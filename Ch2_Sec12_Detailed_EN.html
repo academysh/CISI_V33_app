@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 12 — Reporting of Transactions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;--teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;--amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;--coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;--purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;--green-l:#E1F5EE;--green:#085041;--gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;--bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;--radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 12 — Detailed Deep Dive</div>
+  <div class="app-sub">Reporting of Transactions · Syllabus 2.20-2.21 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 12 is the "reporting" side of an investment firm's work. After each trade the firm must report it across several layers: to the <strong>regulator</strong> (transaction reporting — for market abuse surveillance), to the <strong>market</strong> (trade reporting — for price transparency), to a <strong>trade repository</strong> (EMIR for derivatives, SFTR for securities financing), and to the <strong>client itself</strong> (trade confirmations + periodic statements). Each regime has its own deadline, scope, and exemptions. On the exam — 5-7 questions with specific numbers: <strong>T+1</strong>, <strong>1 minute</strong>, <strong>5 minutes</strong>, <strong>3 minutes</strong>, <strong>3:30pm</strong>, <strong>8pm</strong>, <strong>6 months</strong>.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s121">12.1 Reportable Transactions — definition</a></li>
+    <li>→ <a href="#s122">12.2 Role and Purpose of Reporting</a></li>
+    <li>→ <a href="#s1221">12.2.1 UK MiFIR Transaction vs Trade Reporting</a></li>
+    <li>→ <a href="#s1222">12.2.2 UK EMIR — derivatives reporting</a></li>
+    <li>→ <a href="#s1223">12.2.3 UK SSR — Short Selling Regulation</a></li>
+    <li>→ <a href="#s1224">12.2.4 UK SFTR — Securities Financing Transactions</a></li>
+    <li>→ <a href="#s123">12.3 Reporting Channels and Responsibility</a></li>
+    <li>→ <a href="#s124">12.4 Reporting to Clients</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s121">
+  <div class="section-num">12.1</div>
+  <h2 class="section-title">Reportable Transactions — what must be reported</h2>
+
+  <p class="para">
+    Reportable transactions are trades carried out by <strong>regulated investment firms</strong> in 3 types of instruments:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Financial instruments admitted to trading (or traded) on a trading venue</strong>, or for which a <strong>request for admission to trading has been made</strong> (i.e. even pending admission already triggers reporting).</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">Financial instruments where the <strong>underlying is a financial instrument traded on a trading venue</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">Financial instruments where the <strong>underlying is an index or basket composed of financial instruments traded on a trading venue</strong>.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Scope — where the trades must have happened</h3>
+
+  <p class="para">
+    The obligation to report applies <strong>irrespective of whether transactions were carried out</strong> on trading venues in the <strong>UK, Gibraltar, or EU</strong>. Transactions also need to be reported if the trade <strong>did not take place on a trading venue</strong> (OTC trades in reportable instruments are also in scope).
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Deadline — T+1</h3>
+
+  <div class="info-box">
+    <div class="ib-title">UK MiFIR transaction reporting deadline</div>
+    Complete and accurate details of transactions must be reported to the FCA <strong>as soon as possible, and no later than the close of the next business day</strong> — i.e. <strong>T+1</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Whose duty to determine reportable</h3>
+
+  <p class="para">
+    It is the <strong>UK investment firm's responsibility</strong> to determine whether an instrument it has traded is a <strong>reportable financial instrument</strong>. You cannot simply pass responsibility to an ARM or counterparty.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Definition of UK investment firm</h3>
+
+  <div class="info-box">
+    <div class="ib-title">What is a UK investment firm</div>
+    <em>"Any person whose regular occupation or business is the provision of one or more investment services to third parties or the performance of one or more investment activities on a professional basis."</em><br><br>
+    I.e. any person whose <strong>regular occupation / business</strong> is to provide investment services to third parties or carry on investment activities on a <strong>professional basis</strong>.
+  </div>
+
+  <p class="para">
+    The regulations contain a <strong>number of exemptions</strong> from the obligation to report, which are outside the scope of this workbook.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Reportable vs non-reportable examples</div>
+    <strong>✓ REPORTABLE:</strong><br>
+    • Buying Shell shares on LSE (listed on a trading venue)<br>
+    • OTC equity swap where underlying is Apple stock (NASDAQ-listed)<br>
+    • Option on the FTSE 100 index (basket of trading-venue instruments)<br>
+    • Government bond traded on an MTF<br>
+    <strong>✗ NOT REPORTABLE:</strong><br>
+    • Spot FX trade (spot FX is not a financial instrument under MiFID)<br>
+    • Physical commodity purchase (not a financial instrument)<br>
+    • Private company equity (not admitted to a trading venue)
+  </div>
+</div>
+
+<div class="section-card" id="s122">
+  <div class="section-num">12.2</div>
+  <h2 class="section-title">Role and Purpose of Trade and Transaction Reporting</h2>
+
+  <p class="para">
+    The role and purpose of reporting are defined in <strong>three main regulations</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>UK MiFIR</strong> — transaction reporting + trade reporting (two distinct processes!)</li>
+    <li><strong>UK EMIR</strong> — derivatives reporting</li>
+    <li><strong>UK SFTR</strong> — securities financing transactions reporting</li>
+  </ul>
+
+  <p class="para">
+    Plus <strong>UK SSR (Short Selling Regulation)</strong> — a separate notification regime for net short positions.
+  </p>
+</div>
+
+<div class="section-card" id="s1221">
+  <div class="section-num">12.2.1</div>
+  <h2 class="section-title">UK MiFIR — Transaction vs Trade Reporting (two distinct processes!)</h2>
+
+  <p class="para">
+    This is one of the exam's favourite traps: MiFIR requires <strong>two different reports</strong> that are easily confused.
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Feature</th><th>Transaction Reporting</th><th>Trade Reporting</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Purpose</strong></td>
+        <td>Provide info to regulator → <em>market abuse surveillance</em></td>
+        <td>Feed back to market → <em>price formation, market transparency</em></td>
+      </tr>
+      <tr>
+        <td><strong>Audience</strong></td>
+        <td>FCA (Transaction Monitoring Unit — TMU)</td>
+        <td>Market (publicly)</td>
+      </tr>
+      <tr>
+        <td><strong>Sides</strong></td>
+        <td><strong>Dual-sided</strong> — both counterparties report (if both UK financial)</td>
+        <td><strong>Single-sided</strong> — only one side reports</td>
+      </tr>
+      <tr>
+        <td><strong>Deadline</strong></td>
+        <td><strong>T+1</strong> (close of next business day)</td>
+        <td><strong>1 minute</strong> for equities; <strong>5 minutes</strong> for non-equities</td>
+      </tr>
+      <tr>
+        <td><strong>Instrument scope</strong></td>
+        <td>All reportable financial instruments</td>
+        <td>Equities + non-equities on RM/MTF/OTF</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Transaction Reporting — details</h3>
+
+  <p class="para">
+    Under UK MiFIR, <strong>Transaction reporting</strong> is carried out to provide information to the regulator, enabling <strong>review of transactions after the fact</strong>. The information is used by the regulator to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Monitor for market abuse</strong>, including insider dealing</li>
+    <li>Aid <strong>general surveillance of the market</strong></li>
+  </ul>
+
+  <p class="para">
+    In the UK, the FCA's <strong>Transaction Monitoring Unit (TMU)</strong> monitors compliance with the requirements for authorised firms to report transactions, and also <strong>approves the reporting mechanisms</strong> that can be used.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>ARMs — Approved Reporting Mechanisms</h3>
+
+  <p class="para">
+    <strong>Approved Reporting Mechanisms (ARMs)</strong> include, for example, <strong>UnaVista</strong> and <strong>TRAX</strong>. An ARM is a third-party system that submits reports to the FCA on behalf of the firm. A firm may outsource the technical reporting process, but it <strong>remains responsible</strong> for accuracy.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Responsibility for accuracy rests with the firm</div>
+    Using an ARM <strong>does not transfer responsibility</strong> away from the firm. If the ARM submits an erroneous report — the firm is responsible vis-à-vis the FCA.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Trade Reporting — details</h3>
+
+  <p class="para">
+    <strong>Trade reporting</strong> is a mechanism to <strong>feed back to the marketplace on market depth and liquidity</strong> — a measure of market transparency — and assists in <strong>price formation</strong>.
+  </p>
+
+  <p class="para">
+    Trade reporting is <strong>single-sided</strong>: it shows only the side of the reporting institution. In contrast, transaction reporting can be <strong>dual-sided</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>MiFID II post-trade transparency — non-equities too</h3>
+
+  <p class="para">
+    MiFID II introduced <strong>additional pre-trade and post-trade transparency reporting</strong> obligations for investment firms and market operators. The biggest change in post-trade reporting: it now covers not just equities but also <strong>non-equity financial instruments</strong> admitted to trading on regulated trading venues (<strong>Regulated Markets, MTFs and/or OTFs</strong>).
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Post-trade reporting deadlines</h3>
+
+  <p class="para">
+    <strong>Unless waivers and/or deferrals apply</strong>, reporting must be undertaken by regulated firms within:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>1 minute</strong> for equity transactions</li>
+    <li><strong>5 minutes</strong> for in-scope non-equity financial instruments</li>
+  </ul>
+
+  <p class="para">
+    The new non-equity post-trade reporting requirements <strong>remove many post-trade reporting requirements</strong> that did not provide full transparency when certain instruments were deemed illiquid.
+  </p>
+
+  <div class="exam-box">
+    <div class="xb-title">Key reporting numbers</div>
+    <strong>T+1</strong> — transaction reporting under UK MiFIR to FCA<br>
+    <strong>1 minute</strong> — equity post-trade reporting<br>
+    <strong>5 minutes</strong> — non-equity post-trade reporting<br>
+    Do not confuse these with LSE-specific deadlines (see 12.3).
+  </div>
+</div>
+
+<div class="section-card" id="s1222">
+  <div class="section-num">12.2.2</div>
+  <h2 class="section-title">UK EMIR — derivatives trade repository reporting</h2>
+
+  <p class="para">
+    Under <strong>UK European Market Infrastructure Regulation (UK EMIR)</strong>, <strong>all trades in relation to derivatives contracts</strong> must be reported to a <strong>trade repository</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Dual-sided reporting</h3>
+
+  <p class="para">
+    UK counterparties report under <strong>UK EMIR</strong>, and EU counterparties report under <strong>EU EMIR</strong>, <em>even if one of them is not a financial institution</em>.
+  </p>
+
+  <p class="para">
+    Although there are some exceptions for mandated reporting by financial counterparties, <strong>both counterparties must report each trade</strong>. By prior arrangement, <strong>one party can report on behalf of both</strong> counterparties. Where one report is made on behalf of both, this <strong>must be indicated in the report</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Non-UK entities — NO reporting obligation</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Critical distinction for branches</div>
+    Under UK EMIR, <strong>non-UK entities have NO reporting obligation</strong>. This <strong>includes UK branches of third-country firms</strong>, such as the London branch of a Canadian bank.<br><br>
+    This contrasts with UK investment firm requirements under MiFIR, where a UK branch of a third-country firm is in scope.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Delegation of reporting</h3>
+
+  <p class="para">
+    Either counterparty to the trade may <strong>delegate reporting to a third party</strong>, such as:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Central counterparty (CCP)</strong></li>
+    <li><strong>Trading venue / platform</strong></li>
+    <li><strong>Counterparty bank</strong></li>
+  </ul>
+
+  <p class="para">
+    Delegation shifts <em>operational</em> work, but not responsibility — that remains with the counterparty.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">EMIR reporting example</div>
+    A UK asset manager does an interest rate swap with the London branch of a Canadian bank.<br><br>
+    <strong>Reporting:</strong><br>
+    • UK asset manager: <strong>reports</strong> under UK EMIR (UK financial counterparty)<br>
+    • London branch of Canadian bank: <strong>does NOT report</strong> (it is a non-UK entity — a third-country firm with a UK branch)<br><br>
+    The UK asset manager may delegate reporting to the CCP through which clearing occurs, but remains legally responsible.
+  </div>
+</div>
+
+<div class="section-card" id="s1223">
+  <div class="section-num">12.2.3</div>
+  <h2 class="section-title">UK SSR — Short Selling Regulation</h2>
+
+  <p class="para">
+    The <strong>Short Selling Regulations (SSR)</strong> introduced a <strong>private and public notification regime</strong> for investors holding <strong>net short positions</strong> in certain financial instruments.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA intervention powers</h3>
+
+  <p class="para">
+    The SSR gives the FCA <strong>powers of intervention</strong> during adverse market conditions that pose a serious threat to financial stability or market confidence. The powers may extend to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Extending scope</strong> of the notification and disclosure regime to include additional financial instruments</li>
+    <li><strong>Requiring lenders of financial instruments</strong> to notify any significant change in their fees</li>
+    <li><strong>Restricting short selling</strong>, or other transactions conferring a financial advantage in the event of a price decrease of a financial instrument — across classes or all instruments</li>
+    <li><strong>Restricting or limiting</strong> entering into sovereign credit default swap transactions</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Timing — 3:30pm trading day +1 and midnight calculation</h3>
+
+  <div class="exam-box">
+    <div class="xb-title">Two different times for UK SSR</div>
+    <strong>Notification deadline:</strong> firms must notify the FCA via their <strong>Electronic Submission System</strong> by <strong>3:30pm on the trading day after</strong> the day the position was reached.<br><br>
+    <strong>Calculation timing:</strong> All calculations must be made <strong>as at MIDNIGHT on the trading day the position was reached</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Exemption — market makers and authorised primary dealers</h3>
+
+  <p class="para">
+    <strong>Market makers and authorised primary dealers</strong> may obtain an <strong>exemption</strong> from the UK SSR disclosure requirements. Logic: these market participants regularly take short positions as part of their normal business of providing liquidity — otherwise the market would not function.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">SSR timeline example</div>
+    A hedge fund reached a net short position of 0.2% in Company X shares at 15:00 on Monday.<br><br>
+    <strong>Calculation:</strong> position measured at midnight Monday (23:59 closing value).<br>
+    <strong>Notification deadline:</strong> by <strong>3:30pm Tuesday</strong> (trading day after) via the FCA's Electronic Submission System.<br><br>
+    If the hedge fund were an <em>authorised primary dealer</em> in gilts, it could obtain an exemption from this disclosure.
+  </div>
+</div>
+
+<div class="section-card" id="s1224">
+  <div class="section-num">12.2.4</div>
+  <h2 class="section-title">UK SFTR — Securities Financing Transactions Regulation</h2>
+
+  <p class="para">
+    The reporting obligations of the <strong>UK Securities Financing Transactions Regulation (SFTR)</strong> aim to <strong>enhance transparency</strong> and enable regulators to <strong>monitor risk</strong> by introducing:
+  </p>
+
+  <ul class="bullet">
+    <li>Reporting requirements for <strong>securities finance transactions (SFT)</strong>, similar to those already in place for derivatives under UK EMIR</li>
+    <li><strong>Limitations on the reuse of collateral</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What an SFT is</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Securities Financing Transactions</div>
+    Main types of SFT: <strong>repurchase (repo) transactions</strong>, <strong>reverse repos</strong>, <strong>securities lending and borrowing</strong>, <strong>buy-sell backs</strong>, <strong>margin lending transactions</strong>. These are transactions in which securities are used as collateral for financing.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Dual-sided reporting</h3>
+
+  <p class="para">
+    Reporting can be <strong>dual-sided</strong> where both parties to the transaction are deemed in scope. Reporting is made by firms <strong>to a trade repository</strong>, which submits the information to the FCA.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Exemption — non-financial counterparties</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Key UK-specific exemption</div>
+    Under UK SFTR, <strong>non-financial counterparties (i.e. corporate companies)</strong> are <strong>EXEMPTED by HM Treasury</strong> from having to report their securities financing transactions under UK SFTR.<br><br>
+    This is a <strong>UK-specific</strong> difference — under EU SFTR corporate counterparties must report.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">SFTR scope example</div>
+    <strong>Scenario 1:</strong> UK bank repo with UK asset manager. Both financial counterparties → <strong>both report</strong> (dual-sided).<br>
+    <strong>Scenario 2:</strong> UK bank repo with UK Corporate (non-financial, obtaining funding by pledging shares as collateral). <strong>UK bank reports</strong>, <strong>UK Corporate EXEMPT</strong> (HM Treasury exemption).<br>
+    <strong>Scenario 3:</strong> Two corporates repo between themselves. <strong>Neither reports</strong> (both exempt).
+  </div>
+</div>
+
+<div class="section-card" id="s123">
+  <div class="section-num">12.3</div>
+  <h2 class="section-title">Reporting Channels and Responsibility — LSE-specific rules</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Two LSE systems</h3>
+
+  <p class="para">
+    The LSE runs two main trading systems:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Stock Exchange Electronic Trading Service (SETS)</strong> — UK equities</li>
+    <li><strong>International Order Book (IOB)</strong> — depositary receipts</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Automatic trade reporting — order book trades</h3>
+
+  <p class="para">
+    Trade reporting is <strong>automatic</strong> for <strong>all trades executed on the LSE's electronic order books</strong> — embracing UK equities traded on <strong>SETS</strong> and depositary receipts traded on the <strong>IOB</strong>.
+  </p>
+
+  <p class="para">
+    Because the trades are executed automatically on the order books, they <strong>generate automatic trade reports</strong> — and <strong>there is no need for participants to report trades manually</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Off-order book transactions — 3 minutes</h3>
+
+  <p class="para">
+    <strong>Off-order book transactions</strong> are trades executed by one or more member firms in securities (including gilts), traded away from the order book, often over the telephone.
+  </p>
+
+  <p class="para">
+    Such trades must be reported by the member firm <strong>to the exchange as close to real time as possible</strong>, and in any case <strong>within 3 minutes</strong> of execution by reference to the trade reporting period.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Trade reporting period: 7:15am – 5:15pm</h3>
+
+  <p class="para">
+    The trade reporting period is the period when the LSE system is able to accept trade reports. It runs <strong>from 7:15am to 5:15pm</strong> every business day.
+  </p>
+
+  <p class="para">
+    If a trade is executed between 7:15am and 8:00am — the report must be submitted <strong>before 8:00am or within 3 minutes</strong>, whichever is later.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who reports — seniority rules</h3>
+
+  <div class="info-box">
+    <div class="ib-title">LSE responsibility rules</div>
+    <strong>Equal seniority:</strong> the <strong>selling member firm</strong> reports.<br>
+    <strong>Different seniority:</strong> the <strong>more senior party</strong> reports (typically a market maker).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CREST deadline — 8pm</h3>
+
+  <p class="para">
+    For LSE domestic transactions that require settlement via <strong>CREST</strong>: transaction reports for settlement purposes must be submitted via CREST <strong>by 8:00pm each business day</strong>.
+  </p>
+
+  <div class="exam-box">
+    <div class="xb-title">LSE-specific numbers</div>
+    <strong>3 minutes</strong> — off-order book trades on the LSE<br>
+    <strong>7:15am–5:15pm</strong> — trade reporting period<br>
+    <strong>8:00pm</strong> — CREST deadline for LSE domestic settlement<br>
+    Equal seniority → selling firm reports; different → more senior reports.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Practical example</div>
+    A UK broker-dealer buys £10M in gilts from a market maker (over the telephone) at <strong>9:30am</strong>.<br><br>
+    <strong>3-minute rule:</strong> the market maker (more senior) must report the trade to the LSE <strong>by 9:33am</strong>.<br>
+    <strong>CREST settlement:</strong> the transaction report for settlement via CREST must be submitted <strong>by 8:00pm</strong>.<br>
+    <strong>MiFIR transaction reporting:</strong> separately to the FCA <strong>by T+1 close</strong>.
+  </div>
+</div>
+
+<div class="section-card" id="s124">
+  <div class="section-num">12.4</div>
+  <h2 class="section-title">Reporting to Clients — trade confirmations and periodic statements</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Trade confirmations — ASAP / no later than next business day</h3>
+
+  <p class="para">
+    When a firm executes an order for a retail client, it must <strong>provide confirmation / dealing note</strong> in a <strong>durable medium</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>As soon as possible</strong> AFTER execution</li>
+    <li><strong>No later than the first business day after execution</strong> (T+1)</li>
+    <li>Or — if confirmation is received by the firm from a third party — <strong>no later than the first business day after receipt</strong> of the third-party confirmation</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Trade confirmation contents</h3>
+
+  <p class="para">
+    The confirmation must contain essential information: firm identification, client name, trading day, trading time, type of order, venue identification, financial instrument identification, buy/sell indicator, nature of order, quantity, unit price, total consideration, commissions and expenses charged. For retail — additionally the total sum of commissions + expenses.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Periodic statements — 6-monthly default for retail</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Retail periodic statements</div>
+    A firm providing a portfolio management service must send a retail client a <strong>periodic statement in a durable medium</strong>. <strong>Default frequency — every 6 months</strong> — unless agreed otherwise between firm and client.
+  </div>
+
+  <p class="para">
+    <strong>Exceptions / variations:</strong>
+  </p>
+
+  <ul class="bullet">
+    <li>Client may request <strong>quarterly statements</strong> (more frequent)</li>
+    <li>If the portfolio includes <strong>leveraged transactions</strong> — statement <strong>monthly</strong></li>
+    <li>Client given <strong>online access</strong> with up-to-date valuation — <strong>at least annual</strong> is sufficient (but at least once a year)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Professional clients — upon agreement</h3>
+
+  <p class="para">
+    For <strong>professional clients</strong>, the frequency and content of periodic statements are a <strong>matter of agreement</strong> between firm and client. There is no hard 6-monthly default.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>10% depreciation notification — retail</h3>
+
+  <p class="para">
+    If a retail client's portfolio <strong>loses 10% of value</strong> (and multiples thereof), the firm must inform the client <strong>by the end of the business day on which the threshold is exceeded</strong>. If that day is a non-business day — by the end of the next business day.
+  </p>
+
+  <p class="para">
+    The same rule applies to <strong>leveraged financial instruments or contingent liability transactions</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Record-keeping periods</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Business type</th><th>Retention period</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>MiFID business records</td><td><span class="number-card">5 years</span> (under MiFID II)</td></tr>
+      <tr><td>Non-MiFID general records</td><td><span class="number-card">3 years</span></td></tr>
+      <tr><td>Life policies, pension contracts</td><td><span class="number-card">5 years</span></td></tr>
+      <tr><td>Pension transfers, opt-outs, FSAVCs</td><td><span class="number-card">Indefinitely</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Common frequency misconception</div>
+    Many think that periodic statements are monthly for all retail. That is NOT so. Default for retail = <strong>6 months</strong>. Monthly only if there are <strong>leveraged transactions</strong>. Quarterly — upon client's request.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">10% notification example</div>
+    A retail client has a portfolio worth £100,000 at the start of the quarter. In mid-March a market crash — portfolio value falls to <strong>£88,000</strong> (12% depreciation).<br><br>
+    <strong>The firm must:</strong> notify the client <strong>by the end of the business day</strong> on which the threshold was crossed (passing the -10% mark). Do not wait for the next periodic statement.<br>
+    If the client hits -20% — another notification (multiples of 10%).
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 12</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">5 reporting regimes — know the differences</div>
+    <strong style="color:#FEF3C7">UK MiFIR Transaction</strong> — FCA, T+1, dual-sided, surveillance<br>
+    <strong style="color:#FEF3C7">UK MiFIR Trade</strong> — market, 1/5 min, single-sided, transparency<br>
+    <strong style="color:#FEF3C7">UK EMIR</strong> — derivatives, dual-sided, trade repository<br>
+    <strong style="color:#FEF3C7">UK SSR</strong> — net short, 3:30pm T+1, midnight calc<br>
+    <strong style="color:#FEF3C7">UK SFTR</strong> — SFTs, trade repository, corporates exempt
+  </div>
+
+  <ul>
+    <li><strong>12.1 Reportable transactions = 3 types:</strong> (1) instruments admitted/traded on trading venue + pending admission; (2) underlying is an instrument on a trading venue; (3) underlying is an index/basket of such.</li>
+    <li>Scope <strong>irrespective</strong> of where traded (UK/Gibraltar/EU/OTC). <strong>Deadline: T+1</strong> to FCA.</li>
+    <li><strong>UK investment firm</strong> = any person whose regular occupation/business is providing investment services/activities on a professional basis.</li>
+    <li>The firm itself determines whether an instrument is reportable.</li>
+    <li><strong>12.2.1 MiFIR Transaction vs Trade — the key contrast:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Transaction</strong>: dual-sided, T+1, FCA/TMU, surveillance/market abuse. Via <strong>ARMs</strong> (UnaVista, TRAX).</li>
+        <li><strong>Trade</strong>: single-sided, 1 min (equity) / 5 min (non-equity), market, transparency/price formation.</li>
+      </ul>
+    </li>
+    <li>Post-trade reporting covers <strong>equities + non-equities on RM/MTF/OTF</strong> (MiFID II expansion).</li>
+    <li><strong>12.2.2 UK EMIR — derivatives trade repository.</strong> Dual-sided. UK counterparty reports UK EMIR, EU counterparty — EU EMIR. <strong>Non-UK entities have NO obligation</strong> (including London branch of a Canadian bank). Can <strong>delegate</strong> (CCP, trading venue, counterparty bank).</li>
+    <li><strong>12.2.3 UK SSR — net short positions.</strong> FCA intervention powers (4 types). <strong>Notify by 3:30pm trading day after</strong> position reached. <strong>Calculation as at midnight trading day</strong> position reached. <strong>Market makers + authorised primary dealers</strong> — exemption.</li>
+    <li><strong>12.2.4 UK SFTR — SFTs (repos, sec lending, etc).</strong> Dual-sided, trade repository → FCA. <strong>Non-financial counterparties (corporates) EXEMPT</strong> (HM Treasury). Enhances transparency + limits reuse of collateral.</li>
+    <li><strong>12.3 LSE specifics:</strong>
+      <ul style="margin-top:.3rem">
+        <li>SETS (UK equities) + IOB (depositary receipts) — <strong>automatic</strong> trade reports</li>
+        <li>Off-order book trades — <strong>within 3 minutes</strong> of execution</li>
+        <li>Reporting period <strong>7:15am–5:15pm</strong>. Before 8am — before 8am OR 3 min later</li>
+        <li>Equal seniority — <strong>selling firm</strong> reports; different — <strong>more senior</strong></li>
+        <li><strong>CREST deadline 8pm</strong> for LSE domestic settlement</li>
+      </ul>
+    </li>
+    <li><strong>12.4 Reporting to clients:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Trade confirmation</strong> retail — ASAP, no later than first business day (T+1) in durable medium</li>
+        <li><strong>Periodic statement retail</strong> — <strong>6 months default</strong>. Monthly if leveraged. Quarterly on request. Online access — annual.</li>
+        <li><strong>Professional</strong> — matter of agreement</li>
+        <li><strong>10% depreciation</strong> retail — notify by end of business day threshold crossed (multiples of 10%)</li>
+      </ul>
+    </li>
+    <li><strong>Record-keeping:</strong> MiFID = 5 years / non-MiFID general = 3 years / life & pension = 5 years / pension transfers + opt-outs + FSAVCs = <strong>indefinitely</strong>.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

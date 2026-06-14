@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 1 — COBS: Detailed Deep Dive</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;
+  --teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;
+  --amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;
+  --coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;
+  --purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --green-l:#E1F5EE;--green:#085041;
+  --gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;
+  --bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09);
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 ";}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ ";}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 ";}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.tag-in{background:var(--green-l);color:var(--green);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-out{background:var(--coral-l);color:var(--coral);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-partial{background:var(--amber-l);color:var(--amber-d);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 1 — Detailed Deep Dive</div>
+  <div class="app-sub">The Application and General Provisions of COBS · Syllabus 2.1 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<!-- INTRODUCTION -->
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 1 of Chapter 2 answers three simple questions: <strong>"Who"</strong> must comply with COBS (which firms), <strong>"For which activities"</strong> these rules apply, and <strong>"Where geographically"</strong> they operate. Without understanding this section, you cannot work with the remaining 12 sections of Chapter 2 — it defines the baseline framework for applying the entire conduct of business sourcebook.
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#intro">What COBS is and why it exists</a></li>
+    <li>→ <a href="#s11">1.1 Firms Subject to COBS — which firms fall under COBS</a></li>
+    <li>→ <a href="#s12">1.2 Activities Subject to COBS — which activities are captured</a></li>
+    <li>→ <a href="#summary">Final summary and schema</a></li>
+  </ul>
+</div>
+
+<!-- BIG INTRODUCTION -->
+<div class="section-card" id="intro">
+  <div class="section-num">INTRODUCTION</div>
+  <h2 class="section-title">What COBS is and why it exists at all</h2>
+
+  <p class="para">
+    <strong>COBS</strong> stands for <strong>Conduct of Business Sourcebook</strong>. It is part of the <strong>FCA Handbook</strong>, and specifically sits within the <strong>Business Standards</strong> block.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Structure of the FCA Handbook — where COBS lives</div>
+    The FCA Handbook is divided into large blocks. Here are the main four:
+    <ul class="bullet" style="margin-top:.4rem;margin-bottom:.2rem">
+      <li><strong>High Level Standards</strong> — includes PRIN (the 12 Principles for Businesses), SYSC (systems and controls), FIT (Fit & Proper Test).</li>
+      <li><strong>Business Standards</strong> — <span style="background:#FEF3C7;padding:.05rem .4rem;border-radius:4px;font-weight:600">this is where COBS lives</span>, along with CASS (Client Assets).</li>
+      <li><strong>Regulatory Processes</strong> — SUP (supervision), AUTH (authorisation of firms).</li>
+      <li><strong>Specialist Sourcebooks</strong> — rules for specific sectors (insurance, mortgages, etc.).</li>
+    </ul>
+  </div>
+
+  <p class="para">
+    <strong>Why do we need COBS?</strong> Its main goal is to move regulation away from a <em>"prescriptive"</em> approach (where the regulator dictates literally every step) towards an <em>"outcomes-based"</em> approach (focused on results). Instead of "you must do X, Y, Z in exactly this sequence," the regulator says: "Here is the outcome you must deliver to the client — how you achieve it is up to you."
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Prescriptive vs outcomes-based example</div>
+    <strong>Prescriptive (old approach):</strong> "A firm must send the client a trade confirmation by paper letter in an A4 envelope, no later than 48 hours after order execution, in font no smaller than 11pt."<br><br>
+    <strong>Outcomes-based (COBS approach):</strong> "A firm must ensure that the client receives timely information about the trade in a form they can understand." How exactly — email, SMS, push notification in a mobile app — is for the firm to decide, but the client must get clear information on time.
+  </div>
+
+  <p class="para">
+    COBS also implements the provisions of <strong>MiFID</strong> (Markets in Financial Instruments Directive) — the EU directive on financial instruments, which itself contains high-level standards without prescribing exact methods of execution. This aligned perfectly with the FCA's outcomes-based approach.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Common exam mistake</div>
+    COBS is <strong>not only about MiFID</strong>. Many people think that if a firm does not carry on MiFID business, COBS does not apply to it. This is wrong. COBS contains separate provisions <strong>for non-MiFID investment firms</strong> too. For example, a life insurance adviser does not do MiFID business, but still falls under COBS.
+  </div>
+</div>
+
+<!-- SECTION 1.1 -->
+<div class="section-card" id="s11">
+  <div class="section-num">1.1</div>
+  <h2 class="section-title">Firms Subject to COBS — which firms fall under COBS</h2>
+
+  <p class="para">
+    The core principle: <strong>COBS applies on a geographical basis</strong>. In other words, it does not really matter what the firm does or which instrument it trades first and foremost — what matters is <em>where</em> it does it from.
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">General Application Rule</div>
+    ┌──────────────────────────────────────────┐<br>
+    │  Does the firm have an establishment     │<br>
+    │  (office, branch, or appointed           │<br>
+    │  representative — AR) in the UK?         │<br>
+    └──────────────────┬───────────────────────┘<br>
+    ┌─────────┴─────────┐<br>
+    ▼                   ▼<br>
+    <span style="color:var(--teal-m);font-weight:700">YES</span>                 <span style="color:var(--coral-m);font-weight:700">NO</span><br>
+    │                   │<br>
+    ▼                   ▼<br>
+    COBS applies         Check additionally:<br>
+    (to activity from    is the firm doing<br>
+    that establishment)  business with a UK<br>
+    .                    client from an overseas<br>
+    .                    office? If yes — COBS<br>
+    .                    still generally applies<br>
+    .                    (with some carve-outs).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Breaking down the rule</h3>
+
+  <p class="para">
+    <strong>Part 1 — Firm has an establishment in the UK.</strong> If the firm has a permanent place of business in the UK (office, branch, or its appointed representative — <em>AR</em>), then <strong>all its activity from that establishment</strong> is subject to COBS.
+  </p>
+
+  <p class="para">
+    <strong>Part 2 — Firm does business with a UK client from an establishment overseas.</strong> Even if the establishment is outside the UK, if the firm serves a client located in the UK, COBS generally applies anyway. Exceptions exist for <em>"overseas persons"</em> who meet certain criteria (this topic has its own block in Chapter 1).
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Practical example of establishment</div>
+    Broker firm ABC Ltd has its headquarters in London. It also has a representative office in Singapore. From London, staff serve UK clients — <strong>COBS applies in full</strong>. From Singapore, staff serve clients in South-East Asia — <strong>COBS generally does not apply</strong> (regulated by the local regulator MAS). But if Singapore staff decide to contact a client in Manchester — COBS may again apply to that particular transaction.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Brexit consequences for COBS application</h3>
+
+  <p class="para">
+    Before Brexit, the so-called <strong>"passporting"</strong> regime applied: a UK firm could open a branch in, say, France, and that branch continued to follow UK COBS while serving French clients. Brexit changed this.
+  </p>
+
+  <p class="para">After Brexit, the following scheme applies:</p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th style="width:50%">Situation</th>
+        <th>Does COBS apply?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>UK firm carrying on MiFID business from a UK office for a UK client</td>
+        <td><span class="tag-in">✓ YES, in full</span></td>
+      </tr>
+      <tr>
+        <td>UK MiFID firm carrying on MiFID business from an establishment in an EEA member state (e.g. Paris branch)</td>
+        <td><span class="tag-out">✗ NO</span> — post-Brexit, that branch follows local rules (France)</td>
+      </tr>
+      <tr>
+        <td>Non-UK MiFID firm (third-country firm) carrying on MiFID business through its UK branch (e.g. a US bank via its London branch)</td>
+        <td><span class="tag-in">✓ YES</span> — for the MiFID-derived parts</td>
+      </tr>
+      <tr>
+        <td>EEA firm that, post-Brexit, operates through a UK branch</td>
+        <td>Classified as a <strong>"third-country firm"</strong> for MiFID business in the UK → COBS applies</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box">
+    <div class="wb-title">Key point about third-country firms</div>
+    The term "third-country firm" for UK purposes means any non-UK firm, including EEA firms post-Brexit. Previously, an EEA firm was not a third country (they shared the single market), but now they are placed on the same footing as US, Swiss, or any other non-UK firms.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Important exception: the "home state basis" rule</h3>
+
+  <p class="para">
+    There is <strong>one exception</strong> to the geographical rule. It covers two topics:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Investment research</strong></li>
+    <li><strong>Personal account dealing</strong> — trades carried out personally by staff of the firm</li>
+  </ul>
+
+  <p class="para">
+    For these two topics, COBS applies on a <strong>"home state basis"</strong>. This means these rules apply to a UK firm <strong>wherever it operates</strong> — even if the activity is being conducted overseas.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Home state basis example</div>
+    UK-authorised firm XYZ publishes investment research on Apple stock. The analysts who wrote it sit in its New York office. Even though the establishment is in the US, the COBS rules on investment research <strong>still apply to that report</strong>, because the firm is a UK firm. The same goes for personal account dealing by the New York analyst — they must comply with COBS personal account dealing rules.
+  </div>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — key takeaways for 1.1</div>
+    <strong>Basic rule:</strong> COBS applies geographically — where the establishment is.<br>
+    <strong>Post-Brexit:</strong> UK firm's EEA branch is NO longer under COBS (for MiFID business).<br>
+    <strong>Third-country firm</strong> with a UK branch → COBS applies.<br>
+    <strong>Exception (home state basis):</strong> investment research + personal account dealing → UK firm is always under COBS, regardless of location.
+  </div>
+</div>
+
+<!-- SECTION 1.2 -->
+<div class="section-card" id="s12">
+  <div class="section-num">1.2</div>
+  <h2 class="section-title">Activities Subject to COBS — which activities are captured</h2>
+
+  <p class="para">
+    So, we have sorted out <em>which firms</em> fall under COBS geographically. Now let's work out <em>which specific activities</em> of these firms are regulated by COBS.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Three categories of activity under COBS</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Activity</th>
+        <th>COBS coverage</th>
+        <th>Examples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Designated investment business</strong></td>
+        <td><span class="tag-in">In full</span></td>
+        <td>Dealing in shares, bonds, derivatives; portfolio management; investment advice</td>
+      </tr>
+      <tr>
+        <td><strong>Long-term insurance business</strong> — only for life policies</td>
+        <td><span class="tag-in">In full</span></td>
+        <td>Selling life policies, pension annuities, endowment policies</td>
+      </tr>
+      <tr>
+        <td><strong>Accepting deposits</strong></td>
+        <td><span class="tag-partial">Partial</span></td>
+        <td>Only the <em>financial promotions</em> rules and the rules on preparing/providing <em>product information</em></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Why are deposits only partial?</h3>
+
+  <p class="para">
+    Accepting deposits is the business of banks and building societies. It is a simple and low-risk activity: the client deposits money, the bank pays interest. Applying the full set of complex COBS rules (best execution, suitability, appropriateness and so on) to this does not make sense — those rules are tailored for investment products, where the client needs serious protection.
+  </p>
+
+  <p class="para">
+    But <strong>how a bank markets its deposit product</strong> and <strong>what information it provides about it</strong> does matter, because that is what the client bases their decision on. That is why the following apply to deposits:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Financial promotion rules</strong> — rules on marketing and advertising (promotions must be fair, clear, and not misleading)</li>
+    <li><strong>Product information rules</strong> — rules on preparing and providing information about the product (interest rate, withdrawal conditions, etc.)</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Typical exam trap</div>
+    Do not confuse: banks are <strong>dual-regulated</strong> (PRA + FCA). The PRA regulates them prudentially (capital, liquidity), while the FCA regulates their conduct. Partial COBS application does not mean banks escape regulation — they are regulated both under COBS (for promotions/information) and under other sourcebooks.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>COBS rules disapplied for ECP business</h3>
+
+  <p class="para">
+    <strong>ECP</strong> stands for <strong>Eligible Counterparty</strong>. This is the highest client category — typically large financial institutions, central banks, governments. The logic is simple: they are so professional and knowledgeable about the market that they do not need most of the protective rules designed for retail and professional clients.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Client category hierarchy (for context)</div>
+    <strong>Retail Client</strong> → maximum protection (full COBS protection).<br>
+    <strong>Professional Client</strong> → medium protection.<br>
+    <strong>Eligible Counterparty / ECP</strong> → minimum protection (many rules switched off).<br>
+    <em>Covered in detail in Section 3 (Accepting Clients).</em>
+  </div>
+
+  <p class="para">
+    For <strong>ECP business</strong>, the following COBS chapters are switched off:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>COBS Chapter</th>
+        <th>About</th>
+        <th>Status for ECP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Parts of COBS 2</strong></td>
+        <td>Conduct of business obligations: inducements, agent as client, reliance on others</td>
+        <td><span class="tag-out">Disapplied (in part)</span></td>
+      </tr>
+      <tr>
+        <td><strong>Much of COBS 4</strong></td>
+        <td>Communicating with clients (fair, clear and not misleading), financial promotions, direct offer, information disclosure before providing services</td>
+        <td><span class="tag-out">Disapplied</span></td>
+      </tr>
+      <tr>
+        <td><strong>COBS 6</strong></td>
+        <td>Information on costs, charges, compensation</td>
+        <td><span class="tag-out">Disapplied</span></td>
+      </tr>
+      <tr>
+        <td><strong>COBS 8A</strong></td>
+        <td>Client agreements</td>
+        <td><span class="tag-out">Disapplied</span></td>
+      </tr>
+      <tr>
+        <td><strong>COBS 10</strong></td>
+        <td>Appropriateness (for non-advised services)</td>
+        <td><span class="tag-out">Disapplied</span></td>
+      </tr>
+      <tr>
+        <td><strong>Parts of COBS 11</strong></td>
+        <td>Best execution, client order handling</td>
+        <td><span class="tag-out">Disapplied</span></td>
+      </tr>
+      <tr>
+        <td><strong>Parts of COBS 12</strong></td>
+        <td>Labelling of non-independent research</td>
+        <td><span class="tag-out">Disapplied</span></td>
+      </tr>
+      <tr>
+        <td><strong>COBS 16</strong></td>
+        <td>Reporting to clients</td>
+        <td><span class="tag-out">Disapplied</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box">
+    <div class="wb-title">A very important exam trap!</div>
+    <strong>Conflicts of Interest (SYSC 10) are NOT disapplied for ECPs.</strong> Even if you are dealing with the largest hedge fund or a central bank — the rules on managing conflicts of interest still apply. This is a very frequent exam question: "Which of the following rules still applies even to ECP business?" — the correct answer: <strong>conflicts of interest</strong>.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Practical ECP disapplication example</div>
+    JPMorgan (UK branch) trades derivatives with Goldman Sachs (also an ECP). In this trade:<br>
+    • <strong>No need</strong> to send Goldman a fancy client agreement (COBS 8A disapplied).<br>
+    • <strong>No need</strong> to carry out an appropriateness assessment (COBS 10 disapplied).<br>
+    • <strong>No need</strong> to guarantee best execution in the standard form (part of COBS 11 disapplied).<br>
+    • <strong>BUT</strong> conflicts of interest must still be managed (SYSC 10 always applies).<br>
+    • <strong>AND</strong> the trade must still be reported under UK MiFIR (this is transaction reporting to the regulator, not to the client).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Special rule for participants on a regulated market</h3>
+
+  <p class="para">
+    There is one more specific rule: <strong>members and participants of a regulated market</strong> (for example, traders on the LSE — London Stock Exchange) are not required to comply with <strong>COBS 11.4</strong> (client limit orders) <em>in respect of each other</em>. The logic is the same: they are professional market participants who know how to handle orders.
+  </p>
+
+  <p class="para">
+    <strong>BUT</strong> — when that same trader is executing an order <strong>on behalf of a client</strong>, COBS 11.4 kicks back in in full. Because now there is a client in the chain who needs to be protected.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example — participants on a regulated market</div>
+    A UBS trader on the LSE places a limit order to sell 10,000 HSBC shares. This order is seen by a Barclays trader. Between the two of them, <strong>COBS 11.4 does not apply</strong> — both are ECPs, both are market participants. But if UBS accepted a limit order from a retail client and is routing it to the market — <strong>COBS 11.4 applies in full</strong>, because there is a client behind that order who must be protected.
+  </div>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — key takeaways for 1.2</div>
+    <strong>3 activities under COBS:</strong> designated investment business (in full) + long-term insurance/life (in full) + deposits (partial — only promotions and product information).<br>
+    <strong>Disapplied for ECP business:</strong> COBS 2 (parts), 4 (most of it), 6, 8A, 10, 11 (parts), 12 (parts), 16.<br>
+    <strong>Always applies — even to ECP:</strong> conflicts of interest (SYSC 10).<br>
+    <strong>Members of a regulated market:</strong> do not apply COBS 11.4 between themselves, but do apply it when executing client orders.
+  </div>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 1</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">WHO + WHAT + WHERE = does COBS apply</div>
+    <strong style="color:#FEF3C7">WHO:</strong> firm with a UK establishment<br>
+    <strong style="color:#FEF3C7">    +</strong> third-country firm via UK branch<br>
+    <strong style="color:#FEF3C7">    +</strong> UK firm (for research/PAD — anywhere)<br><br>
+    <strong style="color:#FEF3C7">WHAT:</strong> designated investment business (in full)<br>
+    <strong style="color:#FEF3C7">    +</strong> long-term insurance (life) (in full)<br>
+    <strong style="color:#FEF3C7">    +</strong> accepting deposits (partial)<br><br>
+    <strong style="color:#FEF3C7">WHERE:</strong> in the UK, also with a UK client from overseas<br>
+    <strong style="color:#FEF3C7">    -</strong> UK firm's EEA branch post-Brexit
+  </div>
+
+  <ul>
+    <li><strong>COBS = Conduct of Business Sourcebook</strong>, sits in the Business Standards block of the FCA Handbook.</li>
+    <li>Approach: <strong>outcomes-based</strong>, not prescriptive. Implements MiFID, but also covers non-MiFID firms.</li>
+    <li>Application — <strong>on a geographical basis</strong> (where the firm's establishment is), with a "home state basis" exception for <strong>investment research</strong> and <strong>personal account dealing</strong>.</li>
+    <li>Post-Brexit: UK firm via EEA branch — <strong>NOT under COBS</strong> (for MiFID). EEA firm via UK branch — <strong>under COBS</strong> as a third-country firm.</li>
+    <li>3 activity categories: <strong>designated investment</strong> (100%), <strong>long-term insurance/life</strong> (100%), <strong>deposits</strong> (partial — promotions + product information only).</li>
+    <li>ECP disapplications: parts of COBS <strong>2, 4, 6, 8A, 10, 11, 12, 16</strong>. <strong>Conflicts of interest (SYSC 10) always apply</strong> — a favourite exam trap.</li>
+    <li>Participants in a regulated market do not apply COBS 11.4 (client limit orders) to each other, but do apply it when executing client orders.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

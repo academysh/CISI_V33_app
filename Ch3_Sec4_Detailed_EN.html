@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3, Section 4 — Money Laundering and Financial Crime</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#9F1239;--primary-l:#FEE2E2;--primary-d:#7F1028;--primary-vd:#4C0519;--accent:#D97706;--accent-l:#FEF3C7;--accent-d:#92400E;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#FEF2F2;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(159,18,57,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(76,5,25,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#FEE2E2;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(159,18,57,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(159,18,57,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:62px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.75rem;min-width:50px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 3</div>
+  <div class="app-title">Chapter 3, Section 4 — Detailed Deep Dive</div>
+  <div class="app-sub">Money Laundering and Financial Crime · Syllabus 3.4 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    The largest section of Chapter 3 — the UK's <strong>Anti-Money Laundering (AML) regime</strong>. The primary legislation is the <strong>Proceeds of Crime Act 2002 (POCA)</strong>, with <em>5 offences</em>: Concealing (s.327), Arrangements (s.328), Acquisition/Use/Possession (s.329), Failure to Disclose (s.330), Tipping Off (s.333A). The ML process has <strong>3 stages</strong>: Placement → Layering → Integration. Firms must appoint an <strong>MLRO / Nominated Officer</strong> who reports <strong>SARs to the NCA</strong>. Detailed rules come from the <strong>MLR 2017</strong> (implementing MLD4). Industry guidance — <strong>JMLSG</strong> (endorsed by HM Treasury, NOT mandatory). 3-4 exam questions — many scenarios about defences, sentences, reporting.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s41">4.1 Definitions — ML + criminal property</a></li>
+    <li>→ <a href="#s42">4.2 POCA 2002 — 5 offences</a></li>
+    <li>→ <a href="#s43">4.3 Three stages of ML</a></li>
+    <li>→ <a href="#s44">4.4 CDD + JMLSG + MLR 2017</a></li>
+    <li>→ <a href="#s45">4.5 MLRO + Nominated Officer + SARs</a></li>
+    <li>→ <a href="#cfa">Criminal Finances Act 2017</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s41">
+  <div class="section-num">4.1</div>
+  <h2 class="section-title">Definitions — Money Laundering + Criminal Property</h2>
+
+  <div class="info-box">
+    <div class="ib-title">Money Laundering (POCA 2002)</div>
+    <strong>Money laundering</strong> = the <em>process of turning money derived from criminal activities</em> into funds <em>appearing to come from legitimate sources</em>. In short: "dirty" money → "clean" money.
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">Criminal Property</div>
+    <strong>Criminal property</strong> under POCA is property that:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Constitutes a <em>benefit from criminal conduct</em> (or represents such a benefit), AND</li>
+      <li>The alleged offender <strong>knows or suspects</strong> that the property constitutes / represents such a benefit</li>
+    </ul>
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Two elements of criminal property</div>
+    For property to be "criminal", <strong>both elements</strong> must be present:<br>
+    (1) <em>Benefit from crime</em> — a fact that objectively exists<br>
+    (2) <em>Knowledge/suspicion</em> — subjective mental element in the person<br><br>
+    If a person <em>did not know and did not suspect</em> that the property was a criminal benefit → <strong>the property is not "criminal" to them</strong> → <em>no offence</em>.
+  </div>
+</div>
+
+<div class="section-card" id="s42">
+  <div class="section-num">4.2</div>
+  <h2 class="section-title">POCA 2002 — 5 key ML offences</h2>
+
+  <p class="para">
+    The Proceeds of Crime Act 2002, <strong>Part 7</strong>, sets out <strong>5 offences</strong> relating to money laundering:
+  </p>
+
+  <div class="p-item"><div class="p-num">s.327</div><div class="p-body"><span class="p-title">Concealing</span> — a person <em>conceals, disguises, converts, transfers</em> criminal property, or removes it from England/Wales/Scotland/NI. <strong>Max penalty: 14 years prison + unlimited fine</strong>.</div></div>
+
+  <div class="p-item"><div class="p-num">s.328</div><div class="p-body"><span class="p-title">Arrangements</span> — a person <em>enters into / is concerned in</em> an arrangement that <em>facilitates</em> the acquisition, retention, use or control of criminal property by / on behalf of another. <strong>Widely interpreted</strong> — includes advisers giving advice on relevant transactions. <strong>Max: 14 years + fine</strong>.</div></div>
+
+  <div class="p-item"><div class="p-num">s.329</div><div class="p-body"><span class="p-title">Acquisition, Use, Possession</span> — a person <em>acquires, uses, OR has possession of</em> criminal property. <strong>Good faith defence</strong> — if the person believed the property was legitimate (e.g. an employee acquired criminal property but believed it was legitimately obtained). <strong>Max: 14 years + fine</strong>.</div></div>
+
+  <div class="p-item"><div class="p-num">s.330</div><div class="p-body"><span class="p-title">Failure to Disclose</span> — <em>3 conditions</em>, <strong>all of which</strong> must be met:
+  <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+    <li>(1) The person <strong>knows or suspects</strong> — or has <em>reasonable grounds to know/suspect</em> (<strong>objective test</strong>)</li>
+    <li>(2) The information <em>arose in the regulated sector</em></li>
+    <li>(3) The person <strong>failed to disclose to the MLRO</strong> "as soon as practicable"</li>
+  </ul>
+  <strong>Max: 5 years prison + fine</strong>. There is <em>no minimum threshold</em> for transaction value.</div></div>
+
+  <div class="p-item"><div class="p-num">s.333A</div><div class="p-body"><span class="p-title">Tipping Off</span> — a regulated-sector person <em>discloses</em> an SAR or investigation, <strong>knowing/suspecting</strong> that the disclosure is <em>likely to prejudice an ML/TF investigation</em>. Can be committed <strong>even without knowing</strong> that a report was actually made. <strong>Max: 2 years</strong> (the "mildest" POCA ML offence).</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Defence under s.327-329</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Disclosure defence</div>
+    <strong>Defence to s.327/s.328/s.329</strong> — the person made a <em>required disclosure to the MLRO</em>, OR, <em>if the person IS the MLRO</em>, <strong>disclosure to the NCA</strong>. Separately, the <strong>good faith defence</strong> for s.329 — believed the property was legitimate.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Section 342 — Prejudicing Investigations</h3>
+
+  <p class="para">
+    <strong>Part 7 POCA</strong> also contains <strong>s.342 — Prejudicing Investigations</strong> — which applies <em>generally, not only the regulated sector</em>:
+  </p>
+
+  <ul class="bullet">
+    <li>Makes a disclosure likely to prejudice an investigation</li>
+    <li>Falsifies, conceals, destroys documents relevant to an investigation</li>
+  </ul>
+
+  <p class="para">
+    <strong>Max: 5 years + fine</strong>. Defences: didn't know the disclosure would prejudice; disclosure part of a POCA duty; legal adviser in a professional capacity; didn't know documents were relevant.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Tipping off vs Prejudicing — difference</div>
+    <strong>s.333A Tipping Off</strong> — <em>only the regulated sector</em>, specific disclosure of an SAR.<br>
+    <strong>s.342 Prejudicing Investigations</strong> — <em>applies generally</em>, to all persons, broader scope (includes destroying documents).
+  </div>
+</div>
+
+<div class="section-card" id="s43">
+  <div class="section-num">4.3</div>
+  <h2 class="section-title">Three Stages of Money Laundering</h2>
+
+  <div class="info-box">
+    <div class="ib-title">ML process — 3 stages (correct order)</div>
+    A successful ML operation has <strong>3 stages</strong>:<br>
+    <strong>Placement → Layering → Integration</strong>
+  </div>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Placement</span> — the <em>introduction of criminal proceeds</em> (cash / other assets) into the <strong>financial system</strong>. Typically — placing criminally derived cash into a <em>bank / building society account / bureau de change</em>. This is the <strong>most vulnerable stage</strong> for criminals — cash physically appears at the bank.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Layering</span> — <em>moving criminal proceeds around the financial system</em> through a <strong>series of complex transactions</strong> — to <em>make it difficult for the authorities to link the placed funds</em> to the original source + ultimate beneficiary. Examples: buying/selling foreign currencies / shares / bonds in rapid succession, investing in CIS, insurance-based investments, cross-border transfers.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Integration</span> — the <em>final stage</em>, when layering has been successful and the <em>ultimate beneficiary appears to hold clean money</em>. The money is <strong>integrated into the legitimate financial system</strong> — it appears to have a legitimate source. Purchase of real estate, luxury goods, legitimate businesses.</div></div>
+
+  <div class="exam-box">
+    <div class="xb-title">AML focus — placement + layering</div>
+    <strong>AML provisions are aimed at identifying customers and reporting suspicions at the placement and layering stages</strong> + keeping adequate records — to <em>prevent the integration stage being reached</em>. Once integration happens — it is very hard to recover.
+  </div>
+</div>
+
+<div class="section-card" id="s44">
+  <div class="section-num">4.4</div>
+  <h2 class="section-title">CDD + JMLSG + MLR 2017</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>MLR 2017 — Money Laundering Regulations 2017</h3>
+
+  <p class="para">
+    <strong>MLR 2017</strong> implemented the <strong>Fourth EU Money Laundering Directive (MLD4)</strong>. Detailed rules for firms — CDD, record-keeping, training, risk assessment.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Customer Due Diligence (CDD)</h3>
+
+  <div class="info-box">
+    <div class="ib-title">3 levels of CDD</div>
+    <strong>Standard CDD</strong> — the baseline: identify the customer, verify identity, understand the nature of the business relationship.<br>
+    <strong>Simplified Due Diligence (SDD)</strong> — lower-risk customers (e.g. listed companies, other regulated firms).<br>
+    <strong>Enhanced Due Diligence (EDD)</strong> — <em>higher-risk situations</em>: PEPs, high-risk third countries, complex/unusually large transactions, non-face-to-face customers.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>PEPs — Politically Exposed Persons</h3>
+
+  <p class="para">
+    A <strong>PEP</strong> is an individual who <em>is or has been, at any time in the preceding year, entrusted with prominent public functions</em> — other than as a middle-ranking / junior official. A firm's EDD obligations <strong>cease after the PEP has left office for 1 year</strong> (or longer, if the firm considers it appropriate).
+  </p>
+
+  <p class="para">
+    <strong>Family members of a PEP</strong> — spouse / partner, children + their spouses, parents. EDD for family members <em>ceases when the PEP is no longer entrusted with a prominent public function</em>.
+  </p>
+
+  <p class="para">For PEPs, EDD — firms must:</p>
+
+  <ul class="bullet">
+    <li>Have risk-management systems to determine whether the customer / beneficial owner is a PEP</li>
+    <li><strong>Senior management approval</strong> — for establishing / continuing the business relationship</li>
+    <li>Establish <strong>source of wealth + source of funds</strong></li>
+    <li><strong>Enhanced ongoing monitoring</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>JMLSG — Joint Money Laundering Steering Group</h3>
+
+  <div class="info-box">
+    <div class="ib-title">JMLSG — status</div>
+    The JMLSG is an <em>industry body</em> publishing <strong>guidance</strong> on practical implementation of AML requirements. Status:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>NOT approved by the FCA or PRA</strong></li>
+      <li><strong>Endorsed by HM Treasury</strong></li>
+      <li><strong>NOT mandatory</strong> — industry guidance on best practices</li>
+      <li>Courts <em>consider adherence</em> as evidence of compliance</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Credit Reference Agencies</h3>
+
+  <p class="para">
+    As part of <strong>KYC (Know Your Customer)</strong> activities — may involve using <em>credit reference agency data</em>: electoral registers, credit history (+ financial associates), updates.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Sourcebook reference</h3>
+
+  <p class="para">
+    FCA expectations for AML systems + controls are primarily in <strong>SYSC 6.3</strong>.
+  </p>
+</div>
+
+<div class="section-card" id="s45">
+  <div class="section-num">4.5</div>
+  <h2 class="section-title">MLRO + Nominated Officer + SARs</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>MLRO vs Nominated Officer</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Role</th><th>MLRO (FCA)</th><th>Nominated Officer (POCA / MLR)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Primary role</strong></td><td>Oversees the firm's <em>entire AML compliance</em></td><td>Designated <em>point of contact to receive internal reports</em></td></tr>
+      <tr><td><strong>Legal duty</strong></td><td>FCA regulatory obligations</td><td><em>Must report suspicions to the NCA</em>. Failure = criminal offence</td></tr>
+      <tr><td><strong>Internal</strong></td><td>Policies, training, monitoring</td><td>Receives + reviews SARs from staff</td></tr>
+      <tr><td><strong>External reporting</strong></td><td>Final report to the NCA</td><td>Makes the external report to the NCA</td></tr>
+    </tbody>
+  </table>
+
+  <div class="example-box">
+    <div class="eb-title">In practice</div>
+    In <em>most firms the same person</em> = MLRO + Nominated Officer. The terminology highlights <strong>legal obligation (NO) vs broader compliance function (MLRO)</strong>. The MLRO reports <em>at least annually</em> to the governing body.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>SAR — Suspicious Activity Report</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Reporting chain</div>
+    <strong>Staff</strong> (suspicion) → <strong>MLRO / Nominated Officer</strong> (internal disclosure) → <strong>NCA</strong> (external SAR)
+  </div>
+
+  <p class="para">
+    The <strong>NCA (National Crime Agency)</strong> is the external regulator that receives SARs. Not the FCA, not HMRC.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>MLRO Duties</h3>
+
+  <ul class="bullet">
+    <li><strong>Policy development</strong> — creating/maintaining AML policies + framework</li>
+    <li><strong>Monitoring + reporting</strong> — transaction monitoring, automated alerts, receiving internal reports, making SARs to the NCA</li>
+    <li><strong>Risk management</strong> — company-wide risk assessments, mitigation strategies</li>
+    <li><strong>Training</strong> — AML training programmes, fostering a culture of compliance</li>
+    <li><strong>Regulatory liaison</strong> — staying up-to-date with regulations</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CDD records retention</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Record retention — 5 years</div>
+    Under <strong>MLR 2017</strong>, CDD records must be retained for <strong>5 years</strong> from the <em>end of the business relationship</em> (or occasional transaction date).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Common scenarios — the right action</h3>
+
+  <p class="para">Common exam traps — <em>wrong actions</em> an employee might take:</p>
+
+  <ul class="bullet">
+    <li>❌ <em>Delaying disclosure by several weeks</em> — breaches "as soon as practicable"</li>
+    <li>❌ <em>MLRO does not share suspicion, does not report to NCA</em> — criminal offence s.330</li>
+    <li>❌ <em>Disclosing to the suspect's solicitor who advises the suspect</em> — can be tipping off / prejudicing</li>
+    <li>❌ <em>MLRO travels abroad, delays reporting</em> — breach of the "as soon as practicable" duty</li>
+    <li>✅ <em>Staff → MLRO ASAP; MLRO reviews; if suspicion confirmed → SAR to NCA</em></li>
+  </ul>
+</div>
+
+<div class="section-card" id="cfa">
+  <div class="section-num">4.6</div>
+  <h2 class="section-title">Criminal Finances Act 2017 (CFA 2017)</h2>
+
+  <p class="para">
+    <strong>CFA 2017</strong> created <strong>2 new corporate criminal offences</strong> — failure to prevent:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Failure to prevent facilitation of UK tax evasion</span></div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Failure to prevent facilitation of FOREIGN tax evasion</span></div></div>
+
+  <div class="info-box">
+    <div class="ib-title">Corporate strict liability</div>
+    CFA 2017 applies on a strict liability basis — the company becomes criminally liable <em>if an associated person</em> (employee, agent, contractor) facilitates tax evasion. Defence — show that the company had <strong>reasonable prevention procedures</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>SOCPA 2005 — Spanish bullfighter problem</h3>
+
+  <p class="para">
+    The <strong>Serious Organised Crime and Police Act 2005 (SOCPA)</strong> addressed the so-called <em>"Spanish bullfighter" problem</em>:
+  </p>
+
+  <ul class="bullet">
+    <li>Granted a <strong>defence</strong> for conduct <em>legal in the country where it occurred</em></li>
+    <li>Subject to Secretary of State exceptions (e.g. serious tax evasion)</li>
+  </ul>
+
+  <p class="para">
+    <em>For example</em>: bullfighting is legal in Spain but illegal in the UK. Money earned legitimately in Spain (even from an activity illegal in the UK) is <em>not criminal property</em> under POCA, thanks to the SOCPA defence.
+  </p>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 4</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">POCA 2002 — 5 offences</div>
+    <strong style="color:#FEF3C7">s.327</strong> Concealing — 14y<br>
+    <strong style="color:#FEF3C7">s.328</strong> Arrangements — 14y<br>
+    <strong style="color:#FEF3C7">s.329</strong> Acquisition/Use/Possession — 14y (good faith defence)<br>
+    <strong style="color:#FEF3C7">s.330</strong> Failure to Disclose — 5y (objective test, regulated sector)<br>
+    <strong style="color:#FEF3C7">s.333A</strong> Tipping Off — 2y (regulated sector)<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    3 stages of ML: <strong style="color:#FEF3C7">Placement → Layering → Integration</strong>
+  </div>
+
+  <ul>
+    <li><strong>4.1 ML definition:</strong> turning criminally-derived money into legitimate-appearing funds.</li>
+    <li><strong>Criminal property (POCA):</strong> benefit from crime + knowledge/suspicion.</li>
+    <li><strong>4.2 POCA 2002 — 5 offences:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>s.327 Concealing</strong> — disguising, converting, transferring, removing. 14y.</li>
+        <li><strong>s.328 Arrangements</strong> — widely interpreted, includes advisers. 14y.</li>
+        <li><strong>s.329 Acquisition/Use/Possession</strong> — good faith defence. 14y.</li>
+        <li><strong>s.330 Failure to Disclose</strong> — 3 conditions (knows/suspects + regulated sector + didn't disclose to MLRO ASAP), NO threshold. Objective test. 5y.</li>
+        <li><strong>s.333A Tipping Off</strong> — regulated sector disclosure likely to prejudice the investigation. 2y.</li>
+      </ul>
+    </li>
+    <li><strong>Defence s.327-329:</strong> disclosure to MLRO (or NCA if you ARE the MLRO).</li>
+    <li><strong>s.342 Prejudicing Investigation:</strong> applies generally (not just the regulated sector). 5y. Broader than tipping off.</li>
+    <li><strong>4.3 Three Stages:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) <strong>Placement</strong> — cash into the financial system</li>
+        <li>(2) <strong>Layering</strong> — complex transactions obscuring origin</li>
+        <li>(3) <strong>Integration</strong> — money appears legitimate</li>
+        <li>AML focus = <strong>placement + layering</strong> (prevent integration)</li>
+      </ul>
+    </li>
+    <li><strong>4.4 MLR 2017</strong> implemented <strong>MLD4</strong>. 3 CDD levels: Standard / SDD (low risk) / EDD (high risk — PEPs, high-risk countries, complex transactions).</li>
+    <li><strong>PEPs:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Individual with prominent public functions in the preceding year (not junior/middle)</li>
+        <li>EDD for 1 year after leaving office (or longer if appropriate)</li>
+        <li>Family + close associates — EDD ceases when the PEP leaves office</li>
+        <li>Source of wealth + source of funds; senior management approval; enhanced ongoing monitoring</li>
+      </ul>
+    </li>
+    <li><strong>JMLSG:</strong>
+      <ul style="margin-top:.3rem">
+        <li>NOT approved by FCA / PRA</li>
+        <li><strong>Endorsed by HM Treasury</strong></li>
+        <li>NOT mandatory — industry guidance</li>
+        <li>Courts consider adherence as evidence of compliance</li>
+      </ul>
+    </li>
+    <li><strong>FCA sourcebook:</strong> AML systems + controls in <strong>SYSC 6.3</strong>.</li>
+    <li><strong>4.5 MLRO vs Nominated Officer:</strong>
+      <ul style="margin-top:.3rem">
+        <li>MLRO — broader compliance function (FCA); Nominated Officer — legal reporting duty (POCA/MLR)</li>
+        <li>In practice — often the same person</li>
+        <li>MLRO reports annually to the governing body</li>
+      </ul>
+    </li>
+    <li><strong>SAR chain:</strong> Staff → MLRO (internal) → <strong>NCA</strong> (external). Not the FCA, not HMRC.</li>
+    <li><strong>Record retention (MLR 2017):</strong> <strong>5 years</strong> from the end of the business relationship.</li>
+    <li><strong>CFA 2017:</strong> 2 corporate offences — failure to prevent facilitation of UK tax evasion + foreign tax evasion. Defence = reasonable prevention procedures.</li>
+    <li><strong>SOCPA 2005 — Spanish bullfighter:</strong> defence for conduct legal in the country where it occurred (with SoS exceptions).</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

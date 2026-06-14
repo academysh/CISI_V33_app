@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 4, Section 1 — Consumer Rights</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#065F46;--primary-l:#D1FAE5;--primary-d:#064E3B;--primary-vd:#022C22;--accent:#059669;--accent-l:#A7F3D0;--accent-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--sky:#0369A1;--sky-l:#E0F2FE;--sky-d:#075985;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#F0FDF4;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(6,95,70,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(2,44,34,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#D1FAE5;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(6,95,70,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--sky-l);border-left:4px solid var(--sky);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--sky-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(6,95,70,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#A7F3D0}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 4</div>
+  <div class="app-title">Chapter 4, Section 1 — Detailed Deep Dive</div>
+  <div class="app-sub">Consumer Rights · Syllabus 4.1 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Chapter 4 — <strong>Complaints and Redress</strong> — covers the UK's consumer protection framework. Section 1 is the <strong>Consumer Rights Act 2015 (CRA)</strong>, consolidating consumer protection laws. The Act establishes: (1) <em>statutory rights</em> for consumers in contracts for <strong>goods, digital content, services</strong>; (2) <em>statutory remedies</em> when rights are breached; (3) reform of the <em>unfair terms</em> regime in consumer contracts. The FCA is a <strong>qualifying body</strong> under the CRA — it challenges unfair terms in financial services consumer contracts. Also in this section: <strong>cancellation rights</strong> (14 calendar days for non-life / non-pension; 30 for life and pension) + <strong>Consumer Duty</strong> (Principle 12). 2-3 exam questions, often about unfair terms, the grey list, and cancellation periods.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s11">1.1 CRA 2015 — 3 parts + aims</a></li>
+    <li>→ <a href="#unfair">Unfair terms — definition + grey list</a></li>
+    <li>→ <a href="#fca-qb">FCA as Qualifying Body</a></li>
+    <li>→ <a href="#cancellation">Cancellation rights — 14/30 days</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s11">
+  <div class="section-num">1.1</div>
+  <h2 class="section-title">CRA 2015 — 3 parts + aims</h2>
+
+  <p class="para">
+    The <strong>Consumer Rights Act 2015 (CRA)</strong> is a UK law that <em>consolidates consumer protection laws</em>, particularly for contracts involving <strong>goods, digital content, services</strong>. The Act <em>outlines statutory rights</em> + <em>remedies</em> available when rights are breached.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Aims of the CRA</h3>
+
+  <div class="info-box">
+    <div class="ib-title">The CRA is designed to</div>
+    Enhance consumer confidence + simplify enforcement:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Give consumers <strong>statutory rights</strong> relating to consumer contracts for <em>goods / digital content / services</em></li>
+      <li>Give consumers <strong>statutory remedies</strong> when those rights are breached</li>
+      <li><strong>Reform + consolidate</strong> the law relating to <em>unfair terms</em> in consumer contracts (Part 2)</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 parts</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Part 1</span> — <em>consumers' rights and remedies</em> in relation to contracts for the supply of <strong>goods, digital content, services</strong>.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Part 2</span> — provisions relating to <strong>unfair terms in consumer contracts and notices</strong>.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Part 3</span> — <em>miscellaneous and general provisions</em>, including <strong>investigatory powers</strong> for consumer law enforcers + provisions relating to <strong>secondary ticketing</strong>.</div></div>
+</div>
+
+<div class="section-card" id="unfair">
+  <div class="section-num">1.2</div>
+  <h2 class="section-title">Unfair Terms — definition + grey list</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Definition of an unfair term</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Unfair term — test</div>
+    A term in a consumer contract is <strong>unfair</strong> if, <em>contrary to the requirement of good faith</em>, it <strong>causes a significant imbalance</strong> in the parties' rights and obligations <em>to the detriment of the consumer</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Individually negotiated — also covered</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Applies to individually negotiated terms too</div>
+    The CRA <strong>explicitly</strong> states that unfair-terms provisions apply <em>even to individually negotiated</em> terms. There is no blanket exemption. This <em>differs</em> from the earlier UTCCRs 1999, under which individually negotiated terms were often exempt.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>How fairness is assessed</h3>
+
+  <p class="para">Fairness is determined by considering:</p>
+
+  <ul class="bullet">
+    <li><strong>The nature of the subject matter</strong> of the contract</li>
+    <li><strong>All circumstances</strong> at the <em>time the term was agreed</em></li>
+    <li><strong>All other terms</strong> of the contract (and related contracts)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The grey list — indicative, non-exhaustive</h3>
+
+  <div class="info-box">
+    <div class="ib-title">The CRA "grey list"</div>
+    The CRA contains an <em>indicative and non-exhaustive list</em> of terms that <strong>may be regarded as unfair</strong> — the <em>"grey list"</em>. Being on the grey list <strong>does not automatically</strong> make a term unfair — fairness must be determined <em>on the facts</em>.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Grey list examples</div>
+    • Terms allowing a firm to <em>unilaterally change the contract</em> without a valid reason<br>
+    • Terms <em>excluding liability</em> for death / personal injury<br>
+    • Terms <em>forcing a consumer to bear an unreasonable burden of proof</em><br>
+    • Terms <em>giving the firm a right not available to the consumer</em>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Transparency requirement</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Transparency failure ≠ automatically unfair</div>
+    The CRA requires terms to be <em>transparent</em> (plain / intelligible language). However, if a term <em>fails the transparency test</em>, it is <strong>not automatically unfair</strong>. Unfairness must still be determined, considering <em>all relevant factors</em>.
+  </div>
+</div>
+
+<div class="section-card" id="fca-qb">
+  <div class="section-num">1.3</div>
+  <h2 class="section-title">FCA as Qualifying Body</h2>
+
+  <div class="info-box">
+    <div class="ib-title">FCA powers under the CRA</div>
+    Under the CRA, the <strong>FCA has statutory power</strong> to <em>challenge unfair terms</em> in financial services consumer contracts. The FCA is deemed a <strong>"qualifying body"</strong> under the <em>Unfair Terms in Consumer Contracts Regulations 1999</em> (now CRA 2015).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Available FCA actions</h3>
+
+  <p class="para">The FCA can:</p>
+
+  <ul class="bullet">
+    <li><strong>Seek undertakings</strong> from firms to <em>amend or remove unfair terms</em></li>
+    <li><strong>Apply to court</strong> for an <em>injunction</em> to prevent use of such terms against <em>future customers</em></li>
+    <li>Publish <strong>information</strong> about unfair terms / the firms using them</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Injunctions — limitations</div>
+    Important nuance: an injunction <strong>prevents the firm using the term against FUTURE customers</strong>, but does <em>not retroactively invalidate existing contracts</em>. Existing customers with unfair terms must pursue redress through other routes (complaints / FOS).
+  </div>
+</div>
+
+<div class="section-card" id="cancellation">
+  <div class="section-num">1.4</div>
+  <h2 class="section-title">Cancellation Rights — 14 / 30 days</h2>
+
+  <p class="para">FCA cancellation rights apply to:</p>
+
+  <ul class="bullet">
+    <li>Firms <em>providing retail financial products</em> based on designated investments / deposits</li>
+    <li><strong>Distance contracts</strong> with consumers relating to deposits / designated investments</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Cancellation periods</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Product type / context</th><th>Cancellation period</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Life and pension products</strong> (advised non-distance)</td><td><strong>30 calendar days</strong></td></tr>
+      <tr><td><strong>Life and pension products</strong> (distance contracts)</td><td><strong>30 calendar days</strong></td></tr>
+      <tr><td><strong>Non-life / non-pension products</strong> (advised non-distance)</td><td><strong>14 calendar days</strong></td></tr>
+      <tr><td><strong>Non-life / non-pension products</strong> (distance contracts)</td><td><strong>14 calendar days</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>How to exercise cancellation</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Consumer notification</div>
+    The consumer must <strong>notify the firm within the cancellation period</strong>. A <em>notification dispatched BEFORE the deadline</em> is <strong>sufficient</strong>, even if <em>received AFTER</em> the deadline. This protects consumers from postal delays.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Impact of market movements</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">The cancellation shortfall</div>
+    If the consumer <em>invokes cancellation rights</em> on an investment product (e.g. a <strong>UCITS fund</strong>), they <em>may not get back</em> the full invested amount. They receive the <em>proceeds from the sale of their holding</em> — <strong>impacted by price movement</strong> of the fund's underlying holdings. The market may have moved against them.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 1</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#A7F3D0">CRA 2015 — 3 parts</div>
+    <strong style="color:#A7F3D0">Part 1:</strong> Rights + remedies (goods/digital/services)<br>
+    <strong style="color:#A7F3D0">Part 2:</strong> Unfair terms — contracts + notices<br>
+    <strong style="color:#A7F3D0">Part 3:</strong> Miscellaneous + investigatory powers<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    FCA = <strong style="color:#A7F3D0">qualifying body</strong> — undertakings + court injunctions
+  </div>
+
+  <ul>
+    <li><strong>CRA 2015 aims:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Statutory rights (goods + digital + services)</li>
+        <li>Statutory remedies on breach</li>
+        <li>Reform of unfair-terms law</li>
+      </ul>
+    </li>
+    <li><strong>3 Parts:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Rights + remedies for goods/digital/services</li>
+        <li>(2) Unfair terms in consumer contracts + notices</li>
+        <li>(3) Miscellaneous + investigatory powers + secondary ticketing</li>
+      </ul>
+    </li>
+    <li><strong>Unfair term — test:</strong> contrary to good faith + causes significant imbalance + to the detriment of the consumer.</li>
+    <li><strong>Individually negotiated terms — also covered</strong> (no exemption).</li>
+    <li><strong>Fairness assessed:</strong> nature of subject matter + all circumstances at time of agreement + all other terms.</li>
+    <li><strong>Grey list</strong> — indicative + non-exhaustive. Being on the list ≠ automatically unfair. Fairness is determined on the facts.</li>
+    <li><strong>Transparency failure ≠ automatically unfair</strong> — must still be determined considering all factors.</li>
+    <li><strong>FCA — qualifying body</strong> (under Unfair Terms in Consumer Contracts Regulations 1999 / now CRA 2015):
+      <ul style="margin-top:.3rem">
+        <li>Seek undertakings — amend / remove unfair terms</li>
+        <li>Apply to court for injunctions (future customers)</li>
+        <li>Publish information</li>
+      </ul>
+    </li>
+    <li><strong>FCA cancellation rights apply to:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Retail financial products (designated investments / deposits)</li>
+        <li>Distance contracts with consumers (deposits / designated investments)</li>
+      </ul>
+    </li>
+    <li><strong>Cancellation periods:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Life / pension (advised + distance): <strong>30 calendar days</strong></li>
+        <li>Non-life / non-pension (advised + distance): <strong>14 calendar days</strong></li>
+      </ul>
+    </li>
+    <li><strong>Notification:</strong> dispatched before the deadline — sufficient, even if received after.</li>
+    <li><strong>Cancellation risk:</strong> for investments (e.g. UCITS) the consumer may <em>not get back</em> the full amount — the fund's underlying price movements impact proceeds.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

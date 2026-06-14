@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 8 — Product Disclosure and the Right to Cancel</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;--teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;--amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;--coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;--purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;--green-l:#E1F5EE;--green:#085041;--gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;--bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;--radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 8 — Detailed Deep Dive</div>
+  <div class="app-sub">Product Disclosure and the Right to Cancel · Syllabus 2.12 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 8 governs two connected questions. First, <strong>product disclosure</strong> — what documents the firm must give the client so they understand what they are buying (KIID for UCITS, KFD for packaged products, PRIIPs KID for insurance-based and other packaged retail investments). Second, <strong>right to cancel</strong> — the client's right to change their mind and cancel the contract within a cooling-off period (14 or 30 days depending on the product). On the exam — 3-5 questions focused on specific numbers and tables.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s81">8.1 Purpose and Nature of Disclosure Rules</a></li>
+    <li>→ <a href="#s811">8.1.1 KIID — Key Investor Information Documents (UCITS)</a></li>
+    <li>→ <a href="#s812">8.1.2 KFD — Key Features Documents (packaged products)</a></li>
+    <li>→ <a href="#s813">8.1.3 PRIIPs KID — Key Information Documents</a></li>
+    <li>→ <a href="#s82">8.2 Right to Cancel — general structure</a></li>
+    <li>→ <a href="#s821">8.2.1 Cancellation Periods — 14 or 30 days</a></li>
+    <li>→ <a href="#s822">8.2.2 Required Disclosures — what to tell the client</a></li>
+    <li>→ <a href="#s823">8.2.3 Exercising the Right — how the client cancels</a></li>
+    <li>→ <a href="#s824">8.2.4 Record-Keeping — retention periods</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s81">
+  <div class="section-num">8.1</div>
+  <h2 class="section-title">Purpose and Nature of Disclosure Rules — why product disclosure exists</h2>
+
+  <p class="para">
+    The main purpose of product disclosure rules is to ensure clients are provided with <strong>sufficient and relevant information</strong> to make a decision on whether to undertake an investment. This applies <em>both</em> to recommended investments and to those the client selects <em>independently</em>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">The logic of the rules</div>
+    Suitability and Appropriateness (Section 7) provide <em>procedural protection</em> — ensuring the firm assesses suitability. Product disclosure is <em>informational protection</em>: the client receives a document setting out what the product actually is. Both layers work together.
+  </div>
+
+  <p class="para">
+    Section 8.1 describes <strong>three types of key documents</strong>, each for a different product class:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Document</th><th>For whom</th><th>What it covers</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>KIID</strong><br>Key Investor Information Document</td>
+        <td>AFMs (authorised fund managers) managing <strong>UCITS schemes</strong></td>
+        <td>UCITS funds</td>
+      </tr>
+      <tr>
+        <td><strong>KFD</strong><br>Key Features Document</td>
+        <td>Firms offering packaged products</td>
+        <td>Packaged products, cash deposit ISA, cash deposit CTF</td>
+      </tr>
+      <tr>
+        <td><strong>PRIIPs KID</strong><br>Key Information Document</td>
+        <td>Manufacturers + advisers/sellers of <strong>PRIIPs</strong></td>
+        <td>Investment funds, insurance-based, structured securities, structured deposits</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section-card" id="s811">
+  <div class="section-num">8.1.1</div>
+  <h2 class="section-title">KIID — Key Investor Information Document</h2>
+
+  <p class="para">
+    <strong>Authorised Fund Managers (AFMs)</strong> managing <strong>UCITS schemes</strong> must produce a <strong>KIID</strong>.
+  </p>
+
+  <p class="para">
+    The KIID must be <strong>fair, clear and not misleading</strong> and <strong>consistent with the relevant parts</strong> of the scheme's prospectus. It must provide investors with information about the <em>essential characteristics</em> of the UCITS scheme, enabling them to reasonably understand the nature and risks of the product and make informed investment decisions.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>5 mandatory elements of the KIID</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>(a)</strong> Identification of the scheme</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>(b)</strong> Short description of <strong>investment objectives and investment policy</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>(c)</strong> Presentation of <strong>past performance</strong>, or (where relevant) <strong>performance scenarios</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>(d)</strong> <strong>Costs and associated charges</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>(e)</strong> <strong>Risk and reward profile</strong>, including appropriate guidance and warnings about risks</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 exceptions — when a KIID is not required</h3>
+
+  <ul class="bullet">
+    <li>Where <strong>another firm has agreed to prepare</strong> such a document</li>
+    <li>For <strong>certain types of schemes</strong> where information is already provided in sufficient detail in another document</li>
+    <li>For <strong>reinsurance and pure protection insurance contracts</strong> — special rules apply</li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam mnemonic</div>
+    KIID = <strong>produced by AFMs for UCITS</strong>. Fair/clear/not misleading + consistent with prospectus. 5 elements: <strong>ID / objectives+policy / past performance / costs / risk+reward</strong>. 3 exceptions: another firm agrees / already in another document / reinsurance + pure protection.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Past performance vs performance scenarios example</div>
+    An established UCITS fund with a 10-year history shows <strong>past performance</strong> — a bar chart of annual returns over the last 5-10 years. A newly launched fund with no history shows <strong>performance scenarios</strong> — moderate / favourable / unfavourable / stress scenarios of future returns.
+  </div>
+</div>
+
+<div class="section-card" id="s812">
+  <div class="section-num">8.1.2</div>
+  <h2 class="section-title">KFD — Key Features Document</h2>
+
+  <p class="para">
+    Product disclosure rules require the firm to prepare a disclosure document (KFD) <strong>in good time before it needs to</strong>, in respect of:
+  </p>
+
+  <ul class="bullet">
+    <li>Each <strong>packaged product</strong></li>
+    <li><strong>Cash deposit ISA</strong></li>
+    <li><strong>Cash deposit Child Trust Fund (CTF)</strong></li>
+    <li><strong>Key features illustration</strong> for each packaged product the firm produces</li>
+  </ul>
+
+  <p class="para">
+    Firms must provide <strong>particular information about the nature and risks of designated investments</strong> to clients for whom they conduct MiFID business. They must also do so for <em>retail clients</em> in relation to certain other business.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">What is a packaged product</div>
+    Not one specific product, but a <strong>category</strong>: life policies, personal pensions, unit trusts, investment trust savings schemes, ISAs, CTFs — anything that "packages" inner investments into a single product for retail. It is for these products that a KFD is required.
+  </div>
+</div>
+
+<div class="section-card" id="s813">
+  <div class="section-num">8.1.3</div>
+  <h2 class="section-title">PRIIPs KID — Key Information Document</h2>
+
+  <p class="para">
+    The regulation on <strong>Key Information Documents (KIDs)</strong> for <strong>Packaged Retail and Insurance-based Investment Products (PRIIPs)</strong> introduces a KID covering not only CIS but also <em>other "packaged" investment products</em> offered by banks or insurance companies.
+  </p>
+
+  <p class="para">
+    A <strong>KID</strong> is a <strong>short document</strong> giving <strong>key facts</strong> to investors in a <strong>clear and understandable manner</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Aim of the PRIIPs legislation</h3>
+
+  <p class="para">
+    To help investors <strong>better understand and compare</strong> the key features, risks, rewards and costs of different PRIIPs through a <em>short, consumer-friendly KID</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>UCITS and PRIIPs — exemption until 31 December 2026</h3>
+
+  <p class="para">
+    UCITS already has its own <em>KIID</em> and <em>KFD</em>, as noted in 8.1.1 and 8.1.2. UCITS is <strong>subject to a 5-year exemption period</strong> following the implementation of PRIIPs. The <strong>extension period expires on 31 December 2026</strong>. After that date, UCITS will also move to the PRIIPs KID.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>4 categories of PRIIPs</h3>
+
+  <p class="para">
+    The scope of PRIIPs is defined by <em>broadly comparable functions</em> for retail investors. They typically:
+  </p>
+
+  <ul class="bullet">
+    <li>Provide exposure to multiple underlying assets</li>
+    <li>Deliver capital accumulation over a medium- to long-term period</li>
+    <li>Entail a degree of investment risk (though some may provide capital guarantees)</li>
+    <li>Are normally marketed to retail investors</li>
+  </ul>
+
+  <p class="para">
+    <strong>4 PRIIPs groups:</strong>
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Investment funds</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Insurance-based investment products</strong> (e.g. unit-linked insurance bonds)</li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Retail-structured securities</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Structured term deposits</strong></li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who is affected</h3>
+
+  <p class="para">
+    The regulation applies to firms that:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Manufacture PRIIPs</strong></li>
+    <li><strong>Advise on / sell PRIIPs</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Format and structure of the KID</h3>
+
+  <p class="para">
+    The PRIIPs KID must be:
+  </p>
+
+  <ul class="bullet">
+    <li>A <strong>stand-alone document</strong></li>
+    <li><strong>Standardised format</strong></li>
+    <li>Maximum <strong>3 A4 pages</strong> in length</li>
+    <li><strong>7-section pre-determined sequence</strong> (strict sequencing of 7 sections)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>7 sections of the PRIIPs KID</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>What is this product?</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>What are the risks and what could I get in return?</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>What happens if [manufacturer name] is unable to pay out?</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>What are the costs?</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>How long should I hold it and can I take my money out early?</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>How can I complain?</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Other relevant information</strong></li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Timing and RTSs</h3>
+
+  <p class="para">
+    The KID must be provided <strong>in good time before the transaction</strong>. Detailed rules on content, calculation, review and timing are contained in the <strong>Regulatory Technical Standards (RTSs)</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li>Content and presentation</li>
+    <li>How to calculate certain information</li>
+    <li>Review, revision and republication</li>
+    <li>Timing of delivery</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">"Retail client" under PRIIPs — a broader definition</div>
+    For PRIIPs, <strong>retail client</strong> = (1) retail clients as defined in MiFID, OR (2) customers as referred to in the Insurance Distribution Directive (IDD) who would not qualify as professional clients under MiFID. So the scope is wider than just MiFID retail.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example of product classification</div>
+    An insurance company manufactures a <strong>unit-linked insurance bond</strong> — an investment product where the client's premium is invested in inner funds, and the policy covers lives. This is an <strong>insurance-based investment product</strong> → one of the 4 PRIIPs categories → a <strong>PRIIPs KID</strong> is required. A KIID is not needed here — a KIID is only for UCITS.
+  </div>
+</div>
+
+<div class="section-card" id="s82">
+  <div class="section-num">8.2</div>
+  <h2 class="section-title">Right to Cancel — general structure</h2>
+
+  <p class="para">
+    A "cooling-off period" is a period after contract conclusion during which the client can <strong>change their mind</strong> and <strong>cancel the contract without giving a reason</strong>. A fundamental retail consumer protection: giving them time to reflect after coming under sales pressure.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>To whom it applies</h3>
+
+  <p class="para">
+    Cancellation rights must be provided to <strong>retail customers</strong>. The rules apply to:
+  </p>
+
+  <ul class="bullet">
+    <li>Firms providing <strong>retail financial products based on designated investments or deposits</strong></li>
+    <li>Firms entering into <strong>distance contracts with consumers</strong> relating to deposits or designated investments</li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Who is NOT covered</div>
+    <strong>Professional clients</strong> and <strong>ECPs</strong> — NO cancellation rights. This is a retail protection.
+  </div>
+</div>
+
+<div class="section-card" id="s821">
+  <div class="section-num">8.2.1</div>
+  <h2 class="section-title">Cancellation Periods — 14 or 30 days</h2>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Product type</th><th>Cancellation period</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Life assurance or pension</strong> (incl. life endowment policies, personal pension schemes, stakeholder pensions)</td>
+        <td><span class="number-card">30 calendar days</span></td>
+      </tr>
+      <tr>
+        <td><strong>Cash deposit ISA</strong></td>
+        <td><span class="number-card">14 calendar days</span></td>
+      </tr>
+      <tr>
+        <td><strong>Other non-life/non-pension</strong> (e.g. investment products, distance contracts for deposits, etc.)</td>
+        <td><span class="number-card">14 calendar days</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>When the period starts</h3>
+
+  <p class="para">
+    The period begins on the <strong>later of</strong> two dates:
+  </p>
+
+  <ul class="bullet">
+    <li>Date of <strong>contract conclusion</strong>, OR</li>
+    <li>Date of <strong>receipt by the client of contractual information</strong> (when the client received all the terms)</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Timing logic</div>
+    The client must have real time <em>after learning the terms</em> to decide. So if the firm delayed contractual info — the cooling-off period is extended. A firm cannot "quickly conclude and run out the 14 days without info".
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The logic of different periods</h3>
+
+  <p class="para">
+    Why 30 days for life/pension and 14 for the rest? Life and pension are <strong>long-term, complex</strong> products with serious consequences (sometimes over decades). A mistake in such a choice is a catastrophe. Hence the double cooling-off period.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Timing example</div>
+    A client signs a life endowment policy on 1 May. But the full contractual info only arrives by post on 5 May. The 30-day period starts from <strong>5 May</strong> (later of), so the client can cancel until <strong>3 June</strong>.
+  </div>
+</div>
+
+<div class="section-card" id="s822">
+  <div class="section-num">8.2.2</div>
+  <h2 class="section-title">Required Disclosures — what the firm must tell the client</h2>
+
+  <p class="para">
+    The firm must disclose to the client <strong>5 elements</strong> about cancellation rights:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Existence</strong> of the right to cancel</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Duration</strong> of the period</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Conditions</strong> (including any <strong>costs</strong> associated with exercising the right)</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Consequences if the right is not exercised</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>How to exercise</strong> the right (practical mechanics)</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Timing and medium of disclosure</h3>
+
+  <p class="para">
+    This information must be provided in a <strong>durable medium</strong>, <strong>before the client is bound by the contract</strong>. If this is not possible — <strong>immediately after</strong> binding.
+  </p>
+</div>
+
+<div class="section-card" id="s823">
+  <div class="section-num">8.2.3</div>
+  <h2 class="section-title">Exercising the Right — how the client cancels</h2>
+
+  <p class="para">
+    To exercise the right to cancel, the client must <strong>notify the firm</strong>. The notification is considered <strong>timely</strong> if <strong>dispatched before the deadline expires</strong> — i.e. the date of dispatch counts, not receipt by the firm.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Key features</h3>
+
+  <ul class="bullet">
+    <li>The client is <strong>not required to give a reason</strong> for cancellation — cooling-off without questions.</li>
+    <li>On cancellation the client <strong>may not get the full amount back</strong> — market movements apply. If the fund has fallen 5% over 14 days, the client gets back less than they paid in.</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Important exam nuance</div>
+    Many think cancellation means <em>full refund</em>. It does NOT. For investment products the client bears <strong>market risk</strong> from the moment of conclusion to cancellation. What is returned is the current value of the investment.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Market movement example</div>
+    A client invested £10,000 in an investment product on 1 April. On 10 April they decide to cancel. The market fell 3% in that time. The client will get back roughly <strong>£9,700</strong>, not £10,000. This is not a penalty — it is simply the current value of the investment.
+  </div>
+</div>
+
+<div class="section-card" id="s824">
+  <div class="section-num">8.2.4</div>
+  <h2 class="section-title">Record-Keeping — retention periods for cancellation records</h2>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Type</th><th>Retention period</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Pension transfers, pension opt-outs, FSAVCs</strong></td>
+        <td><span class="number-card">INDEFINITELY</span></td>
+      </tr>
+      <tr>
+        <td><strong>Life policies, pension contracts, personal pension schemes, stakeholder pension schemes</strong></td>
+        <td>At least <span class="number-card">5 years</span></td>
+      </tr>
+      <tr>
+        <td>All other cases</td>
+        <td>At least <span class="number-card">3 years</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Link to Section 4 — same rules</div>
+    The same retention periods apply to client agreements and other records (see Section 4). Pension transfers — always indefinite. Life/pension — 5 years. Other — 3 or 5 years depending on the record type.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 8</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Key numbers of this section</div>
+    KIID — <strong>5 elements</strong><br>
+    PRIIPs KID — <strong>max 3 A4 pages</strong>, <strong>7 sections</strong><br>
+    PRIIPs and UCITS exemption — until <strong>31 December 2026</strong><br>
+    PRIIPs — <strong>4 categories</strong><br>
+    Cancellation life/pension — <strong>30 days</strong><br>
+    Cancellation ISA / other — <strong>14 days</strong><br>
+    Records: pension transfers <strong>indefinitely</strong> / life-pension <strong>5+ years</strong> / other <strong>3+ years</strong>
+  </div>
+
+  <ul>
+    <li><strong>8.1 Purpose:</strong> ensure sufficient and relevant info for an informed decision. Applies both to advised and self-directed investments.</li>
+    <li><strong>8.1.1 KIID:</strong> produced by AFMs for UCITS schemes. Fair/clear/not misleading + consistent with prospectus. <strong>5 elements:</strong> identification / objectives+policy / past performance (or scenarios) / costs / risk+reward profile. <strong>3 exceptions:</strong> another firm agreed / already in another document / reinsurance + pure protection.</li>
+    <li><strong>8.1.2 KFD:</strong> required for (a) each packaged product; (b) cash deposit ISA; (c) cash deposit CTF; (d) key features illustration for each packaged product the firm produces.</li>
+    <li><strong>8.1.3 PRIIPs KID:</strong> for Packaged Retail and Insurance-based Investment Products. Aim — to help retail <em>understand and compare</em>. <strong>4 categories:</strong> investment funds / insurance-based / retail-structured securities / structured term deposits.</li>
+    <li>PRIIPs KID — <strong>stand-alone + standardised + max 3 A4 + 7 sections</strong>. In good time before the transaction.</li>
+    <li><strong>7 sections of the KID:</strong> (1) What is this product? (2) Risks and return? (3) What if manufacturer can't pay? (4) Costs? (5) How long to hold / early exit? (6) How to complain? (7) Other relevant info.</li>
+    <li><strong>RTSs</strong> set the details: content/presentation + calculation + review/revision/republication + timing of delivery.</li>
+    <li><strong>UCITS exempt from PRIIPs until 31 Dec 2026</strong>. After that date — PRIIPs KID.</li>
+    <li>Retail client under PRIIPs = (1) MiFID retail OR (2) IDD customer not qualifying as MiFID professional.</li>
+    <li><strong>8.2 Cancellation — retail customers only.</strong> Applies to retail financial products based on designated investments/deposits + distance contracts (deposits/designated investments).</li>
+    <li><strong>8.2.1 Periods:</strong> life/pension = <strong>30 days</strong>; cash deposit ISA = <strong>14 days</strong>; other = <strong>14 days</strong>. Start = <strong>later of</strong> conclusion OR receipt of contractual info.</li>
+    <li><strong>8.2.2 Disclosures — 5 elements:</strong> existence + duration + conditions (incl. costs) + consequences if not exercised + how to exercise. Durable medium. Before binding (or immediately after if not possible).</li>
+    <li><strong>8.2.3 Exercising:</strong> notify firm. Timely if dispatched before deadline. <strong>No reason required</strong>. Client <strong>MAY NOT get the full amount back</strong> — market movements apply.</li>
+    <li><strong>8.2.4 Records:</strong> pension transfers/opt-outs/FSAVCs = <strong>indefinitely</strong>; life/pension contracts = <strong>≥5 years</strong>; other = <strong>≥3 years</strong>.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

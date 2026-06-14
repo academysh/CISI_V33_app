@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 13 — Client Assets (CASS)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;--teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;--amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;--coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;--purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;--green-l:#E1F5EE;--green:#085041;--gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;--bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;--radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 13 — Detailed Deep Dive</div>
+  <div class="app-sub">Client Assets (CASS) · Syllabus 2.22 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 13 is the final and one of the most critical sections. It is about <strong>CASS (Client Assets Sourcebook)</strong>: the rules on how a firm must protect <em>client money</em> and <em>client assets</em>. The logic is simple but the stakes are enormous: if the firm fails, <strong>client money and client assets must NOT end up with the firm's creditors</strong>. For that — segregation (separating from the firm's own money), statutory trust, strict reconciliation procedures, and an annual auditor's report. Historically CASS is one of the hottest enforcement topics (FCA fines on firms for CASS breaches run into tens of millions of pounds). On the exam 3-5 questions with specific numbers: <strong>CASS 6</strong>, <strong>CASS 7</strong>, <strong>CASS 7.17.2R</strong>, <strong>20 days</strong>, <strong>25 business days</strong>.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s131">13.1 Purpose of CASS — why segregation is needed</a></li>
+    <li>→ <a href="#chapters">Structure of CASS — chapters 6 and 7</a></li>
+    <li>→ <a href="#trust">Statutory trust — CASS 7.17.2R</a></li>
+    <li>→ <a href="#exemptions">Exemptions from CASS</a></li>
+    <li>→ <a href="#bank">Client bank account — opening procedure</a></li>
+    <li>→ <a href="#custody">Custody assets — CASS 6</a></li>
+    <li>→ <a href="#reconciliation">Reconciliation — standard vs alternative approach</a></li>
+    <li>→ <a href="#audit">Client Assets Report — annual auditor</a></li>
+    <li>→ <a href="#oversight">CASS oversight — SMF officer</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s131">
+  <div class="section-num">13.1</div>
+  <h2 class="section-title">Purpose of CASS — why rules on client money and custody exist</h2>
+
+  <p class="para">
+    The rules relating to custody and safeguarding of client money and client assets are contained in the <strong>Client Assets Sourcebook (CASS)</strong>. These requirements ensure firms take adequate steps to <strong>protect those client assets</strong> for which they are responsible.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Scope — who is covered</h3>
+
+  <p class="para">
+    CASS generally applies <strong>to every firm</strong>, with certain specific exemptions. CASS applies <strong>directly</strong> in respect of activities conducted with or for <strong>all categories of client</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Retail clients</strong></li>
+    <li><strong>Professional clients</strong></li>
+    <li><strong>Eligible counterparties (ECPs)</strong></li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">A key difference of CASS from many other rules</div>
+    Unlike many other rules in COBS (which often disapply for ECPs), CASS applies to <strong>ALL categories</strong>. The reason: this is not about <em>conduct</em>, but about <em>ownership</em> — even an ECP has the right to know that its deposits and assets are not commingled with firm's own money and won't be lost on firm failure.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The main goal of CASS — segregation</h3>
+
+  <p class="para">
+    Within CASS there is a requirement to <strong>segregate client money</strong> from any other money held by the firm. This ensures that <strong>if the firm fails, the money will not be used to repay the firm's creditors</strong>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">The logic of CASS — a pre-insolvency mindset</div>
+    Every CASS rule should be read through the question: "What happens if the firm goes bust tomorrow?" Client money must be clearly <strong>identifiable, separate, and reachable</strong> by an administrator — so the client gets their money back quickly and in full, rather than standing in line with general creditors.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Historical importance</h3>
+
+  <p class="para">
+    After the collapse of <em>Lehman Brothers</em> (2008), it emerged that US Lehman had not segregated client money properly — and clients spent years trying to recover their money through complex legal proceedings. Since then the FCA has substantially <strong>tightened CASS</strong> and made it <strong>one of the top priorities of supervision</strong>. Firms are fined for CASS breaches not on a "rule broken" basis, but on a "client money put at risk" basis — and the fines are enormous.
+  </p>
+</div>
+
+<div class="section-card" id="chapters">
+  <div class="section-num">13.2</div>
+  <h2 class="section-title">Structure of CASS — chapters 6 and 7</h2>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Chapter</th><th>What it regulates</th><th>Scope</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CASS 5</strong></td>
+        <td>Client money — insurance mediation activity</td>
+        <td>Insurance brokers</td>
+      </tr>
+      <tr>
+        <td><strong>CASS 6</strong></td>
+        <td><strong>Custody rules</strong> — financial instruments</td>
+        <td>Firms holding client's financial instruments: MiFID business + safeguarding/administering investments (non-MiFID)</td>
+      </tr>
+      <tr>
+        <td><strong>CASS 7</strong></td>
+        <td><strong>Client Money and Distribution Rules</strong></td>
+        <td>UK MiFID investment firm — client money + investment agreement context</td>
+      </tr>
+      <tr>
+        <td><strong>CASS 10</strong></td>
+        <td>CASS resolution pack</td>
+        <td>Documentation for administrator on firm failure</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CASS 6 — custody rules in detail</h3>
+
+  <p class="para">
+    <strong>CASS 6</strong> contains custody rules that apply when:
+  </p>
+
+  <ul class="bullet">
+    <li>A firm holds <strong>financial instruments of a client</strong> in the course of <strong>MiFID business</strong></li>
+    <li>A firm is <strong>safeguarding and administering investments</strong> in the course of <strong>non-MiFID business</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CASS 7 — client money rules in detail</h3>
+
+  <p class="para">
+    <strong>CASS 7</strong> applies to a UK MiFID investment firm either:
+  </p>
+
+  <ul class="bullet">
+    <li>When it holds client money in the course of MiFID business <em>or</em> in respect of any investment agreement entered into with or for a client</li>
+    <li>When, in the course of <strong>non-MiFID business</strong>, the firm <strong>opts to comply</strong> with the MiFID client money rules</li>
+    <li>When it holds money in respect of which CASS 5 (client money — insurance mediation activity) applies and the firm <strong>elects to apply CASS 7 provisions</strong></li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — CASS 6 vs CASS 7</div>
+    <strong>CASS 6 = custody rules</strong> = <strong>financial instruments</strong> (securities) of clients.<br>
+    <strong>CASS 7 = client money rules</strong> = <strong>cash</strong> of clients.<br>
+    Often asked — important to distinguish.
+  </div>
+</div>
+
+<div class="section-card" id="trust">
+  <div class="section-num">13.3</div>
+  <h2 class="section-title">Statutory Trust — CASS 7.17.2R</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Segregation mechanism</h3>
+
+  <p class="para">
+    Usually, segregation of client money is achieved by the client's money being <strong>placed promptly</strong> in a <strong>separately designated client money account</strong> with a bank; the firm then ensures the bank <strong>treats this money separately</strong> from the firm's own funds.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Legal form — statutory trust</h3>
+
+  <div class="info-box">
+    <div class="ib-title">CASS 7.17.2R — key legal structure</div>
+    This is <strong>achieved by the firm holding client money IN TRUST</strong>. The trust is a <strong>statutory trust</strong>, created by rules laid down in <strong>CASS 7.17.2R</strong>.
+  </div>
+
+  <p class="para">
+    A statutory trust is a legal construct in which the firm acts as <strong>trustee</strong>, and the client as <strong>beneficiary</strong>. The money <em>does not belong to the firm</em> — even if the bank account is in the firm's name, legal ownership remains with the client.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Practical consequence of the trust for insolvency</div>
+    If the firm goes bust: money on client money accounts is <strong>NOT part of the firm's estate</strong>. The administrator cannot distribute these funds among the firm's creditors. Clients get their money back directly (through the distribution process under CASS 7A).<br><br>
+    <strong>Contrast with an ordinary bank deposit:</strong> if an ordinary company account (commingling client money and own money), that money becomes part of the estate → clients queue up with creditors → may receive only a fraction.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example — why the statutory trust matters</div>
+    Clients of firm X hold £50 million on client money accounts. Firm X goes bust with debts of £80 million. Firm assets total £30 million.<br><br>
+    <strong>Without CASS trust:</strong> the clients' £50M has been commingled with firm money — all goes into the common pool. Creditors (£80M + £50M = £130M debt) vs £30M + £50M = £80M assets → each gets ~62%. Clients lose ~£19M.<br><br>
+    <strong>With CASS trust (CASS 7.17.2R):</strong> the £50M is <em>not part of the estate</em>. Clients receive <strong>£50M back in full</strong>. The firm's own creditors share only the £30M of firm assets.
+  </div>
+</div>
+
+<div class="section-card" id="exemptions">
+  <div class="section-num">13.4</div>
+  <h2 class="section-title">Exemptions from CASS rules</h2>
+
+  <p class="para">
+    CASS applies generally, but there are <strong>specific exemptions</strong>. The main ones:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>ICVCs (Investment Companies with Variable Capital)</strong> — also known as OEICs. They have a separate regulatory framework under the OEIC Regulations 2001.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>UCITS-qualifying schemes</strong></li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Credit institutions acting as "banker"</strong> — deposits taken by a bank in its normal banking capacity are not client money. When a bank takes a deposit, the client becomes a creditor of the bank (not a beneficiary of a trust).</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Coins held for metal value</strong></li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Money held in DvP (Delivery-vs-Payment) transactions</strong> — <em>unless settlement fails within 3 business days</em>. If DvP does not settle within 3 days — the money becomes client money under CASS.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Money due to the firm</strong> (fees, commissions already earned by the firm)</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Firm in own name by client agreement</strong> (specific structured arrangements)</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Full ownership transfers for security purposes</strong> — where a client transfers full ownership of assets to the firm as collateral securing present or future obligations</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Full ownership transfer — in detail</h3>
+
+  <div class="info-box">
+    <div class="ib-title">CASS 6 and CASS 7 do not apply to full ownership transfers</div>
+    Where a client <strong>transfers full ownership</strong> of safe custody assets or client money <strong>to the firm</strong> for the purpose of <em>securing or covering</em> present or future, actual, contingent or prospective <strong>obligations</strong> — CASS 6 and CASS 7 <strong>do not apply</strong>.<br><br>
+    Logic: if the client has <em>handed over</em> full ownership — it is no longer a "client asset", it is a firm asset. CASS protects only client property held by the firm temporarily / for administration.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Full ownership transfer example</div>
+    Client X provides the firm with securities worth £1M as <strong>title transfer collateral</strong> for securing a loan facility. Legal title to the securities is <em>transferred to the firm</em>; the firm may use or sell them at any time.<br><br>
+    <strong>CASS does not apply</strong> (the securities are the firm's property, not the client's). Instead of CASS protections, the client has <em>contractual rights</em> to get equivalent securities back once the loan is repaid.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Mixed remittances — a cheque with mixed content</h3>
+
+  <p class="para">
+    If the firm receives a <strong>mixed payment</strong> (cheque) containing both client money and the firm's own fees — the <strong>entire amount must be treated as client money</strong> until the firm has segregated its own portion. A protective rule.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Mixed remittance example</div>
+    A client sends the firm a cheque for £1,000: £900 — client money (to be invested), £100 — the firm's management fee.<br><br>
+    <strong>Correct:</strong> the entire £1,000 is initially treated as client money → placed in the client money account. The firm then transfers £100 to its own account (segregating its own portion).<br>
+    <strong>Wrong:</strong> splitting on receipt and putting £100 straight into the firm account before the segregation process.
+  </div>
+</div>
+
+<div class="section-card" id="bank">
+  <div class="section-num">13.5</div>
+  <h2 class="section-title">Client Bank Account — opening procedure</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Notice to the bank</h3>
+
+  <p class="para">
+    When a client bank account is opened, the firm <strong>must send a notice to the bank</strong>, advising that:
+  </p>
+
+  <ul class="bullet">
+    <li>The bank <strong>must not combine money in the client account with any other accounts</strong> held in the firm's name</li>
+    <li>The <strong>title of the client account must distinguish it from any other account</strong> held by the firm</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>20 days — bank acknowledgement (UK accounts)</h3>
+
+  <p class="para">
+    For <strong>client bank accounts held in the UK</strong>, the bank <strong>must acknowledge</strong> the arrangement (of trustee status) <strong>within 20 days</strong>, otherwise the firm must:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Withdraw the money</strong></li>
+    <li><strong>Deposit it with another bank as soon as possible</strong></li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Key number — 20 days</div>
+    <strong>20 days</strong> — deadline for bank acknowledgement of the trust arrangement. If not acknowledged → <strong>withdraw money and deposit elsewhere ASAP</strong>.<br>
+    Classic exam question: "After 25 days the bank has not sent an acknowledgement, what to do?" → withdraw + deposit elsewhere ASAP.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Prohibition — no money until acknowledgement</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Updated rule</div>
+    The rules <strong>now prohibit the placement of client money in an account</strong> <em>UNTIL</em> the relevant <strong>acknowledgement letter has been signed and returned to the firm</strong>. This applies to all client bank accounts, not just UK accounts.<br><br>
+    That is: previously you could deposit, wait for the acknowledgement for 20 days, and if it didn't come — withdraw. Now: you cannot even deposit until a signed acknowledgement is received.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Trust letter and acknowledgement — contents</h3>
+
+  <p class="para">
+    In the notice / acknowledgement letter, the bank must confirm the following:
+  </p>
+
+  <ul class="bullet">
+    <li>The account is held by the firm <strong>as trustee</strong> for clients</li>
+    <li>The bank <strong>will not combine</strong> the money with other accounts of the firm</li>
+    <li>The bank <strong>has no right of set-off</strong> against money in the client account (cannot use client money to offset the firm's debts to the bank)</li>
+    <li>The bank acknowledges the money is client money, not firm's money</li>
+  </ul>
+</div>
+
+<div class="section-card" id="custody">
+  <div class="section-num">13.6</div>
+  <h2 class="section-title">Custody Assets — CASS 6 safeguarding rules</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Adequate arrangements for safeguarding ownership</h3>
+
+  <p class="para">
+    When holding safe custody assets belonging to clients, firms must make <strong>adequate arrangements</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Safeguard client's ownership rights</strong> — especially in the event of the firm's insolvency</li>
+    <li><strong>Prevent client's safe custody assets being used on the firm's own account</strong> — <em>except with the client's express consent</em></li>
+    <li>Introduce adequate <strong>organisational arrangements</strong> to minimise the risk of loss or diminution of the client's safe custody assets</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Correct legal title</h3>
+
+  <p class="para">
+    Firms must <strong>register the correct legal title</strong> to the assets in the name of the client, nominee, or other authorised person, as appropriate to the nature of the service being provided.
+  </p>
+
+  <p class="para">
+    If the firm <strong>owns a nominee</strong>, it must <strong>accept the same level of responsibility for the nominee</strong> as if the firm held the assets itself.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Express consent — use of client assets</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Express consent for securities lending / rehypothecation</div>
+    By default — the firm <strong>CANNOT</strong> use client safe custody assets on its own account. But with <strong>the client's express consent</strong>, this is permitted. Classic use case: securities lending — the firm lends out the client's shares to a hedge fund, the client earns a fee, the firm also earns a spread.<br><br>
+    Without express consent this would be <strong>misappropriation of client assets</strong> — a serious regulatory violation.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Non-segregation country example</div>
+    A client wants to invest in market X where the legal framework does not allow separate designation of client assets from the custodian's own assets. The firm must <strong>explain this to the client</strong> in a durable medium and disclose what risks this creates for the client's assets in that jurisdiction. Without such disclosure — breach of safeguarding disclosure rules (Section 4 + Section 13).
+  </div>
+</div>
+
+<div class="section-card" id="reconciliation">
+  <div class="section-num">13.7</div>
+  <h2 class="section-title">Reconciliation — Standard vs Alternative Approach</h2>
+
+  <p class="para">
+    CASS requires firms to <strong>regularly reconcile</strong> their internal records of client money with external records (bank statements). This catches errors, misappropriations, and shortfalls.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Standard approach — internal reconciliation</h3>
+
+  <p class="para">
+    Under the <strong>standard approach</strong>, the firm must perform:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Internal client money reconciliation</strong> — at minimum <strong>every 25 business days</strong></li>
+    <li><strong>External client money reconciliation</strong> — on a regular basis</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Alternative approach — daily reconciliation</h3>
+
+  <p class="para">
+    If the firm adopts the <strong>alternative approach</strong>, internal client money reconciliations must be performed <strong>EACH BUSINESS DAY</strong>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">When the alternative approach is used</div>
+    The alternative approach is typically used by firms with many small / frequent movements of client money (e.g. retail brokers). Daily reconciliation lets discrepancies be caught quickly. The standard approach is proportionate for firms with more static client money positions.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Shortfall and excess</h3>
+
+  <p class="para">
+    If reconciliation shows a <strong>shortfall</strong> (the firm has <em>less</em> client money than it should), the firm must <strong>pay in its own money</strong> to cover the shortfall, pending investigation. If an <strong>excess</strong> — the firm must pay it into the client money account. These actions are required <strong>as soon as possible</strong>.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Shortfall handling example</div>
+    Friday morning reconciliation: the firm's internal records show £10,000,000 of client money. Bank statements show £9,998,500. <strong>Shortfall £1,500</strong>.<br><br>
+    <strong>The firm must immediately:</strong><br>
+    • <strong>Pay £1,500 from its own money</strong> into the client money account to cover the shortfall<br>
+    • <strong>Investigate</strong> the causes of the shortfall (bank error? internal error? misappropriation?)<br>
+    • <strong>Report serious/unresolved breach to the FCA</strong>
+  </div>
+</div>
+
+<div class="section-card" id="audit">
+  <div class="section-num">13.8</div>
+  <h2 class="section-title">Client Assets Report — the annual auditor's report</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What a Client Assets Report is</h3>
+
+  <p class="para">
+    Firms holding client money or client assets must engage an independent auditor for an annual <strong>Client Assets Report</strong>. This is not an ordinary financial audit — it is specifically an audit of <strong>compliance with the CASS rules</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Two types of report</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Type</th><th>What it means</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Reasonable assurance</strong></td>
+        <td>Positive form — the auditor gives a positive opinion that the firm has complied with CASS. Higher standard</td>
+      </tr>
+      <tr>
+        <td><strong>Limited assurance</strong></td>
+        <td>Negative form — the auditor is not aware of anything suggesting non-compliance. Lower standard (for certain smaller firms)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Firm's own risk assessment — key exam fact</h3>
+
+  <div class="exam-box">
+    <div class="xb-title">For a reasonable assurance Client Assets Report — key fact</div>
+    When the auditor conducts a reasonable assurance Client Assets Report, the auditor <strong>must take into account the FIRM'S OWN RISK ASSESSMENT</strong> of its client assets arrangements.<br><br>
+    The risk assessment forms the basis for determining the <strong>scope and focus of the audit</strong>.
+  </div>
+
+  <p class="para">
+    Logic: each firm has its own unique set of CASS risks (depending on business model, client base, geography, product types). The firm's own risk assessment is the starting point. The auditor does not conduct a generic audit — the auditor focuses on identified risks.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Submission to the FCA</h3>
+
+  <p class="para">
+    The report is submitted to the FCA. If the auditor identifies <strong>material CASS breaches</strong> — this triggers supervisory attention. In serious cases the FCA may inspect the firm, demand remedial actions, or impose fines.
+  </p>
+</div>
+
+<div class="section-card" id="oversight">
+  <div class="section-num">13.9</div>
+  <h2 class="section-title">CASS Oversight — SMF responsibility</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CASS oversight officer (SMF18)</h3>
+
+  <p class="para">
+    Under SM&CR, firms holding client money or assets must appoint a <strong>CASS oversight senior manager function (SMF18)</strong>. This individual is personally accountable for:
+  </p>
+
+  <ul class="bullet">
+    <li>Overseeing the firm's CASS compliance</li>
+    <li>Reporting breaches to the regulator</li>
+    <li>Ensuring the firm has <strong>adequate systems and controls</strong> for CASS</li>
+    <li>Ensuring the resolution pack (CASS 10) is up to date</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CASS Resolution Pack (CASS 10)</h3>
+
+  <p class="para">
+    CASS 10 requires firms to maintain a <strong>resolution pack</strong> — a set of documents enabling an administrator to quickly identify and distribute client money / assets on firm failure.
+  </p>
+
+  <p class="para">
+    The pack must include:
+  </p>
+
+  <ul class="bullet">
+    <li>Identification of all client money accounts and custody accounts</li>
+    <li>Contact details of bank counterparties and custodians</li>
+    <li>Information on segregation arrangements</li>
+    <li>List of all clients with their entitlements</li>
+    <li>Keys, passwords, system access for insolvency practitioners</li>
+  </ul>
+
+  <p class="para">
+    The pack must be retrievable <strong>within 48 hours</strong> upon request by an insolvency practitioner.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Significance of the resolution pack — lessons from Lehman</div>
+    The Lehman Brothers collapse in 2008 showed how poorly prepared most firms were for the rapid identification and return of client assets. Clients waited <em>years</em> to recover their holdings. CASS 10 is a direct response: <strong>the firm must be prepared</strong> to hand over documentation to the administrator within 48 hours so that client returns can be rapid.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 13</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">CASS architecture</div>
+    <strong style="color:#FEF3C7">CASS 6</strong> = custody rules (financial instruments)<br>
+    <strong style="color:#FEF3C7">CASS 7</strong> = client money rules + <strong>7.17.2R</strong> statutory trust<br>
+    <strong style="color:#FEF3C7">CASS 10</strong> = resolution pack<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    Key purpose: <strong>segregation</strong> — protect client money/assets from firm's creditors on failure
+  </div>
+
+  <ul>
+    <li><strong>13.1 CASS purpose:</strong> protect client assets for which the firm is responsible. Applies to <strong>all categories</strong> (retail + professional + ECP) — unlike many other COBS rules.</li>
+    <li><strong>Segregation principle:</strong> client money must be separated from firm's money, so that on firm failure it does not go to creditors.</li>
+    <li><strong>Structure:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>CASS 5</strong> — insurance mediation client money</li>
+        <li><strong>CASS 6</strong> — custody rules (financial instruments)</li>
+        <li><strong>CASS 7</strong> — client money rules (cash)</li>
+        <li><strong>CASS 10</strong> — resolution pack</li>
+      </ul>
+    </li>
+    <li><strong>CASS 7 scope:</strong> UK MiFID firm holding client money in MiFID business / investment agreement context. Plus: non-MiFID firm opt-in. Plus: insurance mediation opt-in.</li>
+    <li><strong>Statutory trust — CASS 7.17.2R:</strong> client money held in trust. On firm insolvency — <strong>not part of the firm's estate</strong>, clients get their money back in full.</li>
+    <li><strong>Client bank account:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Separately designated</li>
+        <li>Notice to bank — no combining with firm accounts, distinguishing title</li>
+        <li>Bank acknowledgement — <strong>within 20 days</strong> (UK); otherwise <strong>withdraw and deposit elsewhere ASAP</strong></li>
+        <li><strong>No client money in the account until a signed acknowledgement is received</strong></li>
+      </ul>
+    </li>
+    <li><strong>CASS exemptions (key ones):</strong>
+      <ul style="margin-top:.3rem">
+        <li>ICVCs (OEICs)</li>
+        <li>UCITS-qualifying schemes</li>
+        <li>Credit institutions as "banker"</li>
+        <li>Coins for metal value</li>
+        <li>DvP transactions (unless settlement fails within 3 business days)</li>
+        <li>Money due to the firm</li>
+        <li>Full ownership transfers for security purposes</li>
+      </ul>
+    </li>
+    <li><strong>Mixed remittances:</strong> a cheque containing client money + firm fees — the <strong>entire amount is treated as client money</strong> until the firm has segregated its own portion.</li>
+    <li><strong>CASS 6 custody:</strong> adequate arrangements for safeguarding + prevent firm's own-account use (<strong>except express consent</strong>) + correct legal title + firm owns nominee → same level of responsibility.</li>
+    <li><strong>Reconciliation:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Standard approach: internal reconciliation <strong>every 25 business days</strong></li>
+        <li>Alternative approach: <strong>each business day</strong></li>
+        <li>Shortfall → firm pays in own money immediately</li>
+      </ul>
+    </li>
+    <li><strong>Client Assets Report:</strong> annual auditor's report. Two types — reasonable (positive) / limited (negative) assurance.</li>
+    <li><strong>Key fact:</strong> for a <strong>reasonable assurance</strong> Client Assets Report, the auditor must <strong>take into account the firm's own risk assessment</strong> of its client assets arrangements. This forms the basis for the scope and focus of the audit.</li>
+    <li><strong>CASS oversight (SMF18):</strong> a named senior manager personally accountable under SM&CR.</li>
+    <li><strong>CASS 10 resolution pack:</strong> documents for the insolvency practitioner — identification of accounts, clients, entitlements. Retrievable within 48 hours.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

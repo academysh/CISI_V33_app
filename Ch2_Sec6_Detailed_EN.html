@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 6 — Retail Clients (Consumer Duty / FTOC)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;
+  --teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;
+  --amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;
+  --coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;
+  --purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --green-l:#E1F5EE;--green:#085041;
+  --gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;
+  --bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09);
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 ";}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ ";}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 ";}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.tag-in{background:var(--green-l);color:var(--green);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-out{background:var(--coral-l);color:var(--coral);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-partial{background:var(--amber-l);color:var(--amber-d);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+.outcome-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:1rem 0}
+.outcome-card{background:linear-gradient(135deg,#f8fafc,#fff);border:1.5px solid var(--teal);border-radius:10px;padding:.9rem 1rem}
+.outcome-num{font-size:.72rem;color:var(--teal);font-weight:700;margin-bottom:.2rem;letter-spacing:.06em}
+.outcome-name{font-size:.95rem;font-weight:700;color:var(--navy);margin-bottom:.35rem}
+.outcome-desc{font-size:.83rem;color:var(--text2);line-height:1.5}
+@media (max-width:600px){.outcome-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 6 — Detailed Deep Dive</div>
+  <div class="app-sub">Retail Clients · Consumer Duty · FTOC · Syllabus 2.7 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<!-- INTRODUCTION -->
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 6 of the textbook is formally brief — it cross-references detailed material in Chapter 1, Section 2. <strong>But the meaning of this topic is huge</strong>: this is where the most recent UK regulatory innovations are examined — <strong>Consumer Duty (Principle 12)</strong>, which came into effect in 2023, and its predecessor <strong>Fair Treatment of Customers (FTOC)</strong>, which continues to apply to firms outside the scope of Consumer Duty. For the exam this is a crucial chapter — expect 4-6 questions on the 4 Consumer Duty outcomes, 3 cross-cutting rules, 6 FTOC outcomes, and the differences between the two regimes.
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#intro">Why a special regime for retail clients is needed</a></li>
+    <li>→ <a href="#cd-overview">Consumer Duty — general overview</a></li>
+    <li>→ <a href="#cd-scope">Scope — to whom Consumer Duty applies</a></li>
+    <li>→ <a href="#cd-cross">The three cross-cutting rules</a></li>
+    <li>→ <a href="#cd-outcomes">The four Consumer Duty outcomes</a></li>
+    <li>→ <a href="#cd-accountability">Accountability and SM&CR Conduct Rule 6</a></li>
+    <li>→ <a href="#ftoc">FTOC — Fair Treatment of Customers for out-of-scope firms</a></li>
+    <li>→ <a href="#mixed">Mixed business — when a firm serves both retail and non-retail</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<!-- BIG INTRODUCTION -->
+<div class="section-card" id="intro">
+  <div class="section-num">INTRODUCTION</div>
+  <h2 class="section-title">Why a special regime is needed for retail clients</h2>
+
+  <p class="para">
+    Running through the entire UK regulatory system is one consistent idea: <strong>retail clients need stronger protection than professional clients and ECPs</strong>. They are, ultimately, consumers — ordinary people bringing their savings into the financial system, often without understanding all the nuances. When a financial firm fails or a product turns out to be unsuitable, it is retail clients who suffer most.
+  </p>
+
+  <p class="para">
+    Before 2023, retail client protection was built around two Principles for Businesses:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Principle 6 (Customers' interests):</strong> a firm must pay due regard to the interests of its customers and treat them fairly.</li>
+    <li><strong>Principle 7 (Communications with clients):</strong> a firm must pay due regard to the information needs of its clients and communicate fairly/clearly/not misleadingly.</li>
+  </ul>
+
+  <p class="para">
+    Plus an operational tool — the <strong>FTOC (Fair Treatment of Customers)</strong> initiative with 6 outcomes. But after the financial crisis and a series of scandals (PPI, London Capital & Finance, mini-bonds), it became clear this was not enough. Firms were formally complying with the rules, yet retail clients were still receiving poor outcomes.
+  </p>
+
+  <p class="para">
+    That is why the FCA launched <strong>Consumer Duty</strong> in 2023 — a new, higher standard expressed in <strong>Principle 12</strong>. For firms within the scope of Consumer Duty, Principles 6 and 7 are <em>disapplied</em> — replaced by the much tougher P12.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Structure of the topic — two parallel regimes</div>
+    <strong>In scope of Consumer Duty</strong> (firms dealing directly with retail): <strong>Principle 12</strong> + 3 cross-cutting rules + 4 outcomes.<br>
+    <strong>Out of scope of Consumer Duty</strong> (wholesale firms, exemptions): <strong>FTOC</strong> + Principles 6 and 7 + client's best interests rule + 6 outcomes.
+  </div>
+</div>
+
+<!-- CONSUMER DUTY OVERVIEW -->
+<div class="section-card" id="cd-overview">
+  <div class="section-num">6.1</div>
+  <h2 class="section-title">Consumer Duty — general overview</h2>
+
+  <p class="para">
+    <strong>Consumer Duty</strong> is an FCA initiative that sets <em>higher and clearer</em> standards of consumer protection in financial services and requires firms to <strong>put customers' needs first</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Structure of Consumer Duty</h3>
+
+  <p class="para">
+    Consumer Duty consists of four components:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Principle 12</strong> — high-level principle: "A firm must act to deliver good outcomes for retail customers."</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Three cross-cutting rules</strong> — general rules applying to all activities.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Four outcomes</strong> — specific areas where the FCA wants to see results.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Formal guidance</strong> — FCA guidance on how to apply all of this.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Implementation dates</h3>
+
+  <p class="para">
+    The Consumer Duty rules came into effect in stages:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>What takes effect</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="number-card">2023</span></td>
+        <td>For <strong>new and existing</strong> products / services</td>
+      </tr>
+      <tr>
+        <td><span class="number-card">31 July 2024</span></td>
+        <td>For <strong>closed products and services</strong> — products only available to existing customers where no new investments can be made, or services that are being wound down</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — don't confuse the dates</div>
+    <strong>2021</strong> — consultation was published.<br>
+    <strong>2022</strong> — final rules published but not yet in effect.<br>
+    <strong>2023</strong> — rules in force for new/existing products.<br>
+    <strong>31 July 2024</strong> — rules extended to closed products.<br>
+    The exam most often asks the year of taking effect — the correct answer is <strong>2023</strong> (for open products).
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">What "act to deliver good outcomes" means</div>
+    Crucially important: the standard is formulated in <strong>terms of outcomes</strong>, not actions. Simply "following the rules" is not enough — a firm must <em>actually deliver</em> good outcomes and <em>understand</em> whether they are being delivered. Firms need to consider the characteristics and objectives of their customers, and also <strong>understand and provide evidence</strong> that those outcomes are being met.
+  </div>
+</div>
+
+<!-- SCOPE -->
+<div class="section-card" id="cd-scope">
+  <div class="section-num">6.2</div>
+  <h2 class="section-title">Scope — to whom Consumer Duty applies</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Basic rule</h3>
+
+  <p class="para">
+    Consumer Duty applies to <strong>retail customers</strong> — including <strong>prospective customers</strong>.
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">Applicability of Consumer Duty</div>
+    ✓ IN scope:<br>
+    • Retail customers (existing)<br>
+    • Prospective retail customers<br>
+    • Any retail customer in any sourcebook<br>
+    &nbsp;&nbsp;(COBS, BCOBS, ICOBS, MCOB, etc.)<br><br>
+    ✗ OUT of scope:<br>
+    • ECPs<br>
+    • Professional clients (generally)<br>
+    • Wholesale activities<br>
+    • Specific exemptions
+  </div>
+
+  <div class="warn-box">
+    <div class="wb-title">The "retail customer" definition varies</div>
+    This is a key nuance: the definition of <em>retail customer</em> depends on the specific sourcebook. One criterion applies in COBS, another in BCOBS (banking conduct), yet another in ICOBS (insurance), a fourth in MCOB (mortgages). For each product context, look up the retail customer definition in the relevant sourcebook.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Wholesale exclusions</h3>
+
+  <p class="para">
+    Some activities are <strong>excluded from Consumer Duty</strong> as "wholesale". One key number:
+  </p>
+
+  <ul class="bullet">
+    <li>Activities in non-retail financial instruments with a minimum <strong>denomination / investment of £50,000</strong> — are excluded from Consumer Duty.</li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam number</div>
+    <strong>£50,000 minimum denomination</strong> for non-retail financial instruments = exclusion from Consumer Duty. You may be tempted to pick £10K / £25K / £100K — all are wrong.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Agent as client</h3>
+
+  <p class="para">
+    Firms acting under the "agent as client" rules (see Section 3.2) must ascertain whether <strong>retail customers are at the end of the distribution chain</strong>, and whether they (the firm) can determine or materially influence the outcomes for those retail customers. If yes — Consumer Duty applies proportionately.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Misclassification prohibition</h3>
+
+  <p class="para">
+    The FCA has made clear: <strong>deliberate misclassification</strong> of clients (for example, classifying a retail client as professional to avoid Consumer Duty) is <strong>not permitted</strong>. Both manufacturers and distributors in the distribution chain carry their share of the responsibility.
+  </p>
+</div>
+
+<!-- CROSS-CUTTING RULES -->
+<div class="section-card" id="cd-cross">
+  <div class="section-num">6.3</div>
+  <h2 class="section-title">The three Cross-Cutting Rules</h2>
+
+  <p class="para">
+    The FCA cross-cutting rules are basic requirements applying to <em>everything</em> the firm does for retail clients. There are three:
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Rule 1: Act in good faith towards retail customers</h3>
+
+  <ul class="bullet">
+    <li>A standard of conduct characterised by <strong>honesty, fair and open dealings</strong>.</li>
+    <li>The firm's actions must be consistent with the <strong>reasonable expectations</strong> of retail customers.</li>
+    <li>Firms should consider this rule <strong>at the design stage</strong> of a product or service — not just at the point of sale.</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Rule 2: Avoid foreseeable harm to retail customers</h3>
+
+  <ul class="bullet">
+    <li>Firms must ensure that retail customers <strong>understand and accept the inherent risk</strong> of products.</li>
+    <li><strong>Firms do NOT have responsibility to protect customers from ALL foreseeable harm</strong> — an important clarification.</li>
+    <li>Firms must be clear and transparent.</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Common misconception</div>
+    Some think that Consumer Duty obliges firms to <em>fully</em> protect clients from any possible losses. This is NOT the case. The client still bears the inherent risk of investments — and can lose money. The firm is responsible for <em>avoiding</em> <em>foreseeable</em> harm (for example, designing a product that is clearly unsuitable for the target market), but not for guaranteeing positive returns.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Rule 3: Enable and support retail customers to pursue their financial objectives</h3>
+
+  <ul class="bullet">
+    <li>The conclusion firms reach depends on the products/services requested or bought by retail customers.</li>
+    <li>Firms are <strong>NOT responsible for customers' decisions</strong> — clients make their own choices. But the firm must be clear and transparent when providing material and information.</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>General applicability of cross-cutting rules</h3>
+
+  <p class="para">
+    For each cross-cutting rule, the firm must <strong>assess and take into account</strong> the financial understanding (knowledge and awareness) of the target market and provide clear and transparent support where necessary.
+  </p>
+</div>
+
+<!-- FOUR OUTCOMES -->
+<div class="section-card" id="cd-outcomes">
+  <div class="section-num">6.4</div>
+  <h2 class="section-title">The four Consumer Duty Outcomes — the key construct</h2>
+
+  <p class="para">
+    This is <strong>the most exam-heavy part of the section</strong>. You need to know all 4 outcomes, what each one means, and how they apply.
+  </p>
+
+  <div class="outcome-grid">
+    <div class="outcome-card">
+      <div class="outcome-num">OUTCOME 1</div>
+      <div class="outcome-name">Products and Services</div>
+      <div class="outcome-desc">Products and services are designed for the needs of an identified target market and do not cause foreseeable harm</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-num">OUTCOME 2</div>
+      <div class="outcome-name">Price and Value</div>
+      <div class="outcome-desc">Price is proportionate to the benefit received by the client — fair value</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-num">OUTCOME 3</div>
+      <div class="outcome-name">Consumer Understanding</div>
+      <div class="outcome-desc">Communications are clear and allow clients to make informed decisions</div>
+    </div>
+    <div class="outcome-card">
+      <div class="outcome-num">OUTCOME 4</div>
+      <div class="outcome-name">Consumer Support</div>
+      <div class="outcome-desc">Appropriate service throughout the relationship — for the full life of the relationship</div>
+    </div>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Outcome 1: Products and Services</h3>
+
+  <p class="para">
+    The FCA expects that <strong>all products and services for customers are designed to meet the needs and objectives of the target group</strong>.
+  </p>
+
+  <p class="para">
+    Consumer Duty interacts with the requirements in <strong>PROD (Product Intervention and Product Governance Sourcebook)</strong> regarding manufacturers and distributors.
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Role</th>
+        <th>Responsibilities</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Product providers</strong> (manufacturers)</td>
+        <td>
+          • Ensure design of the product/service for the specific needs of an identified target market<br>
+          • Carry out <strong>regular reviews</strong> of product performance
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Product distributors</strong></td>
+        <td>
+          • Distribute/market the product focused on the identified target market<br>
+          • Take reasonable steps to prevent the product being offered to customers <em>outside</em> the intended target market
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="para">
+    Where multiple firms are involved in the distribution chain, <strong>each firm takes responsibility proportionately</strong> according to its ability to influence product design, operation, and distribution.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Outcome 2: Price and Value</h3>
+
+  <p class="para">
+    The FCA does not regulate pricing directly. But it expects firms to offer products/services that represent <strong>fair value</strong>.
+  </p>
+
+  <ul class="bullet">
+    <li>Fair value does <strong>NOT mean</strong> all retail consumers will achieve the same outcomes. Those who shop around gain confidence — because products will match their needs and represent better value than an existing provider.</li>
+    <li>Firms are <strong>not required</strong> to price the same for new and existing retail customers. But they must <strong>be able to demonstrate</strong> that any discounts for new customers are <em>clearly communicated</em> to both groups so that both can receive fair value.</li>
+    <li>The price of products must represent a <strong>"fair" value</strong> for customers in the target market / group.</li>
+    <li>Value is <strong>not just the price</strong> paid by the customer for a product/service: the firm must ensure there is a <strong>reasonable relationship between price paid and benefit</strong> received by the customer.</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Key exam mistake</div>
+    "Fair value" does <strong>NOT = cheapest price</strong>. Firms may charge premium prices if justified by the benefit to the customer. Also — the FCA <strong>does NOT pre-approve pricing</strong>. The notion that the firm must "set the lowest price in the market" is wrong.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example: premium wealth management</div>
+    A large firm charges a 2% AMC for its discretionary portfolio — above the market average. This is not automatically a breach. If the firm provides individualised service, high-quality portfolio managers, detailed reporting, and additional services worth the difference, fair value can be demonstrated. The key is the <strong>relationship between price and benefit</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Outcome 3: Consumer Understanding</h3>
+
+  <p class="para">
+    Firms must <strong>communicate with customers in a consistent manner</strong> so they can make informed decisions about purchasing financial products or services.
+  </p>
+
+  <p class="para">
+    The FCA expects firms to provide the required information <strong>at the right time and presented clearly and easily understood</strong>, enabling customers to understand and assess:
+  </p>
+
+  <ul class="bullet">
+    <li>The features of products and services</li>
+    <li>The likely costs, associated risks and benefits from specific products/services</li>
+    <li>Whether products/services meet their financial needs and objectives</li>
+  </ul>
+
+  <p class="para">
+    Firms need to consider <strong>who the target market audience is</strong> and use that to design marketing material and information:
+  </p>
+
+  <ul class="bullet">
+    <li>Firms should <strong>put themselves in the shoes</strong> of retail customers and sense-check that the information is pitched at the right level of detail and understanding.</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Outcome 4: Consumer Support</h3>
+
+  <p class="para">
+    Firms must provide an <strong>appropriate level of service</strong> that meets customers' needs <strong>throughout their relationship</strong>.
+  </p>
+
+  <ul class="bullet">
+    <li>Communications must be <strong>fair, clear and not misleading</strong>, so clients can make informed decisions.</li>
+    <li>The firm must present information in a format <strong>understood by the customers</strong> — the firm needs to understand the "financial awareness" of the target market audience.</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Example of breaching multiple outcomes</div>
+    A firm designs an investment product with <em>high fees</em> and <em>complex features</em> that is difficult for most retail customers to understand. Which outcomes might be breached?<br><br>
+    <strong>Potentially several at once:</strong><br>
+    • <strong>Products and Services</strong> — is the product designed for the target market's needs? Who is the target market?<br>
+    • <strong>Price and Value</strong> — do the high fees represent fair value?<br>
+    • <strong>Consumer Understanding</strong> — can customers actually understand these complex features?<br>
+    A good example of how a breach often spans multiple outcomes.
+  </div>
+</div>
+
+<!-- ACCOUNTABILITY -->
+<div class="section-card" id="cd-accountability">
+  <div class="section-num">6.5</div>
+  <h2 class="section-title">Accountability — the new Conduct Rule and senior managers</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>New Conduct Rule 6 in SM&CR</h3>
+
+  <p class="para">
+    As part of Consumer Duty, the FCA introduced a <strong>new Conduct Rule</strong> (under SM&CR) for firms in scope:
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Conduct Rule 6</div>
+    <strong>"You must act to deliver good outcomes for retail customers"</strong>
+  </div>
+
+  <p class="para">
+    Where a firm is <strong>NOT in scope</strong> of Consumer Duty, Conduct Rule 6 <strong>does not apply</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>COCON rules — the details</h3>
+
+  <p class="para">
+    The FCA in COCON (Code of Conduct) rules has identified:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Acting in good faith</strong> — a standard of conduct characterised by honesty, fair and open dealing, and consistent with the reasonable expectations of retail customers.</li>
+    <li>Firms and their individuals must <strong>avoid foreseeable harm</strong> to retail customers.</li>
+    <li>Firms and their individuals must <strong>enable and support</strong> retail customers to pursue their financial objective.</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Senior managers accountable</h3>
+
+  <p class="para">
+    The FCA will <strong>hold senior managers accountable</strong> for implementation and ongoing compliance with their regulatory obligations under Consumer Duty — ensuring that it is <em>embedded in the firm via the SM&CR</em>.
+  </p>
+
+  <p class="para">
+    Firms must therefore make sure that senior managers are <strong>clear about what they are accountable and responsible for</strong>, and how they ensure the firm complies with the Consumer Duty on an ongoing basis.
+  </p>
+</div>
+
+<!-- FTOC -->
+<div class="section-card" id="ftoc">
+  <div class="section-num">6.6</div>
+  <h2 class="section-title">FTOC — Fair Treatment of Customers for out-of-scope firms</h2>
+
+  <p class="para">
+    What about firms that are <strong>not in scope of Consumer Duty</strong>? This happens in two cases:
+  </p>
+
+  <ul class="bullet">
+    <li>The firm <strong>does not deal directly with retail customers</strong> and is not able to <em>materially impact</em> good outcomes for them (for example, pure B2B investment banks).</li>
+    <li>The firm's products/services fall under <strong>one of the exemptions</strong> from Consumer Duty.</li>
+  </ul>
+
+  <p class="para">
+    Such firms continue to be subject to the <strong>FTOC (Fair Treatment of Customers) initiative</strong>, underpinned by Principles 6 and 7.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The concept of fair treatment</h3>
+
+  <p class="para">
+    The concept of fair treatment sits <strong>at the heart of the regulatory system</strong>. It is expressed in <strong>Principle 6</strong> and in an important conduct of business rule:
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">The client's best interests rule</div>
+    <em>"A firm must act honestly, fairly and professionally in accordance with the best interests of its client."</em>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Supervision and management information</h3>
+
+  <p class="para">
+    An important part of the FCA's supervision of firms is <strong>assessing how they demonstrate fair treatment of clients</strong>. The firm's management culture must have the client's best interests <em>at the heart</em> of the firm.
+  </p>
+
+  <p class="para">
+    Firms must gather <strong>sufficient management information (MI)</strong> to:
+  </p>
+
+  <ul class="bullet">
+    <li>Monitor how well they adhere to these obligations</li>
+    <li>Identify where they may be failing</li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">What is required to demonstrate FTOC compliance</div>
+    Management information (MI) demonstrating fair treatment at <strong>all stages of the client relationship</strong>. Not a formal certificate from the FCA, not annual audit reports, not a policy on the website — it is specifically <strong>MI</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Principle 6 for out-of-scope firms</h3>
+
+  <p class="para">
+    All firms regulated by the FCA and not in scope of Consumer Duty must adhere to <strong>Principle 6</strong>: firms <em>must pay due regard to the interests of its customers and treat them fairly</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What the FTOC initiative raises</h3>
+
+  <p class="para">
+    The FTOC initiative raises standards in how firms carry on their business. Specifically, FTOC:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Helps customers to fully understand</strong> the features, benefits, risks and costs of the financial products they buy.</li>
+    <li><strong>Minimises the sale of unsuitable products</strong> by encouraging best practice before, during and after a sale.</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The six FTOC Outcomes</h3>
+
+  <p class="para">
+    The FTOC initiative defines <strong>six consumer outcomes</strong>:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Consumers can be confident</strong> they are dealing with firms where fair treatment of customers is central to the corporate culture.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Products and services</strong> marketed and sold in the retail market are <strong>designed to meet the needs</strong> of identified consumer groups and targeted accordingly.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Consumers are provided with clear information</strong> and kept appropriately informed before, during and after the sale.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Where consumers receive <strong>advice, the advice is suitable</strong> and takes account of their circumstances.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Consumers are provided with products that <strong>perform as firms have led them to expect</strong>, and the associated service is of an acceptable standard.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Consumers do not face <strong>unreasonable post-sale barriers</strong> imposed by firms to change product, switch provider, submit a claim or make a complaint.</li>
+  </ol>
+
+  <div class="exam-box">
+    <div class="xb-title">Don't confuse: 4 vs 6 outcomes</div>
+    <strong>Consumer Duty</strong> = <span class="number-card">4 outcomes</span> (Products+Services / Price+Value / Understanding / Support)<br>
+    <strong>FTOC</strong> = <span class="number-card">6 outcomes</span> (culture / design / info / suitable advice / performance / no post-sale barriers)<br>
+    This is a favourite exam trap — you must know both numbers and both structures.
+  </div>
+</div>
+
+<!-- MIXED BUSINESS -->
+<div class="section-card" id="mixed">
+  <div class="section-num">6.7</div>
+  <h2 class="section-title">Mixed business — when a firm serves both retail and non-retail</h2>
+
+  <p class="para">
+    What about a firm whose activities and business model mean it engages with clients who are <strong>both in scope and out of scope</strong> of Consumer Duty?
+  </p>
+
+  <p class="para">
+    Such firms must <strong>comply with the relevant requirements for the services and products they provide to the different types</strong> of customers/clients.
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">Mixed business operational challenge</div>
+    Firm with retail + professional clients<br>
+    ↓<br>
+    Must have <strong>two parallel sets</strong> of operational procedures:<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    Retail side: <strong>Consumer Duty (P12)</strong><br>
+    + cross-cutting rules<br>
+    + 4 outcomes<br>
+    + Conduct Rule 6 for senior managers<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    Non-retail side: <strong>FTOC (P6 + P7)</strong><br>
+    + client's best interests rule<br>
+    + 6 FTOC outcomes<br>
+    + MI to demonstrate fair treatment
+  </div>
+
+  <p class="para">
+    This <strong>presents operational challenges</strong> for firms that provide products and services to both retail and non-retail customers (i.e. professional clients).
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Firm's discretion on extending Consumer Duty</h3>
+
+  <p class="para">
+    <strong>Firms decide themselves</strong> whether to apply Consumer Duty standards to their business activities that are <em>out of scope</em>. The decision is based on:
+  </p>
+
+  <ul class="bullet">
+    <li>Differences in operating standards</li>
+    <li>Procedures</li>
+    <li>Policies for the products and services they provide to all customers</li>
+  </ul>
+
+  <p class="para">
+    In practice, many large firms opt to apply Consumer Duty <em>principles</em> across the whole business — this simplifies operational consistency and reduces the risk of inadvertent breaches.
+  </p>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 6</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Two parallel regimes</div>
+    <strong style="color:#FEF3C7">Consumer Duty</strong> (P12, retail-focused, from 2023):<br>
+    • 3 cross-cutting rules<br>
+    • 4 outcomes (Products+Services / Price+Value / Understanding / Support)<br>
+    • Conduct Rule 6 under SM&CR<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong style="color:#FEF3C7">FTOC</strong> (P6 + P7, out-of-scope firms):<br>
+    • Client's best interests rule<br>
+    • 6 FTOC outcomes<br>
+    • MI to demonstrate fair treatment
+  </div>
+
+  <ul>
+    <li><strong>Consumer Duty = Principle 12:</strong> "act to deliver good outcomes for retail customers". In effect from <strong>2023</strong> (open products), <strong>31 July 2024</strong> (closed products).</li>
+    <li><strong>Applies to:</strong> retail customers + prospective. NOT ECPs. NOT professional (but applies to the classification process). Wholesale exclusion: non-retail instruments with ≥£50K denomination.</li>
+    <li><strong>Three cross-cutting rules:</strong> (1) act in good faith, (2) avoid foreseeable harm (not all — only foreseeable), (3) enable and support clients to pursue financial objectives.</li>
+    <li><strong>Four outcomes:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Products and Services</strong> — designed for target market, no foreseeable harm. PROD interaction. Manufacturers + distributors.</li>
+        <li><strong>Price and Value</strong> — fair value (price vs benefit). NOT cheapest price. FCA does not pre-approve pricing.</li>
+        <li><strong>Consumer Understanding</strong> — clear comms enabling informed decisions. Put yourself in the shoes of the target market.</li>
+        <li><strong>Consumer Support</strong> — appropriate service throughout the relationship.</li>
+      </ul>
+    </li>
+    <li><strong>Accountability:</strong> FCA introduced a new <strong>Conduct Rule 6</strong> under SM&CR for in-scope firms: "You must act to deliver good outcomes for retail customers". Senior managers accountable.</li>
+    <li><strong>Misclassification prohibition:</strong> you cannot deliberately reclassify retail clients as professional to avoid Consumer Duty.</li>
+    <li><strong>FTOC for out-of-scope firms:</strong> underpinned by Principles 6 and 7. Includes the client's best interests rule: "A firm must act honestly, fairly and professionally in accordance with the best interests of its client."</li>
+    <li><strong>6 FTOC outcomes:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Fair treatment central to corporate culture</li>
+        <li>(2) Products designed for target consumer groups</li>
+        <li>(3) Clear information before/during/after sale</li>
+        <li>(4) Where advice given, it is suitable</li>
+        <li>(5) Products perform as expected</li>
+        <li>(6) No unreasonable post-sale barriers (switch/claim/complain)</li>
+      </ul>
+    </li>
+    <li><strong>MI (management information):</strong> what is required to demonstrate FTOC compliance. The firm must gather sufficient MI to monitor fair treatment at all stages of the relationship.</li>
+    <li><strong>Mixed business:</strong> firms with a mix of retail/non-retail clients must apply Consumer Duty for retail and FTOC for non-retail. Many choose to apply Consumer Duty principles across the whole business.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

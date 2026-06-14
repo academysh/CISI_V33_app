@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1, Section 3 — Fitness and Propriety</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#4338CA;--primary-l:#E0E7FF;--primary-d:#3730A3;--primary-vd:#1E1B4B;--accent:#7C3AED;--accent-l:#EDE9FE;--accent-d:#5B21B6;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--rose:#BE123C;--rose-l:#FFE4E6;--rose-d:#881337;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--slate-d:#334155;--ink:#0F172A;--muted:#475569;--bg:#F5F3FF;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(67,56,202,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(30,27,75,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--primary-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(67,56,202,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(67,56,202,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:48px 1fr;gap:.6rem;align-items:start;margin-bottom:.5rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.2rem .4rem;font-size:.85rem;width:fit-content;min-width:38px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 1</div>
+  <div class="app-title">Chapter 1, Section 3 — Detailed Deep Dive</div>
+  <div class="app-sub">Fitness and Propriety · SM&CR · FIT · Syllabus 1.3 + 1.7.4 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 3 is about <strong>personal accountability of individuals in the financial industry</strong>. After the 2008 crisis (and the 2012 LIBOR scandal) it became clear that fining firms alone is not enough — if a bank loses billions, those were <em>specific people</em> making the decisions. In response, the <strong>Senior Managers and Certification Regime (SM&CR)</strong> was created — a three-component regime that (1) forces the regulator to <strong>personally approve</strong> senior managers, (2) requires firms to <strong>annually certify</strong> other risk-bearing employees, and (3) imposes <strong>Conduct Rules</strong> on everyone. Plus the <strong>Fit and Proper Test (FIT)</strong> — three criteria against which regulator/firm assess an individual. On the exam 2-3 questions — one of the most frequently tested topics.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s31">3.1 Background — why SM&CR came about</a></li>
+    <li>→ <a href="#scope">SM&CR scope — who is covered</a></li>
+    <li>→ <a href="#firm-types">3 types of solo-regulated firms</a></li>
+    <li>→ <a href="#s32">3.2 Senior Managers Regime (SMR)</a></li>
+    <li>→ <a href="#smf">SMFs — what are Senior Management Functions</a></li>
+    <li>→ <a href="#form-a">Form A + 90-day clock + regulatory reference</a></li>
+    <li>→ <a href="#prescribed">Prescribed Responsibilities + Management Responsibilities Map</a></li>
+    <li>→ <a href="#s33">3.3 Certification Regime (CR)</a></li>
+    <li>→ <a href="#s34">3.4 Conduct Rules — 5 individual + 4 SM</a></li>
+    <li>→ <a href="#s35">3.5 Fit and Proper Test (FIT) — 3 criteria</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s31">
+  <div class="section-num">3.1</div>
+  <h2 class="section-title">Background — why SM&CR came about</h2>
+
+  <p class="para">
+    In response to the <strong>2007-08 banking crisis</strong> and significant conduct failings (such as the <strong>manipulation of LIBOR</strong> in 2012), the UK Government set up the <strong>Parliamentary Commission for Banking Standards (PCBS)</strong> to make recommendations on how to improve standards in the banking sector.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>PCBS recommendations</h3>
+
+  <p class="para">
+    The PCBS recommended:
+  </p>
+
+  <ul class="bullet">
+    <li>A <strong>new accountability framework</strong> focused primarily on the accountability of senior management</li>
+    <li>Firms to take <strong>more responsibility for employees being fit and proper</strong></li>
+    <li>Better <strong>standards of conduct at all levels</strong> in banking firms</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Implementation — 2016 and 2018</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Date</th><th>Event</th></tr></thead>
+    <tbody>
+      <tr><td><span class="number-card">2016</span></td><td>Parliament passed legislation → FCA and PRA <strong>introduced SM&CR to the banking sector</strong></td></tr>
+      <tr><td><span class="number-card">2016</span></td><td>Parliament introduced further changes — requiring regulators to <strong>extend SM&CR to all FSMA-authorised firms</strong></td></tr>
+      <tr><td><span class="number-card">2018</span></td><td>Extension to insurers</td></tr>
+      <tr><td><span class="number-card">2019</span></td><td>Extension to solo-regulated firms (asset managers, stockbrokers, IFAs)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <div class="ib-title">Historical context</div>
+    The old regime — the <strong>Approved Persons Regime (APER)</strong> — had <em>~30,000</em> approved individuals (Significant Influence Functions, SIFs). After the crisis it became clear: too many, too diffuse, and the regulator could not <em>actually</em> assess the fitness of each one. The new SM&CR: <strong>fewer individuals approved by the regulator</strong> (SMFs only) + <strong>firms certify the rest themselves</strong>. A shift of responsibility: from regulator to firm.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Three components of SM&CR</h3>
+
+  <p class="para">
+    SM&CR comprises:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Senior Managers Regime (SMR)</strong> — regulatory approval for senior individuals</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Certification Regime (CR)</strong> — firms certify other risk-posing staff as fit and proper</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Conduct Rules</strong> — behavioural standards for all relevant staff</li>
+  </ol>
+</div>
+
+<div class="section-card" id="scope">
+  <div class="section-num">3.1.1</div>
+  <h2 class="section-title">SM&CR scope — who is covered</h2>
+
+  <p class="para">
+    SM&CR applies to <strong>all FSMA-authorised firms</strong>, <strong>EXCEPT</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Appointed Representatives (ARs)</strong> — they operate under the principal firm's responsibility; the principal applies SM&CR to its own business</li>
+    <li><strong>Benchmark Administrators</strong> — regulated under a separate framework (Benchmarks Regulation)</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Only 2 categories excluded</div>
+    A frequent exam trap — "are solo-regulated firms excluded?" — <strong>NO</strong>. Solo-regulated firms are <em>included</em> under the proportionate regime. Insurance firms are <em>included</em>. Banks are <em>included</em> since 2016. Excluded are <strong>only ARs and Benchmark Administrators</strong>.
+  </div>
+</div>
+
+<div class="section-card" id="firm-types">
+  <div class="section-num">3.1.2</div>
+  <h2 class="section-title">3 types of solo-regulated firms — proportionate approach</h2>
+
+  <p class="para">
+    When the FCA applied SM&CR to <strong>solo-regulated firms</strong>, it implemented a <strong>proportionate regime</strong>, introducing 3 types of firms with different levels of application:
+  </p>
+
+  <table class="comp-table">
+    <thead><tr><th>Type</th><th>Who</th><th>Requirements</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Limited scope</strong></td>
+        <td>Sole traders without employees, limited permission consumer credit firms, oil/energy market participants, authorised professional firms (non-mainstream activities only)</td>
+        <td><strong>Fewer</strong> requirements</td>
+      </tr>
+      <tr>
+        <td><strong>Core scope</strong></td>
+        <td>Most firms (majority)</td>
+        <td><strong>Baseline</strong> SM&CR requirements</td>
+      </tr>
+      <tr>
+        <td><strong>Enhanced scope</strong></td>
+        <td>Larger solo-regulated firms (by AUM, revenue, etc.)</td>
+        <td><strong>Significantly greater</strong> requirements</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="example-box">
+    <div class="eb-title">Classification examples</div>
+    <strong>Sole trader IFA</strong> (advisor, consultant, no staff) — Limited Scope.<br>
+    <strong>Small wealth manager</strong> (50 staff, £200M AUM) — Core.<br>
+    <strong>Large asset manager</strong> (£10bn AUM, 500+ staff) — Enhanced.<br>
+    <strong>Major stockbroker</strong> (500+ employees) — Core or Enhanced.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Burden of proof</h3>
+
+  <p class="para">
+    Senior managers continue to have an obligation to <strong>prevent regulatory breaches</strong>, but a senior manager will only be guilty of misconduct <strong>if the FCA is able to demonstrate</strong> that the senior manager <em>failed to take reasonable steps</em> to prevent the breach. The burden of proof <strong>rests with the FCA</strong>, <em>but</em> senior managers are expected to provide evidence of the <strong>reasonable steps</strong> they took when made aware of the breach.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">"Duty of responsibility" — replaced "reverse burden"</div>
+    The original SM&CR (in a 2015 draft) had a <em>"reverse burden of proof"</em>: senior manager <em>presumed guilty</em>, having to prove they took reasonable steps. In 2016 this was replaced with a <strong>"duty of responsibility"</strong> — the burden of proof lies with the FCA. This is more pro-defendant.
+  </div>
+</div>
+
+<div class="section-card" id="s32">
+  <div class="section-num">3.2</div>
+  <h2 class="section-title">Senior Managers Regime (SMR)</h2>
+
+  <p class="para">
+    The <strong>SMR captures</strong> certain individuals performing defined <strong>Senior Management Functions (SMFs)</strong>.
+  </p>
+</div>
+
+<div class="section-card" id="smf">
+  <div class="section-num">3.2.1</div>
+  <h2 class="section-title">SMFs — Senior Management Functions</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Typical SMFs</h3>
+
+  <p class="para">
+    SMFs typically comprise members of the firm's <strong>senior management team</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Chief Executive Officer (SMF1)</strong></li>
+    <li><strong>Chief Finance Officer (SMF2)</strong></li>
+    <li><strong>Executive Director (SMF3)</strong></li>
+    <li><strong>Chief Risk Officer (SMF4)</strong></li>
+    <li><strong>Head of Internal Audit (SMF5)</strong></li>
+    <li><strong>Chair (SMF9)</strong></li>
+    <li><strong>Compliance Oversight (SMF16)</strong> — FCA function</li>
+    <li><strong>Money Laundering Reporting Officer / MLRO (SMF17)</strong> — FCA function</li>
+    <li><strong>Other Overall Responsibility (SMF18)</strong> — Enhanced firms only</li>
+    <li><strong>Partner (SMF27)</strong></li>
+  </ul>
+
+  <p class="para">
+    Generally — individuals who <em>manage direction and implement strategy</em> of the firm. Plus other individuals who <em>may not perform executive-level functions</em> (head of compliance, MLRO, head of internal audit).
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Division between PRA and FCA SMFs</div>
+    <strong>PRA controls SMFs 1-14</strong> for banks (executive + NED functions). <strong>FCA controls</strong>:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>SMF16 (Compliance Oversight)</li>
+      <li>SMF17 (MLRO)</li>
+      <li>SMF18 (Other Overall Responsibility — Enhanced firms)</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Chair and NEDs are also in scope</h3>
+
+  <p class="para">
+    In line with the PRA's approach in <strong>Supervisory Statement 28/15</strong>, persons holding SMFs <strong>include the Chair and non-executive directors</strong>. They can be <em>explicitly held to account for boardroom decisions</em>, and deemed potentially culpable for poor decisions in the same fashion as executive directors.
+  </p>
+
+  <p class="para">
+    Persons approved to hold an SMF must <strong>show and demonstrate increased understanding</strong> of the key business and strategic activities of the entities for which they are responsible + their associated risks.
+  </p>
+</div>
+
+<div class="section-card" id="form-a">
+  <div class="section-num">3.2.2</div>
+  <h2 class="section-title">Form A + 90-day clock + regulatory reference</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Pre-approval — mandatory</h3>
+
+  <p class="para">
+    An individual may <strong>perform an SMF only after</strong> the regulator has granted <strong>approved person status</strong>. The candidate completes <strong>Form A</strong>, submitted to the regulator <em>by the firm</em>.
+  </p>
+
+  <p class="para">
+    Form A includes a comprehensive list of questions establishing:
+  </p>
+
+  <ul class="bullet">
+    <li>The person's <strong>employment history</strong></li>
+    <li><strong>Fitness and propriety</strong></li>
+  </ul>
+
+  <p class="para">
+    In certain circumstances an <strong>abbreviated form</strong> may be completed — e.g. if the person is <em>already approved</em> executing a similar function.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Regulatory Reference — 6 years</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Regulatory Reference requirement</div>
+    Prior to Form A being submitted to the regulators, the firm must, under SM&CR, take <strong>all reasonable steps to obtain a regulatory reference</strong>:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>From the candidate's <strong>current employer</strong></li>
+      <li>From <strong>all previous employers</strong> within the <strong>past 6 years</strong></li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Statement of Responsibilities</h3>
+
+  <p class="para">
+    As part of the application process, firms must include a <strong>statement of responsibilities</strong> setting out the aspects of the firm's affairs for which the person will be responsible when performing the function.
+  </p>
+
+  <p class="para">
+    Regulators expect that <strong>each responsibility is allocated to a single senior manager</strong>. Where a responsibility is shared between more than one senior manager, regulators expect <em>the division of responsibility and accountability to be clearly articulated</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>90-day statutory clock</h3>
+
+  <div class="exam-box">
+    <div class="xb-title">90 days — statutory determination deadline</div>
+    FSMA imposes a statutory obligation on the FCA and PRA to <strong>reach a determination on a person's fitness and propriety within 90 days</strong> of receiving Form A. The actual time varies and depends on additional checks.
+  </div>
+
+  <p class="para">
+    If regulators consider they need <strong>further information</strong> from the firm, they <strong>stop the statutory "clock"</strong> until the requested information is received.
+  </p>
+</div>
+
+<div class="section-card" id="prescribed">
+  <div class="section-num">3.2.3</div>
+  <h2 class="section-title">Prescribed Responsibilities + Management Responsibilities Map</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Prescribed Responsibilities (PRs)</h3>
+
+  <p class="para">
+    <strong>Prescribed Responsibilities</strong> must be allocated to the <strong>most senior individuals</strong> of those performing SMFs. Captured individuals' key duties are recorded as part of the individual <em>statement of responsibilities</em>, describing the most senior executives' roles and demonstrated through:
+  </p>
+
+  <ul class="bullet">
+    <li>Day-to-day management</li>
+    <li>Adding scope and accountability to current roles</li>
+    <li>Control and information arrangements</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Examples of Prescribed Responsibilities</div>
+    • <em>Responsibility for performance of the firm's obligations under the SMR</em><br>
+    • <em>Responsibility for performance of the firm's obligations under the Certification Regime</em><br>
+    • <em>Responsibility for financial crime / AML</em><br>
+    • <em>Responsibility for implementation of the Consumer Duty</em><br>
+    • <em>Responsibility for compliance with CASS rules</em><br>
+    Each PR must have <strong>one named SMF</strong> accountable.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Management Responsibilities Map</h3>
+
+  <p class="para">
+    The <strong>Management Responsibilities Map</strong> documents the firm's management and governance arrangements — <strong>including how prescribed responsibilities have been allocated</strong>. Purpose:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Enhanced transparency</strong> of individual accountability</li>
+    <li>Increases <strong>reporting line and quality</strong></li>
+    <li>Specifies <strong>management information requirements</strong></li>
+  </ul>
+
+  <p class="para">
+    For <strong>Core firms</strong> — simplified version. For <strong>Enhanced firms</strong> — comprehensive, mandatory.
+  </p>
+</div>
+
+<div class="section-card" id="s33">
+  <div class="section-num">3.3</div>
+  <h2 class="section-title">Certification Regime (CR)</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Firm certifies — not the regulator</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Key difference SMR vs Certification</div>
+    <strong>SMR:</strong> individuals approved <em>by the regulator</em> (Form A → 90 days → approval).<br>
+    <strong>CR:</strong> individuals <strong>NOT approved by the regulators</strong> — rather, <em>firms make the assessment</em> that they are <strong>"fit and proper"</strong> and provide an annual certificate.<br><br>
+    This introduces an <strong>administrative and evidential burden on firms</strong>, not regulators.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Frequency — recruitment + annually</h3>
+
+  <p class="para">
+    The CR requires firms to assess fitness and propriety of certain employees:
+  </p>
+
+  <ul class="bullet">
+    <li>At the <strong>recruitment stage</strong></li>
+    <li><strong>Annually thereafter</strong></li>
+  </ul>
+
+  <p class="para">
+    The firm's <strong>senior management must attest annually</strong> that individuals captured by the Certification Regime <em>remain fit and proper</em> through arrangements designed and managed by the firm.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who is in scope — "significant harm functions"</h3>
+
+  <p class="para">
+    The CR captures employees who <strong>could pose a risk of significant harm</strong> to the firm or its customers. Different approaches between PRA and FCA:
+  </p>
+
+  <table class="comp-table">
+    <thead><tr><th>Regulator</th><th>Approach</th></tr></thead>
+    <tbody>
+      <tr><td><strong>PRA</strong></td><td>Limits scope to <strong>"material risk takers" (MRTs)</strong>, defined in the Capital Requirements Regulation (CRR) — i.e. individuals subject to the <em>Remuneration Code</em> ("Code staff")</td></tr>
+      <tr><td><strong>FCA</strong></td><td><strong>Wider approach</strong> — includes individuals performing a function from the UK or dealing with UK clients</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Examples of Significant Harm Functions</h3>
+
+  <p class="para">
+    The FCA approach includes individuals who:
+  </p>
+
+  <ul class="bullet">
+    <li>Previously performed a <strong>significant influence function (SIF) role under APER</strong>, but are now outside the SMR (not SMF) — for example:
+      <ul style="margin-top:.2rem">
+        <li><strong>CASS oversight officer</strong></li>
+        <li><strong>Benchmark submitter</strong> or administrator</li>
+        <li><strong>Proprietary trader</strong></li>
+        <li>Previous <strong>CF29 significant manager function-holders</strong></li>
+      </ul>
+    </li>
+    <li><strong>Material risk takers</strong> (Code staff)</li>
+    <li><strong>Functions requiring qualifications</strong> (investment advisers)</li>
+    <li><strong>Managers of certification employees</strong></li>
+    <li><strong>Client-dealing functions</strong> (some)</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">"Code staff"</div>
+    The term <strong>"code staff"</strong> refers to employees whose activities have a <em>material impact on the firm's risk profile</em>. These are employees subject to the Remuneration Code (CRR): bonus deferral rules, clawback, proportional bonus cap.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>UK nexus requirement</h3>
+
+  <p class="para">
+    Where an <strong>individual is based overseas</strong> and <em>does not deal with UK clients</em> and is performing a Certification function (other than MRT), they <strong>will not be a certified person</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Failed certification</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">What to do if an individual is not fit and proper</div>
+    If a certificate is <strong>not issued</strong> because the individual is deemed <em>not to meet</em> fitness/propriety criteria, the firm must:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Give <strong>written notice</strong> explaining what <em>steps (if any) it proposes to take</em></li>
+      <li><strong>Notify the FCA</strong> of the circumstances</li>
+    </ul>
+    Dismissal is not automatic — the firm must take positive action.
+  </div>
+</div>
+
+<div class="section-card" id="s34">
+  <div class="section-num">3.4</div>
+  <h2 class="section-title">Conduct Rules — 5 individual + 4 Senior Manager</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>General structure</h3>
+
+  <p class="para">
+    Conduct Rules are a <strong>framework of behavioural standards</strong> against which individual conduct is judged. Applicable to <strong>all individuals EXCEPT ancillary staff</strong> (cleaners, catering staff). The regulator <strong>must be notified</strong> of breaches + any formal disciplinary action taken.
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">Conduct Rules structure</div>
+    <strong>INDIVIDUAL CONDUCT RULES</strong> (all relevant staff)<br>
+    5 rules (or 6 if Consumer Duty applies)<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong>SENIOR MANAGER CONDUCT RULES</strong><br>
+    +4 additional rules (SC1-SC4) ONLY for Senior Managers
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Individual Conduct Rules (all relevant staff)</h3>
+
+  <div class="p-item"><div class="p-num">Rule 1</div><div class="p-body">You must act <strong>with integrity</strong>.</div></div>
+  <div class="p-item"><div class="p-num">Rule 2</div><div class="p-body">You must act with <strong>due skill, care and diligence</strong>.</div></div>
+  <div class="p-item"><div class="p-num">Rule 3</div><div class="p-body">You must be <strong>open and cooperative with the FCA, PRA and other regulators</strong>.</div></div>
+  <div class="p-item"><div class="p-num">Rule 4</div><div class="p-body">You must pay <strong>due regard to the interests of customers and treat them fairly</strong>.</div></div>
+  <div class="p-item"><div class="p-num">Rule 5</div><div class="p-body">You must <strong>observe proper standards of market conduct</strong>.</div></div>
+  <div class="p-item"><div class="p-num">Rule 6</div><div class="p-body">You must <strong>act to deliver good outcomes for retail customers</strong>. <em>(New rule under Consumer Duty — FCA-only firms)</em></div></div>
+
+  <div class="info-box">
+    <div class="ib-title">Rule 4 vs Rule 6 — mutually exclusive</div>
+    Following implementation of the Consumer Duty, <strong>Rule 6 applies</strong> to individuals working for a firm subject to the Consumer Duty. In that case <strong>Rule 4 ceases to apply</strong> (no overlap).<br><br>
+    Rule 6 does <strong>NOT apply</strong> for firms <em>out of scope</em> of the Consumer Duty — therefore <strong>Rule 4 continues</strong> for those firms. Only 5 individual conduct rules apply.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Senior Manager Conduct Rules (additional for SMFs)</h3>
+
+  <div class="p-item"><div class="p-num">SC1</div><div class="p-body">You must take <strong>reasonable steps to ensure</strong> that the business of the firm for which you are responsible is <strong>controlled effectively</strong>.</div></div>
+  <div class="p-item"><div class="p-num">SC2</div><div class="p-body">You must take reasonable steps to ensure that the business of the firm for which you are responsible <strong>complies with relevant requirements and standards of the regulatory system</strong>.</div></div>
+  <div class="p-item"><div class="p-num">SC3</div><div class="p-body">You must take reasonable steps to ensure that <strong>any delegation of your responsibilities</strong> is to an appropriate person — and you <strong>oversee discharge</strong> of the delegated responsibility <strong>effectively</strong>.</div></div>
+  <div class="p-item"><div class="p-num">SC4</div><div class="p-body">You must <strong>disclose appropriately any information</strong> of which the FCA or PRA would <em>reasonably expect notice</em>.</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Breach notification obligation</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Always notify the regulator of breaches</div>
+    Conduct Rules breach + formal disciplinary action → <strong>MUST notify the regulator</strong>. This applies to <strong>ALL staff</strong>, not only senior managers. Even a junior analyst — if they breach Rule 1 (integrity) and the firm disciplines them — the FCA is notified.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>COCON — where the Conduct Rules live</h3>
+
+  <p class="para">
+    Additional details of SM&CR, including the list of SMR applicable functions and prescribed responsibilities, are located in the <strong>FCA's SYSC (Senior Management Arrangement, Systems and Controls)</strong> sourcebook:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>SYSC 23</strong> — Senior managers and certifications: Introduction and classification</li>
+    <li><strong>SYSC 24</strong> — Allocation of prescribed responsibilities</li>
+    <li><strong>SYSC 25</strong> — Management responsibilities maps and handover procedures</li>
+    <li><strong>SYSC 26</strong> — Overall and local responsibility</li>
+    <li><strong>SYSC 27</strong> — Certification regime</li>
+    <li><strong>COCON</strong> — contains the Code of Conduct Rules + guidance</li>
+  </ul>
+</div>
+
+<div class="section-card" id="s35">
+  <div class="section-num">3.5</div>
+  <h2 class="section-title">Fit and Proper Test (FIT) — 3 criteria</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who does the assessment</h3>
+
+  <p class="para">
+    Individuals performing SMFs within authorised firms must be <strong>approved by the regulator as fit and proper</strong> before taking on the function. The PRA and FCA may grant an application if satisfied that the candidate <em>is a fit and proper person to perform the function applied for</em>.
+  </p>
+
+  <p class="para">
+    <strong>Responsibility lies with the firm</strong> making the application — to satisfy the regulator(s) that the candidate is fit and proper.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The three main FIT criteria</h3>
+
+  <p class="para">
+    In assessing fitness and propriety, regulator(s) will look at factors against a set of criteria, of which the <strong>most important are the person's</strong>:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.6rem;font-size:.92rem"><strong>Honesty, integrity and reputation</strong></li>
+    <li style="margin-bottom:.6rem;font-size:.92rem"><strong>Competence and capability</strong></li>
+    <li style="margin-bottom:.6rem;font-size:.92rem"><strong>Financial soundness</strong></li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(1) Honesty, Integrity, Reputation</h3>
+
+  <p class="para">
+    The FCA will have regard to whether the person has been:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Convicted of a criminal offence</strong> — particular consideration given to offences of <em>fraud, dishonesty, financial crime</em></li>
+    <li>Subject to an <strong>adverse finding or settlement in a civil case</strong> — particular consideration for cases involving financial businesses and fraud</li>
+    <li>Subject to <strong>previous investigation or disciplinary proceedings</strong> by the FCA, PRA, another regulatory authority, including previous regulators</li>
+    <li>Subject to a <strong>justified complaint</strong> in relation to regulated activities</li>
+    <li><strong>Refused a licence to trade</strong>, or had a licence/registration <strong>revoked</strong></li>
+    <li>Involved in an <strong>insolvent business</strong></li>
+    <li><strong>Disqualified as a director</strong>, or <strong>dismissed from a position of trust</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(2) Competence and Capability</h3>
+
+  <p class="para">
+    The FCA considers:
+  </p>
+
+  <ul class="bullet">
+    <li>Whether the person <strong>meets relevant training and competence requirements</strong></li>
+    <li>Whether the person has <strong>demonstrated due skill, care, diligence</strong> in their work history</li>
+    <li>Whether the person has <strong>experience relevant</strong> to the SMF applied for</li>
+    <li>Whether the person has the <strong>qualifications required</strong> (RDR, professional standards)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(3) Financial Soundness</h3>
+
+  <p class="para">
+    The FCA considers whether the person has been:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Declared bankrupt</strong></li>
+    <li>Subject to a <strong>judgement debt</strong> or award (especially unpaid)</li>
+    <li>Entered into an <strong>Individual Voluntary Arrangement (IVA)</strong></li>
+    <li>Made <strong>any arrangements with creditors</strong> (e.g. composition)</li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">Financial soundness ≠ wealth</div>
+    The FCA does not require a senior manager to be wealthy. Financial soundness is about <em>how</em> the person has handled financial obligations in the past. Bankruptcy or unpaid debts may indicate poor judgment — and therefore raise concerns about fitness to manage a firm's affairs.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Non-exhaustive criteria</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">The list is NOT exhaustive</div>
+    The criteria above are <em>examples of the type of information</em> the regulator will want. This <strong>does not constitute a definitive list</strong> of matters that might be relevant. The regulator can consider <em>anything</em> that raises concerns about fitness.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">FIT assessment example</div>
+    The firm applies to approve a candidate for the CEO role (SMF1). The candidate has:<br>
+    • <strong>MBA and 20 years' experience</strong> ✓ Competence<br>
+    • <strong>£2M house, stable financial position</strong> ✓ Financial soundness<br>
+    • But: <strong>fined in civil court £100K for misrepresentation</strong> in a previous role (even if long ago) ⚠️<br><br>
+    The regulator is <em>entitled to refuse</em> approval even if everything else is fine — on the basis of <strong>honesty/reputation</strong>. In the worst case — a <em>prohibition order</em> (ban from the industry).
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 3</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">SM&CR — 3 components</div>
+    <strong style="color:#FEF3C7">SMR</strong> = Senior Managers Regime (regulator approves)<br>
+    <strong style="color:#FEF3C7">CR</strong> = Certification Regime (firm certifies annually)<br>
+    <strong style="color:#FEF3C7">Conduct Rules</strong> = 5 individual + 4 SM (all except ancillary staff)<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong style="color:#FEF3C7">FIT</strong> = 3 criteria: Honesty+Integrity+Reputation / Competence+Capability / Financial Soundness
+  </div>
+
+  <ul>
+    <li><strong>3.1 Background:</strong> response to 2007-08 crisis + LIBOR manipulation. PCBS → recommendations on senior accountability. Legislation → SM&CR for banking in 2016. Extended to insurers 2018, solo-regulated 2019.</li>
+    <li><strong>Scope:</strong> ALL FSMA-authorised firms, <em>except</em> Appointed Representatives + Benchmark Administrators.</li>
+    <li><strong>3 types of solo-regulated firms:</strong> Limited Scope / Core (majority) / Enhanced.</li>
+    <li><strong>Burden of proof:</strong> "duty of responsibility" — the FCA must prove that the SM failed to take reasonable steps. (Not "reverse burden".)</li>
+    <li><strong>3 components of SM&CR:</strong> Senior Managers Regime + Certification Regime + Conduct Rules.</li>
+    <li><strong>3.2 SMR:</strong>
+      <ul style="margin-top:.3rem">
+        <li>SMFs — CEO (SMF1), CFO, CRO, Compliance (SMF16), MLRO (SMF17), Internal Audit, Chair, NEDs, SMF18 (Enhanced only)</li>
+        <li><strong>Pre-approval mandatory</strong>: Form A → regulator → approval BEFORE performing function</li>
+        <li><strong>Regulatory reference</strong> — current + previous employers <strong>past 6 years</strong></li>
+        <li><strong>90-day statutory clock</strong> for determination; can be <em>stopped</em> for further info requests</li>
+        <li>Statement of Responsibilities — single SMF per responsibility</li>
+      </ul>
+    </li>
+    <li><strong>PRA vs FCA SMFs:</strong> PRA = SMF1-14 (executive + NED); FCA = SMF16 (compliance), SMF17 (MLRO), SMF18 (Enhanced).</li>
+    <li><strong>Prescribed Responsibilities:</strong> allocated to the most senior individuals. <strong>Management Responsibilities Map</strong> — documents governance and allocation of PRs (Enhanced firms — mandatory).</li>
+    <li><strong>3.3 Certification Regime:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Firm certifies</strong> (not regulator) — annual</li>
+        <li>At recruitment + annually thereafter. Senior management attests annually.</li>
+        <li><strong>Significant harm functions:</strong> CASS oversight, benchmark submitter, proprietary trader, material risk takers, significant management, qualified roles, managers of certified staff, client-dealing</li>
+        <li>PRA — limited to MRTs (Code staff); FCA — wider (UK nexus)</li>
+        <li>Failed certification → <strong>written notice + FCA notification</strong></li>
+      </ul>
+    </li>
+    <li><strong>3.4 Conduct Rules:</strong> 5 individual + 4 SM. Applicable to everyone EXCEPT <strong>ancillary staff</strong> (cleaners, catering).
+      <ul style="margin-top:.3rem">
+        <li>Individual: Integrity / Skill, care, diligence / Open with regulators / Due regard to customers / Market conduct / (Consumer Duty — Rule 6 replaces Rule 4)</li>
+        <li>SM: SC1 effective control / SC2 regulatory compliance / SC3 appropriate delegation / SC4 disclose FCA/PRA</li>
+      </ul>
+    </li>
+    <li><strong>Breach notification:</strong> regulator MUST be notified of breaches + formal disciplinary action. All staff, not only SMFs.</li>
+    <li><strong>SM&CR lives in SYSC 23-27 + COCON.</strong></li>
+    <li><strong>3.5 FIT Test — 3 criteria:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Honesty, Integrity, Reputation</strong> — criminal convictions, civil findings, prior disciplinary, justified complaints, revoked licences, insolvency, disqualification, dismissal from trust</li>
+        <li><strong>Competence and Capability</strong> — T&C requirements, skills, experience, qualifications</li>
+        <li><strong>Financial Soundness</strong> — bankruptcy, judgement debts, IVA, creditor arrangements</li>
+      </ul>
+    </li>
+    <li><strong>FIT list not exhaustive</strong> — regulator can consider anything raising concerns.</li>
+    <li><strong>Responsibility:</strong> the firm must satisfy the regulator that the candidate is fit and proper.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

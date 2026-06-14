@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 5 — Communicating with Clients, including Financial Promotions</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;
+  --teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;
+  --amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;
+  --coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;
+  --purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --green-l:#E1F5EE;--green:#085041;
+  --gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;
+  --bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09);
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 ";}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ ";}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 ";}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.tag-in{background:var(--green-l);color:var(--green);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-out{background:var(--coral-l);color:var(--coral);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-partial{background:var(--amber-l);color:var(--amber-d);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 5 — Detailed Deep Dive</div>
+  <div class="app-sub">Communicating with Clients, including Financial Promotions · Syllabus 2.6 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<!-- INTRODUCTION -->
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 5 is one of the largest and most exam-heavy sections in COBS. It governs <strong>all firm communications with clients</strong> — and especially <strong>financial promotions</strong> (marketing and advertising of investment products). The central standard here is: <strong>fair, clear and not misleading</strong>. This is not just "good manners" — it's a hard regulatory requirement. Expect 5-7 exam questions, with many nuances about cold calls, past performance, real-time vs non-real-time, FPO exemptions, and anti-greenwashing.
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#intro">Why communication rules exist</a></li>
+    <li>→ <a href="#s51">5.1 Application of the rules on communication and financial promotion</a></li>
+    <li>→ <a href="#s512">5.1.2 Fair, Clear and Not Misleading — the core standard</a></li>
+    <li>→ <a href="#s513">5.1.3 Identifying Promotions — types of promotions</a></li>
+    <li>→ <a href="#s514">5.1.4 Anti-Greenwashing — new rules 2024</a></li>
+    <li>→ <a href="#s52">5.2 Exceptions to the Financial Promotion Rules</a></li>
+    <li>→ <a href="#s53">5.3 Prospectus Advertisements</a></li>
+    <li>→ <a href="#s54">5.4 Approval of Financial Promotions & the Gateway</a></li>
+    <li>→ <a href="#s542">5.4.2 Relying on Another Firm's Approval</a></li>
+    <li>→ <a href="#s55">5.5 Communicating with Retail Clients — general rules</a></li>
+    <li>→ <a href="#s56">5.6 Past, Simulated Past and Future Performance</a></li>
+    <li>→ <a href="#s57">5.7 Direct Offer Financial Promotions</a></li>
+    <li>→ <a href="#s58">5.8 Cold Calls and Overseas Persons</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<!-- INTRO -->
+<div class="section-card" id="intro">
+  <div class="section-num">INTRODUCTION</div>
+  <h2 class="section-title">Why communication and financial promotion rules exist</h2>
+
+  <p class="para">
+    The FCA Handbook contains <strong>12 Principles for Businesses</strong> (covered in Chapter 1, Section 2). These Principles apply to all regulated activities, including dealing as principal, ancillary activities, home finance, insurance, deposits — and <strong>to the communication and approval of financial promotions</strong>.
+  </p>
+
+  <p class="para">
+    The common theme of the communication rules is <strong>fair play</strong>, together with recognition of the <strong>information imbalance</strong> between firm and client. The firm usually knows far more about its products than its clients. The COBS rules aim to level this playing field.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Principles for Businesses relevant to communications</div>
+    Two key Principles directly relate to this section:<br>
+    <strong>Principle 6 (Customers' interests):</strong> a firm must pay due regard to the interests of its customers and treat them fairly.<br>
+    <strong>Principle 7 (Communications with clients):</strong> a firm must pay due regard to the information needs of its clients and communicate information to them in a way which is <em>fair, clear and not misleading</em>.<br>
+    The detailed rules in COBS 4 are the implementation of these two Principles.
+  </div>
+
+  <p class="para">
+    <strong>What is a financial promotion?</strong> Under FSMA, it is <em>any invitation or inducement to engage in investment activity</em>. That's a huge definition — it covers everything: newspaper ads, email campaigns, push notifications, video ads, social media posts, flyers, telemarketing, conference presentations, influencer posts, and so on.
+  </p>
+</div>
+
+<!-- 5.1 -->
+<div class="section-card" id="s51">
+  <div class="section-num">5.1</div>
+  <h2 class="section-title">Application of the rules on communicating with clients</h2>
+
+  <p class="para">
+    A firm must ensure that <strong>all communications relating to designated investment business</strong>, including financial promotions, are <strong>fair, clear and not misleading</strong>.
+  </p>
+
+  <p class="para">
+    This fundamental rule applies:
+  </p>
+
+  <ul class="bullet">
+    <li>To communications with <strong>any category of client</strong> (retail, professional, and even ECP — although some rules are disapplied for ECPs, the basic honesty standard remains)</li>
+    <li>To all types of communications — verbal, written, electronic</li>
+    <li>To all designated investment business</li>
+  </ul>
+</div>
+
+<!-- 5.1.2 FAIR CLEAR NOT MISLEADING -->
+<div class="section-card" id="s512">
+  <div class="section-num">5.1.2</div>
+  <h2 class="section-title">Fair, Clear and Not Misleading — the central standard</h2>
+
+  <p class="para">
+    This is the <strong>central standard</strong> of the whole section. The way it is satisfied must be <em>appropriate and proportionate</em>, taking into account the type of communication and the information being conveyed.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Difference in standard between client types</h3>
+
+  <p class="para">
+    The principle is the same — but the <em>presentation</em> must differ:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>For whom</th>
+        <th>Level of detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Professional client</strong></td>
+        <td>Can be <strong>more detailed and complex</strong> — client is assumed to understand technical terminology</td>
+      </tr>
+      <tr>
+        <td><strong>Retail client</strong></td>
+        <td>Should be <strong>less detailed but clearer</strong> — with explanation of key concepts</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box">
+    <div class="wb-title">Important nuance</div>
+    This does NOT mean that for professional clients you can "hide" risks in a long technical wall of text. It means that technical language is acceptable — but the fair/clear/not misleading standard itself stays the same.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Specific rules for financial promotions</h3>
+
+  <p class="para">
+    Firms must ensure:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>If the client's capital may be at risk — this must be made clear.</strong> It cannot be hidden or softened.</li>
+    <li><strong>If yields are quoted — a balanced impression must be given of short-, medium- and long-term prospects</strong> for the investment.</li>
+    <li><strong>If the product is complex or multiple elements of remuneration apply</strong> — this must be communicated <em>fairly, clearly and not misleadingly</em>, taking account of the information needs of the recipient.</li>
+    <li><strong>If the FCA is named as the firm's regulator, but the communication also covers non-FCA-regulated matters</strong> — it must be made clear which aspects are not FCA-regulated.</li>
+    <li><strong>Promotions about packaged or stakeholder products not produced by the firm itself</strong> must give a fair, clear and non-misleading impression of the producer or manager of the product.</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Example of a fair/clear/not misleading breach</div>
+    A promotional email for a structured product: "Your capital grows with the market — with no downside risk." If capital is actually <em>at risk</em> (structured products often have a barrier beyond which capital is lost), this is a <strong>blatant breach</strong>. The fact that capital is at risk must be prominently and explicitly stated.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example on "balanced impression" of yield</div>
+    A promotion says: "Fund yield — 15% per annum!" But this is the result of one lucky year. A balanced impression is needed: what about 3, 5, 10-year returns; what a "bad" year looks like; how volatile it has been. Cherry-picking a single outstanding result is misleading.
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">Code of Conduct for advertising deposit accounts</div>
+    FCA guidance notes that firms may take into account the <strong>Code of Conduct for the Advertising of Interest-Bearing Accounts</strong>, produced by UK Finance and the Building Societies Association (BSA), when drafting financial promotions for deposit accounts.
+  </div>
+</div>
+
+<!-- 5.1.3 -->
+<div class="section-card" id="s513">
+  <div class="section-num">5.1.3</div>
+  <h2 class="section-title">Identifying Promotions — types of promotions</h2>
+
+  <p class="para">
+    Firms must ensure that financial promotions they communicate or approve, and which are addressed to clients, are <strong>clearly identifiable as such</strong>.
+  </p>
+
+  <p class="para">
+    There are <strong>exceptions</strong>: for example, if the financial promotion is made to a professional client or ECP — it does not need to be labelled as a promotion.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Types of communication</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Examples</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Real-time</strong></td>
+        <td>Face-to-face meetings, telephone conversations, presentations, interactive dialogue</td>
+        <td>Happens live; no initial record</td>
+      </tr>
+      <tr>
+        <td><strong>Unsolicited real-time</strong> (aka <em>cold calls</em>)</td>
+        <td>Cold calls, uninvited visits</td>
+        <td>Real-time + client did not request it</td>
+      </tr>
+      <tr>
+        <td><strong>Non-real-time</strong></td>
+        <td>Emails, letters, websites</td>
+        <td>Usually a record exists; client reads at own convenience</td>
+      </tr>
+      <tr>
+        <td><strong>Direct offer financial promotion</strong></td>
+        <td>Promotions making an offer to enter into an agreement + form of response or specified response method</td>
+        <td>"Click here to buy" — can be executed without further firm contact</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="example-box">
+    <div class="eb-title">Classification example</div>
+    An email to a client with an offer to buy a fund and a link to an online order form is simultaneously <strong>non-real-time</strong> (email) AND a <strong>direct offer</strong> (offer + response mechanism).<br>
+    A phone call where an analyst discusses a structured product is <strong>real-time</strong>. If the client did not request the call — it's additionally a <strong>cold call</strong> (unsolicited real-time).
+  </div>
+</div>
+
+<!-- 5.1.4 ANTI-GREENWASHING -->
+<div class="section-card" id="s514">
+  <div class="section-num">5.1.4</div>
+  <h2 class="section-title">Anti-Greenwashing Rule — protection against "green deception"</h2>
+
+  <p class="para">
+    The <strong>anti-greenwashing rule</strong> is a relatively new piece of regulation that <strong>came into effect in 2024</strong>. It was introduced because of a widespread practice where firms brand their products as "green", "sustainable", or "ESG-friendly" without any real basis for the claim.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>To whom it applies</h3>
+
+  <p class="para">
+    The rule applies to <strong>all FCA-regulated firms</strong> when undertaking client communications, marketing, or making statements about the <strong>sustainability characteristics</strong> of a product or service.
+  </p>
+
+  <p class="para">
+    It applies <strong>regardless of where the communication was developed or written</strong> — if it is distributed by an FCA-regulated firm to its clients (both retail and professional), the FCA rules apply.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Purpose of the rules</h3>
+
+  <p class="para">
+    To ensure that sustainability claims are:
+  </p>
+
+  <ul class="bullet">
+    <li>Consistent with the actual sustainability characteristics of the products/services</li>
+    <li>Fair, clear and not misleading</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA's four criteria for sustainability statements</h3>
+
+  <p class="para">
+    Any sustainability references should be:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Correct and capable of being substantiated</strong>.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Clear and presented in a way that can be understood</strong>.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Complete</strong> — they should not <em>omit or hide</em> important information and should consider the <strong>full life cycle</strong> of the product or service.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Comparable</strong> — accurate in comparisons with other products/services.</li>
+  </ol>
+
+  <div class="warn-box">
+    <div class="wb-title">What "client communications" covers</div>
+    Client communications include: statements, assertions, strategies, targets, policies, information <strong>and images</strong>. Even a picture of a green forest on the homepage of a fund's site could fall under this rule, if it creates the impression that the fund is "green".
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Relationship with other rules</h3>
+
+  <p class="para">
+    The FCA notes that the anti-greenwashing rule is intended to <strong>complement</strong> and be <em>consistent</em> with existing Handbook rules (Principles for Businesses, COBS, Consumer Credit). It does <strong>not replace</strong> them.
+  </p>
+
+  <p class="para">
+    The FCA also explicitly links anti-greenwashing with <strong>Consumer Duty</strong> — the rule is consistent with the requirement that firms act <em>in good faith</em> towards retail customers.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example of greenwashing</div>
+    A fund markets itself as the "Eco-Friendly Growth Fund" with wind turbines on its website. In reality, 40% of the portfolio sits in oil and gas companies, of which only 5% invest in "green" technologies. This is <strong>obvious greenwashing</strong>. The name and imagery create an impression that doesn't match the portfolio. Breaches: criterion (1) "not substantiated" and (3) "misses important info".
+  </div>
+</div>
+
+<!-- 5.2 EXCEPTIONS -->
+<div class="section-card" id="s52">
+  <div class="section-num">5.2</div>
+  <h2 class="section-title">Exceptions to the Financial Promotion Rules</h2>
+
+  <p class="para">
+    The financial promotion rules are <strong>disapplied</strong> in certain cases. These are called <strong>"excluded communications"</strong>. They are communications that are:
+  </p>
+
+  <ul class="bullet">
+    <li>Aimed at <strong>high-net-worth individuals</strong> (Article 48 of the FPO) and <strong>sophisticated investors</strong> (Articles 50 and 50A of the FPO), or</li>
+    <li><strong>Exempt under the Financial Promotion Order (FPO)</strong> — promotions exempt from the regime if communicated by an unauthorised person, or originating outside the UK and which cannot have an effect within the UK, or</li>
+    <li>From outside the UK, and would be exempt under the FPO if the office from which they are communicated were a separate unauthorised person (even though it is not), or</li>
+    <li>Subject to (or exempted from) the <strong>Takeover Code</strong>, and</li>
+    <li><strong>One-off promotions</strong> that are not cold calls</li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Key limitation</div>
+    The exemption for excluded communications <strong>does NOT generally apply</strong> to UK MiFID business. So for MiFID business, the core financial promotion requirements are almost always retained.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>2024 HM Treasury updates</h3>
+
+  <p class="para">
+    In November 2023, HM Treasury published its consultation response on exemptions for HNW and sophisticated investors. Changes that came into effect in 2024:
+  </p>
+
+  <ul class="bullet">
+    <li>Requirement for businesses to <strong>provide details of themselves</strong> in any communications using the exemptions</li>
+    <li><strong>Updating the title of the certified high-net-worth individual exemption</strong> — dropping the word "certified"</li>
+    <li><strong>Updating the investor statements</strong> for HNW individuals and self-certified sophisticated investors</li>
+    <li>Applying these changes to the equivalent exemptions for promotions of collective investment schemes</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Important practical effect of the 2024 changes</div>
+    Investor statements that complied with the <strong>previous</strong> requirements are <strong>NO LONGER VALID</strong>. Investors must sign new statements under the updated criteria.
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">FPO — what it is</div>
+    The <strong>Financial Promotion Order (FPO)</strong> is secondary legislation under FSMA that contains a long list of cases where the <em>general prohibition</em> in FSMA on promotions by unauthorised persons does not apply. The FPO is a fine-tuning tool: it lets specific categories of sophisticated investors or specific situations (takeovers, one-off contacts) operate without the full regulatory burden.
+  </div>
+</div>
+
+<!-- 5.3 PROSPECTUS -->
+<div class="section-card" id="s53">
+  <div class="section-num">5.3</div>
+  <h2 class="section-title">Prospectus Advertisements</h2>
+
+  <p class="para">
+    <strong>COBS 4</strong> (the part about communications to clients) <strong>does not apply</strong> where the <strong>Prospectus Regulation Rules (PRR 3.3)</strong> apply. This is a separate regulatory regime for public offerings of securities.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>When PRR 3.3 applies</h3>
+
+  <p class="para">
+    PRR 3.3 applies to offers, or admission to trading, of transferable securities where:
+  </p>
+
+  <ul class="bullet">
+    <li>A prospectus is <strong>required under Section 85 FSMA</strong>, or</li>
+    <li>An <strong>election has been made to produce a prospectus under Section 87 FSMA</strong></li>
+  </ul>
+
+  <p class="para">
+    A <strong>prospectus advertisement</strong> is any type of communication (TV, press, email, letter, text, brochure) that specifically promotes the offer to subscribe for or acquire securities.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>4 requirements for a prospectus advertisement</h3>
+
+  <p class="para">
+    An advertisement relating to such offers or admissions to trading must not be issued unless it:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>States that a prospectus has been (or will be) published</strong>, and where investors can obtain it.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Is clearly recognisable as an advertisement</strong>.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>The information in it is not inaccurate or misleading</strong>.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Is consistent with the information that is, or is required to be, in the prospectus</strong>.</li>
+  </ol>
+
+  <div class="info-box">
+    <div class="ib-title">Mandatory statement in a written advertisement</div>
+    Any written prospectus advertisement must <strong>prominently and in bold</strong> state that it is <em>NOT a prospectus</em> but an advertisement, and that investors <strong>should not subscribe</strong> to the securities except on the basis of the information in the prospectus.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example of a prospectus advertisement</div>
+    A newspaper ad: "New Growth Capital plc — IPO on the LSE Main Market. Shares offered at £2.50. The full prospectus is available at www.ngc-ipo.com."<br>
+    Must also contain, in bold: <em>"This is not a prospectus but an advertisement. Investors should make decisions only on the basis of the information in the full prospectus."</em>
+  </div>
+</div>
+
+<!-- 5.4 APPROVAL -->
+<div class="section-card" id="s54">
+  <div class="section-num">5.4</div>
+  <h2 class="section-title">Approval of Financial Promotions — for unauthorised persons</h2>
+
+  <p class="para">
+    Under FSMA, an unauthorised person cannot communicate a financial promotion itself. But if an <strong>authorised firm approves</strong> such a promotion (using the "gateway"), the unauthorised person may then distribute it.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Duties of the approving firm</h3>
+
+  <p class="para">
+    COBS requires: before an authorised firm approves a financial promotion for an unauthorised person, it must <strong>confirm compliance</strong> with the financial promotion rules.
+  </p>
+
+  <p class="para">
+    If the firm later becomes aware that the promotion no longer complies:
+  </p>
+
+  <ul class="bullet">
+    <li>It must <strong>withdraw its approval</strong></li>
+    <li>It must <strong>notify everyone known to be relying on that approval</strong>, as soon as is reasonably practicable</li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">Approval rules — same as for own promotions</div>
+    The rules for approving a financial promotion apply in the same way as if the firm were communicating the promotion itself. That is, the approving firm carries the same responsibility for the content as the author.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Restrictions on type of promotion</h3>
+
+  <p class="para">
+    <strong>Firms may NOT approve real-time financial promotions</strong> — i.e. promotions to be made in the course of personal visits, telephone conversations or other interactive dialogue. Only non-real-time promotions can be approved for unauthorised persons.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Unregulated collective schemes</h3>
+
+  <p class="para">
+    Authorised firms are <strong>restricted</strong> in the promotion of unregulated collective schemes. They may approve a financial promotion for such a scheme only <strong>if they would be able to legitimately promote it themselves</strong> — for example, through an exemption or in compliance with specific rules.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Limited approvals</h3>
+
+  <p class="para">
+    If a firm approves a financial promotion for which <em>some financial promotion rules are disapplied</em>, it must do so on the basis that the approval is <strong>limited to those circumstances</strong>.
+  </p>
+
+  <p class="para">
+    For example, if approval is for communication only to professional clients or ECPs — this limit must be <strong>stated</strong>. If an unauthorised person then communicates the promotion <em>outside</em> that limited approval, <strong>they are committing an offence</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The 2023 Gateway — a fundamental change</h3>
+
+  <p class="para">
+    <strong>Before 2023:</strong> under FSMA, <em>any authorised person</em> could approve financial promotions for unauthorised persons.
+  </p>
+
+  <p class="para">
+    <strong>From 2023:</strong> the FCA introduced a <strong>"gateway"</strong> — firms wishing to approve promotions for third-party (unauthorised) firms must <strong>obtain specific FCA permission</strong>. Firms without this permission can only approve <em>their own</em> promotions.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Influencers and social media</div>
+    The FCA has been clear: influencers who promote financial products on social media without approval from an FCA-authorised firm (with the right permission) could be committing a <strong>criminal offence</strong>. Firms are responsible for all their promotions, including those by influencers they work with.
+  </div>
+</div>
+
+<!-- 5.4.2 RELIANCE -->
+<div class="section-card" id="s542">
+  <div class="section-num">5.4.2</div>
+  <h2 class="section-title">Firms Relying on Promotions Approved by Another Party</h2>
+
+  <p class="para">
+    What if a firm is <strong>neither the author</strong> nor <strong>the approver</strong> of a promotion — but wants to communicate it further? This is a common scenario in distribution chains.
+  </p>
+
+  <p class="para">
+    For <strong>non-MiFID business</strong>, a firm is <strong>not in breach</strong> of the rules if it communicates a financial promotion produced by another party, where <strong>three conditions</strong> are met:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Takes reasonable care</strong> to establish that another authorised firm has confirmed the promotion complies with the rules.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Takes reasonable care</strong> to communicate the promotion only to the type of recipient intended at the time of confirmation.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>As far as the firm is (or should be) aware</strong>, the promotion is still fair, clear and not misleading, and has not been withdrawn by the other party.</li>
+  </ol>
+
+  <div class="example-box">
+    <div class="eb-title">Example: distributor of a non-MiFID product</div>
+    A distributor firm receives marketing material from a fund provider (non-MiFID). The distributor did not create the material, did not approve it, but wants to send it to its clients. To avoid a breach:<br>
+    1. Verify that another authorised firm (in this case the provider) has confirmed compliance with the rules.<br>
+    2. Distribute only to the intended client type (e.g. retail only).<br>
+    3. Continue to monitor — if the promotion becomes misleading or is withdrawn, stop distribution.
+  </div>
+</div>
+
+<!-- 5.5 RETAIL -->
+<div class="section-card" id="s55">
+  <div class="section-num">5.5</div>
+  <h2 class="section-title">Communicating with Retail Clients — additional rules</h2>
+
+  <p class="para">
+    For retail clients, additional stricter rules apply. When a firm provides information about designated investment business, or <em>issues / approves</em> a financial promotion that is <em>likely to be received by a retail client</em>, it must comply with a set of additional COBS rules.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>General principle</h3>
+
+  <p class="para">
+    The additional requirements cover:
+  </p>
+
+  <ul class="bullet">
+    <li>Clarity of wording and structure</li>
+    <li>Mandatory risk warnings</li>
+    <li>Balance of positive and negative aspects of the investment</li>
+    <li>Rules on comparisons and figures</li>
+    <li>Restrictions for specific types of investment (speculative illiquid securities)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Restrictions on Speculative Illiquid Securities (SIS)</h3>
+
+  <p class="para">
+    Speculative illiquid securities are high-risk, low-liquidity securities (often mini-bonds and similar products). Following a series of high-profile scandals (London Capital & Finance and others), the FCA significantly restricted their promotion to retail clients.
+  </p>
+
+  <p class="para">
+    Key restrictions: ban on mass-marketing SIS to retail clients; promotion permitted only to specific categories (certified sophisticated, HNW, restricted investors); strict risk warnings.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Risk warning for high-risk investments</h3>
+
+  <p class="para">
+    A financial promotion for a high-risk investment to a retail client must carry a mandatory <strong>risk warning</strong>, including the phrase: "<strong>investors could lose all of the money they invest</strong>". This is the standard wording prescribed by COBS 4.
+  </p>
+</div>
+
+<!-- 5.6 PAST/FUTURE PERFORMANCE -->
+<div class="section-card" id="s56">
+  <div class="section-num">5.6</div>
+  <h2 class="section-title">Past, Simulated Past and Future Performance</h2>
+
+  <p class="para">
+    Performance figures are one of the most powerful persuasion tools in promotions. And one of the easiest areas to mislead in. The rules are strict.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Past Performance — actual historical returns</h3>
+
+  <p class="para">
+    If a promotion presents actual past performance:
+  </p>
+
+  <ul class="bullet">
+    <li>A <strong>prominent warning</strong> must be included that <em>past performance is not a reliable indicator of future performance</em></li>
+    <li>Information about the relevant period and source must be given</li>
+    <li>If the figures are gross (without costs) — the <strong>effect of commissions, fees, tax and other charges must be disclosed</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Simulated Past Performance</h3>
+
+  <p class="para">
+    For a new product with no track record, the firm may show simulated performance — but under rules:
+  </p>
+
+  <ul class="bullet">
+    <li>The simulation must be based on <strong>actual past performance of one or more investments or indices</strong> that are the same as, or underlie, the investments being simulated.</li>
+    <li>A <strong>prominent warning</strong> must state that: (a) the figures are simulated past performance, AND (b) past performance is not a reliable indicator of future performance.</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Example of simulated past performance</div>
+    A new smart-beta ETF launches in 2026. It has no real track record. The firm may show a "backtest": what would have happened if this ETF had existed from 2015, applying the same selection rules — it would have returned X%. That is simulated. It must explicitly say: "THESE FIGURES ARE SIMULATED — they are not the fund's actual history. Past performance is not a reliable indicator of future performance."
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Future Performance — projections</h3>
+
+  <p class="para">
+    Projections of future returns must be based on:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Reasonable assumptions</strong></li>
+    <li>Supported by <strong>objective data</strong></li>
+  </ul>
+
+  <p class="para">
+    Projections <strong>MUST NOT</strong> be based on, or refer to, <strong>simulated past performance</strong>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Why simulated past cannot be used for future projections</div>
+    Simulated past is "what would have been". Future projection is "what will be". Mixing them creates the illusion that a modelled past = expected future return. This is an obvious manipulation of the client and is therefore directly prohibited.
+  </div>
+</div>
+
+<!-- 5.7 DIRECT OFFER -->
+<div class="section-card" id="s57">
+  <div class="section-num">5.7</div>
+  <h2 class="section-title">Direct Offer Financial Promotions</h2>
+
+  <p class="para">
+    A <strong>direct offer financial promotion</strong> is a promotion containing an <em>offer to enter into an agreement</em> <strong>AND</strong> a form of response, or a specified method of responding. The client can accept the offer <em>directly</em>, without a separate interaction with the firm.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>8 mandatory information categories</h3>
+
+  <p class="para">
+    A direct offer promotion likely to be received by a retail client must include prescribed information on:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>The firm and services</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Investment management</strong> (if relevant)</li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Safekeeping of assets</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Costs and charges</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Nature and risks of the investment</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Prospectus statement</strong> (if applicable)</li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Combined investment risk</strong> explanation</li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Third-party guarantee</strong> details</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Exception: reference to another document</h3>
+
+  <p class="para">
+    Required information elements <strong>need not be included</strong> in the promotion itself if the client can refer to <strong>another document</strong> (e.g. a prospectus) containing that information in order to respond to the offer.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example: direct offer with a reference</div>
+    An IPO prospectus for company X with a tear-off share subscription form is a classic direct offer. Rather than duplicating 80 pages of prospectus into a marketing flyer, the flyer can contain summary information + a reference: "See the Prospectus, available at www.xyz.com/prospectus, for the full prescribed information." This is lawful, provided the client actually has access to the full prospectus before making the decision.
+  </div>
+</div>
+
+<!-- 5.8 COLD CALLS -->
+<div class="section-card" id="s58">
+  <div class="section-num">5.8</div>
+  <h2 class="section-title">Cold Calls, Unwritten Promotions and Overseas Persons</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>5.8.2 Unsolicited Real-Time Communications (Cold Calling)</h3>
+
+  <p class="para">
+    <strong>"Cold calling"</strong> is the common term for the practice of authorised or exempt persons contacting people <strong>without a prior appointment</strong>, with a view to communicating a financial promotion.
+  </p>
+
+  <p class="para">
+    Firms <strong>must not make cold calls</strong>, except in three cases:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Existing client who expects such a call</strong>: the recipient has an existing client relationship with the firm and would <em>envisage or expect</em> to receive such a call.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Generally marketable packaged product</strong>: the call relates to a generally marketable packaged product that is <strong>NOT</strong> a higher-volatility fund or a life policy linked to such a fund.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Controlled activity with limited investments</strong>: the call relates to a controlled activity involving a limited range of investments — including <strong>deposits</strong> and <strong>readily realisable investments</strong>, other than <strong>warrants</strong> or generally marketable non-geared packaged products.</li>
+  </ol>
+
+  <div class="warn-box">
+    <div class="wb-title">High-volatility funds — outside the cold call exemption</div>
+    Even for an existing client, the firm CANNOT cold-call them about a <strong>high-volatility fund</strong> or a <strong>life policy linked to such a fund</strong>. This is an explicit exception to the packaged product permission. Warrants are also outside the exemption.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Unwritten Promotions — 4 conditions</h3>
+
+  <p class="para">
+    If a firm initiates an <strong>unwritten promotion</strong> (verbal, face-to-face) to a specific person <em>outside its premises</em>, <strong>4 conditions</strong> must be met:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Appropriate time of day</strong>.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Identify self and firm, state purpose</strong> of the call/visit.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Clarify if the client wants to continue or terminate</strong> (and terminate if requested).</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Give a contact point</strong> if an appointment is arranged.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>5.8.3 Overseas Persons</h3>
+
+  <p class="para">
+    Firms are NOT permitted to communicate or approve financial promotions for overseas firms, unless the promotion:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>States which firm has approved / communicated</strong> the promotion</li>
+    <li>(If relevant) explains:
+      <ul class="bullet" style="margin-top:.3rem">
+        <li>That <strong>the rules for the protection of investors will not apply</strong></li>
+        <li>The extent to which the UK compensation scheme is available (and if it is not, that fact)</li>
+        <li>If the communicator wishes — details of any overseas compensation and/or deposit protection scheme</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Fundamental requirement</div>
+    A firm <strong>must not communicate and/or approve</strong> a promotion unless it has <strong>no doubt</strong> that the overseas firm will deal with UK retail clients <strong>honestly and reliably</strong>. Formal approval is not enough — real due diligence on the overseas partner is required.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example: promoting a US fund to UK retail clients</div>
+    A UK firm wants to promote a US-based fund to UK retail clients. The promotion must contain: (a) the name of the UK firm that approved/communicates it; (b) notice that US investor protection rules (SIPC etc.) may not apply to UK investors; (c) that the UK FSCS does not cover the fund; (d) if there is overseas compensation — its details. The UK firm must also conduct due diligence on the US provider to be satisfied of their reliability.
+  </div>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 5</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Central standard</div>
+    <strong style="color:#FEF3C7">FAIR, CLEAR AND NOT MISLEADING</strong><br>
+    Applies to all communications, all clients<br>
+    Built on Principles 6 and 7<br>
+    Presentation is proportionate to the client type<br>
+    Retail — simpler and clearer; Professional — more complex is allowed
+  </div>
+
+  <ul>
+    <li><strong>5.1.2</strong> — Fair/clear/not misleading standard. For professional — can be more complex; for retail — simpler. Capital at risk = explicitly stated; yield = balanced impression; FCA named + non-regulated parts = clearly separate.</li>
+    <li><strong>5.1.3</strong> — Promotion must be <em>clearly identifiable as such</em>. Exception: professional/ECP. Types: real-time / unsolicited real-time (cold calls) / non-real-time / direct offer.</li>
+    <li><strong>5.1.4 Anti-greenwashing (2024):</strong> 4 criteria — correct/substantiated + clear + complete + comparable. Applies to ALL FCA firms. Aligned with Consumer Duty (good faith to retail).</li>
+    <li><strong>5.2 Excluded communications:</strong> HNW (Art.48 FPO), sophisticated (Art.50/50A FPO), FPO-exempt, overseas equivalents, Takeover Code, one-off (not cold call). <strong>Does NOT apply to UK MiFID business</strong>. 2024 HMT update: old investor statements are no longer valid.</li>
+    <li><strong>5.3 Prospectus Advertisements:</strong> instead of COBS 4, <strong>PRR 3.3</strong> applies. 4 requirements: prospectus published + clearly recognisable as ad + accurate + consistent with the prospectus. Written ads — in bold: "not a prospectus".</li>
+    <li><strong>5.4 Approval:</strong> approving firm = liable as the author. On discovery of non-compliance — withdraw + notify relying parties ASAP. <strong>Real-time promotions cannot be approved</strong>. Limited approval = must be explicitly stated; breach of those limits = offence by the unauthorised person. <strong>2023 Gateway:</strong> specific FCA permission required to approve third-party promotions.</li>
+    <li><strong>5.4.2 Reliance (non-MiFID):</strong> 3 conditions — reasonable care as to another authorised firm's confirmation + right type of recipients + knowledge it is still compliant.</li>
+    <li><strong>5.5 Retail:</strong> additional rules + SIS restrictions + risk warning "investors could lose all of the money they invest" for high-risk.</li>
+    <li><strong>5.6 Performance:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Past — prominent warning "not a reliable indicator of future"; gross → disclose costs/fees/tax.</li>
+        <li>Simulated — based on actual past of one or more investments/indices + prominent simulation warning + "not a reliable indicator".</li>
+        <li>Future — reasonable assumptions + objective data. <strong>NOT based on simulated past</strong>.</li>
+      </ul>
+    </li>
+    <li><strong>5.7 Direct offer:</strong> 8 categories of prescribed info (firm/services + management + safekeeping + costs + nature/risks + prospectus + combined risk + guarantee). Can reference another document if the client has access.</li>
+    <li><strong>5.8 Cold calls:</strong> prohibited, except in 3 cases — existing client expects / packaged product (NOT high-volatility/life-policy-linked) / limited investments (NOT warrants). Unwritten promotions: 4 conditions — time + ID + continue check + contact point.</li>
+    <li><strong>5.8.3 Overseas:</strong> cannot promote overseas firms unless — who approved + loss of UK investor protection + UK compensation status. Plus: firm must have no doubt about honest/reliable dealings by the overseas partner.</li>
+    <li><strong>Influencers:</strong> FCA position — without approval from an FCA-authorised firm with the right permission = potential <em>criminal offence</em>. Firms remain responsible for influencers they work with.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

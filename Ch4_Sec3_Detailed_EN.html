@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 4, Section 3 — Data Protection (DPA 2018 · UK GDPR)</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#065F46;--primary-l:#D1FAE5;--primary-d:#064E3B;--primary-vd:#022C22;--accent:#059669;--accent-l:#A7F3D0;--accent-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--sky:#0369A1;--sky-l:#E0F2FE;--sky-d:#075985;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#F0FDF4;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(6,95,70,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(2,44,34,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#D1FAE5;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(6,95,70,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--sky-l);border-left:4px solid var(--sky);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--sky-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(6,95,70,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#A7F3D0}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 4</div>
+  <div class="app-title">Chapter 4, Section 3 — Detailed Deep Dive</div>
+  <div class="app-sub">Data Protection · DPA 2018 · UK GDPR · Syllabus 4.3 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 3 covers <strong>data protection</strong>. The key sources of UK law are the <strong>Data Protection Act 2018 (DPA 2018)</strong> (which replaced DPA 1998) + the <strong>UK GDPR</strong> (the retained post-Brexit version of EU GDPR). They work <em>together</em> — the DPA 2018 <strong>supplements the UK GDPR</strong> and covers areas not covered by GDPR (law enforcement, national security). The regulator is the <strong>Information Commissioner's Office (ICO)</strong>. 1-2 exam questions, often on the <strong>6 DPA 2018 principles</strong>, the <strong>7 UK GDPR principles</strong>, data subject rights, 72-hour breach notification, and the retention rule "no longer than necessary".
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s31">3.1 DPA 2018 — scope + 6 principles</a></li>
+    <li>→ <a href="#ico">3.2 ICO — mission + role</a></li>
+    <li>→ <a href="#gdpr">3.3 UK GDPR — scope + 7 principles</a></li>
+    <li>→ <a href="#rights">Rights of individuals — 7 rights</a></li>
+    <li>→ <a href="#lawful">6 lawful bases for processing</a></li>
+    <li>→ <a href="#breach">Breach notification — 72 hours / HIGH risk</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s31">
+  <div class="section-num">3.1</div>
+  <h2 class="section-title">DPA 2018 — scope + 6 principles</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Background — DPA 1998 → DPA 2018</h3>
+
+  <p class="para">
+    The <strong>Data Protection Act 1998</strong> provided how personal data must be dealt with, <em>protecting the rights</em> of persons concerned. Personal data <em>relates to living individuals</em> who are <strong>identifiable by that data</strong>.
+  </p>
+
+  <p class="para">
+    Following the <strong>implementation of EU GDPR in 2018</strong>, DPA 1998 was <strong>repealed and replaced</strong> by the new UK DPA (<strong>Data Protection Act 2018</strong>).
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>DPA 2018 — wider remit than GDPR</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Why the DPA 2018 is broader than GDPR</div>
+    The DPA 2018 has a <strong>wider remit</strong> than GDPR:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Part <em>dealing with processing not falling within EU law</em> — e.g. <strong>immigration</strong>. Applies GDPR standards, amended for UK national context</li>
+      <li>Part that <em>transposes the EU Data Protection Directive 2016/680</em> (<strong>Law Enforcement Directive</strong>) into UK domestic law — <strong>Part 3</strong> sets out requirements for <em>processing personal data for criminal "law enforcement purposes"</em></li>
+      <li><strong>National security</strong> — outside EU law. UK provisions <em>based on the Council of Europe Data Protection Convention 108</em> apply to intelligence services</li>
+      <li>Separate parts covering the <strong>ICO</strong> (duties, functions, powers) + enforcement provisions</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>6 DPA 2018 Principles</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Lawful and fair</span> — processing <em>must be lawful and fair</em>.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Specified purposes</span> — purposes of processing must be <em>specified, explicit, legitimate</em>.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Adequate + relevant</span> — personal data <em>must be adequate, relevant, not excessive</em>.</div></div>
+
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Accurate + up to date</span> — personal data <em>must be accurate and kept up to date</em>.</div></div>
+
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Not kept longer than necessary</span> — personal data <em>kept for <strong>"no longer than necessary"</strong></em>.</div></div>
+
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Processed in a secure manner</span> — personal data <em>must be processed securely</em>.</div></div>
+
+  <div class="exam-box">
+    <div class="xb-title">Classic exam question — retention</div>
+    A favourite in sample papers: <strong>"How long should personal data be held?"</strong> Answer = <em>"No longer than necessary"</em> (Principle 5). <em>Not</em> "indefinitely", <em>not</em> "3 years", <em>not</em> "5 years" — concrete numbers are wrong.
+  </div>
+</div>
+
+<div class="section-card" id="ico">
+  <div class="section-num">3.2</div>
+  <h2 class="section-title">ICO — Information Commissioner's Office</h2>
+
+  <div class="info-box">
+    <div class="ib-title">ICO mission</div>
+    The ICO's mission: <em>"to uphold information rights in the public interest, promoting openness by public bodies and data privacy for individuals"</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>ICO role</h3>
+
+  <ul class="bullet">
+    <li>Safeguarding + empowering <em>individuals</em></li>
+    <li>Fostering <em>responsible innovation</em></li>
+    <li>Promoting <em>transparency</em></li>
+    <li>Ensuring compliance with <em>data protection + e-privacy legislation</em></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Registration requirement</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Data controllers — must register with the ICO</div>
+    <strong>Data controllers</strong> (those that collect + process personal data) <em>must register with the ICO</em>. This is an annual obligation + fee.
+  </div>
+</div>
+
+<div class="section-card" id="gdpr">
+  <div class="section-num">3.3</div>
+  <h2 class="section-title">UK GDPR — scope + 7 principles</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Post-Brexit retention</h3>
+
+  <p class="para">
+    Following Brexit, the GDPR requirements were <em>retained in UK domestic law</em> as the <strong>UK GDPR</strong>. The high-level requirements <em>remained unchanged</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Scope — key differences from the old DPA</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Aspect</th><th>DPA (old)</th><th>UK GDPR</th></tr></thead>
+    <tbody>
+      <tr><td>Applies to</td><td>Only <strong>controllers</strong></td><td>Both <strong>controllers + processors</strong></td></tr>
+      <tr><td>Extraterritorial</td><td>No</td><td><strong>Yes</strong> — non-UK controllers/processors if offering goods/services or monitoring UK data subjects</td></tr>
+      <tr><td>Accountability</td><td>Implicit</td><td><strong>Explicit obligation to demonstrate compliance</strong></td></tr>
+      <tr><td>Data export</td><td>Limited rules</td><td>Allowed if <em>compliant with UK GDPR conditions</em></td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>DPOs — Data Protection Officers</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Mandatory DPO designation</div>
+    The UK GDPR makes it <em>mandatory</em> for certain organisations to <strong>designate a DPO</strong>:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Public authorities / bodies</strong></li>
+      <li>Organisations that <strong>regularly + systematically monitor data subjects on a large scale</strong></li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>7 UK GDPR Principles</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Lawfulness, Fairness, Transparency</span> — processing must have a <em>valid basis</em>, be fair, be <em>transparent</em> to data subjects</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Purpose limitation</span> — data collected for <em>specified, explicit, legitimate</em> purposes; not further processed in an <em>incompatible</em> manner</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Data minimisation</span> — data <em>adequate, relevant, limited</em> to what is necessary</div></div>
+
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Accuracy</span> — data <em>accurate + kept up to date</em></div></div>
+
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Storage limitation</span> — kept for <strong>no longer than necessary</strong></div></div>
+
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Integrity + confidentiality (security)</span> — appropriate <em>security measures</em></div></div>
+
+  <div class="p-item"><div class="p-num">7</div><div class="p-body"><span class="p-title">Accountability</span> — the controller is <strong>responsible + must demonstrate compliance</strong> with all other principles</div></div>
+
+  <div class="exam-box">
+    <div class="xb-title">DPA 6 vs UK GDPR 7 principles</div>
+    DPA 2018 has <strong>6 principles</strong>. UK GDPR has <strong>7 principles</strong>. The difference: UK GDPR adds <em>"Accountability"</em> as an explicit principle. A classic exam trap is distinguishing between the two regimes.
+  </div>
+</div>
+
+<div class="section-card" id="rights">
+  <div class="section-num">3.4</div>
+  <h2 class="section-title">Rights of individuals — 7 rights under UK GDPR</h2>
+
+  <p class="para">
+    Under the UK GDPR, data subjects have specific rights regarding their personal data:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Right to be informed</strong> — about how data is being used</li>
+    <li><strong>Right of access</strong> — to access their data (Subject Access Request)</li>
+    <li><strong>Right to rectification</strong> — <em>correct inaccurate</em> data</li>
+    <li><strong>Right to erasure</strong> ("<em>right to be forgotten</em>") — in certain circumstances</li>
+    <li><strong>Right to restrict processing</strong></li>
+    <li><strong>Right to data portability</strong> — receive / transfer data</li>
+    <li><strong>Right to object</strong> — to processing</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Right to erasure — when it applies</h3>
+
+  <div class="info-box">
+    <div class="ib-title">"Right to be forgotten" conditions</div>
+    The right to erasure applies when:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Data is <em>no longer necessary</em> for the original purpose</li>
+      <li><strong>Consent is withdrawn</strong> (if consent was the basis)</li>
+      <li>Individual objects + <em>no overriding legitimate grounds</em></li>
+      <li><strong>Unlawful processing</strong></li>
+      <li>Legal erasure obligation</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-card" id="lawful">
+  <div class="section-num">3.5</div>
+  <h2 class="section-title">6 Lawful Bases for Processing</h2>
+
+  <p class="para">
+    Principle 1 (lawfulness) requires a <em>lawful basis</em> for processing. The UK GDPR lists <strong>6 lawful bases</strong>:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Consent</span> — clear, affirmative, specific, informed</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Contract necessity</span> — processing necessary for a contract with the data subject</div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Legal obligation</span> — compliance with a legal obligation</div></div>
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Vital interests</span> — protecting vital interests of the data subject / another person</div></div>
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Public task</span> — performing a task in the public interest / official authority</div></div>
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Legitimate interests</span> — pursued by the controller / third party, not overridden by rights</div></div>
+
+  <div class="example-box">
+    <div class="eb-title">Examples of bases in practice</div>
+    • <em>Bank KYC check</em> → legal obligation (MLR 2017)<br>
+    • <em>Online subscription form</em> → contract necessity<br>
+    • <em>Marketing emails</em> → consent (GDPR requires <em>opt-in</em>)<br>
+    • <em>Fraud prevention</em> → legitimate interests
+  </div>
+</div>
+
+<div class="section-card" id="breach">
+  <div class="section-num">3.6</div>
+  <h2 class="section-title">Breach Notification</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>72-hour ICO notification</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Strict deadline — 72 hours</div>
+    Notifiable personal data breaches must be <em>reported to the ICO</em> <strong>within 72 hours</strong> of <em>becoming aware</em>. "Notifiable" = the breach is <em>likely to result in a risk</em> to the rights + freedoms of individuals.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Individual notification — HIGH risk only</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Notify affected individuals</div>
+    Data subjects <em>must be notified</em> when the breach is <strong>likely to result in HIGH risk</strong> to their rights + freedoms. <em>Higher threshold</em> than the ICO notification.
+  </div>
+
+  <table class="comp-table">
+    <thead><tr><th>Who to notify</th><th>When</th><th>Threshold</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ICO</strong></td><td>Within <strong>72 hours</strong></td><td>"Risk" to rights</td></tr>
+      <tr><td><strong>Data subjects</strong></td><td>"Without undue delay"</td><td><strong>HIGH risk</strong> to rights</td></tr>
+    </tbody>
+  </table>
+
+  <div class="example-box">
+    <div class="eb-title">Scenario</div>
+    A bank leaks <em>1,000 customer records</em> (names, addresses, account numbers) via a phishing attack.<br>
+    → <strong>ICO notification</strong> — within 72 hours (risk to rights is present).<br>
+    → <strong>Individual notification</strong> — if HIGH risk, e.g. financial fraud is likely.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 3</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#A7F3D0">UK Data Protection Regime</div>
+    <strong style="color:#A7F3D0">DPA 2018</strong> (6 principles) + <strong style="color:#A7F3D0">UK GDPR</strong> (7 principles)<br>
+    Regulator: <strong style="color:#A7F3D0">ICO</strong> · Breach: <strong style="color:#A7F3D0">72h to ICO</strong> / HIGH risk to subject<br>
+    Retention: <strong style="color:#A7F3D0">"no longer than necessary"</strong><br>
+    6 lawful bases · 7 individual rights · Mandatory DPO for public bodies / large-scale monitoring
+  </div>
+
+  <ul>
+    <li><strong>Background:</strong> DPA 1998 repealed + replaced by DPA 2018 (after EU GDPR 2018). Post-Brexit the UK retained GDPR as UK GDPR.</li>
+    <li><strong>DPA 2018 wider remit than GDPR:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Part — non-EU law processing (e.g. immigration)</li>
+        <li>Part 3 — transposes Law Enforcement Directive 2016/680</li>
+        <li>National security / intelligence provisions</li>
+        <li>ICO (duties, functions, powers) + enforcement</li>
+      </ul>
+    </li>
+    <li><strong>6 DPA 2018 Principles:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Lawful + fair</li>
+        <li>(2) Specified, explicit, legitimate purposes</li>
+        <li>(3) Adequate, relevant, not excessive</li>
+        <li>(4) Accurate + up to date</li>
+        <li>(5) Kept <strong>"no longer than necessary"</strong></li>
+        <li>(6) Secure processing</li>
+      </ul>
+    </li>
+    <li><strong>ICO:</strong> "upholds information rights in the public interest". Data controllers must register with the ICO.</li>
+    <li><strong>UK GDPR — key differences:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Applies to <strong>both controllers AND processors</strong> (DPA — only controllers)</li>
+        <li>Extraterritorial — non-UK controllers if offering goods/services / monitoring UK subjects</li>
+        <li><strong>Accountability obligation</strong> — must demonstrate compliance</li>
+        <li>DPOs mandatory — public bodies + large-scale monitoring</li>
+      </ul>
+    </li>
+    <li><strong>7 UK GDPR Principles:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Lawfulness, Fairness, Transparency</li>
+        <li>(2) Purpose limitation</li>
+        <li>(3) Data minimisation</li>
+        <li>(4) Accuracy</li>
+        <li>(5) Storage limitation</li>
+        <li>(6) Integrity + confidentiality (security)</li>
+        <li>(7) <strong>Accountability</strong> (demonstrate compliance with all other principles)</li>
+      </ul>
+    </li>
+    <li><strong>7 individual rights:</strong> informed / access / rectification / erasure ("right to be forgotten") / restrict processing / data portability / object.</li>
+    <li><strong>Right to erasure applies:</strong> data no longer necessary / consent withdrawn / unlawful processing.</li>
+    <li><strong>6 lawful bases:</strong> consent / contract / legal obligation / vital interests / public task / legitimate interests.</li>
+    <li><strong>Breach notification:</strong>
+      <ul style="margin-top:.3rem">
+        <li>ICO — within <strong>72 hours</strong> of becoming aware (risk to rights)</li>
+        <li>Individuals — without undue delay (<strong>HIGH risk</strong> to rights/freedoms)</li>
+      </ul>
+    </li>
+    <li><strong>Classic exam question:</strong> retention — <em>"no longer than necessary"</em> (not concrete years).</li>
+    <li><strong>DPA vs UK GDPR:</strong> DPA has 6 principles; UK GDPR has 7 (adds Accountability).</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

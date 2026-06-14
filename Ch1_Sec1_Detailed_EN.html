@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1, Section 1 — The Regulatory Environment</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#4338CA;--primary-l:#E0E7FF;--primary-d:#3730A3;--primary-vd:#1E1B4B;--accent:#7C3AED;--accent-l:#EDE9FE;--accent-d:#5B21B6;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--rose:#BE123C;--rose-l:#FFE4E6;--rose-d:#881337;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--slate-d:#334155;--ink:#0F172A;--muted:#475569;--bg:#F5F3FF;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(67,56,202,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(30,27,75,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--primary-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(67,56,202,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(67,56,202,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 1</div>
+  <div class="app-title">Chapter 1, Section 1 — Detailed Deep Dive</div>
+  <div class="app-sub">The Regulatory Environment · Syllabus 1.1 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 1 is the <strong>foundation of the entire syllabus</strong>. It describes <em>how</em> the UK financial regulation system is set up: who the main players are (FCA and PRA), what law underpins their work (FSMA 2000 as amended by FSA 2012 and FSMA 2023), what <strong>statutory objectives</strong> each of them has, how they divide firms between themselves on the <strong>"twin peaks"</strong> principle, where they get their money, and to whom they report. These are "where the regulator sits on the map" questions — ~3-4 exam questions — but without grasping them, the later chapters do not fit into a coherent picture.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s11">1.1 FSMA 2000 and FS Act 2012 — the legal framework</a></li>
+    <li>→ <a href="#split">Twin peaks — split into FCA and PRA</a></li>
+    <li>→ <a href="#s12">1.2 Statutory Objectives — FCA and PRA</a></li>
+    <li>→ <a href="#fca-obj">FCA — 1 strategic + 3 operational</a></li>
+    <li>→ <a href="#pra-obj">PRA — safety and soundness + insurance</a></li>
+    <li>→ <a href="#secondary">Secondary objective (FSMA 2023) — int. competitiveness</a></li>
+    <li>→ <a href="#accountability">Accountability — 4 mechanisms</a></li>
+    <li>→ <a href="#supervision">Supervision — how the regulator watches</a></li>
+    <li>→ <a href="#s13">1.3 Rule-Making Powers — Part 9A FSMA</a></li>
+    <li>→ <a href="#handbook">FCA Handbook — rules / guidance / evidential</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s11">
+  <div class="section-num">1.1</div>
+  <h2 class="section-title">FSMA 2000 and FS Act 2012 — the legal framework</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What FSMA is</h3>
+
+  <p class="para">
+    The <strong>Financial Services and Markets Act (FSMA) 2000</strong> is the primary legislation regulating financial services in the UK. It came into effect in 2001 and has been amended many times since. Its main purpose is to provide <strong>stronger protection for consumers</strong> than existed under the previous framework (where the industry was largely self-regulated).
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">What "person" means in FSMA</div>
+    FSMA applies to all "persons" in the UK. In the FSMA context, <strong>"person"</strong> means:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Natural persons</strong> (individuals)</li>
+      <li><strong>All types of legal person</strong>: firms, incorporated bodies, partnerships, trusts, and other unincorporated associations</li>
+    </ul>
+    The term is as wide as possible — it is <em>not just companies</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>General prohibition — Section 19 FSMA</h3>
+
+  <p class="para">
+    It is a <strong>criminal offence</strong> to carry on regulated activity <strong>by way of business</strong> in the UK unless a person is either <strong>authorised</strong> or an <strong>exempt person</strong>. This is called the <strong>"general prohibition"</strong> and is set out in <strong>Section 19 FSMA</strong>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">A criminal offence — this is serious</div>
+    A breach of the general prohibition is not an administrative infringement but a <strong>criminal offence</strong>. In addition, contracts entered into by an unauthorised firm with a client are <strong>unenforceable</strong> against the client — the client can walk away; the firm cannot compel performance.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FS Act 2012 — transition to twin peaks</h3>
+
+  <p class="para">
+    In <strong>2012</strong>, FSMA was significantly amended by the <strong>Financial Services Act 2012</strong>, which came into effect in <strong>April 2013</strong>. Before that, there was a <strong>single regulator — the Financial Services Authority (FSA)</strong>. The 2007-2008 crisis showed that a monolithic regulator struggles: conduct issues (mis-selling of products) <em>and</em> prudential issues (banks with insufficient capital) require different expertise.
+  </p>
+
+  <p class="para">
+    FS Act 2012 <strong>split the FSA into three parts</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Financial Conduct Authority (FCA)</strong> — conduct regulator + prudential for non-PRA firms</li>
+    <li><strong>Prudential Regulation Authority (PRA)</strong> — prudential for the largest firms (part of the Bank of England from 2016)</li>
+    <li><strong>Financial Policy Committee (FPC)</strong> — macro-prudential / systemic risks, part of the Bank of England</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FS Act 2023 — post-Brexit reform</h3>
+
+  <p class="para">
+    In <strong>June 2023</strong>, the <strong>Financial Services and Markets Act 2023</strong> received Royal Assent. Certain provisions came into effect in <strong>August 2023</strong>, the rest — on <strong>1 January 2024</strong>. This Act:
+  </p>
+
+  <ul class="bullet">
+    <li>Starts the process of <strong>revoking retained EU law</strong> in financial services</li>
+    <li>Gives powers to HM Treasury, PRA, and FCA to replace EU legislation with <strong>UK-specific rules</strong> designed for UK markets</li>
+    <li>Enhances the UK regulatory regime — updates the objectives of the PRA and FCA, adding <strong>greater focus on long-term growth and international competitiveness</strong> (a new <em>secondary objective</em>)</li>
+    <li>Implements the <strong>"Smarter Regulatory Framework"</strong> — a general reform</li>
+  </ul>
+
+  <p class="para">
+    Revoking EU laws is a <strong>lengthy process</strong>, which the PRA and FCA are undertaking via a <strong>phased implementation approach</strong>.
+  </p>
+</div>
+
+<div class="section-card" id="split">
+  <div class="section-num">1.1.1</div>
+  <h2 class="section-title">Twin Peaks — the split into FCA and PRA</h2>
+
+  <p class="para">
+    The UK regulatory model is known as the <strong>"twin peaks" approach</strong>. The logic: for <strong>deposit takers, insurers, and investment banks</strong>, <em>two different supervisors</em> — one focuses on prudential issues (PRA), the other on conduct and market-related issues (FCA).
+  </p>
+
+  <p class="para">
+    But the <strong>FCA is also responsible for prudential regulation</strong> of all firms <strong>not regulated by the PRA</strong> (the so-called <em>solo-regulated firms</em> — asset managers, stockbrokers).
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">The twin peaks model, visualised</div>
+    <strong>TWO FIRM CATEGORIES</strong><br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong>DUAL-REGULATED FIRMS</strong><br>
+    Banks, building societies, credit unions,<br>
+    insurers, major investment banks<br>
+    ↓ ↓<br>
+    PRA (prudential) + FCA (conduct)<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong>SOLO-REGULATED FIRMS</strong><br>
+    Asset managers, stockbrokers, IFAs,<br>
+    mortgage brokers, CMCs<br>
+    ↓<br>
+    <strong>FCA only</strong> (both conduct and prudential)
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA — role and scope</h3>
+
+  <p class="para">
+    <strong>The FCA is responsible for</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Protecting consumers</strong> of financial services</li>
+    <li><strong>Keeping the industry stable</strong></li>
+    <li><strong>Promoting healthy competition</strong> between financial services providers</li>
+    <li><strong>Solely responsible</strong> for <strong>authorisation</strong> and supervision of all financial institutions <em>not regulated</em> by the PRA — including intermediaries and investment exchanges</li>
+    <li>Powers to investigate and prosecute <strong>insider dealing and market abuse</strong></li>
+    <li>Acts as the <strong>Listing Authority</strong> for the UK (UKLA)</li>
+    <li>Oversees the <strong>Financial Ombudsman Service (FOS)</strong></li>
+    <li>Jointly with the PRA, oversees the <strong>Financial Services Compensation Scheme (FSCS)</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>PRA — role and scope</h3>
+
+  <p class="para">
+    The <strong>PRA's focus</strong> is prudential regulation of <strong>banks, building societies, credit unions, insurers, and major investment firms</strong>. The goal: to promote the <strong>safety and soundness</strong> of these firms, which in turn <em>reduces harm to the UK financial system</em>.
+  </p>
+
+  <p class="para">
+    After the <strong>Financial Services Act 2016</strong>, the PRA became <strong>part of the Bank of England</strong> — micro-prudential regulation of institutions was brought within the BoE's scope via the establishment of the <strong>Prudential Regulation Committee (PRC)</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA — financial and organisational independence</h3>
+
+  <p class="para">
+    Both authorities — FCA and PRA — are <strong>funded entirely from fees paid by the firms they regulate</strong>. They set the fees payable by regulated firms and make rules in respect of the activities under their remit. This secures <strong>operational independence from government funding</strong>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">FCA — a private company</div>
+    The FCA is a <strong>private company</strong> with a <strong>special privilege</strong> that allows it not to use the word "limited" in its name. The FCA is <strong>accountable</strong> to the UK Government for how it performs its functions — via <strong>HM Treasury</strong>. The PRA, by contrast, is not directly accountable to any UK Government body, but is answerable to Parliament via the <strong>House of Commons Treasury Committee</strong> through the Bank of England.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Examples of how firms split</div>
+    <strong>Barclays Bank:</strong> deposit-taker + investment bank → <em>dual-regulated</em>. The PRA checks capital adequacy; the FCA supervises how Barclays sells products to retail clients.<br>
+    <strong>Schroders (asset manager):</strong> not a deposit-taker, not an insurer → <em>solo-regulated</em> by the FCA (both conduct and prudential).<br>
+    <strong>AXA UK (insurer):</strong> an insurance company → <em>dual-regulated</em>. The PRA checks solvency ratios; the FCA monitors how AXA sells policies.<br>
+    <strong>A small IFA (10 staff):</strong> <em>solo-regulated</em> by the FCA.
+  </div>
+</div>
+
+<div class="section-card" id="s12">
+  <div class="section-num">1.2</div>
+  <h2 class="section-title">Statutory Objectives — FCA and PRA</h2>
+
+  <p class="para">
+    Statutory objectives are <strong>goals set by law</strong> (FSMA, as amended) that the regulator must advance through its work. They are not abstract mottos — they are <strong>legally binding</strong> objectives against which the regulator reports and can be challenged in the courts.
+  </p>
+</div>
+
+<div class="section-card" id="fca-obj">
+  <div class="section-num">1.2.1</div>
+  <h2 class="section-title">FCA — 1 Strategic + 3 Operational Objectives</h2>
+
+  <p class="para">
+    The FCA has a <strong>single strategic objective</strong> and <strong>three operational objectives</strong>, set out in the Financial Services Act 2012.
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">FCA Objectives — the structure</div>
+    <strong>STRATEGIC (×1)</strong><br>
+    Ensuring relevant markets function well<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong>OPERATIONAL (×3)</strong><br>
+    (1) Consumer protection<br>
+    (2) Integrity of UK financial system<br>
+    (3) Effective competition<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong>SECONDARY (from FSMA 2023)</strong><br>
+    International competitiveness + growth
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Strategic objective</h3>
+
+  <div class="info-box">
+    <div class="ib-title">FCA strategic objective</div>
+    <em>"Ensuring that the relevant markets function well"</em> — ensure relevant markets operate well.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Operational objective 1: Consumer Protection</h3>
+
+  <p class="para">
+    The <strong>consumer protection objective</strong> — <em>"securing an appropriate degree of protection for consumers"</em> (ensuring an appropriate degree of protection for consumers).
+  </p>
+
+  <p class="para">
+    The key word is <strong>"appropriate"</strong>. This does <em>not mean preventing all risk of loss</em> to consumers. When considering what degree of protection is "appropriate", the FCA <strong>must have regard</strong> to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Different degrees of risk</strong> involved in different kinds of investment</li>
+    <li><strong>Differing levels of experience and expertise</strong> of consumers</li>
+    <li>The needs of consumers for <strong>advice and accurate information</strong></li>
+    <li>The <strong>general principle</strong> that consumers <strong>should take some responsibility</strong> for their decisions</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">A common exam mistake</div>
+    The answer "FCA must prevent all risk of loss to consumers" is <strong>wrong</strong>. Consumer protection is an <em>appropriate degree</em>, not absolute protection. Consumers <em>share responsibility</em> for their decisions.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Operational objective 2: Integrity</h3>
+
+  <p class="para">
+    The <strong>integrity objective</strong> — <em>"protecting and enhancing the integrity of the UK financial system"</em>. The integrity of the financial system includes <strong>6 elements</strong>:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Soundness, stability, and resilience</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Not being used for a purpose connected with financial crime</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Not being affected by behaviour amounting to market abuse</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Orderly operation</strong> of financial markets</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Reliability and transparency</strong> of the price-formation process in those markets</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Suitability of the listing rules</strong></li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Operational objective 3: Competition</h3>
+
+  <p class="para">
+    The <strong>competition objective</strong> — <em>"promoting effective competition in the interests of consumers"</em> in the markets for regulated financial services or services provided by a RIE when carrying out regulated activities in respect of which it is exempt from the general prohibition.
+  </p>
+
+  <p class="para">
+    The FCA may have regard to the following matters:
+  </p>
+
+  <ul class="bullet">
+    <li>The <strong>needs of different consumers</strong> who use or may use these services — <em>including their need for information</em> enabling informed choices</li>
+    <li>The <strong>ease with which consumers can change the person</strong> from whom they obtain services (switching)</li>
+    <li>The <strong>ease with which new entrants can enter the market</strong></li>
+    <li>How far <strong>competition encourages innovation</strong></li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Competition objective in action</div>
+    The FCA launches the Open Banking initiative — requiring the big-9 banks to share account data with fintech start-ups via APIs. This <strong>promotes competition</strong>: eases market entry for new entrants (fintechs) + eases consumer switching to better products + encourages innovation. A direct advance of the competition objective.
+  </div>
+</div>
+
+<div class="section-card" id="pra-obj">
+  <div class="section-num">1.2.2</div>
+  <h2 class="section-title">PRA — Safety and Soundness + Insurance Objective</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>General objective</h3>
+
+  <div class="info-box">
+    <div class="ib-title">PRA General Objective</div>
+    <em>"Promoting the safety and soundness of PRA-authorised persons"</em> — promoting the safety and soundness of PRA-authorised persons.
+  </div>
+
+  <p class="para">
+    This general objective is advanced <strong>primarily</strong> through:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem">Seeking to ensure that the business of PRA-authorised persons is <strong>carried on in a way that avoids adverse effects on the stability of the UK financial system</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Seeking to <strong>minimise the adverse effect</strong> the failure of a PRA-authorised person could have on the stability of the UK financial system</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Insurance objective</h3>
+
+  <p class="para">
+    The PRA also has an <strong>insurance objective</strong>, relating only to <em>effecting or carrying out contracts of insurance as principal</em> — to the extent that is a PRA-regulated activity. The objective: <strong>"contributing to securing an appropriate degree of protection for those who are or may become policyholders"</strong>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Why insurance is separate</div>
+    Insurers differ from banks. Bank failure is an immediate stress for depositors. Insurer failure is slower — but with much longer tails (life insurance may run 40-50 years after policy inception). Hence the PRA has a <em>separate insurance objective</em> — not "safety and soundness" but protection of policyholders.
+  </div>
+</div>
+
+<div class="section-card" id="secondary">
+  <div class="section-num">1.2.3</div>
+  <h2 class="section-title">Secondary Objective (FSMA 2023) — International Competitiveness</h2>
+
+  <p class="para">
+    Following the coming into force of <strong>FSMA 2023</strong>, the PRA and FCA have been given a new <strong>secondary objective</strong>:
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Secondary Objective</div>
+    <em>"Facilitate the international competitiveness of the UK economy and its medium-to-long-term growth (subject to international standards)"</em> — to facilitate the international competitiveness of the UK economy and its medium-to-long-term growth (subject to international standards).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What "secondary" means</h3>
+
+  <p class="para">
+    The FCA has <strong>specifically stated</strong> that the new objective will apply <strong>only when the FCA is advancing its existing operational objectives</strong> (consumer protection, market integrity, competition). In other words, the secondary objective <em>does not override</em> the primary ones. If an action improves international competitiveness but harms consumer protection — it is not taken.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The "international standards" safeguard</h3>
+
+  <p class="para">
+    The phrase <strong>"subject to international standards"</strong> means the FCA <strong>will not take action or develop rules</strong> that harm the UK's reputation or standing in the international financial community. I.e. "competitiveness" cannot mean a race to the bottom — lowering regulatory standards for competitiveness's sake.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Secondary objective in application</div>
+    The FCA considers a rule that <em>might</em> slightly improve consumer protection, but creates gold-plating over EU standards and makes the UK less attractive for international firms. Under the secondary objective, the FCA may <em>not</em> adopt the rule if it maintains adequate protection without unnecessary burden.
+  </div>
+</div>
+
+<div class="section-card" id="accountability">
+  <div class="section-num">1.2.4</div>
+  <h2 class="section-title">Accountability — 4 Mechanisms</h2>
+
+  <p class="para">
+    The FCA's objectives also provide a <strong>degree of accountability</strong>. Four mechanisms:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Annual report</strong> — the FCA's annual report to the Treasury contains an assessment of how well the FCA has met its statutory objectives. The report is scrutinised by various Parliamentary committees.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Rules</strong> — the FCA must <em>show how the rules it makes relate to its statutory objectives</em>. You cannot just issue a rule without justification.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Judicial review</strong> — if the FCA <em>fails to consider the objectives</em> or <em>incorrectly interprets them</em>, it can be challenged in the courts.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Regulatory failure</strong> — the FCA and PRA will be held accountable if breaches of the objectives occur, or are made worse, because of a <em>serious failure on the part of the regulator</em>.</li>
+  </ol>
+
+  <div class="exam-box">
+    <div class="xb-title">Despite 4 mechanisms, the FCA remains operationally independent</div>
+    The FCA reports but is operationally independent <em>of government</em>. The Treasury cannot dictate policy or intervene in individual decisions. This independence is underpinned by <strong>independent funding</strong> (fees from firms, not taxpayers).
+  </div>
+</div>
+
+<div class="section-card" id="supervision">
+  <div class="section-num">1.2.5</div>
+  <h2 class="section-title">Supervision — how the regulator watches</h2>
+
+  <p class="para">
+    Under FSMA, the relevant regulator (FCA and/or PRA) is <strong>required to maintain arrangements to supervise compliance</strong> with requirements imposed on authorised persons. The supervisory approach must <em>ensure that the statutory objectives are met</em>.
+  </p>
+
+  <p class="para">
+    The <strong>FCA's supervisory efforts focus on</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li>The <strong>conduct of BOTH FCA-authorised and PRA-authorised firms</strong></li>
+    <li>Plus the <strong>prudential regulation</strong> of authorised firms not directly authorised by the PRA</li>
+  </ul>
+
+  <p class="para">
+    The <strong>PRA supervises the prudential aspects</strong> of firms it directly authorises.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA Mission: Approach to Supervision (2019)</h3>
+
+  <p class="para">
+    In <strong>2019</strong> the FCA published <strong>"FCA Mission: Approach to Supervision"</strong>, outlining <strong>eight supervisory principles</strong> and a supervisory model based on <strong>3 types of work</strong>:
+  </p>
+
+  <table class="comp-table">
+    <thead><tr><th>Type</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Proactive</strong></td><td><em>Pre-emptive identification of harm</em> through review and assessment of firms and portfolios. Includes business-model analysis and review of culture drivers</td></tr>
+      <tr><td><strong>Reactive</strong></td><td>Dealing with issues emerging or already arisen — to <em>prevent harm growing</em></td></tr>
+      <tr><td><strong>Thematic</strong></td><td><em>Wider diagnostic or remedy work</em> where actual or potential harm cuts across multiple firms</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Conduct Risk and FTOC</h3>
+
+  <p class="para">
+    The FCA does not provide a <strong>precise definition of "conduct risk"</strong>. Broadly speaking, conduct risk is the <em>risks posed to customers and the wider integrity of financial markets by the way authorised firms and their staff conduct themselves</em>, and the risks that firms' behaviours result in <em>poor outcomes for the consumer</em>.
+  </p>
+
+  <p class="para">
+    The concept of <strong>Treating Customers Fairly (TCF)</strong> and its <strong>6 principles</strong> was introduced as an initiative in <strong>2006</strong>. TCF has since been renamed <strong>"Fair Treatment of Customers" (FTOC)</strong> — setting out consumer outcomes the FCA considers core to what it expects of firms.
+  </p>
+</div>
+
+<div class="section-card" id="s13">
+  <div class="section-num">1.3</div>
+  <h2 class="section-title">Rule-Making Powers — Part 9A FSMA</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Source of powers</h3>
+
+  <p class="para">
+    <strong>Part 9A of FSMA empowers the FCA</strong> to make rules that are <strong>legally binding on authorised firms</strong> concerning regulated activity — and also activity that is <em>not regulated</em>. Such rules are necessary or expedient for the FCA for the purpose of advancing one or more of its operational objectives.
+  </p>
+
+  <p class="para">
+    The <strong>PRA has similar rule-making powers</strong>; however, its powers <em>extend only to PRA-authorised persons</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Other powers under FSMA</h3>
+
+  <p class="para">
+    Besides rule-making, FSMA empowers either regulator to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Grant authorisation</strong> to persons applying for Part 4A permission, <strong>vary</strong> a firm's permission, and <strong>cancel authorisation</strong></li>
+    <li><strong>Supervise authorised persons</strong> on an ongoing basis to ensure they continue to meet authorisation requirements and comply with Handbook rules and other regulatory obligations</li>
+    <li>Employ a range of <strong>disciplinary measures and sanctions</strong> — to punish or limit activities of firms and senior management that fail to comply</li>
+    <li><strong>Enforce the regulatory framework</strong> — the general approach is <em>"credible deterrence"</em>, using enforcement strategy as a tool to change behaviour in the industry</li>
+  </ul>
+</div>
+
+<div class="section-card" id="handbook">
+  <div class="section-num">1.3.1</div>
+  <h2 class="section-title">FCA Handbook — Rules, Guidance, and Evidential Provisions</h2>
+
+  <p class="para">
+    The FCA Handbook is the document containing the <strong>rules, guidance, and other provisions</strong> with which authorised firms must comply. The Handbook is divided into a number of separate <strong>Sourcebooks and manuals</strong> covering different topics (COBS, SYSC, CASS, MAR, PRIN, ENF, DEC, etc.).
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Three types of provision — an important distinction</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Provision type</th><th>Binding?</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Rules</strong></td>
+        <td>Binding</td>
+        <td>Legally binding — the firm must comply. Breach → disciplinary action</td>
+      </tr>
+      <tr>
+        <td><strong>Guidance</strong></td>
+        <td><strong>Not binding</strong></td>
+        <td>Indicates what the FCA considers good practice. Not mandatory — but useful as evidence of compliance</td>
+      </tr>
+      <tr>
+        <td><strong>Evidential provisions</strong></td>
+        <td><strong>Not binding in its own right</strong></td>
+        <td>"Safe harbour" — compliance with it <em>tends to establish</em> compliance with the linked rule (and vice versa for contravention)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <div class="ib-title">Evidential provision — how it works</div>
+    Rule: "The firm must take reasonable steps to prevent financial crime". Evidential provision: "Having an annual AML training programme". This is evidential — you are <em>not required</em> to have exactly that training. But if the firm does have it — this <em>tends to establish</em> that the firm took reasonable steps. If the firm has <em>no</em> training programme at all — this <em>tends to establish</em> contravention of the rule.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Other material types in the Handbook</h3>
+
+  <ul class="bullet">
+    <li><strong>Directions and requirements</strong> — specific directions to a firm</li>
+    <li><strong>UK legislative material</strong> — related statutes (FSMA sections, Regulations, etc.)</li>
+    <li><strong>Statutory notices</strong> — forms of formal notices for enforcement</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Regulatory Decisions Committee (RDC)</h3>
+
+  <p class="para">
+    The <strong>RDC</strong> is an independent FCA committee that takes <em>contested statutory decisions</em>, including:
+  </p>
+
+  <ul class="bullet">
+    <li>Refusing Part 4A permission applications</li>
+    <li>Cancelling existing permissions</li>
+    <li>Enforcement decisions</li>
+  </ul>
+
+  <p class="para">
+    The RDC is <strong>operationally separate</strong> from FCA supervisory and enforcement staff — this ensures decision-making independence.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Super-complaints — another FCA feature</div>
+    Under the <strong>Financial Services Act 2012</strong>, certain <em>designated consumer bodies</em> (e.g. Citizens Advice, Consumers' Association) can <strong>alert the FCA via a super-complaint</strong> — when they believe a market feature harms consumer interests. The FCA must respond publicly within 90 days. This is a mechanism for consumer voice in the regulatory process.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 1</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Main entities of the section</div>
+    <strong style="color:#FEF3C7">FSMA 2000</strong> (amended 2012, 2023) — the legal framework<br>
+    <strong style="color:#FEF3C7">FCA</strong> — conduct + prudential for solo-regulated<br>
+    <strong style="color:#FEF3C7">PRA</strong> — prudential for banks + insurers + major investment firms<br>
+    <strong style="color:#FEF3C7">FPC</strong> — macro-prudential / systemic risks (part of BoE)<br>
+    <strong style="color:#FEF3C7">Twin peaks</strong> — dual-regulated (PRA + FCA) vs solo-regulated (FCA only)
+  </div>
+
+  <ul>
+    <li><strong>1.1 FSMA 2000:</strong> primary legislation since 2001. Amended by FS Act 2012 (split FSA into FCA/PRA/FPC, effective April 2013). FSMA 2023 — post-Brexit reform + secondary objective.</li>
+    <li><strong>General prohibition (Section 19 FSMA):</strong> criminal offence to carry on regulated activity by way of business without being authorised or exempt. Contracts with an unauthorised firm are unenforceable against the client.</li>
+    <li><strong>"Person" under FSMA:</strong> natural persons + all legal persons (firms, incorporated bodies, partnerships, trusts, unincorporated associations).</li>
+    <li><strong>Twin peaks:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Dual-regulated</strong> (banks, building societies, credit unions, insurers, major investment banks) → PRA (prudential) + FCA (conduct)</li>
+        <li><strong>Solo-regulated</strong> (asset managers, stockbrokers, IFAs, mortgage brokers) → FCA only (both conduct and prudential)</li>
+      </ul>
+    </li>
+    <li><strong>FCA responsibilities:</strong> consumer protection, industry stability, competition, authorisation of non-PRA firms, insider dealing/market abuse prosecution, Listing Authority (UKLA), oversight of the FOS, jointly with PRA — FSCS.</li>
+    <li><strong>PRA:</strong> part of Bank of England (from FS Act 2016 via PRC).</li>
+    <li><strong>Funding:</strong> both authorities entirely funded by fees from regulated firms (operational independence).</li>
+    <li><strong>FCA Statutory Objectives:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>1 strategic:</strong> markets function well</li>
+        <li><strong>3 operational:</strong> consumer protection + integrity + competition</li>
+        <li><strong>Secondary (FSMA 2023):</strong> int. competitiveness + long-term growth subject to int. standards</li>
+      </ul>
+    </li>
+    <li><strong>Consumer protection:</strong> <em>appropriate</em> degree (not preventing all loss). Regard: different risks / experience / information needs / consumer responsibility.</li>
+    <li><strong>Integrity — 6 elements:</strong> soundness + no financial crime + no market abuse + orderly markets + transparent prices + suitable listing rules.</li>
+    <li><strong>Competition — 4 matters regard:</strong> consumer needs/info + switching ease + new entrants + innovation.</li>
+    <li><strong>PRA:</strong> general objective = <em>safety and soundness</em> of PRA-authorised persons. Plus <em>insurance objective</em> = appropriate protection for policyholders. Plus secondary (int. competitiveness).</li>
+    <li><strong>Accountability — 4 mechanisms:</strong> annual report to Treasury + rules linked to objectives + judicial review + regulatory-failure accountability. Operationally independent.</li>
+    <li><strong>Supervision:</strong> FCA supervises conduct of both FCA-authorised and PRA-authorised firms + prudential of solo-regulated. PRA supervises prudential for firms it directly authorises.</li>
+    <li><strong>FCA Mission (2019):</strong> 8 supervisory principles + <strong>3 types of work</strong> — Proactive (pre-emptive) + Reactive (emerging issues) + Thematic (across firms).</li>
+    <li><strong>TCF (2006) → renamed FTOC:</strong> 6 principles for treating customers fairly. Conduct risk — no precise definition.</li>
+    <li><strong>1.3 Rule-making:</strong> Part 9A FSMA for FCA (over authorised firms + non-regulated activity). PRA — only over PRA-authorised persons.</li>
+    <li><strong>FCA powers under FSMA:</strong> authorisation/variation/cancellation (Part 4A permission) + supervision + disciplinary + enforcement (credible deterrence).</li>
+    <li><strong>Handbook — 3 provision types:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Rules</strong> — binding</li>
+        <li><strong>Guidance</strong> — not binding</li>
+        <li><strong>Evidential provisions</strong> — not binding in their own right, but compliance tends to establish rule compliance</li>
+      </ul>
+    </li>
+    <li><strong>RDC:</strong> independent committee for contested decisions (Part 4A refusals, cancellations, enforcement). Operationally separate from supervisory/enforcement staff.</li>
+    <li><strong>Super-complaints:</strong> designated consumer bodies can alert the FCA (under FS Act 2012).</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

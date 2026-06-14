@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1, Section 4 — Prudential Standards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#4338CA;--primary-l:#E0E7FF;--primary-d:#3730A3;--primary-vd:#1E1B4B;--accent:#7C3AED;--accent-l:#EDE9FE;--accent-d:#5B21B6;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--rose:#BE123C;--rose-l:#FFE4E6;--rose-d:#881337;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--slate-d:#334155;--ink:#0F172A;--muted:#475569;--bg:#F5F3FF;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(67,56,202,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(30,27,75,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--primary-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(67,56,202,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(67,56,202,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+.tier-card{display:inline-block;padding:.3rem .7rem;border-radius:8px;font-size:.82rem;font-weight:700;margin-right:.35rem}
+.tier-1{background:var(--emerald-l);color:var(--emerald-d);border:1.5px solid var(--emerald)}
+.tier-2{background:var(--amber-l);color:var(--amber-d);border:1.5px solid var(--amber)}
+.tier-3{background:var(--rose-l);color:var(--rose-d);border:1.5px solid var(--rose)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 1</div>
+  <div class="app-title">Chapter 1, Section 4 — Detailed Deep Dive</div>
+  <div class="app-sub">Prudential Standards · Syllabus 1.4 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 4 is about the <strong>financial soundness of firms</strong>. If conduct rules (COBS, Principles) are "how firms behave", prudential rules are "how much capital and liquidity a firm must hold to meet its obligations". The logic since 2008: <em>a firm without an adequate buffer collapses and drags its clients down with it</em>. Prudential is split into three sourcebooks depending on what the firm does: <strong>GENPRU</strong> (banks), <strong>MIFIDPRU</strong> (MiFID investment firms), and <strong>IPRU-INV</strong> (everyone else). The central new development is <strong>IFPR (Investment Firms Prudential Regime)</strong>, effective from January 2022: a radical shift from "risks TO the firm" → "harm the firm MAY CAUSE to consumers and markets". On the exam 1-2 questions.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s41">4.1 Capital Adequacy — the foundation</a></li>
+    <li>→ <a href="#sourcebooks">Three sourcebooks: GENPRU / MIFIDPRU / IPRU-INV</a></li>
+    <li>→ <a href="#crd">CRD + CRR — for banks</a></li>
+    <li>→ <a href="#pillars">3 Pillars of CRD framework</a></li>
+    <li>→ <a href="#tiers">Tiers of capital — Core T1 / T2 / T3</a></li>
+    <li>→ <a href="#ifpr">IFPR — philosophical shift</a></li>
+    <li>→ <a href="#overarching">2 overarching requirements</a></li>
+    <li>→ <a href="#outcomes">4 FCA outcomes of IFPR</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s41">
+  <div class="section-num">4.1</div>
+  <h2 class="section-title">Capital Adequacy — the foundation of prudential</h2>
+
+  <p class="para">
+    <strong>Principle 4</strong> of the Principles for Businesses states:
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Principle 4 — Financial Prudence</div>
+    <em>"A firm must maintain adequate financial resources"</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Financial resources — what they are</h3>
+
+  <p class="para">
+    Financial resources include <strong>both</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Capital resources</strong> — the firm's permanent funding base (shares, reserves, subordinated debt)</li>
+    <li><strong>Liquidity resources</strong> — the firm's ability to meet <em>short-term obligations as they fall due</em> (cash, readily realisable assets)</li>
+  </ul>
+
+  <p class="para">
+    The goal: the firm can <strong>meet its liabilities as they fall due</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Why standards differ</h3>
+
+  <p class="para">
+    Standards differ according to:
+  </p>
+
+  <ul class="bullet">
+    <li>The <strong>activities undertaken</strong> by the firm</li>
+    <li>Whether the firm's activities <strong>fall within the scope of MiFID</strong></li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Why not one rule for all</div>
+    A bank and an IFA have radically different risk profiles. A bank takes retail deposits — failure leads to <em>immediate mass-consumer harm</em>. An IFA gives advice — its failure will not wipe out the sector. Applying identical capital requirements would be: (1) insufficient for banks, (2) overkill for advisors. Hence 3 different sourcebooks.
+  </div>
+</div>
+
+<div class="section-card" id="sourcebooks">
+  <div class="section-num">4.1.1</div>
+  <h2 class="section-title">Three Sourcebooks — who falls under which</h2>
+
+  <table class="comp-table">
+    <thead><tr><th>Sourcebook</th><th>Who</th><th>Regulator</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>GENPRU</strong><br>(General Prudential Sourcebook)</td>
+        <td>Firms subject to UK CRD — <strong>banks / credit institutions / deposit-taking institutions</strong></td>
+        <td><strong>PRA</strong></td>
+      </tr>
+      <tr>
+        <td><strong>MIFIDPRU</strong><br>(Prudential Sourcebook for UK MiFID Investment Firms)</td>
+        <td>UK-regulated firms subject to MiFID — <strong>not banks</strong>. In force from <strong>1 January 2022</strong></td>
+        <td><strong>FCA</strong></td>
+      </tr>
+      <tr>
+        <td><strong>IPRU-INV</strong><br>(Interim Prudential Sourcebook for Investment Businesses)</td>
+        <td>Investment firms <strong>not subject</strong> to CRD/CRR or MIFIDPRU</td>
+        <td><strong>FCA</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Decision-tree logic</div>
+    If firm = <strong>bank</strong> → GENPRU (PRA).<br>
+    If firm = <strong>MiFID investment firm (not a bank)</strong> → MIFIDPRU (FCA, since 2022).<br>
+    If firm = neither of the above (MiFID-exempt, personal investment firm, etc.) → IPRU-INV (FCA).<br>
+    It is the <strong>catch-all</strong>: "not CRD, not MIFIDPRU → IPRU-INV".
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>IPRU-INV — for which firms</h3>
+
+  <p class="para">
+    IPRU-INV applies to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Authorised professional firms</strong></li>
+    <li>Certain types of securities and futures firms <strong>not directly subject to MiFID</strong></li>
+    <li>Lloyd's underwriting agents and members' advisers</li>
+    <li><strong>Fund managers</strong> — including operators of personal pension schemes and <strong>SIPP operators</strong></li>
+    <li><strong>Exempt CAD firms</strong> or local firms with limited MiFID business or <em>passporting rights</em></li>
+    <li><strong>Service companies</strong></li>
+    <li><strong>Personal investment firms</strong> operating under a MiFID exemption — e.g. <em>financial advisory firms</em></li>
+    <li><strong>Credit unions</strong> providing Junior ISAs</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Practical classification examples</div>
+    <strong>Barclays Bank</strong> — deposit-taker → <em>GENPRU</em> (PRA).<br>
+    <strong>Schroders Investment Management</strong> — MiFID investment firm → <em>MIFIDPRU</em> (FCA).<br>
+    <strong>Small IFA (MiFID exemption)</strong> — personal investment firm → <em>IPRU-INV</em> (FCA).<br>
+    <strong>Lloyd's underwriting agent</strong> → <em>IPRU-INV</em> (FCA).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Activity-dependent IPRU-INV</h3>
+
+  <div class="info-box">
+    <div class="ib-title">IPRU-INV — rules depend on activity</div>
+    The way IPRU-INV applies <strong>depends on the activity</strong> conducted by the firm. Consequently, if the firm's <em>activity changes</em>, this may mean the firm must comply with <strong>different aspects</strong> of IPRU-INV. It is <em>not uniform</em> — each type of firm has prescribed capital adequacy requirements tailored to its activities.
+  </div>
+</div>
+
+<div class="section-card" id="crd">
+  <div class="section-num">4.1.2</div>
+  <h2 class="section-title">CRD + CRR — the framework for banks</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What CRD/CRR is</h3>
+
+  <p class="para">
+    The <strong>Capital Requirements Directive (CRD)</strong> and the <strong>Capital Requirements Regulations (CRR)</strong> apply to <strong>credit institutions</strong> (banks / deposit-taking institutions), managed by the <strong>PRA</strong>. The body of text previously developed while the UK was in the EU was <strong>retained following Brexit</strong>.
+  </p>
+
+  <p class="para">
+    CRD and CRR created a <strong>common framework for financial resources and risk management</strong> — minimising the risk of a firm's financial failure.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Origin — Basel III</div>
+    CRD/CRR implement <strong>Basel III</strong> international standards (Basel Committee on Banking Supervision). After the 2008 crisis these standards were significantly tightened. The UK retained them post-Brexit, but now has the power to diverge from EU interpretation.
+  </div>
+</div>
+
+<div class="section-card" id="pillars">
+  <div class="section-num">4.1.3</div>
+  <h2 class="section-title">3 Pillars of the CRD Framework</h2>
+
+  <p class="para">
+    The CRD framework is based on the concept of <strong>three pillars</strong>:
+  </p>
+
+  <table class="comp-table">
+    <thead><tr><th>Pillar</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Pillar 1</strong></td>
+        <td><strong>Minimum capital requirements</strong> for <em>credit, market, and operational risks</em>. Quantitative — a specific minimum the firm <em>must</em> hold.</td>
+      </tr>
+      <tr>
+        <td><strong>Pillar 2</strong></td>
+        <td>Firms and supervisors <strong>decide whether additional capital should be held</strong> to cover risks <em>not covered</em> in Pillar 1. Qualitative — firm-specific assessment.</td>
+      </tr>
+      <tr>
+        <td><strong>Pillar 3</strong></td>
+        <td><strong>Disclosure of information</strong> about risks, capital, and risk management — to <em>improve market discipline</em>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Reporting requirements</h3>
+
+  <p class="para">
+    Firms are required to <strong>provide detailed reports</strong> to the relevant regulator on capital adequacy provisions. The frequency of reporting depends on:
+  </p>
+
+  <ul class="bullet">
+    <li>The size of the firm</li>
+    <li>Whether it is subject to UK CRD requirements or not</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Immediate notification on breach</div>
+    Additionally — if at any time a firm knows that its <strong>capital resources have fallen below the prescribed minimum</strong>, it <strong>must notify the regulator (PRA) IMMEDIATELY</strong>. No grace period, no waiting, no alternative — notification must be <em>immediate</em>.
+  </div>
+</div>
+
+<div class="section-card" id="tiers">
+  <div class="section-num">4.1.4</div>
+  <h2 class="section-title">Tiers of Capital — quality matters</h2>
+
+  <p class="para">
+    Firms subject to UK CRD requirements must also comply with provisions relating to the <strong>quality of capital held</strong>. A firm must consider the <strong>loss absorbency</strong> of instruments it wishes to use to meet capital resource requirements.
+  </p>
+
+  <p class="para">
+    Capital is broadly split into <strong>three tiers</strong>:
+  </p>
+
+  <table class="comp-table">
+    <thead><tr><th>Tier</th><th>Examples</th><th>Loss absorbency</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="tier-card tier-1">Core Tier 1</span></td>
+        <td><strong>Permanent share capital</strong>, reserves, externally verified interim profits</td>
+        <td><strong>Highest</strong> (absorbs losses first)</td>
+      </tr>
+      <tr>
+        <td><span class="tier-card tier-2">Tier 2</span></td>
+        <td><strong>Long-term subordinated debt</strong>, revaluation reserves</td>
+        <td>Medium</td>
+      </tr>
+      <tr>
+        <td><span class="tier-card tier-3">Tier 3</span></td>
+        <td><strong>Short-term subordinated debt</strong>, interim trading book P&L</td>
+        <td><strong>Lowest</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The logic of tiers</h3>
+
+  <p class="para">
+    <strong>Permanent</strong> instruments (share capital) — <em>first to absorb losses</em> and cannot be withdrawn. <strong>Long-term debt</strong> — medium: maturity far enough away but not permanent. <strong>Short-term debt</strong> — can be paid off quickly, less reliable in stress scenarios.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Exam example — tiers</div>
+    <strong>Permanent share capital</strong> → <span class="tier-card tier-1">Core T1</span> (highest loss absorbency).<br>
+    <strong>Long-term subordinated debt (10 years)</strong> → <span class="tier-card tier-2">T2</span> (medium).<br>
+    <strong>Short-term subordinated debt (2 years)</strong> → <span class="tier-card tier-3">T3</span> (lowest).<br><br>
+    Maturity matters: same instrument type, different maturity → different tier.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Goodwill — deducted, not capital</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Goodwill is not counted as capital</div>
+    Intangibles (goodwill, deferred tax assets) are <em>not counted AS capital</em> — they are <strong>deducted FROM capital</strong>. The logic: goodwill does not generate cash, does not absorb losses in stress.
+  </div>
+</div>
+
+<div class="section-card" id="ifpr">
+  <div class="section-num">4.2</div>
+  <h2 class="section-title">IFPR — Investment Firms Prudential Regime</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>IFPR background</h3>
+
+  <p class="para">
+    The <strong>Investment Firms Prudential Regime (IFPR)</strong> is a new regime for FCA solo-regulated MiFID investment firms. Contained in the <strong>FCA's MIFIDPRU Sourcebook</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Timeline</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Date</th><th>Event</th></tr></thead>
+    <tbody>
+      <tr><td><span class="number-card">2021</span></td><td>The EU's <strong>Investment Firms Directive (IFD)</strong> and <strong>Investment Firms Regulation (IFR)</strong> came into effect in the EU</td></tr>
+      <tr><td><span class="number-card">1 January 2022</span></td><td>UK IFPR came into effect in the <strong>MIFIDPRU Sourcebook</strong> — with <em>UK-specific adjustments</em></td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The philosophical shift — fundamental</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Key paradigm shift</div>
+    <strong>Old approach (CRD):</strong> focused on <em>"risks firms face"</em> — what could happen to the firm?<br>
+    <strong>IFPR (new):</strong> focuses on <em>"harm firms may cause others"</em> — what damage can the firm inflict on consumers and markets?<br><br>
+    This is a radical shift. Before IFPR, a firm with £100M AUM had the same requirements as a firm with £10bn — both applied similar calculations. Under IFPR requirements scale with the <em>potential harm from activities</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Aim of IFPR</h3>
+
+  <p class="para">
+    The aim of IFPR is to <strong>simplify requirements</strong> for FCA solo-regulated MiFID investment firms, refocusing prudential requirements and expectations <em>away from the risks firms face</em> — <em>towards mitigating the potential for harm the firm can pose to consumers and markets</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>IFPR approach</h3>
+
+  <p class="para">
+    The approach under IFPR (as contained in MIFIDPRU):
+  </p>
+
+  <ul class="bullet">
+    <li>Consider the <strong>harm a MiFID investment firm can cause to others</strong>, based on the activities carried out</li>
+    <li>The amount of <strong>capital and liquid assets</strong> held is <em>sufficient</em> for an <strong>orderly wind down</strong></li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Orderly wind down — the concept</div>
+    IFPR is not about preventing firm failure absolutely — it is about ensuring that <em>if</em> a firm fails, it can <strong>wind down in an orderly manner</strong>. This means: enough capital/liquidity so the firm can <em>return client assets, close positions, pay employees</em> and exit the market <em>without</em> disruption to consumers or markets. A "controlled death" rather than chaotic collapse.
+  </div>
+</div>
+
+<div class="section-card" id="overarching">
+  <div class="section-num">4.2.1</div>
+  <h2 class="section-title">2 Overarching Requirements — key obligations</h2>
+
+  <p class="para">
+    Each type of firm has prescribed capital adequacy requirements, and <strong>all firms must comply with 2 overarching requirements</strong>:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.6rem;font-size:.92rem"><strong>Firms must AT ALL TIMES have available the amount and type of financial resources</strong> required by the regulator's rules.</li>
+    <li style="margin-bottom:.6rem;font-size:.92rem"><strong>Firms must notify the relevant regulator IMMEDIATELY</strong> if the firm becomes aware it is in breach or <em>expects to be in breach</em> of the relevant financial resources rule.</li>
+  </ol>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam points</div>
+    <strong>"At all times"</strong> — not quarterly, not yearly, not "after the first year" — <em>continuously</em>.<br>
+    <strong>"Immediately"</strong> — not "within 5 days", not "next quarterly report" — <em>right away</em>.<br>
+    <strong>"Expects to be in breach"</strong> — notification is required even before actual breach, if anticipated.
+  </div>
+</div>
+
+<div class="section-card" id="outcomes">
+  <div class="section-num">4.2.2</div>
+  <h2 class="section-title">4 FCA Outcomes of IFPR</h2>
+
+  <p class="para">
+    The FCA identified the <strong>following outcomes</strong> of IFPR:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.7rem;font-size:.92rem"><strong>A prudential regime aligned to the way investment firms run their business</strong>:
+      <ul style="margin-top:.3rem;margin-bottom:0">
+        <li>Taking into account the <em>different business models</em> of FCA investment firms</li>
+        <li>Better <em>protect consumers and markets</em> from the harm those firms may pose</li>
+      </ul>
+    </li>
+    <li style="margin-bottom:.7rem;font-size:.92rem"><strong>FCA investment firms subject to MEANINGFUL and CONSISTENT prudential requirements</strong></li>
+    <li style="margin-bottom:.7rem;font-size:.92rem"><strong>FCA investment firms spend LESS TIME on complex capital requirement calculations</strong> that <em>do little to help manage risk</em>:
+      <ul style="margin-top:.3rem;margin-bottom:0">
+        <li>Allowing management <em>more time</em> to focus on <em>running the business</em>, while managing and mitigating harm and risk</li>
+      </ul>
+    </li>
+    <li style="margin-bottom:.7rem;font-size:.92rem"><strong>Prudential rules understandable and accessible</strong> — with most rules brought into a <strong>new single prudential sourcebook (MIFIDPRU)</strong></li>
+  </ol>
+
+  <div class="info-box">
+    <div class="ib-title">Before IFPR — fragmentation</div>
+    Before IFPR, prudential rules for MiFID investment firms were <em>scattered across many sourcebooks</em> — GENPRU, BIPRU, IPRU-INV, parts of SYSC. Firms spent huge resources just navigating the rules. IFPR <strong>consolidated</strong> most rules in one place (MIFIDPRU) — outcome 4.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>IFPR vs old regime — an example</h3>
+
+  <div class="example-box">
+    <div class="eb-title">Small boutique advisory firm (£50M AUM)</div>
+    <strong>Old (pre-2022):</strong> applied complex CRD calculations designed for banks. Spending £50K/year on compliance. The calculations gave little insight into <em>actual harm</em> the firm could cause.<br>
+    <strong>IFPR (post-2022):</strong> simplified calculations scaled to activities. Focus on the <em>orderly wind down scenario</em> — how much capital is needed so the firm can return client assets and close shop cleanly. Compliance cost dropped; focus shifted from paperwork to actual risk management.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 4</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">3 Sourcebooks decision tree</div>
+    Bank → <strong style="color:#FEF3C7">GENPRU</strong> (PRA, CRD/CRR, pillars 1-2-3)<br>
+    MiFID firm (not bank) → <strong style="color:#FEF3C7">MIFIDPRU</strong> (FCA, IFPR, from Jan 2022)<br>
+    Everything else → <strong style="color:#FEF3C7">IPRU-INV</strong> (FCA)
+  </div>
+
+  <ul>
+    <li><strong>4.1 Capital Adequacy:</strong> based on <strong>Principle 4</strong> ("firm must maintain adequate financial resources").</li>
+    <li><strong>Financial resources = capital resources + liquidity resources</strong> → meet liabilities as they fall due.</li>
+    <li><strong>Standards differ</strong> by: (1) activities undertaken; (2) whether in scope of MiFID.</li>
+    <li><strong>3 Sourcebooks:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>GENPRU</strong> — UK CRD firms (banks/credit institutions). Managed by <strong>PRA</strong>.</li>
+        <li><strong>MIFIDPRU</strong> — UK MiFID investment firms (not banks). In force from <strong>1 January 2022</strong>. FCA.</li>
+        <li><strong>IPRU-INV</strong> — firms <em>not subject</em> to CRD/CRR or MIFIDPRU. Catch-all. FCA.</li>
+      </ul>
+    </li>
+    <li><strong>IPRU-INV firms:</strong> professional firms / certain securities and futures firms / Lloyd's agents / fund managers + SIPP operators / exempt CAD firms / service companies / personal investment firms (MiFID-exempt, e.g. IFAs) / credit unions with Junior ISAs.</li>
+    <li><strong>IPRU-INV activity-dependent:</strong> if the firm's activity changes — different aspects may apply.</li>
+    <li><strong>CRD/CRR:</strong> applies to banks/deposit-taking institutions. Managed by the PRA. Text <strong>retained post-Brexit</strong>. Common framework — minimise the risk of firm failure.</li>
+    <li><strong>3 Pillars of CRD:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Pillar 1</strong> — minimum capital requirements (credit + market + operational risks)</li>
+        <li><strong>Pillar 2</strong> — firms and supervisors decide additional capital (risks not covered by Pillar 1)</li>
+        <li><strong>Pillar 3</strong> — disclosure (market discipline)</li>
+      </ul>
+    </li>
+    <li><strong>Reporting:</strong> detailed reports to regulator; frequency depends on size + whether UK CRD.</li>
+    <li><strong>IMMEDIATE notification</strong> if capital resources fall below prescribed minimum — to PRA, no grace period.</li>
+    <li><strong>Tiers of Capital (quality / loss absorbency):</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Core T1 (highest):</strong> permanent share capital, reserves, verified interim profits</li>
+        <li><strong>T2 (medium):</strong> long-term subordinated debt, revaluation reserves</li>
+        <li><strong>T3 (lowest):</strong> short-term sub debt, interim trading book P&L</li>
+      </ul>
+    </li>
+    <li><strong>Maturity matters:</strong> long-term sub debt = T2, short-term sub debt = T3.</li>
+    <li><strong>Goodwill and intangibles</strong> — deducted FROM capital, not counted AS capital.</li>
+    <li><strong>4.2 IFPR — the new regime:</strong>
+      <ul style="margin-top:.3rem">
+        <li>EU IFD/IFR — 2021 → UK IFPR in MIFIDPRU — <strong>1 January 2022</strong></li>
+        <li>UK-specific adjustments for the UK market</li>
+        <li><strong>Fundamental shift:</strong> from "risks firms face" → "harm firms may cause" (consumers + markets)</li>
+        <li><strong>Approach:</strong> harm-based + capital for <em>orderly wind down</em></li>
+      </ul>
+    </li>
+    <li><strong>2 Overarching IPRU-INV / IFPR requirements:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) <strong>At all times</strong> have required financial resources</li>
+        <li>(2) <strong>Immediately notify</strong> regulator if in breach or <em>expects breach</em></li>
+      </ul>
+    </li>
+    <li><strong>4 FCA Outcomes of IFPR:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Aligned with business models / protect consumers and markets</li>
+        <li>(2) Meaningful and consistent requirements</li>
+        <li>(3) Less time on complex calculations</li>
+        <li>(4) Understandable and accessible — most rules in a <strong>single MIFIDPRU sourcebook</strong></li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

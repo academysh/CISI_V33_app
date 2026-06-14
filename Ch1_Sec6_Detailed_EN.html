@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1, Section 6 — Regulated and Prohibited Activities</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#4338CA;--primary-l:#E0E7FF;--primary-d:#3730A3;--primary-vd:#1E1B4B;--accent:#7C3AED;--accent-l:#EDE9FE;--accent-d:#5B21B6;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--rose:#BE123C;--rose-l:#FFE4E6;--rose-d:#881337;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--slate-d:#334155;--ink:#0F172A;--muted:#475569;--bg:#F5F3FF;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(67,56,202,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(30,27,75,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--primary-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(67,56,202,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(67,56,202,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:40px 1fr;gap:.55rem;align-items:start;margin-bottom:.4rem;padding:.4rem .55rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.15rem .35rem;font-size:.8rem;min-width:30px;height:26px}
+.p-body{font-size:.87rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 1</div>
+  <div class="app-title">Chapter 1, Section 6 — Detailed Deep Dive</div>
+  <div class="app-sub">Regulated and Prohibited Activities · Syllabus 1.6 + 1.7 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 6 is about <strong>what exactly is regulated in UK financial services</strong>. FSMA sets the general principle — the <em>general prohibition</em> (Section 19) — but does not spell out precisely <em>which activities</em> are regulated and <em>which investments</em>. That is done in a separate statutory instrument — the <strong>Regulated Activities Order (RAO) 2001</strong>. A regulated activity is defined by a three-part test: <strong>(1) specified activity + (2) specified investment + (3) by way of business</strong>. The section also covers <strong>offences, defences, prohibition orders, and actions for damages</strong>. Key exam distinction: <strong>exemption</strong> (you CAN do the regulated activity without authorisation) vs <strong>exclusion</strong> (the activity is not treated as regulated at all). 2-3 exam questions.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s61">6.1 General Prohibition + unenforceability</a></li>
+    <li>→ <a href="#exempt">Exempt Persons — 6 categories</a></li>
+    <li>→ <a href="#s62">6.2 Prohibition Orders (Section 56)</a></li>
+    <li>→ <a href="#damages">Actions for Damages (Sections 71 + 138D)</a></li>
+    <li>→ <a href="#s63">6.3 Regulated Activities — 3-part test</a></li>
+    <li>→ <a href="#investments">Specified Investments (26 types)</a></li>
+    <li>→ <a href="#activities">Specified Activities (19+ types)</a></li>
+    <li>→ <a href="#s65">6.5 Main RAO Exclusions</a></li>
+    <li>→ <a href="#tc">Threshold Conditions</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s61">
+  <div class="section-num">6.1</div>
+  <h2 class="section-title">General Prohibition — Section 19 FSMA</h2>
+
+  <p class="para">
+    FSMA is subdivided into <strong>30 parts</strong>. <strong>Part II (Regulated and Prohibited Activities)</strong> contains the <em>general prohibition</em>:
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">General Prohibition (Section 19 FSMA)</div>
+    <em>"No person may carry on a regulated activity in the UK, or purport to do so, unless they are either <strong>authorised</strong> (by the PRA and/or FCA) or <strong>exempt</strong> from the requirement to be authorised"</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Sanctions for breach</h3>
+
+  <p class="para">Contravention is a <strong>criminal offence</strong>. Maximum sanctions:</p>
+  <ul class="bullet">
+    <li><strong>Up to 2 years' imprisonment</strong></li>
+    <li><strong>Unlimited fine</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Defence</h3>
+
+  <p class="para">
+    It is a defence for a person to show that they took <em>all reasonable precautions and exercised all due diligence</em> to avoid committing the offence. This is a <strong>complete defence</strong>, not mitigation.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Unenforceability of Agreements</h3>
+
+  <p class="para">
+    A further effect — <strong>agreements made are unenforceable</strong> by the offending person <em>against the other party</em>. This also applies to agreements made as a result of the offender's activities — <em>even if the offender is not a party</em>.
+  </p>
+
+  <p class="para">The <strong>other party is entitled to</strong>:</p>
+  <ul class="bullet">
+    <li><strong>Recover any money or property</strong> transferred under the agreement</li>
+    <li>Be <strong>compensated for any loss suffered</strong></li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Textbook example — X, ABC plc, UNA Ltd</div>
+    <strong>X</strong> buys shares in <em>ABC plc</em> following a recommendation from brokers <em>UNA Ltd</em>. X discovers: <strong>UNA is not authorised under FSMA</strong>.<br><br>
+    X has <strong>2 choices</strong>:<br>
+    • Keep the shares, take no action<br>
+    • <strong>Sue UNA for recovery of her money and damages</strong> (handing back the shares)<br><br>
+    Relevant UNA staff have also committed a <strong>criminal act</strong> — up to 2 years prison + unlimited fine.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Part 4A Permission</h3>
+
+  <p class="para">
+    To be authorised, a person must first <strong>apply for permission to perform particular regulated activities</strong>. If the criteria are satisfied — the regulator grants <strong>Part 4A Permission</strong>.
+  </p>
+</div>
+
+<div class="section-card" id="exempt">
+  <div class="section-num">6.1.1</div>
+  <h2 class="section-title">Exempt Persons — 6 categories</h2>
+
+  <p class="para">
+    Various FSMA provisions by which a person can be <strong>exempt from the general prohibition</strong>:
+  </p>
+
+  <table class="comp-table">
+    <thead><tr><th>Provision</th><th>Exempt persons</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Section 39 FSMA</strong> + Appointed Representatives Regs 2001</td><td><strong>Appointed Representatives (ARs)</strong></td></tr>
+      <tr><td><strong>Section 285 FSMA</strong></td><td><strong>RIEs</strong> (Recognised Investment Exchanges) + <strong>RCHs</strong> (Recognised Clearing Houses)</td></tr>
+      <tr><td><strong>Section 312A FSMA</strong></td><td>Operators of <strong>multilateral trading systems</strong> exercising certain rights</td></tr>
+      <tr><td><strong>Section 316 FSMA</strong></td><td>Members of the <strong>Society of Lloyd's</strong></td></tr>
+      <tr><td><strong>FSMA Exemption Order 2001</strong></td><td>Central banks, <strong>supranational bodies</strong>, local authorities, charities, industrial/provident societies, government-overseen orgs</td></tr>
+      <tr><td><strong>Part 20 FSMA</strong></td><td>Special regime for <strong>professional firms</strong> (accountants, solicitors, actuaries) subject to conditions</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <div class="ib-title">Exemption vs Exclusion — critical distinction</div>
+    <strong>Exemption</strong> → person <em>CAN carry on regulated activity</em>, but authorisation is not needed (ARs, RIEs).<br>
+    <strong>Exclusion</strong> → activity <em>falls OUTSIDE the definition of regulated activity</em> entirely (intra-group, newspaper advice).<br><br>
+    Fundamentally different. A frequent exam trap.
+  </div>
+</div>
+
+<div class="section-card" id="s62">
+  <div class="section-num">6.2</div>
+  <h2 class="section-title">Prohibition Orders — Section 56 FSMA</h2>
+
+  <p class="para">
+    Separately from the general prohibition, <strong>Section 56 FSMA</strong> gives regulators the power to make an order <em>prohibiting an individual from performing a specified function</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Grounds</h3>
+
+  <p class="para">
+    Either regulator may do this if it considers the individual <strong>not a fit and proper person</strong>. The order may relate to:
+  </p>
+  <ul class="bullet">
+    <li><strong>A particular regulated activity</strong></li>
+    <li><strong>Regulated activities generally</strong> (industry-wide ban)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Breach of prohibition order</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Breach — criminal offence + fine</div>
+    An individual who <strong>breaches the order</strong> → guilty of a <em>criminal offence</em> + liable to a fine. Defence — show they took <em>all reasonable care and exercised due diligence</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Firm responsibility</h3>
+
+  <p class="para">
+    An <strong>authorised person (firm)</strong> must take <strong>reasonable care to ensure</strong> that individuals for whom they are responsible <em>do not breach prohibition orders</em>.
+  </p>
+
+  <p class="para">
+    Prohibition orders may also be made against <strong>exempt persons</strong> and <strong>exempt professional firms</strong> (Part 20 regime — professional firms undertake regulated activities under <em>supervision of their professional body</em> rather than direct FCA/PRA).
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Variation / revocation</h3>
+
+  <p class="para">
+    A person may <strong>apply to the FCA or PRA</strong> to have an order <em>varied or revoked</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Section 59 — approval requirement</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Section 59 FSMA</div>
+    <em>An authorised person must take reasonable care to ensure</em> that <strong>no person performs a role requiring approval</strong> (SMF under SM&CR + controlled function under APER) unless they have received confirmation of approval.
+  </div>
+</div>
+
+<div class="section-card" id="damages">
+  <div class="section-num">6.2.1</div>
+  <h2 class="section-title">Actions for Damages — Sections 71 + 138D</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Section 71 FSMA — private person sues firm</h3>
+
+  <p class="para">
+    <strong>Section 71</strong> — a <em>private person may sue a firm</em> for damages if they <strong>suffer loss</strong> due to breach of statutory duty, when:
+  </p>
+
+  <ul class="bullet">
+    <li>An individual in the firm carries out a function <em>in breach of a Section 56 prohibition order</em>, OR</li>
+    <li>An individual carries out a <em>controlled function without prior approval</em> (Section 59)</li>
+  </ul>
+
+  <p class="para">
+    Section 71 <strong>also provides</strong> for <em>non-private persons</em> (businesses, trusts) — sue for damages <em>as a consequence of negligence concerning prohibition orders</em>, in prescribed circumstances.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Section 138D FS Act 2012 — breach of rule</h3>
+
+  <p class="para">
+    <strong>Section 138D</strong> — a person suffering losses <em>as a result of a breach of a rule</em> by an authorised person has the <strong>right to claim damages</strong>.
+  </p>
+
+  <p class="para">The person needs to <strong>only show</strong>:</p>
+  <ul class="bullet">
+    <li>The authorised person <strong>breached a rule</strong></li>
+    <li>They <strong>suffered a loss</strong></li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Private right of action</div>
+    Consumers can <em>sue directly in the civil courts</em> — no need to wait for FCA enforcement. A powerful enforcement mechanism for rules.
+  </div>
+</div>
+
+<div class="section-card" id="s63">
+  <div class="section-num">6.3</div>
+  <h2 class="section-title">Regulated Activities — 3-Part Test</h2>
+
+  <p class="para">
+    To know whether someone has breached the general prohibition, you need to know what regulated activities actually are. Defined in the <strong>Regulated Activities Order (RAO) 2001</strong>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">3 conditions for a regulated activity</div>
+    An activity is a regulated activity if:
+    <ol style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>It is an activity of a <strong>specified kind</strong></li>
+      <li>Carried on <strong>by way of business</strong></li>
+      <li>Relates to an <strong>investment of a specified kind</strong></li>
+    </ol>
+    All <strong>3 conditions must be met simultaneously</strong>.
+  </div>
+
+  <p class="para">
+    The RAO defines regulated activities <em>first</em> by reference to <strong>specified investments</strong>, then to activities the firm may carry on <em>in relation to those investments</em>. An activity that is listed but carried out in relation to an asset that is <em>not a specified investment</em> is <strong>not a regulated activity</strong>.
+  </p>
+</div>
+
+<div class="section-card" id="investments">
+  <div class="section-num">6.3.1</div>
+  <h2 class="section-title">Specified Investments — 26 types in RAO</h2>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Deposits</span> — money paid from one person to another, repayable when a specified event occurs. Exclusions: e-money, prepayments for goods/services, security deposits.</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Electronic money</span> — monetary value stored on an electronic device, issued on receipt of funds, accepted as payment by third parties.</div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Rights under contracts of insurance</span> — long-term (life assurance, endowment) + general (motor, buildings). FCA guidance in the <em>PERG Sourcebook</em>.</div></div>
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Shares</span> — shares/stock in any company (wherever incorporated) or unincorporated body formed outside the UK. Exclusions: <em>OEIC shares</em> (separate CIS definition), some building society shares (captured as deposits).</div></div>
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Instruments creating or acknowledging indebtedness</span> — debentures, loan stock, bonds, certificates of deposit.</div></div>
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Government and public securities</span> — gilts, local authority bonds, similar issued by Government/public bodies.</div></div>
+  <div class="p-item"><div class="p-num">7</div><div class="p-body"><span class="p-title">Instruments giving entitlements to investments</span> — warrants, rights to subscribe for shares/debentures.</div></div>
+  <div class="p-item"><div class="p-num">8</div><div class="p-body"><span class="p-title">Certificates representing certain securities</span> — depository receipts (ADRs, GDRs).</div></div>
+  <div class="p-item"><div class="p-num">9</div><div class="p-body"><span class="p-title">Units in CIS</span> — Collective Investment Schemes (OEICs, unit trusts).</div></div>
+  <div class="p-item"><div class="p-num">10</div><div class="p-body"><span class="p-title">Rights under stakeholder pension scheme</span></div></div>
+  <div class="p-item"><div class="p-num">11</div><div class="p-body"><span class="p-title">Rights under personal pension scheme</span></div></div>
+  <div class="p-item"><div class="p-num">12</div><div class="p-body"><span class="p-title">Options</span> — calls and puts.</div></div>
+  <div class="p-item"><div class="p-num">13</div><div class="p-body"><span class="p-title">Futures</span> — contracts for sale/purchase at a future date.</div></div>
+  <div class="p-item"><div class="p-num">14</div><div class="p-body"><span class="p-title">CFDs (Contracts for Differences)</span> — including spread bets.</div></div>
+  <div class="p-item"><div class="p-num">15</div><div class="p-body"><span class="p-title">Lloyd's syndicate capacity and membership</span></div></div>
+  <div class="p-item"><div class="p-num">16</div><div class="p-body"><span class="p-title">Funeral plan contracts</span> — pre-paid funeral arrangements.</div></div>
+  <div class="p-item"><div class="p-num">17</div><div class="p-body"><span class="p-title">Regulated mortgage contracts</span> — residential mortgages.</div></div>
+  <div class="p-item"><div class="p-num">18</div><div class="p-body"><span class="p-title">Regulated home reversion, home purchase, home finance plans</span></div></div>
+  <div class="p-item"><div class="p-num">19</div><div class="p-body"><span class="p-title">Credit agreements</span> — covered by CCA 1974 and FCA regulation.</div></div>
+  <div class="p-item"><div class="p-num">20</div><div class="p-body"><span class="p-title">Consumer hire agreements</span></div></div>
+  <div class="p-item"><div class="p-num">21</div><div class="p-body"><span class="p-title">Agreements for provision of credit information services</span></div></div>
+  <div class="p-item"><div class="p-num">22</div><div class="p-body"><span class="p-title">P2P agreements</span> — peer-to-peer lending platforms.</div></div>
+  <div class="p-item"><div class="p-num">23</div><div class="p-body"><span class="p-title">Claims management services</span></div></div>
+  <div class="p-item"><div class="p-num">24</div><div class="p-body"><span class="p-title">Rights under pension benefits</span></div></div>
+  <div class="p-item"><div class="p-num">25</div><div class="p-body"><span class="p-title">Rights to, or interests in, other specified investments</span> — rights in anything that is a specified investment (excluding home finance).</div></div>
+  <div class="p-item"><div class="p-num">26</div><div class="p-body"><span class="p-title">Emission allowances</span> — EU ETS / UK ETS carbon credits.</div></div>
+
+  <div class="warn-box">
+    <div class="wb-title">NOT specified investments — common exam questions</div>
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Premium bonds (NS&I)</strong> — not an investment in the RAO sense</li>
+      <li><strong>Government trade bills</strong></li>
+      <li><strong>Security deposits</strong></li>
+      <li><strong>Physical gold bullion</strong> (but gold derivatives — yes)</li>
+      <li><strong>Residential property for personal use</strong></li>
+      <li><strong>Antiques / collectibles</strong></li>
+      <li><strong>Money paid in advance</strong> for goods/services</li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-card" id="activities">
+  <div class="section-num">6.3.2</div>
+  <h2 class="section-title">Specified Activities (19+)</h2>
+
+  <p class="para">The regulated activities themselves (non-exhaustive):</p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Accepting deposits</span> — mainly banks and building societies.</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Issuing e-money</span></div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Effecting or carrying out contracts of insurance as principal</span> — applies to insurers.</div></div>
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Insurance risk transformation</span> — assuming risk from a third party via an insurance contract.</div></div>
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Dealing in investments as principal</span> — on own account. Applies to securities (shares, debentures, warrants) + contractually-based investments (options, futures, CFDs, life policies).</div></div>
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Dealing in investments as agent</span> — on behalf of others.</div></div>
+  <div class="p-item"><div class="p-num">7</div><div class="p-body"><span class="p-title">Arranging deals in investments</span></div></div>
+  <div class="p-item"><div class="p-num">8</div><div class="p-body"><span class="p-title">Managing investments</span></div></div>
+  <div class="p-item"><div class="p-num">9</div><div class="p-body"><span class="p-title">Safeguarding and administering investments</span> — custody.</div></div>
+  <div class="p-item"><div class="p-num">10</div><div class="p-body"><span class="p-title">Sending dematerialised instructions</span> — CREST operations.</div></div>
+  <div class="p-item"><div class="p-num">11</div><div class="p-body"><span class="p-title">Establishing, operating, or winding up a CIS</span></div></div>
+  <div class="p-item"><div class="p-num">12</div><div class="p-body"><span class="p-title">Managing UCITS / AIFs</span></div></div>
+  <div class="p-item"><div class="p-num">13</div><div class="p-body"><span class="p-title">Establishing, operating, or winding up pension schemes</span></div></div>
+  <div class="p-item"><div class="p-num">14</div><div class="p-body"><span class="p-title">Advising on investments</span> — including P2P, pension transfers, opt-outs.</div></div>
+  <div class="p-item"><div class="p-num">15</div><div class="p-body"><span class="p-title">Regulated mortgage contracts</span> — entering into, administering, arranging, advising.</div></div>
+  <div class="p-item"><div class="p-num">16</div><div class="p-body"><span class="p-title">Insurance distribution</span> — mediation activities.</div></div>
+  <div class="p-item"><div class="p-num">17</div><div class="p-body"><span class="p-title">Debt counselling, debt collecting, debt administration, debt adjusting</span></div></div>
+  <div class="p-item"><div class="p-num">18</div><div class="p-body"><span class="p-title">Operating electronic system in relation to lending (P2P)</span></div></div>
+  <div class="p-item"><div class="p-num">19</div><div class="p-body"><span class="p-title">Funeral plan contracts</span> — entering into, carrying out.</div></div>
+
+  <div class="example-box">
+    <div class="eb-title">NOT specified activities</div>
+    • Providing <em>general economic information</em> to the public<br>
+    • <em>Journalism</em> about markets (subject to newspaper exclusion)<br>
+    • <em>Teaching</em> finance/economics<br>
+    • Running a <em>research database</em> (not personalised advice)
+  </div>
+</div>
+
+<div class="section-card" id="s65">
+  <div class="section-num">6.5</div>
+  <h2 class="section-title">Main RAO Exclusions</h2>
+
+  <p class="para">
+    A significant number of exclusions are provided in FSMA — those carrying on regulated activities falling entirely within an exclusion <em>can conduct the activity without applying for authorisation</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(1) Absence of Holding Out</h3>
+
+  <p class="para">
+    <strong>Dealing in investments as principal</strong> is a regulated activity. Persons dealing for themselves in the hope of making profits must be authorised/exempt. However, the <em>activity is restricted to persons holding themselves out</em> as market makers and <strong>regularly soliciting the public</strong> to induce dealing.
+  </p>
+
+  <p class="para">The exclusion applies if the counterparty is NOT:</p>
+  <ul class="bullet">
+    <li>An authorised person</li>
+    <li>An exempt person</li>
+    <li>An overseas person</li>
+    <li>An incoming electronic commerce provider</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(2) Groups and Joint Enterprises</h3>
+
+  <p class="para">
+    Firms undertaking <strong>intra-group dealing</strong> or <em>joint enterprise relationships</em> benefit from the exclusion of the following activities:
+  </p>
+  <ul class="bullet">
+    <li>Dealing in investments as principal / agent</li>
+    <li>Arranging deals in investments</li>
+    <li>Managing investments</li>
+    <li>Safeguarding and administering investments</li>
+    <li>Sending dematerialised instructions</li>
+    <li>Advising on investments</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Intra-group example</div>
+    A parent holding company moves assets between subsidiary companies. There is <strong>no</strong> third party. This is <em>not a regulated activity</em> under the exclusion — even though technically it looks like "managing investments".
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(3) Advice in Newspapers</h3>
+
+  <p class="para">
+    A particular exclusion for <strong>advice in writing or other legible form</strong>, contained in:
+  </p>
+  <ul class="bullet">
+    <li>A newspaper</li>
+    <li>A journal, magazine, periodical publication</li>
+    <li>A service of <em>regularly updated news or information</em></li>
+  </ul>
+
+  <p class="para">
+    The existence of money/city pages <strong>does not make the principal purpose</strong> of the paper anything other than the <em>provision of news</em> — authorisation is not required.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Exception — tip-sheets</div>
+    If the <strong>principal purpose of the publication is the provision of investment advice</strong>, with a view to encouraging investors to undertake investment activity, <em>authorisation IS required</em>. This is the case for periodicals that <em>tip certain investments</em> and are often sold <strong>on a subscription basis</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(4) Trustees, Nominees, Personal Representatives</h3>
+
+  <p class="para">Exclusion if the person carrying on the regulated activity is:</p>
+  <ul class="bullet">
+    <li><strong>Acting as representative of another party</strong></li>
+    <li><strong>Not generally holding themselves out</strong> as carrying on regulated activities</li>
+    <li><strong>Not receiving additional remuneration</strong> for providing the services</li>
+  </ul>
+
+  <p class="para">Applies to:</p>
+  <ul class="bullet">
+    <li>Dealing in investments as principal</li>
+    <li>Arranging deals / making arrangements</li>
+    <li>Other ancillary activities</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(5) Employee Share Schemes</h3>
+
+  <p class="para">
+    An employer setting up an <strong>employee share scheme</strong> for its own employees (SAYE, SIP, etc.) <em>does not carry on a regulated activity</em> in respect of the scheme.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(6) Overseas Persons</h3>
+
+  <p class="para">
+    An <strong>overseas person</strong> (no permanent establishment in the UK) dealing <em>with</em> or <em>through</em> UK-authorised persons <strong>does not carry on a regulated activity</strong> in the UK.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Overseas persons example</div>
+    A US broker-dealer with no UK office accepts orders from a UK-authorised agent (e.g. Barclays UK). Under the overseas persons exclusion, the US broker <em>does not need UK authorisation</em> — the deal flows through the UK-authorised intermediary.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Part 20 Professional Firm restrictions</h3>
+
+  <p class="para">
+    Part 20 FSMA enables professional firms (accountants, solicitors, actuaries) to undertake certain regulated activities <em>under the supervision of their professional body</em> rather than direct FCA authorisation. However:
+  </p>
+
+  <ul class="bullet">
+    <li>Must <em>return commissions</em> from product providers to the client</li>
+    <li><strong>Certain activities are prohibited</strong>:
+      <ul style="margin-top:.2rem">
+        <li>Accepting deposits</li>
+        <li>Dealing in investments as principal (market maker)</li>
+        <li>Lending / administering home finance (except as trustee/personal rep)</li>
+        <li>Establishing / operating / winding up a CIS or stakeholder/personal pension scheme</li>
+        <li>Managing Lloyd's syndicate underwriting capacity</li>
+        <li>Effecting / carrying out contracts of insurance (including Lloyd's)</li>
+        <li>Providing funeral plan contracts</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+<div class="section-card" id="tc">
+  <div class="section-num">6.6</div>
+  <h2 class="section-title">Threshold Conditions (TC) — Minimum Standards</h2>
+
+  <p class="para">
+    <strong>Threshold Conditions (TCs)</strong> are the <em>minimum standards expected</em> of authorised persons — being authorised and remaining authorised. The <strong>FSMA (Threshold Conditions) Order 2013</strong> changed and redistributed responsibility between the FCA and PRA. Some FCA TCs apply to all firms, including dual-regulated.
+  </p>
+
+  <p class="para">
+    The latest TCs were issued in <strong>August 2023</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA assessments</h3>
+
+  <ul class="bullet">
+    <li><strong>Dual-regulated firms:</strong> FCA assesses only <em>conduct issues</em>; PRA — <em>prudential</em></li>
+    <li><strong>Solo-regulated firms:</strong> FCA assesses <em>BOTH</em> conduct and prudential</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Business Model Threshold Condition</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Business Model TC</div>
+    The FCA expects firms to demonstrate an <strong>appropriate, viable, and sustainable business model</strong>, given the nature and scale of business activity they intend to carry out. It requires:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Adequate contingency planning</strong></li>
+      <li>How the business model <em>meets the needs of clients/customers</em> — not placing them at undue risk</li>
+      <li>Not placing at risk the <em>integrity of the wider financial system</em> (financial crime)</li>
+      <li>Clear information — how the firm can evidence meeting the condition</li>
+    </ul>
+  </div>
+
+  <p class="para">
+    The FCA has stated it will <strong>recommend refusal at an early stage</strong> if satisfied that a firm does not (or will not continue to) meet the minimum threshold standards. This acts as a <em>catch-all provision</em> + a good fall-back.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>PRA Additional Conditions</h3>
+
+  <p class="para">
+    Firms must meet <strong>BOTH PRA- and FCA-specific threshold conditions</strong>. PRA-specific TCs apply to <em>banks, building societies, credit unions, designated investment firms</em> that are regulated by the PRA for prudential purposes.
+  </p>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 6</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">3-part test for regulated activity</div>
+    (1) <strong style="color:#FEF3C7">Specified activity</strong> +<br>
+    (2) <strong style="color:#FEF3C7">Specified investment</strong> +<br>
+    (3) <strong style="color:#FEF3C7">By way of business</strong><br>
+    = Regulated activity → need authorisation OR exemption
+  </div>
+
+  <ul>
+    <li><strong>6.1 General Prohibition (Section 19 FSMA):</strong> no person carries on a regulated activity in the UK unless authorised or exempt. <strong>Criminal offence</strong> — up to <strong>2 years prison + unlimited fine</strong>.</li>
+    <li><strong>Defence:</strong> reasonable precautions + due diligence (complete defence).</li>
+    <li><strong>Unenforceability:</strong> agreements by an unauthorised firm are <strong>unenforceable by the offender</strong>. The other party recovers money/property + compensation.</li>
+    <li><strong>Part 4A Permission</strong> — application to PRA/FCA for authorisation.</li>
+    <li><strong>6 Exempt Person categories:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Section 39 — <strong>ARs</strong></li>
+        <li>Section 285 — <strong>RIEs + RCHs</strong></li>
+        <li>Section 312A — MTFs</li>
+        <li>Section 316 — Lloyd's members</li>
+        <li>FSMA Exemption Order 2001 — central banks, supranational, local authorities, charities</li>
+        <li>Part 20 — <strong>professional firms</strong> (accountants, solicitors, actuaries)</li>
+      </ul>
+    </li>
+    <li><strong>Exemption vs Exclusion:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Exemption</strong> = activity IS regulated, but the person does not need authorisation</li>
+        <li><strong>Exclusion</strong> = activity falls OUTSIDE the definition of regulated activity</li>
+      </ul>
+    </li>
+    <li><strong>6.2 Prohibition Orders (Section 56):</strong> FCA/PRA may prohibit an individual (if not fit and proper) from performing a specified function. Breach = criminal offence + fine. Also applies to exempt persons and Part 20 firms. Section 59 — firms must ensure only approved persons perform SMFs.</li>
+    <li><strong>Actions for Damages:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Section 71 FSMA</strong> — sue the firm if breach of statutory duty (prohibition order / Section 59)</li>
+        <li><strong>Section 138D FS Act 2012</strong> — right to claim damages for <em>breach of rule</em> (just show breach + loss)</li>
+      </ul>
+    </li>
+    <li><strong>6.3 Regulated Activities:</strong> defined in <strong>RAO 2001</strong>. 3 conditions simultaneously: specified activity + specified investment + by way of business.</li>
+    <li><strong>26 Specified Investments:</strong> deposits, e-money, insurance contracts, shares, debentures, government securities, warrants, CIS units, pension rights, options, futures, CFDs, Lloyd's capacity, funeral plans, mortgages, P2P, claims management, emission allowances, etc.</li>
+    <li><strong>NOT specified:</strong> premium bonds (NS&I), government trade bills, security deposits, physical gold, residential property (personal use), antiques.</li>
+    <li><strong>19+ Specified Activities:</strong> accepting deposits / e-money / insurance / dealing (principal/agent) / arranging / managing / safeguarding (custody) / CREST / CIS / UCITS/AIFs / pension schemes / advising / mortgages / insurance distribution / debt counselling+collecting+administration / P2P operation.</li>
+    <li><strong>6.5 Main RAO Exclusions (6):</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) <strong>Absence of holding out</strong> — dealing own account without public solicitation</li>
+        <li>(2) <strong>Groups and joint enterprises</strong> — intra-group transactions</li>
+        <li>(3) <strong>Advice in newspapers</strong> — if the principal purpose = news (NOT tip-sheets)</li>
+        <li>(4) <strong>Trustees, nominees, personal representatives</strong> — representative capacity, no holding out, no additional remuneration</li>
+        <li>(5) <strong>Employee share schemes</strong> — employer for own employees</li>
+        <li>(6) <strong>Overseas persons</strong> — dealing through UK-authorised intermediaries</li>
+      </ul>
+    </li>
+    <li><strong>Part 20 Professional Firms</strong> — accountants/solicitors/actuaries under the supervision of their professional body. Must return commissions. Certain activities prohibited (deposits, market making, CIS, insurance, pensions, funeral plans).</li>
+    <li><strong>6.6 Threshold Conditions (TC):</strong> minimum standards — latest <strong>August 2023</strong>. Dual-regulated: FCA=conduct, PRA=prudential. Solo: FCA=both. <strong>Business Model TC</strong> — appropriate, viable, sustainable model + contingency planning.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

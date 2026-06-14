@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3, Section 3 — Market Manipulation</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#9F1239;--primary-l:#FEE2E2;--primary-d:#7F1028;--primary-vd:#4C0519;--accent:#D97706;--accent-l:#FEF3C7;--accent-d:#92400E;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#FEF2F2;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(159,18,57,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(76,5,25,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#FEE2E2;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(159,18,57,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 3</div>
+  <div class="app-title">Chapter 3, Section 3 — Detailed Deep Dive</div>
+  <div class="app-sub">Market Manipulation · Syllabus 3.3 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    The second "half" of market abuse (after insider dealing) is <strong>market manipulation</strong>. UK MAR states that a <em>person shall not engage in or attempt to engage in</em> market manipulation. There are <strong>4 forms</strong>: (1) manipulating transactions, (2) manipulating devices, (3) dissemination, (4) benchmark manipulation. The section also covers <em>legitimate behaviour</em>, <em>accepted market practices (AMPs)</em>, the obligations of <strong>PDMRs</strong>, and the rules on <strong>investment recommendations</strong>. 2-3 exam questions, often scenarios asking which form of manipulation applies.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s31">3.1 General Prohibition + 4 forms</a></li>
+    <li>→ <a href="#s32">3.2 Legitimate behaviour + AMPs + PDMRs</a></li>
+    <li>→ <a href="#s33">3.3 Investment Recommendations</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s31">
+  <div class="section-num">3.1</div>
+  <h2 class="section-title">General Prohibition + 4 forms of manipulation</h2>
+
+  <p class="para">
+    UK MAR states that a <strong>person shall not engage or attempt to engage</strong> in market manipulation. Market manipulation can cause <em>distortion of financial markets</em>, users may get a <strong>misleading impression</strong>, and it undermines <em>investor trust</em>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Attempts also prohibited</div>
+    UK MAR explicitly prohibits <em>both engaging in AND attempting to engage in</em> manipulation. <strong>Even unsuccessful attempts</strong> constitute a violation.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>4 forms of market manipulation</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Manipulating Transactions</span> — behaviour consisting of effecting transactions / orders <em>not for legitimate reasons</em> + <em>not in conformity with accepted practices</em>, which <strong>give a false or misleading impression</strong> of supply/demand/price of the qualifying investment, OR <strong>secure the price at an abnormal/artificial level</strong>. Examples: "wash trades", "spoofing", pump-and-dump through real orders.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Manipulating Devices</span> — effecting transactions / orders <em>using fictitious devices</em> or <strong>any other form of deception / contrivance</strong>. Examples: fake news + coordinated trading, using multiple accounts to imitate genuine activity.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Dissemination</span> — <em>dissemination of information by any means</em>, giving a <strong>false or misleading impression</strong> of a qualifying investment, by a <em>person who knew, or could reasonably be expected to have known</em>, the info was <strong>false / misleading</strong>. This is <em>"particularly harmful"</em> — investors make decisions on the basis of incorrect/distorted information.</div></div>
+
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Benchmark Manipulation</span> — <em>transmitting false/misleading inputs</em> in relation to a benchmark, where the person <em>knew or ought to have known</em> the input was false/misleading, OR any other behaviour manipulating the calculation of a benchmark. Classic: LIBOR / FX fix scandals of the 2010s.</div></div>
+
+  <div class="example-box">
+    <div class="eb-title">Scenario — identify the form</div>
+    • Trader <em>buys shares across multiple personal accounts</em>, creating a false impression of demand → <strong>Manipulating transactions</strong><br>
+    • Algo bot posts <em>layered orders</em> cancelled before execution → <strong>Manipulating devices</strong> (spoofing)<br>
+    • Journalist <em>publishes a fake story</em> about a takeover → <strong>Dissemination</strong><br>
+    • LIBOR submitter <em>submits a rate benefiting own bank's trading position</em> → <strong>Benchmark manipulation</strong>
+  </div>
+</div>
+
+<div class="section-card" id="s32">
+  <div class="section-num">3.2</div>
+  <h2 class="section-title">Legitimate Behaviour + AMPs + PDMRs</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Legitimate Behaviour</h3>
+
+  <p class="para">
+    <strong>Legitimate behaviour</strong> in relation to market manipulation — <em>actions/transactions carried out for valid commercial reasons</em>, in line with <em>accepted market practices</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Accepted Market Practices (AMPs)</h3>
+
+  <div class="info-box">
+    <div class="ib-title">AMPs — FCA criteria</div>
+    The FCA may <em>accept practices</em> as legitimate. Criteria for establishing an AMP:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Transparency of the practice</li>
+      <li>Effect on market liquidity / efficiency</li>
+      <li>Interaction with the market mechanism</li>
+      <li>Risk to <em>integrity of directly/indirectly-related markets</em></li>
+      <li>Outcome of the FCA's investigation of past practice</li>
+      <li>Structural characteristics of the relevant market</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>PDMRs — Persons Discharging Managerial Responsibilities</h3>
+
+  <div class="info-box">
+    <div class="ib-title">PDMR — definition</div>
+    <strong>PDMRs</strong> are members of the issuer's <em>administrative, management or supervisory bodies</em> (e.g. directors) + <strong>senior executives</strong> with <em>regular access to inside information</em> + power to make <em>managerial decisions</em> affecting future developments.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>PDMR obligations</h3>
+
+  <ul class="bullet">
+    <li>Notify issuer + FCA of <em>transactions in the issuer's instruments</em>, <strong>within 3 business days</strong></li>
+    <li>Applies to transactions <strong>≥ €5,000 per year</strong> (aggregate)</li>
+    <li>Same rules apply to <em>closely associated persons</em> (spouse, dependent children, controlled entities)</li>
+    <li><strong>Closed periods</strong> — <em>NO trading</em> in the issuer's instruments during the <strong>30 calendar days BEFORE announcement</strong> of the interim / annual financial report</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Closed period exceptions</div>
+    Trading during the closed period <em>may be permitted</em> in <strong>exceptional circumstances</strong>:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><em>Severe financial need</em> requiring immediate realisation of funds</li>
+      <li>Employee share schemes <strong>with no change in beneficial ownership</strong></li>
+    </ul>
+    Never "whenever approved by the FCA". There is no €10k threshold.
+  </div>
+</div>
+
+<div class="section-card" id="s33">
+  <div class="section-num">3.3</div>
+  <h2 class="section-title">Investment Recommendations</h2>
+
+  <p class="para">
+    <strong>Investment recommendations</strong> — <em>research notes, reports, recommendations</em> produced by firms for clients or general distribution. UK MAR sets <em>specific obligations</em> so that recommendations are <strong>fair, objective, clearly presented</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Key requirements</h3>
+
+  <ul class="bullet">
+    <li><strong>Identity of the producer</strong> must be clear (individual + firm)</li>
+    <li><strong>All substantially material sources</strong> — clearly/prominently indicated</li>
+    <li><strong>Facts clearly distinguished</strong> from <em>interpretations, estimates, opinions, and other non-factual information</em></li>
+    <li>Projections, valuations, price targets — clearly labelled <em>as such</em>, with material assumptions</li>
+    <li><strong>Previous recommendations (12 months)</strong> — if the new one differs from a previous one, <em>indicate the change + the date of the previous recommendation</em></li>
+    <li>Any <strong>conflicts of interest</strong> — disclosed (firm holds a position, proprietary trading, received compensation from the issuer)</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Conflict disclosure example</div>
+    A firm holds a <em>large long position</em> in an instrument and publishes a <strong>"buy" recommendation</strong>. That is a <em>conflict</em>. The firm <strong>must disclose it</strong> — readers should understand the recommendation <em>may be biased</em> by the firm's own exposure.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 3</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">4 forms of market manipulation</div>
+    (1) <strong style="color:#FEF3C7">Manipulating transactions</strong> — fake orders/trades, not legitimate<br>
+    (2) <strong style="color:#FEF3C7">Manipulating devices</strong> — fictitious devices, deception<br>
+    (3) <strong style="color:#FEF3C7">Dissemination</strong> — spreading false info (especially harmful)<br>
+    (4) <strong style="color:#FEF3C7">Benchmark manipulation</strong> — false inputs (LIBOR-type)
+  </div>
+
+  <ul>
+    <li><strong>3.1 General prohibition:</strong> UK MAR prohibits engaging AND attempting to engage in market manipulation.</li>
+    <li><strong>4 forms:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Manipulating transactions — not legitimate + false impression of supply/demand/price OR price at abnormal level</li>
+        <li>(2) Manipulating devices — fictitious devices, deception, contrivance</li>
+        <li>(3) Dissemination — spreading false info (knew or should have known) — "particularly harmful"</li>
+        <li>(4) Benchmark manipulation — false inputs to a benchmark</li>
+      </ul>
+    </li>
+    <li><strong>3.2 Legitimate behaviour:</strong> valid commercial reasons + accepted market practices. FCA criteria for AMPs — transparency, effect on liquidity, risk to market integrity.</li>
+    <li><strong>PDMRs:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Directors + senior executives with regular access to inside info</li>
+        <li>Notify issuer + FCA <strong>within 3 business days</strong></li>
+        <li>Threshold: <strong>≥ €5,000</strong> aggregate transactions per year</li>
+        <li>Rules apply to <em>closely associated persons</em></li>
+        <li><strong>Closed period: 30 calendar days BEFORE</strong> financial reports</li>
+        <li>Exceptions: severe financial need + employee share schemes with no change in beneficial ownership</li>
+      </ul>
+    </li>
+    <li><strong>3.3 Investment recommendations:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Identity of producer clear</li>
+        <li>Material sources — clearly indicated</li>
+        <li>Facts distinguished from opinions</li>
+        <li>Projections — labelled with material assumptions</li>
+        <li>Previous recommendations (12 months) — if differs, indicate change + date</li>
+        <li>Conflicts of interest — disclosed</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

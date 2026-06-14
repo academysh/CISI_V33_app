@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 3 — Accepting Clients: Detailed Deep Dive</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;
+  --teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;
+  --amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;
+  --coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;
+  --purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --green-l:#E1F5EE;--green:#085041;
+  --gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;
+  --bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09);
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 ";}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ ";}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 ";}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.tag-in{background:var(--green-l);color:var(--green);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-out{background:var(--coral-l);color:var(--coral);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-partial{background:var(--amber-l);color:var(--amber-d);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+.protection-scale{display:flex;gap:.5rem;margin:1rem 0;align-items:stretch}
+.prot-box{flex:1;padding:.9rem .7rem;border-radius:10px;text-align:center;color:#fff;position:relative}
+.prot-retail{background:linear-gradient(135deg,#1D9E75,#085041)}
+.prot-prof{background:linear-gradient(135deg,#B07D12,#7C5A0A)}
+.prot-ecp{background:linear-gradient(135deg,#993C1D,#6B2A14)}
+.prot-label{font-size:.75rem;font-weight:600;opacity:.85;margin-bottom:.2rem}
+.prot-name{font-size:.9rem;font-weight:700;margin-bottom:.3rem}
+.prot-desc{font-size:.72rem;opacity:.9;line-height:1.4}
+.prot-arrow{display:flex;justify-content:center;align-items:center;font-size:.75rem;color:var(--text2);margin:.3rem 0 .7rem;letter-spacing:.08em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 3 — Detailed Deep Dive</div>
+  <div class="app-sub">Accepting Clients · Client Categorisation · Syllabus 2.3 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<!-- INTRODUCTION -->
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    This is one of the most content-packed sections in the chapter — and one of the most important on the exam (expect 3-5 questions). It governs how a firm must "label" its clients — <strong>retail</strong>, <strong>professional</strong>, or <strong>eligible counterparty (ECP)</strong>. The category determines the level of protection the client receives: from maximum (retail) to minimum (ECP). The section is very "numerical" — you need to memorise many thresholds in euros and pounds.
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#intro">Why client categorisation exists</a></li>
+    <li>→ <a href="#s31">3.1 Application of categorisation rules</a></li>
+    <li>→ <a href="#categories">3.1.2 The three client categories</a></li>
+    <li>→ <a href="#perse">3.1.2 (pt. 2) Per se professional clients — in detail</a></li>
+    <li>→ <a href="#ecp">3.1.2 (pt. 3) Eligible Counterparties — in detail</a></li>
+    <li>→ <a href="#s32">3.2 Agents — the "agent as client" rules</a></li>
+    <li>→ <a href="#s33">3.3 Recategorisation — moving between categories</a></li>
+    <li>→ <a href="#local">3.3 (pt. 2) Local authorities — special regime</a></li>
+    <li>→ <a href="#higher">3.3.1 Recategorisation to higher protection</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<!-- BIG INTRODUCTION -->
+<div class="section-card" id="intro">
+  <div class="section-num">INTRODUCTION</div>
+  <h2 class="section-title">Why client categorisation exists at all</h2>
+
+  <p class="para">
+    The core idea of UK financial services regulation is to <strong>protect those who need protecting</strong>. An ordinary pensioner putting their savings into shares and a Dutch pension fund with €100bn under management need entirely different levels of protection. The pensioner needs to be shielded from everything: unsuitable products, aggressive promotions, hidden fees. The pension fund knows the market better than many brokers.
+  </p>
+
+  <p class="para">
+    That is why the FCA (following MiFID) divides all clients into three categories with different levels of protection.
+  </p>
+
+  <div class="protection-scale">
+    <div class="prot-box prot-retail">
+      <div class="prot-label">MORE PROTECTION</div>
+      <div class="prot-name">Retail Client</div>
+      <div class="prot-desc">Maximum protection: full COBS rules, FOS, FSCS, suitability, appropriateness</div>
+    </div>
+    <div class="prot-box prot-prof">
+      <div class="prot-label">MEDIUM LEVEL</div>
+      <div class="prot-name">Professional Client</div>
+      <div class="prot-desc">Core rules apply, but fewer protective requirements</div>
+    </div>
+    <div class="prot-box prot-ecp">
+      <div class="prot-label">LESS PROTECTION</div>
+      <div class="prot-name">Eligible Counterparty (ECP)</div>
+      <div class="prot-desc">Minimum protection: many COBS rules disapplied (see Section 1)</div>
+    </div>
+  </div>
+
+  <div class="prot-arrow">◄ — — — MORE PROTECTION · LESS PROTECTION — — — ►</div>
+
+  <div class="info-box">
+    <div class="ib-title">The key categorisation principle</div>
+    "<strong>Any client is a retail client unless they meet the criteria of a professional investor or eligible counterparty</strong>." This is a favourite exam question phrased as "what is the overriding principle". Retail is the <em>default</em>, <em>residual</em> category. When in doubt — treat as retail.
+  </div>
+
+  <p class="para">
+    When a client is classified <strong>correctly</strong>, everyone is happy: ECPs get fast service without unnecessary paperwork, retail clients get the full protection package. When classified <strong>incorrectly</strong> (e.g. a retail client "upgraded" to professional just to sell them a complex product), this can be a serious FCA breach.
+  </p>
+</div>
+
+<!-- 3.1 -->
+<div class="section-card" id="s31">
+  <div class="section-num">3.1</div>
+  <h2 class="section-title">When categorisation is required</h2>
+
+  <p class="para">
+    A firm must categorise its clients <strong>if it carries on designated investment business</strong>. In other words: a pure deposit-taking bank — no categorisation needed. Any kind of investment business — yes.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>MiFID vs Non-MiFID — two parallel systems</h3>
+
+  <p class="para">
+    MiFID laid down the categorisation rules for <strong>MiFID business</strong>. For <strong>non-MiFID business</strong>, the FCA adopted the same terminology (retail / professional / ECP) but modified the criteria in some places. The result is <strong>two parallel systems</strong> with identical terminology but different thresholds.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">The mixed-business rule</div>
+    If a firm provides <strong>both</strong> MiFID and non-MiFID services to the same client — it must use the <strong>MiFID categorisation</strong>, unless the MiFID business is conducted <em>separately</em>. The logic: the stricter system applies by default to avoid confusion.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Mixed-business example</div>
+    An adviser simultaneously advises a client on:<br>
+    1. Buying units in a UCITS fund (MiFID service)<br>
+    2. A life insurance policy (NOT MiFID)<br><br>
+    <strong>Result:</strong> must use MiFID categorisation for both services. If the insurance business were done in a separate subsidiary, by a separate team, under a separate contract — then non-MiFID categorisation could be used for the insurance.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3.1.1 Definition of a Client</h3>
+
+  <p class="para">
+    COBS defines a "<strong>client</strong>" as <em>a person to whom a firm provides, intends to provide, or has provided a service</em> in the course of regulated activity. For MiFID business, it also includes any <em>ancillary service</em>.
+  </p>
+
+  <p class="para">
+    <strong>Very important:</strong> the definition is not limited to those with signed contracts. It covers:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Potential clients</strong> — people the firm is in discussions with but hasn't started working with yet.</li>
+    <li><strong>Persons acting as agents</strong> for another (default rule: the agent is the client, see 3.2).</li>
+    <li><strong>For financial promotion rules</strong> — any persons the firm communicates with, whether or not they are actually clients.</li>
+    <li><strong>Clients of an appointed representative (AR)</strong> or tied agent — also treated as clients of the principal firm.</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Example of the broad client definition</div>
+    Brokerage firm "BrokerCorp" sends a marketing email about a new ETF product to a database of 10,000 potential clients. None of them are currently BrokerCorp clients — no contracts. But for <strong>financial promotion rules</strong> purposes, all 10,000 people are "clients" — and the full protective machinery (fair, clear, not misleading) applies to them.
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">The term "Customer" — umbrella term but not complete</div>
+    The FCA Handbook uses the term <strong>"customer"</strong> (do not confuse with "client"!). It covers retail + professional. <strong>ECPs are not included in "customer".</strong> Some rules are written for "customers" (i.e. apply to retail and professional), others for all "clients" (including ECPs).
+  </div>
+</div>
+
+<!-- 3.1.2 -->
+<div class="section-card" id="categories">
+  <div class="section-num">3.1.2</div>
+  <h2 class="section-title">The three client categories — overview</h2>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Protection level</th>
+        <th>Typical examples</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Retail Client</strong></td>
+        <td><span class="tag-in">Maximum</span></td>
+        <td>Individual, small business, anyone not professional and not ECP</td>
+      </tr>
+      <tr>
+        <td><strong>Professional Client</strong> (per se or elective)</td>
+        <td><span class="tag-partial">Medium</span></td>
+        <td>Banks, investment firms, pension funds, large companies</td>
+      </tr>
+      <tr>
+        <td><strong>Eligible Counterparty (ECP)</strong> (per se or elective)</td>
+        <td><span class="tag-out">Minimum</span></td>
+        <td>Banks, central banks, governments, regulated institutional players (but NOT large undertakings)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box">
+    <div class="wb-title">Key logic of sub-categories</div>
+    Both professional and ECP have two sub-categories:<br>
+    <strong>Per se</strong> = "by definition", "automatic", based on the nature of the client itself (e.g. a bank is <em>already</em> a professional simply because it is a bank).<br>
+    <strong>Elective</strong> = "by choice", "on request", when a client <em>asks</em> for a lower level of protection and passes the required tests.
+  </div>
+</div>
+
+<!-- PER SE PROFESSIONAL -->
+<div class="section-card" id="perse">
+  <div class="section-num">3.1.2 pt. 2</div>
+  <h2 class="section-title">Per se Professional Clients — in detail</h2>
+
+  <p class="para">
+    These are clients who are professional "by definition", without having to prove anything. The COBS list is exhaustive.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Group 1: Regulated financial institutions</h3>
+
+  <ul class="bullet">
+    <li>Credit institution (a bank)</li>
+    <li>Investment firm</li>
+    <li>Any other authorised / regulated financial institution</li>
+    <li>Insurance company</li>
+    <li>CIS or management company of such a scheme (collective investment scheme)</li>
+    <li>Pension fund or management company of a pension fund</li>
+    <li>Commodity or commodity derivatives dealer</li>
+    <li>Any other institutional investor</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Group 2: Large Undertakings — a key exam topic</h3>
+
+  <p class="para">
+    These are companies which are <em>large and sophisticated enough</em> to count as professional without being a financial institution. But the rules are different for MiFID and non-MiFID business.
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>For MiFID business</th>
+        <th>For Non-MiFID business</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Meets <strong>any 2 of 3</strong>:<br>
+          • Balance sheet ≥ <span class="number-card">€20m</span><br>
+          • Net turnover ≥ <span class="number-card">€40m</span><br>
+          • Own funds ≥ <span class="number-card">€2m</span>
+        </td>
+        <td>
+          Alternative tests (any one):<br>
+          <strong>Option A:</strong> Called-up share capital or net assets ≥ <span class="number-card">£5m</span> (now or in the past 2 years)<br><br>
+          <strong>Option B:</strong> Any 2 of 3:<br>
+          • Balance sheet ≥ <span class="number-card">€12.5m</span><br>
+          • Net turnover ≥ <span class="number-card">€25m</span><br>
+          • <span class="number-card">250 employees</span> on average during the year
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — don't mix up the numbers!</div>
+    <strong>MiFID:</strong> €20M / €40M / €2M (in euros, any 2 of 3).<br>
+    <strong>Non-MiFID alternative 1:</strong> £5M share capital / net assets (in pounds).<br>
+    <strong>Non-MiFID alternative 2:</strong> €12.5M / €25M / 250 employees.<br>
+    These are among the most frequent numerical exam questions.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Special cases for Non-MiFID</h3>
+
+  <ul class="bullet">
+    <li><strong>Partnership or unincorporated association:</strong> net assets ≥ £5m (now or in past 2 years). For limited partnerships — calculated without deducting loans from partners.</li>
+    <li><strong>Trustee of a trust</strong> (other than pension): assets ≥ £10m (now or in past 2 years).</li>
+    <li><strong>Trustee of a pension scheme</strong> (occupational, SSAS, personal, stakeholder): <span class="number-card">≥ 50 members</span> <strong>AND</strong> assets under management ≥ <span class="number-card">£10m</span> (now or in past 2 years).</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Pension trust — BOTH conditions must be met</div>
+    <strong>50 members + £10m assets.</strong> Not "or" — "AND". A trust with 60 members and £5M assets is NOT per se professional. A trust with 40 members and £20M assets is also NOT per se professional.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Group 3: Government bodies</h3>
+
+  <ul class="bullet">
+    <li>National / regional governments</li>
+    <li>Certain public bodies</li>
+    <li>Central banks</li>
+    <li>International / supranational institutions (World Bank, ECB, IMF, etc.)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Group 4: Institutional investors</h3>
+
+  <p class="para">
+    Institutional investors whose main business is investment in financial instruments.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example — a small UK company</div>
+    A small UK company with net assets of £200,000 approaches an investment firm for equity investment advice. How should it be classified?<br><br>
+    <strong>Answer:</strong> Retail. It does NOT meet the MiFID large undertaking thresholds (€20M/€40M/€2M), and does NOT meet the non-MiFID £5M test. Companies are not automatically professional just because they are companies — they have to pass the tests. If they don't pass — retail by default.
+  </div>
+</div>
+
+<!-- ECP -->
+<div class="section-card" id="ecp">
+  <div class="section-num">3.1.2 pt. 3</div>
+  <h2 class="section-title">Eligible Counterparties (ECP) — in detail</h2>
+
+  <p class="para">
+    ECP is the highest category, with the lowest level of protection. The ECP list is <strong>very similar to the per se professional list</strong>, but with one <strong>key difference</strong>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">KEY DIFFERENCE: ECP vs Per se Professional</div>
+    <strong>ECP = per se professional MINUS large undertakings.</strong><br><br>
+    That is, a large company that passed the tests to become per se professional <strong>does NOT automatically become an ECP</strong>. It remains professional. This is a much-loved exam question.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Full list of per se ECPs</h3>
+
+  <ul class="bullet">
+    <li>Credit institution</li>
+    <li>Investment firm</li>
+    <li>Another financial institution authorised / regulated under UK or EEA-state law (including regulated institutions in banking, insurance, and securities sectors)</li>
+    <li>Insurance company</li>
+    <li>CIS authorised under the UCITS Directive, or its management company</li>
+    <li>Pension fund or its management company</li>
+    <li>National government or its corresponding office (including the public-debt body)</li>
+    <li>Supranational organisation</li>
+    <li>Central bank</li>
+    <li>Undertaking exempted from MiFID under Article 2(1)(k) (certain own-account commodity/commodity-derivatives dealers) or Article 2(1)(l) (locals)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>ECP status applies only to specific services</h3>
+
+  <p class="para">
+    <strong>Very important:</strong> ECP status only applies when the firm is providing the client with a narrow set of services:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Dealing on own account</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Execution of orders on behalf of clients</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Reception and transmission of orders</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Ancillary services</strong> directly related to the above</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Arranging</strong> in relation to business which is not MiFID or equivalent third country business</li>
+  </ol>
+
+  <p class="para">
+    If an ECP wants <strong>investment advice</strong> or <strong>portfolio management</strong> — they must be classified <strong>as per se professional</strong> for those services. ECP status does not extend to them.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example: insurance company wants advice</div>
+    Insurance company "InsuranceCo" is classified as an ECP. It approaches a brokerage firm for investment advice on portfolio diversification. How should it be classified for this service?<br><br>
+    <strong>Answer:</strong> Per se professional, not ECP. Because investment advice is not on the list of ECP-eligible services. The company is still a professional — it cannot suddenly be dropped to retail. But the full protective package for professionals applies (including suitability).
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">Why some ECPs want more protection</div>
+    Some clients who would be per se ECPs may <em>prefer</em> a higher level of protection and ask to be treated as professionals. This is called <strong>recategorisation to a higher level of protection</strong>, see 3.3.1.
+  </div>
+</div>
+
+<!-- 3.2 AGENTS -->
+<div class="section-card" id="s32">
+  <div class="section-num">3.2</div>
+  <h2 class="section-title">Agents — the "agent as client" rules</h2>
+
+  <p class="para">
+    What happens if person A approaches a firm but is acting as an agent for person B? Who is the firm's client — A or B?
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">The default rule and its exceptions</div>
+    DEFAULT:<br>
+    Person A (the agent) → served by the firm<br>
+    Firm knows A is acting for B<br>
+    <strong>A is treated as the firm's client</strong> (the agent)<br><br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    EXCEPTIONS (B becomes the client):<br>
+    ① Firm and A have <strong>agreed in writing</strong><br>
+    &nbsp;&nbsp;&nbsp;to treat B as the client.<br>
+    ② A's involvement is <strong>mainly designed</strong><br>
+    &nbsp;&nbsp;&nbsp;<strong>to reduce the firm's duties</strong> towards B<br>
+    &nbsp;&nbsp;&nbsp;→ B is still the client.
+  </div>
+
+  <p class="para">
+    <strong>Default rule:</strong> if the firm knows that A is acting as agent for B, <strong>A is treated as the firm's client</strong>.
+  </p>
+
+  <p class="para">
+    <strong>Exception 1:</strong> the firm may <strong>agree in writing</strong> with A that B will be treated as the client instead. This is permitted.
+  </p>
+
+  <p class="para">
+    <strong>Exception 2 (anti-avoidance):</strong> if A's involvement in the arrangement is mainly designed to <em>reduce the firm's duties towards B</em> — then B is still the client regardless. This protects against schemes where unscrupulous firms use agents as a "screen" to avoid their duties to the ultimate beneficiary.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example: family office as agent</div>
+    Family office "FamilyOffice Ltd" manages funds for the Smith family and approaches a broker to execute trades. Under the default rule, the broker's client is FamilyOffice (the agent). But they may agree in writing that the Smith family itself will be the client — then the broker owes its duties directly to the Smiths, not through an intermediate link.
+  </div>
+</div>
+
+<!-- 3.3 RECATEGORISATION -->
+<div class="section-card" id="s33">
+  <div class="section-num">3.3</div>
+  <h2 class="section-title">Recategorising Clients — to a lower level of protection</h2>
+
+  <p class="para">
+    Section 3.3 governs the situation where a retail client wants to become professional, or a professional wants to become ECP. This is <strong>reducing the protection level</strong>, so the FCA sets strict conditions.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Elective Professional Clients — from retail to professional</h3>
+
+  <p class="para">
+    A retail client may become an "elective professional" if they pass:
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">Two tests for elective professional</div>
+    ┌─────────────────────────────────────────┐<br>
+    │  TEST 1: QUALITATIVE                    │<br>
+    │  Firm assesses the client's expertise,  │<br>
+    │  experience, knowledge and believes     │<br>
+    │  they can make their own investment     │<br>
+    │  decisions and understand the risks     │<br>
+    │  → REQUIRED for both MiFID and          │<br>
+    │    non-MiFID business                    │<br>
+    └─────────────────────────────────────────┘<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+&nbsp;(MiFID only)<br>
+    ┌─────────────────────────────────────────┐<br>
+    │  TEST 2: QUANTITATIVE                   │<br>
+    │  Any 2 of 3:                            │<br>
+    │  • 10+ significant transactions/quarter │<br>
+    │    over past 4 quarters                 │<br>
+    │  • Portfolio > €500,000                 │<br>
+    │    (cash + financial instruments)       │<br>
+    │  • ≥ 1 year in financial sector         │<br>
+    │    in a relevant role                   │<br>
+    └─────────────────────────────────────────┘
+  </div>
+
+  <div class="exam-box">
+    <div class="xb-title">A very important nuance</div>
+    <strong>For MiFID business</strong> → BOTH tests are needed (qualitative + quantitative).<br>
+    <strong>For non-MiFID business</strong> → ONLY the qualitative test is needed.<br>
+    Quantitative thresholds (10 trades, €500K, 1 year experience) apply only to MiFID.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">MiFID example: Maria</div>
+    Maria wants to become an elective professional for MiFID services. Her details: 12 trades per quarter over the past year, €300K portfolio, 3 years as a compliance officer at a bank.<br><br>
+    <strong>Quantitative test:</strong><br>
+    • 12 > 10 trades → ✓ PASS<br>
+    • €300K < €500K → ✗ FAIL<br>
+    • 3 years at a bank → ✓ PASS<br>
+    Total 2 of 3 → <strong>PASS</strong>. If the firm also confirms the qualitative test — Maria becomes an elective professional.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">MiFID example: James</div>
+    James wants to become an elective professional. His details: €600K portfolio, 2 years as an analyst, but only 3 trades per quarter.<br><br>
+    <strong>Quantitative test:</strong><br>
+    • 3 < 10 trades → ✗ FAIL<br>
+    • €600K > €500K → ✓ PASS<br>
+    • 2 years as analyst → ✓ PASS<br>
+    2 of 3 → <strong>PASS</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The written procedure — three steps</h3>
+
+  <p class="para">
+    Even when the client passes the tests, the reclassification procedure is strictly formal:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>The client writes to the firm:</strong> requesting reclassification, specifying the services/products the reclassification should apply to.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>The firm responds with a written warning:</strong> clearly setting out what protections the client will lose.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>The client confirms in a separate written document:</strong> that they understand the consequences of losing those protections.</li>
+  </ol>
+
+  <div class="warn-box">
+    <div class="wb-title">What a retail client loses by becoming elective professional</div>
+    The client loses the following protections:
+    <ul class="bullet" style="margin-top:.4rem">
+      <li>Communications rules (fair, clear, not misleading)</li>
+      <li>Information about the firm, its services, and remuneration</li>
+      <li>Suitability assessment</li>
+      <li>Appropriateness (for non-advised services)</li>
+      <li>Dealing / carrying out orders — best execution rules apply in a limited way</li>
+      <li>Reporting information to clients</li>
+      <li>Remuneration and incentivisation of staff rules</li>
+      <li>Client reporting</li>
+      <li><strong>Investor compensation (FOS and FSCS)</strong> — critically important</li>
+      <li>Exclusion of liability (limits on firm's liability)</li>
+      <li>Share Trading Obligation</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The client's duty to keep the firm updated</h3>
+
+  <p class="para">
+    After becoming an elective professional, the client <strong>is obliged to inform the firm</strong> of any changes in their circumstances that may affect their categorisation. If the firm becomes aware that the client no longer meets the conditions, it must take action. If that means moving the client back to retail, the firm must notify them of the new categorisation.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Elective Eligible Counterparties — from professional to ECP</h3>
+
+  <p class="para">
+    A professional client may become an "elective ECP" if:
+  </p>
+
+  <ul class="bullet">
+    <li>It is an <strong>undertaking</strong> (an organisation, not a natural person)</li>
+    <li>It is a <strong>per se professional client</strong> (but NOT one who is only professional because they are an institutional investor)</li>
+    <li>It <strong>requests</strong> ECP treatment</li>
+  </ul>
+</div>
+
+<!-- LOCAL AUTHORITIES -->
+<div class="section-card" id="local">
+  <div class="section-num">3.3 pt. 2</div>
+  <h2 class="section-title">Local Authorities — special regime post-MiFID II</h2>
+
+  <p class="para">
+    Another very important exam topic. MiFID II introduced extra protection for <strong>local authorities</strong> and municipalities, because in the past they lost huge sums on complex derivative products they didn't understand (see the famous Hammersmith & Fulham case in the 1990s, for instance).
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Key MiFID II change</div>
+    <strong>Local authorities are RETAIL CLIENTS by default.</strong><br>
+    Previously they could be professional. Now — only retail. They can be moved to elective professional, <strong>but with tougher thresholds</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Special tests for local authorities</h3>
+
+  <p class="para">
+    The qualitative test is the same as for ordinary retail clients (adequate assessment of expertise/experience/knowledge).
+  </p>
+
+  <p class="para">The quantitative test for a local authority is special:</p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Ordinary retail (MiFID)</th>
+        <th>Local authority (MiFID)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Portfolio > <span class="number-card">€500,000</span></td>
+        <td>Portfolio > <span class="number-card">£10,000,000</span> (in pounds, not euros!)</td>
+      </tr>
+      <tr>
+        <td colspan="2" style="padding:.5rem 1rem;background:var(--gray-l) !important;font-weight:600">PLUS one of the following:</td>
+      </tr>
+      <tr>
+        <td>Any 2 of 3 criteria</td>
+        <td>
+          Any 1 of 3:<br>
+          (a) 10+ trades per quarter over past 4 quarters<br>
+          (b) Person authorised to carry out transactions on behalf of the authority has ≥1 year in the financial sector in a professional role<br>
+          (c) <strong>Authority is an administering authority of the LGPS</strong> (Local Government Pension Scheme)
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — don't confuse the thresholds</div>
+    <strong>Ordinary retail:</strong> €500,000 and 2 of 3.<br>
+    <strong>Local authority:</strong> £10,000,000 (!) and 1 of 3 (including the special LGPS route).<br>
+    The local authority threshold is in pounds and over 20x higher in value.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example: local authority with LGPS role</div>
+    A local authority with a £12m portfolio, also serving as the administering authority of the LGPS, wants to become an elective professional.<br><br>
+    <strong>Check:</strong><br>
+    • Portfolio £12M > £10M → ✓ PASS<br>
+    • LGPS administering authority → ✓ PASS (one of three alternatives)<br>
+    → Quantitative test passed. Plus the qualitative test (adequate assessment of competence) is required — and then reclassification is possible.
+  </div>
+</div>
+
+<!-- HIGHER PROTECTION -->
+<div class="section-card" id="higher">
+  <div class="section-num">3.3.1</div>
+  <h2 class="section-title">Recategorising to a Higher Level of Protection</h2>
+
+  <p class="para">
+    The other direction: a professional wanting to become retail, or an ECP wanting to become professional/retail. This is <strong>increasing protection</strong>, so the procedure is simpler.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who may request it</h3>
+
+  <ul class="bullet">
+    <li><strong>Professional clients</strong> may request to be treated as <strong>retail</strong>.</li>
+    <li><strong>ECPs</strong> may request to be treated as <strong>professional</strong> or <strong>retail</strong>.</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Firm's own initiative</h3>
+
+  <p class="para">
+    The firm may <strong>on its own initiative</strong> (or at the same time as a client's request):
+  </p>
+
+  <ul class="bullet">
+    <li>Treat per se professional clients as retail clients</li>
+    <li>Treat per se ECPs as professional or retail clients</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Different categorisations for different instruments</h3>
+
+  <p class="para">
+    A firm may classify a client <strong>differently for different financial instruments</strong>. Recategorisation can be:
+  </p>
+
+  <ul class="bullet">
+    <li>On a <strong>general basis</strong> (for the whole portfolio)</li>
+    <li>On <strong>more specific terms</strong> — for example, for one specific transaction only</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Practical note</div>
+    In practice, most firms <strong>classify a client once</strong> for all financial instruments. Different categorisations for different instruments are theoretically possible, but they create <strong>complex internal procedures</strong> and risk of errors. Simpler to have one category.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Notification obligations</h3>
+
+  <p class="para">
+    New clients must be notified of their categorisation <strong>BEFORE services are provided</strong>. The firm must also advise of:
+  </p>
+
+  <ul class="bullet">
+    <li>The client's right to request a different categorisation</li>
+    <li>Any limits on protections resulting from the current classification</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Record-keeping</h3>
+
+  <p class="para">
+    The firm must:
+  </p>
+
+  <ul class="bullet">
+    <li>Have <strong>written internal policies</strong> on categorisation</li>
+    <li><strong>Record each notice and agreement</strong> on categorisation</li>
+    <li>Retain the records for the <strong>relevant period after ceasing business</strong> with the client</li>
+  </ul>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 3</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Key numbers for the exam</div>
+    <strong style="color:#FEF3C7">MiFID large undertaking:</strong> €20M / €40M / €2M (2 of 3)<br>
+    <strong style="color:#FEF3C7">Non-MiFID large undertaking:</strong> £5M share cap/net assets<br>
+    <strong style="color:#FEF3C7">Non-MiFID alt. 2-of-3:</strong> €12.5M / €25M / 250 employees<br>
+    <strong style="color:#FEF3C7">Trust (non-pension):</strong> £10M assets<br>
+    <strong style="color:#FEF3C7">Pension trust:</strong> 50 members + £10M assets<br>
+    <strong style="color:#FEF3C7">Elective professional (MiFID):</strong> 10 trades / €500K portfolio / 1 year experience (2 of 3)<br>
+    <strong style="color:#FEF3C7">Local authority:</strong> £10M + 1 of 3 (including LGPS)
+  </div>
+
+  <ul>
+    <li><strong>3 categories:</strong> Retail (max protection) / Professional (per se or elective, medium protection) / ECP (per se or elective, min protection).</li>
+    <li><strong>Categorisation required</strong> for designated investment business. For mixed MiFID+non-MiFID — MiFID rules apply.</li>
+    <li><strong>Retail = default.</strong> Any client is retail unless professional or ECP.</li>
+    <li><strong>"Customer"</strong> (FCA Handbook term) = retail + professional. ECPs NOT included.</li>
+    <li><strong>Per se professional:</strong> regulated financial institutions + large undertakings (by tests) + governments/central banks + institutional investors.</li>
+    <li><strong>ECP = per se professional MINUS large undertakings.</strong> Key exam distinction.</li>
+    <li><strong>ECP status applies only to:</strong> dealing on own account + execution + reception/transmission + related ancillary services + arranging (non-MiFID). For advice and portfolio management — classify as professional.</li>
+    <li><strong>Conflicts of interest (SYSC 10) always apply</strong>, even for ECPs.</li>
+    <li><strong>Agents (3.2):</strong> default — agent is client. Exceptions: written agreement + anti-avoidance rule.</li>
+    <li><strong>Elective professional (MiFID):</strong> qualitative + quantitative tests (2 of 3). Non-MiFID: qualitative only.</li>
+    <li><strong>Elective professional procedure = 3 written steps:</strong> (1) client request, (2) firm warning, (3) client's separate written confirmation.</li>
+    <li><strong>Local authorities post-MiFID II:</strong> retail by default. Elective professional only with £10M portfolio + 1 of 3 (including LGPS administering authority).</li>
+    <li><strong>Higher protection level:</strong> simpler procedure, firm can initiate. May be general basis or per-transaction.</li>
+    <li><strong>Notifications:</strong> new clients BEFORE services + advise of right to recategorise + limits on protections.</li>
+    <li><strong>Records:</strong> written policies + record all notices + retain after ceasing business.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

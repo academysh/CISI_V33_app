@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 9 — Conflicts of Interest</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;--teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;--amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;--coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;--purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;--green-l:#E1F5EE;--green:#085041;--gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;--bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;--radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 9 — Detailed Deep Dive</div>
+  <div class="app-sub">Conflicts of Interest · Syllabus 2.13 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 9 governs one of the most sensitive aspects of a financial firm's work — <strong>conflicts of interest</strong>. When a firm simultaneously manages client investments, gives them advice, trades on its own account, and provides corporate finance services, its interests inevitably diverge from those of its clients. The rules (SYSC and COBS) require the firm to <em>identify</em>, <em>prevent</em> and <em>manage</em> such conflicts. Particular attention is paid to investment research — here the potential for abuse is enormous. On the exam — 4-6 questions, often based on scenarios.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s91">9.1 The Principles and Rules on Conflicts</a></li>
+    <li>→ <a href="#types">5 types of conflicts + information barriers</a></li>
+    <li>→ <a href="#s92">9.2 Disclosing Conflicts — a last resort</a></li>
+    <li>→ <a href="#s93">9.3 Conflicts of Interest Policy — contents</a></li>
+    <li>→ <a href="#s94">9.4 Investment Research and Recommendations</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s91">
+  <div class="section-num">9.1</div>
+  <h2 class="section-title">The Principles and Rules on Conflicts — Principle 8 and SYSC</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Principle 8 — the high-level principle</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Principle 8 — Conflicts of Interest</div>
+    <em>"A firm must manage conflicts of interest fairly, both between itself and its customers and between a customer and another client."</em>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Detailed rules in SYSC</h3>
+
+  <p class="para">
+    The detailed rules on conflicts of interest are specified in <strong>SYSC (Systems and Controls)</strong>. They apply to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Common platform firms</strong> in respect of regulated business and ancillary services representing MiFID business</li>
+    <li><strong>Non-MiFID firms and business</strong></li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — where exactly the rules sit</div>
+    The principle — <strong>PRIN (Principle 8)</strong>. Detailed rules — <strong>SYSC</strong>. Note: NOT in COBS (which contains rules on disclosure and client behaviour). Confusing PRIN / SYSC / COBS / MAR is a common exam trap.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Two categories of relationship where conflicts arise</h3>
+
+  <p class="para">
+    Firms must take all appropriate steps to <strong>identify, prevent and/or manage</strong> conflicts of interest between:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem">The <strong>firm (including its managers, employees, appointed representatives/tied agents and parties connected by way of control) and a client</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">One client of the firm and <strong>another client</strong></li>
+  </ol>
+
+  <div class="schema">
+    <div class="schema-title">Two axes of conflict</div>
+    <strong>AXIS 1: Firm v Client</strong><br>
+    Firm's interests (incl. its staff, ARs, related parties)<br>
+    ↕<br>
+    Client's interests<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong>AXIS 2: Client v Client</strong><br>
+    Interests of one firm's client<br>
+    ↕<br>
+    Interests of another firm's client
+  </div>
+</div>
+
+<div class="section-card" id="types">
+  <div class="section-num">9.1.1</div>
+  <h2 class="section-title">5 types of conflicts + information barriers</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>5 types of conflicts that may arise</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Realising a financial gain, or avoiding a financial loss, at the expense of a client</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Having an interest in the outcome of a service or transaction that is distinct from the client's interest</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Having an incentive to favour one client over others</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Carrying on the same business as the client</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Receiving inducements from someone other than the client, which are over and above the standard commission or fee</strong>.</li>
+  </ol>
+
+  <div class="example-box">
+    <div class="eb-title">Examples of each type</div>
+    <strong>(1) Financial gain at expense:</strong> the firm sells a client a product from its own inventory at an inflated price.<br>
+    <strong>(2) Distinct interest:</strong> the broker recommends an IPO to help its corporate finance unit place the issue.<br>
+    <strong>(3) Favour one client:</strong> a fund manager gives better allocations to a large institutional client at the expense of retail.<br>
+    <strong>(4) Same business as client:</strong> the firm's proprietary trading competes with a hedge fund client for the same alpha signals.<br>
+    <strong>(5) Third-party inducement:</strong> an IFA gets higher commissions from one provider and recommends that provider's products preferentially.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Firm's management duties</h3>
+
+  <p class="para">
+    Firms must:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Maintain and operate effective organisational and administrative arrangements</strong>, designed to prevent conflicts of interest from adversely affecting clients</li>
+    <li>For those producing externally facing investment research, have <strong>appropriate information systems and controls</strong>, plus <strong>barriers</strong> to stop the flow of information from research activities to the rest of the business</li>
+    <li><strong>Prepare, maintain and implement an effective conflicts policy</strong></li>
+    <li><strong>Provide retail clients and potential retail clients</strong> with a description of the conflicts of interest policy</li>
+    <li>Keep <strong>records</strong> of those activities where a conflict arose</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Information barriers (Chinese walls)</h3>
+
+  <p class="para">
+    One type of organisational measure is <strong>information barriers</strong> (sometimes called "Chinese walls"). This is the arrangement under which information held by an employee in one part of the business is <em>withheld from</em> (or, if not possible — at least <em>not used by</em>) people in another part of the business.
+  </p>
+
+  <p class="para">
+    If the firm establishes and maintains an information barrier, it must:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Withhold or not use</strong> the information held</li>
+    <li>For that purpose, <strong>permit its employees in one part</strong> to withhold information from those in another part — but only to the extent that at least one of those parts is <strong>carrying on regulated activities or another activity connected with a regulated activity</strong></li>
+  </ul>
+
+  <p class="para">
+    The requirement to <strong>maintain information barriers</strong> includes taking reasonable steps to ensure the arrangements remain effective and adequately monitored.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Classic information barrier example</div>
+    An investment bank has a <strong>corporate finance</strong> unit (working on an M&A deal for company X) and an <strong>equity research</strong> unit (writing investment recommendations on the same X's shares).<br><br>
+    <strong>Information barrier ("Chinese wall")</strong>: corporate finance cannot pass knowledge of the pending deal to the research team. Research writes its report based solely on <em>public information</em>, regardless of what corporate finance knows.<br><br>
+    <strong>Purpose:</strong> prevent the leakage of material non-public information into published research and the corresponding market abuse. The inability to pass this knowledge to clients is <em>not considered</em> a failure of duty.
+  </div>
+</div>
+
+<div class="section-card" id="s92">
+  <div class="section-num">9.2</div>
+  <h2 class="section-title">Disclosing Conflicts — disclosure as a last resort</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>When disclosure is required</h3>
+
+  <p class="para">
+    When the arrangements the firm puts in place to prevent or manage potential conflicts are <strong>NOT sufficient</strong> to ensure, with reasonable confidence, that the risk of damage to the client's interests will be prevented, the firm must <strong>clearly disclose</strong> the general nature and/or source of the conflicts of interest to the client <strong>BEFORE undertaking business</strong> for / on behalf of the client.
+  </p>
+
+  <p class="para">
+    Thus, disclosure of a conflict of interest should only be undertaken as a <strong>LAST RESORT</strong> — if the firm's internal controls (preventing and/or managing conflicts) will not satisfy the risk of material damage to the client's best interests.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Key philosophy — disclosure ≠ solution</div>
+    Disclosure is the <em>last</em> tool, not the first. The preferred approach is to <strong>prevent</strong> or <strong>manage</strong> the conflict through organisational arrangements. Only if this is not possible — disclose and let the client decide whether to continue.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 requirements for disclosure</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem">Must be made in a <strong>durable medium</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Include <strong>sufficient detail</strong>, taking into account the nature of the client</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Enable the client to <strong>take an informed decision</strong> in respect of the service in the context of which the conflict arises</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Disclosure does not exempt the firm from managing</h3>
+
+  <p class="para">
+    <strong>Disclosure of conflicts of interest does NOT exempt firms</strong> from the obligation to maintain and operate effective organisational and administrative arrangements under <strong>SYSC 10.1.3</strong>.
+  </p>
+
+  <p class="para">
+    Although disclosure of specific conflicts is required under <strong>SYSC 10.1.8</strong>, <strong>over-reliance on disclosure</strong> without adequate consideration of how conflicts can appropriately be managed is <strong>not permitted</strong>.
+  </p>
+
+  <div class="exam-box">
+    <div class="xb-title">Common misconception</div>
+    Many think: "I disclosed the conflict — so I'm clean." This is NOT so. Disclosure is a last resort. The firm must still maintain effective organisational arrangements. You cannot just publish a standard disclaimer and carry on as if nothing happened.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example of proper application</div>
+    The firm has a conflict: the portfolio manager owns shares in Company X, which the firm is now recommending to clients. The firm tries to manage — forbids the PM from personally trading in X. If the management arrangements work — no disclosure to the client is needed. But if the fund manager continues to hold a personal stake and standard procedures are insufficient — the firm <strong>must disclose</strong> to clients in a durable medium with sufficient detail <em>before</em> making recommendations.
+  </div>
+</div>
+
+<div class="section-card" id="s93">
+  <div class="section-num">9.3</div>
+  <h2 class="section-title">Conflicts of Interest Policies — contents</h2>
+
+  <p class="para">
+    Firms are required to have in place <strong>effective arrangements</strong> for preventing and managing conflicts of interest. Specifically, the rules require a <strong>written conflicts of interest policy</strong>, appropriate to the scale and nature of the business.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Group firms</h3>
+
+  <p class="para">
+    If the firm is a member of a larger group, the policy must take into account <strong>potential conflicts arising from the structure and/or business activities of other members of that group</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Two mandatory policy components</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Component</th><th>What it includes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Circumstances</strong></td>
+        <td>
+          Circumstances that may give rise to a conflict. Particular attention to circumstances where a person <strong>performs two or more roles</strong>, e.g.:<br>
+          • Investment research and advice<br>
+          • Proprietary trading<br>
+          • Portfolio management<br>
+          • Corporate finance business
+        </td>
+      </tr>
+      <tr>
+        <td><strong>2. Processes/Procedures</strong></td>
+        <td>
+          Processes and procedures for preventing and/or managing such conflicts
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>5 conflict management procedures</h3>
+
+  <p class="para">
+    Procedures must cover:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Control of information</strong> to prevent the exchange of information that may harm the interests of one or more clients</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Separate supervision</strong> of persons engaged in activities for different clients whose interests may conflict with each other or with the firm's interests</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Removal of direct link</strong> between the remuneration of individuals whose activities may give rise to conflicts</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Measures to prevent or limit</strong> one person exercising inappropriate influence over another</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Measures to control</strong> an individual's involvement in a series of activities that may give rise to a conflict</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Special rules for corporate finance firms</h3>
+
+  <p class="para">
+    For corporate finance firms managing an offering of securities, the policy must have particular regard to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Offering process</strong> — for example, whether the firm might place securities with its investment clients or with its own proprietary book</li>
+    <li>Must include <strong>specific detail on arrangements for allocation and pricing</strong></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s94">
+  <div class="section-num">9.4</div>
+  <h2 class="section-title">Investment Research and Research Recommendations</h2>
+
+  <p class="para">
+    There are <strong>particular conduct of business rules</strong> for managing conflicts of interest when a firm produces investment research.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What is investment research</h3>
+
+  <p class="para">
+    <strong>Investment research</strong> is information recommending or suggesting an investment strategy, including opinion on the present or future value, or price of the investments, and intended for distribution to the public (as opposed to just for use within the firm or the firm's group).
+  </p>
+
+  <p class="para">
+    Investment research must:
+  </p>
+
+  <ul class="bullet">
+    <li>Be <strong>clearly labelled as investment research</strong></li>
+    <li>Be presented as an <strong>objective or independent explanation</strong> of the matters which are the subject of the research</li>
+    <li><strong>NOT be presented</strong> by the investment firm in a way that constitutes a personal recommendation to a client</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Investment research vs Investment recommendations (MAR)</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Characteristic</th><th>Investment Research</th><th>Investment Recommendations (UK MAR)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Where regulated</td>
+        <td>COBS / SYSC</td>
+        <td>UK MAR</td>
+      </tr>
+      <tr>
+        <td>Time horizon</td>
+        <td>Obj/independent explanation</td>
+        <td>Short-term trade ideas / strategies</td>
+      </tr>
+      <tr>
+        <td>Audience</td>
+        <td>Public distribution</td>
+        <td>One or more clients of firms</td>
+      </tr>
+      <tr>
+        <td>Implies personal rec</td>
+        <td><strong>No</strong> — must NOT be personal rec</td>
+        <td>Depends</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>9.4.1 Measures and Arrangements — SYSC 10.1.11R</h3>
+
+  <p class="para">
+    If the firm produces investment research, it must implement all the measures on managing conflicts of interest set out in <strong>SYSC 10.1.11R</strong> in relation to:
+  </p>
+
+  <ul class="bullet">
+    <li>Financial analysts involved in producing research</li>
+    <li>Other relevant persons, particularly if their interests may conflict with those to whom it is disseminated</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Arrangements must prevent dealing ahead</h3>
+
+  <p class="para">
+    Arrangements must ensure the following:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Financial analysts and other relevant persons</strong> who know the likely timing or content of investment research (not yet publicly available / available to clients, and not inferable from information that is available), <strong>do NOT undertake personal transactions, or trade for others</strong>, <strong>until the recipient of the research has had a reasonable opportunity to act</strong>.
+      <br><em>Exceptions:</em> receipt of an instruction from an execution-only client or a market maker acting in good faith.
+    </li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">In any event, they <strong>do NOT undertake personal account transactions</strong> in the investments to which the research relates, <strong>without prior approval from the firm's compliance or legal department</strong>, and then only in <strong>exceptional circumstances</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">The firm and any person involved in the production of research <strong>do NOT accept inducements</strong> from those with a material interest in the subject matter of the research.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">They <strong>do NOT promise issuers favourable research coverage</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">If <strong>draft investment research</strong> includes a recommendation or target price, <strong>NO ONE other than financial analysts</strong> may review the draft — other than for the purpose of verifying compliance with the firm's legal obligations.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Fair presentation — disclosing influence from the issuer</h3>
+
+  <p class="para">
+    As part of the <strong>fair presentation</strong> requirements, firms must indicate material sources — <strong>including whether the recommendation was disclosed to the issuer and amended prior to dissemination</strong>. This ensures transparency about issuer influence.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Why this matters</div>
+    If an analyst showed a draft recommendation to the CEO of Company X, and afterwards "softened" the tone — that is a material source the client has the right to know. Otherwise the research looks "independent" but has in fact been run through the subject company.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Dealing ahead breach example</div>
+    A research analyst has finished a report on Company X with a "BUY" recommendation and target price. The report is planned to be distributed to clients on Monday morning. On Friday evening the analyst <strong>buys shares of X on their personal account</strong> through a brokerage with which the firm has no arrangement.<br><br>
+    <strong>This is a classic dealing ahead breach.</strong> The analyst used non-public knowledge of the forthcoming positive recommendation to buy before recipients of the research had a reasonable opportunity to act. A breach of SYSC 10.1.11R and potentially market abuse under UK MAR.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 9</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Conflict management architecture</div>
+    <strong style="color:#FEF3C7">Prevention</strong> — organisational arrangements (first priority)<br>
+    <strong style="color:#FEF3C7">Management</strong> — information barriers, separate supervision, remuneration link removal<br>
+    <strong style="color:#FEF3C7">Disclosure</strong> — LAST RESORT, when the first two are insufficient
+  </div>
+
+  <ul>
+    <li><strong>Principle 8:</strong> "A firm must manage conflicts of interest fairly, both between itself and its customers and between a customer and another client."</li>
+    <li><strong>Detailed rules — SYSC</strong> (NOT COBS). Apply to common platform firms for MiFID + ancillary services, plus non-MiFID firms.</li>
+    <li><strong>2 axes of conflict:</strong> (1) firm (incl managers/employees/ARs/connected parties) vs client; (2) one client vs another client.</li>
+    <li><strong>5 types of conflicts:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Financial gain / avoiding loss at client's expense</li>
+        <li>(2) Interest in outcome distinct from client's</li>
+        <li>(3) Incentive to favour one client</li>
+        <li>(4) Same business as client</li>
+        <li>(5) Third-party inducements above standard fee</li>
+      </ul>
+    </li>
+    <li><strong>Duties:</strong> maintain organisational arrangements + information barriers for research + conflicts policy + description for retail + records.</li>
+    <li><strong>Information barriers (Chinese walls):</strong> staff of one part of the business withhold information from another. Applies only if at least one part carries on regulated activity. Requires ongoing monitoring.</li>
+    <li><strong>9.2 Disclosure — LAST RESORT</strong>, when arrangements are not sufficient. Required: durable medium + sufficient detail + enable informed decision. <strong>Does NOT exempt</strong> the firm from obligation to maintain organisational arrangements (SYSC 10.1.3). Over-reliance not permitted.</li>
+    <li><strong>9.3 Policy must contain 2 components:</strong> (1) circumstances (multi-role: research+advice, prop trading, PM, corporate finance); (2) processes/procedures.</li>
+    <li><strong>5 procedures:</strong> control of info / separate supervision / remove remuneration link / prevent inappropriate influence / control series of activities.</li>
+    <li><strong>Corporate finance firms:</strong> special attention to offering process + allocation/pricing.</li>
+    <li><strong>9.4 Investment research</strong> = public distribution, clearly labelled as independent, NOT a personal recommendation. Differs from <strong>Investment recommendations (UK MAR)</strong> — short-term trade ideas.</li>
+    <li><strong>SYSC 10.1.11R for analysts:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Prevent dealing ahead — no personal transactions until recipients had reasonable opportunity to act</li>
+        <li>No personal transactions in subject investments without prior compliance/legal approval (only exceptional)</li>
+        <li>No inducements from those with material interest</li>
+        <li>No promises of favourable coverage</li>
+        <li>Draft review only by analysts — others only for legal compliance verification</li>
+      </ul>
+    </li>
+    <li><strong>Fair presentation</strong> requires disclosure of whether the recommendation was disclosed to the issuer and amended prior to dissemination.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

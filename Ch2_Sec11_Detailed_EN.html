@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 11 — Dealing and Managing</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;--teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;--amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;--coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;--purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;--green-l:#E1F5EE;--green:#085041;--gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;--bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;--radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 11 — Detailed Deep Dive</div>
+  <div class="app-sub">Dealing and Managing · Syllabus 2.15-2.19 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 11 is the "working engine" of an investment firm's day-to-day operations. It governs how a firm must <strong>execute client orders</strong>: obtain the best possible result (best execution), properly handle order sequence (client order handling), fair allocation on aggregation, deal with limit orders, and ensure employees do not misuse knowledge of pending trades (personal account dealing). On the exam — 5-7 questions with details on the 6 execution factors, 3 conditions for aggregation, and the 3 personal account dealing prohibitions.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s111">11.1 Application of Rules on Dealing and Managing</a></li>
+    <li>→ <a href="#s112">11.2 Best Execution — 6 factors and 3 COBS subsections</a></li>
+    <li>→ <a href="#s113">11.3 Order Execution Policy (OEP)</a></li>
+    <li>→ <a href="#s114">11.4 Specific Client Instructions</a></li>
+    <li>→ <a href="#s115">11.5 Client Order Handling</a></li>
+    <li>→ <a href="#s116">11.6 Aggregation and Allocation</a></li>
+    <li>→ <a href="#s117">11.7 Client Limit Orders</a></li>
+    <li>→ <a href="#s118">11.8 Personal Account Dealing</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s111">
+  <div class="section-num">11.1</div>
+  <h2 class="section-title">Application of Rules on Dealing and Managing</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What COBS rules cover</h3>
+
+  <p class="para">The COBS rules on dealing and managing include:</p>
+
+  <ul class="bullet">
+    <li><strong>Best execution</strong> (COBS 11.2, 11.2A, 11.2B and 11.2C)</li>
+    <li><strong>Client order handling</strong> (COBS 11.3)</li>
+    <li><strong>Client limit orders</strong> (COBS 11.4)</li>
+    <li><strong>Record keeping</strong>, client orders and transactions (COBS 11.5A)</li>
+    <li><strong>Personal account dealing</strong> (COBS 11.7)</li>
+    <li><strong>Recording telephone conversations and electronic communications</strong> (SYSC 10A)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>To whom they apply</h3>
+
+  <p class="para">The rules on dealing and managing (other than personal account dealing) apply <strong>generally to authorised firms</strong>; there are some variations in application depending on the nature of business and location of the firm.</p>
+
+  <ul class="bullet">
+    <li>Certain provisions (those marked in the FCA Handbook) apply to <strong>non-MiFID firms as if they were rules</strong>.</li>
+    <li>The rules on <strong>personal account dealing</strong> apply to the designated investment business of an authorised firm, in relation to activities carried on from an <strong>establishment in the UK</strong>.</li>
+  </ul>
+</div>
+
+<div class="section-card" id="s112">
+  <div class="section-num">11.2</div>
+  <h2 class="section-title">Best Execution — the "best possible result"</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 COBS subsections on best execution</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Section</th><th>For whom</th></tr></thead>
+    <tbody>
+      <tr><td><strong>COBS 11.2</strong></td><td>Alternative Investment Fund Managers (AIFMs) and residual CIS operators</td></tr>
+      <tr><td><strong>COBS 11.2A</strong></td><td>MiFID investment firms</td></tr>
+      <tr><td><strong>COBS 11.2B</strong></td><td>UCITS management companies</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The central obligation</h3>
+
+  <p class="para">The best execution rules require firms to <strong>execute orders on the terms most favourable to the client</strong>. The general rule: they apply if the firm owes <strong>contractual or agency obligations</strong> to its client and is acting on the client's behalf.</p>
+
+  <div class="info-box">
+    <div class="ib-title">"All sufficient" vs "all reasonable steps"</div>
+    <strong>MiFID firms</strong> (COBS 11.2A): obligation to take <strong>all sufficient steps</strong> — the stricter MiFID II standard.<br>
+    <strong>AIFMs and residual CIS operators</strong> (COBS 11.2): continue to operate under the previous FCA obligation — <strong>all reasonable steps</strong> — a slightly lesser burden.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>6 execution factors</h3>
+
+  <p class="para">Execution factors are the parameters the firm must take into account when determining the best possible result:</p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Price</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Costs</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Speed</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Likelihood of execution and settlement</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Size</strong></li>
+    <li style="margin-bottom:.3rem;font-size:.92rem"><strong>Nature</strong> or any other consideration relevant to execution</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Determining relative importance</h3>
+
+  <p class="para">The <strong>relative importance</strong> of each factor depends on the criteria, characteristics and circumstances of:</p>
+
+  <ul class="bullet">
+    <li>The <strong>client</strong>, including their categorisation</li>
+    <li>The <strong>client order</strong></li>
+    <li>The <strong>financial instruments</strong> involved</li>
+    <li>The <strong>execution venues</strong> to which the order can be directed</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Best execution ≠ best price</div>
+    Best execution does <strong>NOT mean</strong> simply "the best price". Any of the 6 factors can take precedence over price depending on the circumstances. For example, for <em>illiquid instruments</em>, <strong>likelihood of execution</strong> may be more important than price — sending an order just anywhere at the best quoted price may simply not get filled.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example — when likelihood of execution beats price</div>
+    Client wants to buy £5M of an emerging markets issuer's corporate bond. Venue A quotes 98.50 (better price), but low liquidity — only 20% of the order can fill. Venue B quotes 98.55 (slightly worse), but deep liquidity — the whole order fills. <strong>Venue B is best execution</strong>, because likelihood of execution outweighs marginal price improvement.
+  </div>
+</div>
+
+<div class="section-card" id="s113">
+  <div class="section-num">11.3</div>
+  <h2 class="section-title">Order Execution Policy (OEP) — requirements</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>MiFID business requirements</h3>
+
+  <p class="para">MiFID II requires firms to have an <strong>order execution policy</strong> that clearly articulates to clients how the firm seeks to obtain the best possible result.</p>
+
+  <p class="para">Firms must:</p>
+
+  <ul class="bullet">
+    <li><strong>Disclose the OEP to the client</strong> <em>prior to</em> undertaking any MiFID investment business for that client</li>
+    <li><strong>Obtain prior consent from the client</strong> to the OEP — either by general agreement or in respect of individual transactions</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Annual review requirement</h3>
+
+  <p class="para">Firms must review the ongoing appropriateness of the OEP and their order execution arrangements:</p>
+
+  <ul class="bullet">
+    <li><strong>At least annually</strong>, OR</li>
+    <li>When there are <strong>material changes</strong> affecting the firm's ability to continue to obtain the best possible result</li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam numbers</div>
+    OEP review — <strong>at least annually</strong> (not quarterly, not every 2 years). OR upon a material change. Firms are required to update policies and notify clients of such updates.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Non-MiFID business — differences</h3>
+
+  <p class="para">For non-MiFID firms, the OEP must include, for each class of financial instrument in which the firm deals:</p>
+
+  <ul class="bullet">
+    <li><strong>Information about different execution venues</strong> where the firm executes client orders</li>
+    <li>The <strong>factors</strong> affecting choice of venue used</li>
+  </ul>
+
+  <p class="para">Firms must give clients <strong>appropriate information about their execution policies</strong>; more detailed for <strong>retail clients</strong>. Firms must obtain clients' consent prior to their OEP (although this can be <strong>implied consent</strong> where the client continues to trade with the firm after receiving the MiFID Terms of Business).</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Portfolio managers and receivers/transmitters</h3>
+
+  <p class="para">Portfolio managers, receivers and transmitters of orders <strong>MUST MAINTAIN order execution policies</strong>, but they do <strong>NOT need to obtain client consent</strong> to the policy.</p>
+</div>
+
+<div class="section-card" id="s114">
+  <div class="section-num">11.4</div>
+  <h2 class="section-title">Specific Client Instructions</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The rule on following specific instructions</h3>
+
+  <p class="para">The firm is <strong>deemed to have satisfied</strong> its obligation to obtain the best possible result <strong>if it follows the client's specific instructions</strong> — but <strong>only in relation to the part or aspect</strong> of the order related to those instructions.</p>
+
+  <p class="para">Firms must adhere to the client's instructions <strong>even if an alternative means of execution would have given a better result</strong>.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Partial instructions</h3>
+
+  <p class="para">If the client's specific instruction relates <strong>only to one part or aspect</strong> of the order, the firm is still required to adhere to best execution principles in relation to any other parts of the order that are not subject to the specific instructions.</p>
+
+  <div class="warn-box">
+    <div class="wb-title">The firm must not induce the client</div>
+    Firms <strong>must not induce clients to instruct an order in a particular way</strong> — by expressly indicating or implicitly suggesting the content of the instruction — if they know that any such instruction would likely prevent obtaining the best possible result.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example — a legitimate specific instruction</div>
+    Client gives the firm a specific instruction: "Execute my order for 10,000 XYZ shares <strong>only on LSE, not on dark pools</strong>". The firm executes on LSE, even though a dark pool offered a better price. <strong>The firm has satisfied best execution for this aspect</strong> (venue), because the client specifically instructed. But if the client did not specify timing and the firm chose poor timing — the firm breached best execution <em>for that aspect</em>.
+  </div>
+</div>
+
+<div class="section-card" id="s115">
+  <div class="section-num">11.5</div>
+  <h2 class="section-title">Client Order Handling</h2>
+
+  <p class="para">Firms must apply procedures and arrangements that provide for the <strong>prompt, fair and expeditious execution of client orders</strong>, relative to other orders or trading interests of the firm.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Execution sequence</h3>
+
+  <p class="para">Procedures must allow <strong>comparable client orders</strong> to be executed <strong>in the order in which they are received</strong>.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>4 firm duties</h3>
+
+  <p class="para">Firms must ensure:</p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Executed client orders are promptly and accurately recorded and allocated</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Comparable orders are executed sequentially and promptly</strong>, unless impracticable or the client's interests require otherwise</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Retail clients are <strong>informed of any material difficulty in the prompt execution of their order IMMEDIATELY</strong> upon the firm becoming aware</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">If the firm is responsible for overseeing / arranging settlement — <strong>assets / money must be delivered promptly and correctly</strong></li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Misuse of information prohibition</h3>
+
+  <p class="para">Firms <strong>must not misuse information relating to client orders</strong> and must take steps to prevent its abuse (e.g. to profit by dealing on their own account).</p>
+</div>
+
+<div class="section-card" id="s116">
+  <div class="section-num">11.6</div>
+  <h2 class="section-title">Aggregation and Allocation — 3 conditions</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 conditions for aggregation</h3>
+
+  <p class="para">Firms may aggregate their deals with those of a client (or aggregate two or more clients' deals), <strong>only if</strong>:</p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem">This is <strong>unlikely to disadvantage</strong> any of the aggregated clients</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">The fact that aggregation <strong>may work to their disadvantage is disclosed to the clients</strong></li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">An <strong>order allocation policy is established</strong>, providing (in sufficiently precise terms) for the fair allocation of transactions. Must cover:
+      <ul style="margin-top:.3rem;margin-bottom:0">
+        <li>How <strong>volume and price</strong> of orders affect allocation</li>
+        <li>How <strong>partial allocations</strong> will be dealt with</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Partial execution</h3>
+
+  <p class="para">If the aggregated order is executed <strong>only partly</strong>, the firm must allocate the trades <strong>in accordance with the allocation policy</strong>.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Own-account aggregated with client orders</h3>
+
+  <p class="para">If the firm has <strong>own-account orders aggregated</strong> with client orders — it <strong>must not allocate in a way detrimental to clients</strong>.</p>
+
+  <p class="para">In particular, the firm must <strong>allocate client orders in priority over its own</strong> — <strong>UNLESS</strong> it can show that <em>without the inclusion of its own order, less favourable terms would have been obtained</em>. In such circumstances, the firm may allocate deals <strong>proportionately</strong>.</p>
+
+  <div class="exam-box">
+    <div class="xb-title">Key priority rule</div>
+    Aggregation of firm's own + client orders + partial execution:<br>
+    → <strong>Client orders first</strong> (priority).<br>
+    → Exception: if the firm's own order helped obtain better terms, it may allocate proportionately.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Prevent reallocation</h3>
+
+  <p class="para">The firm must, as part of its allocation policy, put in place procedures to <strong>prevent reallocation</strong>, in a way detrimental to the client, of transactions for its own account that are executed in combination with client orders.</p>
+
+  <div class="example-box">
+    <div class="eb-title">Example — correct allocation</div>
+    Firm receives orders: Client A buy 10,000; Client B buy 5,000; Client C buy 5,000. Plus own-account: buy 5,000. Firm aggregates: combined 25,000 share order. Only 15,000 execute.<br><br>
+    <strong>Correct allocation:</strong> 100% to client orders first (20,000 share demand), but only 15,000 available. Allocate per policy pro-rata among clients: A gets 7,500; B — 3,750; C — 3,750. Firm's own order gets 0 — unless the firm can show that without including its 5,000 the clients would not have obtained even these terms.
+  </div>
+</div>
+
+<div class="section-card" id="s117">
+  <div class="section-num">11.7</div>
+  <h2 class="section-title">Client Limit Orders — obligation to make public</h2>
+
+  <p class="para"><strong>Unless the client instructs otherwise</strong>, a firm receiving a client limit order for shares <strong>listed on a regulated market</strong> and which <strong>cannot immediately execute</strong> under prevailing market conditions, <strong>must make the limit order public</strong> (in a manner easily accessible to other market participants).</p>
+
+  <p class="para">This must be done <strong>IMMEDIATELY</strong>, so that the order can be executed as soon as possible.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Exception — orders above normal market size</h3>
+
+  <p class="para">The firm <strong>need NOT do so</strong> for <strong>orders over normal market size</strong>. Logic: a large order could disrupt the market if made public.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>2 ways of making a limit order public</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Transmitting the order</strong> to a regulated market or MTF operating an order book trading system, OR</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Ensuring the order is made public</strong> and can be easily executed as soon as market conditions allow</li>
+  </ol>
+
+  <div class="info-box">
+    <div class="ib-title">What is a limit order</div>
+    A <strong>limit order</strong> is an order to buy or sell a security at a specific price or better. For example, "buy XYZ at <strong>£5.00 or lower</strong>". If the market is currently trading at £5.20, the order cannot be executed immediately. The firm must make it public so other market participants can trade with it when the price falls to £5.00.
+  </div>
+</div>
+
+<div class="section-card" id="s118">
+  <div class="section-num">11.8</div>
+  <h2 class="section-title">Personal Account Dealing — restrictions on employees</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who are "relevant persons"</h3>
+
+  <p class="para">The rules apply to <strong>employees who are relevant persons</strong>:</p>
+
+  <ul class="bullet">
+    <li><strong>Directors, partners</strong> of the firm or its appointed representatives</li>
+    <li><strong>Other personnel</strong> involved in regulated activities either directly or via an <strong>outsourcing arrangement</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 personal account dealing prohibitions</h3>
+
+  <p class="para">Firms must have arrangements in place to <strong>prevent employees who are relevant persons</strong> from:</p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Entering into a personal transaction that</strong>:
+      <ul style="margin-top:.3rem;margin-bottom:0">
+        <li>Is <em>contrary to UK MAR</em> (market abuse), OR</li>
+        <li>Involves <em>misuse or improper disclosure of confidential information</em>, OR</li>
+        <li><em>Conflicts with the firm's duties to a customer</em></li>
+      </ul>
+    </li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Improperly advising or procuring anyone else to enter into a transaction</strong> that (if completed by the employee) would fall foul of point 1 or a relevant provision</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Improperly disclosing</strong>, other than in the normal course of employment/contract, information or opinion <strong>to any other person</strong>, if the relevant person knows (or reasonably ought to know) that as a result of the disclosure the other person will or would be likely to take steps to:
+      <ul style="margin-top:.3rem;margin-bottom:0">
+        <li>(a) Enter into a transaction in designated investments that would fall foul of (1) or a relevant provision</li>
+        <li>(b) Advise or procure another person to enter into such a transaction</li>
+      </ul>
+    </li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Relevant provisions</h3>
+
+  <p class="para">"Relevant provisions" includes:</p>
+
+  <ul class="bullet">
+    <li>Rules on <strong>personal account transactions undertaken by financial analysts</strong></li>
+    <li>Rules on <strong>misuse of information relating to pending client orders</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Records</h3>
+
+  <p class="para">Firms must <strong>keep records of all personal transactions</strong> notified to them, and of any authorisation or prohibition made in connection with them.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Core rule</h3>
+
+  <div class="info-box">
+    <div class="ib-title">COBS 11.7 core requirement</div>
+    Under COBS 11.7, the core personal account dealing obligation is that <strong>personal transactions MUST NOT CONFLICT with the interests of clients</strong>. <strong>Pre-clearance is required</strong>.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Prohibition (1) breach example</div>
+    A portfolio manager plans to sell a large holding in XYZ across all discretionary client accounts tomorrow morning. His sister — in the compliance team — overhears the plan and <strong>sells XYZ from her personal account this evening</strong>, ahead of the client trades.<br><br>
+    <strong>Prohibition (1) violated:</strong> personal transaction conflicts with firm's duties to customer + contrary to UK MAR (misuse of information about pending client orders). Classic <em>front-running</em> — could lead to criminal prosecution under MAR.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Compliance arrangements</h3>
+
+  <p class="para">Arrangements must ensure affected employees are <strong>aware of restrictions</strong> on personal transactions and of the firm's procedures. In practice this means:</p>
+
+  <ul class="bullet">
+    <li><strong>Pre-clearance</strong> of any personal trade through compliance</li>
+    <li><strong>Restricted list</strong> of securities where trading is prohibited or limited (usually those where the firm holds material non-public information)</li>
+    <li><strong>Holding period</strong> requirements (cannot sell shares immediately after purchase)</li>
+    <li><strong>Mandatory disclosure</strong> of all trading accounts held by employees</li>
+  </ul>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 11</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">6 Execution Factors</div>
+    <strong style="color:#FEF3C7">Price / Costs / Speed / Likelihood of Execution & Settlement / Size / Nature</strong><br>
+    Best execution ≠ best price<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong style="color:#FEF3C7">Standards:</strong> MiFID — all sufficient steps / AIFM+CIS — all reasonable steps
+  </div>
+
+  <ul>
+    <li><strong>11.1 Scope:</strong> rules apply generally to authorised firms. Personal account dealing — to designated investment business from a UK establishment.</li>
+    <li><strong>11.2 Best execution — 3 subsections:</strong> COBS 11.2 (AIFMs + residual CIS), 11.2A (MiFID), 11.2B (UCITS). <strong>All sufficient steps</strong> for MiFID, <strong>all reasonable steps</strong> for AIFMs.</li>
+    <li><strong>6 execution factors:</strong> price + costs + speed + likelihood of execution/settlement + size + nature/other. Relative importance depends on client / order / instrument / venue.</li>
+    <li><strong>Best execution ≠ best price.</strong> Any factor may take precedence — e.g. likelihood of execution for illiquid instruments.</li>
+    <li><strong>11.3 OEP — MiFID:</strong> disclose prior + obtain prior consent + review at least annually OR on material change. Content prescriptive under COBS 11.2A.</li>
+    <li><strong>OEP — non-MiFID:</strong> list of execution venues + factors influencing choice. More detailed for retail. Consent may be implied (continued trading).</li>
+    <li><strong>Portfolio managers / receivers / transmitters:</strong> MUST maintain OEP, but do NOT obtain client consent.</li>
+    <li><strong>11.4 Specific instructions:</strong> firm deemed to have satisfied best execution for the <em>part</em> covered by the instruction (even if an alternative would give a better result). Firm must not induce the client to give particular instructions.</li>
+    <li><strong>11.5 Order handling:</strong> prompt/fair/expeditious. Comparable orders — sequential by receipt. Retail — inform of material difficulty immediately. No misuse of information.</li>
+    <li><strong>11.6 Aggregation — 3 conditions:</strong> (1) unlikely to disadvantage clients; (2) disclosed; (3) allocation policy (covering volume+price + partial). Partial fill — per policy.</li>
+    <li><strong>Own-account + client aggregation:</strong> client orders first. Exception: firm's order enabled better terms → proportionate allocation.</li>
+    <li><strong>11.7 Client limit orders</strong> for listed shares that cannot be immediately executed: <strong>must be made public IMMEDIATELY</strong> (unless client instructs otherwise or order over normal market size). 2 ways: transmit to RM/MTF OR ensure public and easily executable.</li>
+    <li><strong>11.8 Personal account dealing — relevant persons:</strong> directors, partners, ARs, other personnel in regulated activities (direct/outsourced).</li>
+    <li><strong>3 prohibitions:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Personal transaction contrary to UK MAR / misuse confidential info / conflicts with duty to customer</li>
+        <li>(2) Improperly advising / procuring another to enter such transaction</li>
+        <li>(3) Improperly disclosing info to another, knowing they will take steps (a) to enter such transaction or (b) to advise/procure others</li>
+      </ul>
+    </li>
+    <li><strong>Core:</strong> personal transactions must NOT conflict with client interests. Pre-clearance required. Records kept.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

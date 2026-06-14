@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 2 — Appointed Representatives: Detailed Deep Dive</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;
+  --teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;
+  --amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;
+  --coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;
+  --purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --green-l:#E1F5EE;--green:#085041;
+  --gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;
+  --bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09);
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 ";}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ ";}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 ";}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.tag-in{background:var(--green-l);color:var(--green);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-out{background:var(--coral-l);color:var(--coral);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-partial{background:var(--amber-l);color:var(--amber-d);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 2 — Detailed Deep Dive</div>
+  <div class="app-sub">Appointed Representatives (ARs) · Syllabus 2.2 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<!-- INTRODUCTION -->
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    An <strong>Appointed Representative (AR)</strong> is a kind of "satellite" of an authorised firm. The AR itself does not hold an FCA licence, but can carry on regulated business <em>under the umbrella</em> of another firm (called the <strong>principal</strong>). The principal is the one responsible for the AR's conduct, as if the AR were its own employee. In 2022, the FCA significantly tightened the AR regime following several scandals — this section explains how the system works today.
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#intro">What an AR is and why it exists</a></li>
+    <li>→ <a href="#cobs">How COBS applies to ARs</a></li>
+    <li>→ <a href="#promos">AR financial promotions — a key topic</a></li>
+    <li>→ <a href="#activities">Which activities an AR may carry on</a></li>
+    <li>→ <a href="#reforms">The 2022 reforms — what changed</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<!-- BIG INTRODUCTION -->
+<div class="section-card" id="intro">
+  <div class="section-num">INTRODUCTION</div>
+  <h2 class="section-title">What an Appointed Representative is and why it exists</h2>
+
+  <p class="para">
+    Under the basic principle of FSMA 2000, to carry on regulated activity in the UK you must be either an <strong>authorised person</strong> or an <strong>exempt person</strong>. An Appointed Representative is precisely an exempt person under <strong>Section 39 FSMA</strong> and the <strong>FSMA (Appointed Representatives) Regulations 2001</strong>.
+  </p>
+
+  <p class="para">
+    The idea is simple: there is a large authorised firm (say, an investment company), and it wants to distribute its services through smaller local advisers or agents. Instead of each of them going through the expensive and slow FCA authorisation process, they become ARs of that larger firm — and operate <strong>under its licence and responsibility</strong>.
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">Principal ↔ AR ↔ Client relationship</div>
+    ┌──────────────────────┐<br>
+    │  FCA (regulator)     │<br>
+    └──────────┬───────────┘<br>
+    │ issues licence<br>
+    ▼<br>
+    ┌──────────────────────┐<br>
+    │   PRINCIPAL FIRM     │ ◄── FCA authorised<br>
+    │  (authorised)        │ ◄── responsible for AR<br>
+    └──────────┬───────────┘<br>
+    │ written contract<br>
+    ▼<br>
+    ┌──────────────────────┐<br>
+    │ APPOINTED            │ ◄── NOT authorised<br>
+    │ REPRESENTATIVE (AR)  │ ◄── exempt under Section 39<br>
+    └──────────┬───────────┘<br>
+    │ deals with client<br>
+    ▼<br>
+    ┌──────────────────────┐<br>
+    │       CLIENT         │<br>
+    └──────────────────────┘
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Real-world example</div>
+    Major insurance company Aviva (the principal) wants to sell its life policies across the country. Rather than setting up 500 of its own branches, it signs agreements with 500 small independent brokerage firms. Each such firm becomes an AR of Aviva — they sell its policies, receive commission, but technically they are not FCA-authorised. Responsibility for their conduct rests with Aviva.
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">Core idea of the AR regime</div>
+    <strong>The AR's exempt status is not a free ride.</strong> The exemption from authorisation is given in exchange for the principal taking on <em>full responsibility</em> for the AR's conduct and its ongoing supervision. This is an important trade-off: "less red tape for the AR — but all the legal responsibility sits with the principal."
+  </div>
+</div>
+
+<!-- SECTION: COBS and ARs -->
+<div class="section-card" id="cobs">
+  <div class="section-num">2.1</div>
+  <h2 class="section-title">How COBS applies to Appointed Representatives</h2>
+
+  <p class="para">
+    The COBS rules apply to firms <strong>in respect of the activities carried out for them by their ARs</strong>. In other words, COBS does <em>not apply directly</em> to the AR (the AR is an exempt person; FCA rules formally do not bite at its level). But any business conducted by the AR for which the principal has accepted responsibility is <strong>treated as having been conducted by the principal itself</strong>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Important legal point</div>
+    Formally, the AR is not authorised → FCA rules do not apply to it. But in practice, <strong>through the principal</strong>, they apply in full. If the AR breaches COBS, the regulator does not go to the AR (it has no formal regulatory relationship with the AR) — it goes to the principal.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What the principal is required to do</h3>
+
+  <ul class="bullet">
+    <li><strong>The principal must hold the relevant permissions</strong> for the activities that its AR will carry out. For example, if the AR is going to advise on investments — the principal must hold permission to advise on investments.</li>
+    <li><strong>Inside the AR firm, certain individuals must be approved for controlled functions</strong> — namely the governors (directors, partners) and individuals performing customer functions (those dealing with clients).</li>
+    <li><strong>The principal must conduct thorough reviews of the suitability and conduct of its ARs</strong> — both before appointment and on an ongoing basis.</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Example — principal's permissions</div>
+    Brokerage firm "City Brokers Ltd" holds an FCA permission only for <em>arranging deals</em>. It wants to appoint an AR that will advise clients on investments. This is <strong>impossible</strong>: for the AR to give advice, City Brokers must first obtain permission to advise on investments. Without the matching permission at the principal level, the AR cannot give any advice.
+  </div>
+</div>
+
+<!-- SECTION: Promotions -->
+<div class="section-card" id="promos">
+  <div class="section-num">2.2</div>
+  <h2 class="section-title">AR financial promotions — a very important topic</h2>
+
+  <p class="para">
+    This is one of the most frequently tested exam topics. Let's work through the logic step by step.
+  </p>
+
+  <p class="para">
+    Under <strong>Section 21 FSMA</strong>, a financial promotion can only be made by an <em>authorised person</em> or an <em>exempt person</em>. Unauthorised persons cannot issue promotions themselves — their materials must be approved by an authorised "gateway" firm.
+  </p>
+
+  <p class="para">
+    <strong>Question:</strong> An AR is an exempt person. Therefore, technically, a promotion communicated by an AR is an <strong>exempt promotion</strong>, and formally it does not require approval.
+  </p>
+
+  <p class="para">
+    <strong>However!</strong> The FCA specifically included in COBS: a firm (the principal) is required to ensure that its ARs comply with the COBS rules when communicating <strong>any</strong> financial promotions. In other words, the formal "exempt" status does not relieve the principal of responsibility for the content.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Why the FCA made a specific point of this</div>
+    Without this reminder, a loophole could open up: the AR communicates a promotion, it is exempt, no approval is needed, so anything goes. The FCA closed that loophole: the principal is <strong>always</strong> responsible for the content of its ARs' promotions.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Scenario: AR sends a bad marketing email</div>
+    "AR Solutions Ltd" is an appointed representative of "PrincipalCorp plc". AR Solutions sends a marketing email about a new investment product to retail clients. The email contains misleading claims about past performance. <strong>Who is responsible?</strong><br><br>
+    <strong>Answer:</strong> PrincipalCorp plc. Although the AR sent the email, the principal bears legal responsibility for the content of all financial promotions communicated by its ARs. Clients are not obliged to verify claims themselves — that is the firm's duty. The FCA will fine PrincipalCorp.
+  </div>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — key fact</div>
+    For which promotions is the principal responsible? <strong>All types</strong>. Not only MiFID instruments, not only retail promotions, not only high-risk ones — <strong>ALL OF THEM</strong>. This is a direct exam question (Q26 in the official sample paper).
+  </div>
+</div>
+
+<!-- SECTION: Activities -->
+<div class="section-card" id="activities">
+  <div class="section-num">2.3</div>
+  <h2 class="section-title">Which regulated activities can an AR carry on</h2>
+
+  <p class="para">
+    The AR Regulations <strong>limit</strong> the set of regulated activities an AR may carry on under its exempt basis. The list is closed — here it is:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th style="width:60%">Activity</th>
+        <th>Status for AR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Dealing in investments as agent</strong> — only pure protection or general insurance contracts</td>
+        <td><span class="tag-in">✓ Allowed (restricted)</span></td>
+      </tr>
+      <tr>
+        <td><strong>Arranging deals in investments</strong> and making arrangements with a view to transactions</td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Arranging deals in home finance transactions</strong></td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Assisting in the administration and performance of a contract of insurance</strong></td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Arranging the safeguarding and administration of assets</strong></td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Advising on investments</strong></td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Giving basic advice on stakeholder products</strong></td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Advising on home finance transactions</strong></td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Agreeing to carry on a regulated activity</strong></td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Operating electronic platforms in relation to lending</strong> (P2P)</td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td><strong>Certain consumer credit related activities</strong></td>
+        <td><span class="tag-in">✓ Allowed</span></td>
+      </tr>
+      <tr>
+        <td style="background:var(--coral-l) !important"><strong>Dealing in investments AS PRINCIPAL</strong></td>
+        <td><span class="tag-out">✗ PROHIBITED</span></td>
+      </tr>
+      <tr>
+        <td style="background:var(--coral-l) !important"><strong>Managing investments</strong> (portfolio management)</td>
+        <td><span class="tag-out">✗ PROHIBITED</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box">
+    <div class="wb-title">Two prohibited activities — you must remember these</div>
+    ARs <strong>CANNOT</strong>:<br>
+    1. <strong>Deal as principal</strong> (trading on their own account)<br>
+    2. <strong>Manage investments</strong> (discretionary portfolio management)<br><br>
+    Why? Both activities are considered too high-risk for exempt status. They require direct FCA authorisation and their own prudential oversight (capital adequacy, etc.).
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example: AR wants to manage a portfolio</div>
+    A client asks their AR adviser to take discretionary authority over a £500,000 portfolio. The AR adviser <strong>must refuse</strong> — this is a prohibited activity. The only way forward is for the client to sign the contract directly with the principal (which holds permission to manage investments); the AR can only provide organisational support in that process.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Nuance on dealing as agent</h3>
+
+  <p class="para">
+    ARs can deal as agent, <strong>but only</strong> for <em>pure protection</em> contracts (protection-only insurance policies, e.g. term life cover) and <em>general insurance</em> contracts (motor, home insurance, etc.). ARs cannot act as agent for shares, bonds, or derivatives.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Consumer credit — a special rule</h3>
+
+  <p class="para">
+    A firm can hold <strong>limited permission</strong> for certain regulated activities in consumer credit, and at the same time <strong>be an AR</strong> of another firm for other (non-consumer-credit) activities. This is an unusual "dual" position, but it is specifically permitted by the FCA.
+  </p>
+</div>
+
+<!-- SECTION: Reforms 2022 -->
+<div class="section-card" id="reforms">
+  <div class="section-num">2.4</div>
+  <h2 class="section-title">The 2022 reforms — what changed and why</h2>
+
+  <p class="para">
+    In 2021, the FCA consulted on reforming the AR regime. The reason — a string of scandals where ARs caused harm to consumers while principals failed to exercise proper oversight. The new rules <strong>came into force at the end of 2022</strong>.
+  </p>
+
+  <p class="para">
+    The FCA identified <strong>two key areas of change</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li>Additional information on ARs and notification requirements for principals.</li>
+    <li>Clarifying and strengthening the responsibilities and expectations of principals.</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Four target outcomes of the reform</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Principals fully understand their responsibilities</strong> in relation to ARs, and have stronger and better oversight of, and take more effective responsibility for, their ARs.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>The FCA can more effectively challenge firms</strong> that already have, or are planning to appoint, ARs.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Principals address problems</strong> that cause, or have the potential to cause, harm to consumers or markets.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Retail consumers can access better-quality information</strong> on principals and ARs and make good decisions when choosing products and services.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Specific new requirements — Information & Notification</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Requirement</th>
+        <th>Timing / detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Notify FCA of a <strong>new</strong> AR appointment</td>
+        <td><span class="number-card">30 days</span> <strong>BEFORE</strong> the appointment takes effect</td>
+      </tr>
+      <tr>
+        <td>Provide information on <strong>existing</strong> ARs (one-off on introduction of rules)</td>
+        <td><span class="number-card">60 days</span> from when the rules came into force</td>
+      </tr>
+      <tr>
+        <td>Provide data on the business and on ARs, including the nature of their regulated activities</td>
+        <td>Ongoing requirement</td>
+      </tr>
+      <tr>
+        <td>Data on AR <strong>complaints</strong> and <strong>revenue</strong></td>
+        <td>Provided to the FCA regularly</td>
+      </tr>
+      <tr>
+        <td>FCA updates the public Register with the regulated activities the principal permits its ARs to undertake</td>
+        <td>Ongoing</td>
+      </tr>
+      <tr>
+        <td>Notify the FCA whether the principal currently provides, or will cease to provide, <strong>regulatory hosting</strong> services</td>
+        <td>On change</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam numbers — do not confuse them!</div>
+    <strong>30 days</strong> = notification to FCA of a NEW AR appointment (BEFORE).<br>
+    <strong>60 days</strong> = deadline for information on EXISTING ARs (one-off on rules coming into force in 2022).<br>
+    This is a favourite trap in exams — the context matters.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Specific new requirements — Responsibilities</h3>
+
+  <ul class="bullet">
+    <li><strong>Enhanced oversight of ARs</strong>, including:
+      <ul class="bullet" style="margin-top:.3rem">
+        <li>adequate systems and controls</li>
+        <li>sufficient resources</li>
+        <li>monitoring AR growth</li>
+      </ul>
+    </li>
+    <li><strong>More effective responsibility for ARs</strong>:
+      <ul class="bullet" style="margin-top:.3rem">
+        <li>monitoring and assessing the risk of harm to consumers and market integrity</li>
+        <li><strong>oversight to a comparable standard as if the ARs were direct employees</strong></li>
+      </ul>
+    </li>
+    <li><strong>Clarity on the circumstances where the principal terminates an AR relationship</strong> and assists with an orderly wind down.</li>
+    <li><strong>Annual review of the ARs' activities, business and senior management</strong> — the principal must prepare a <strong>self-assessment document</strong>.</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Key oversight standard</div>
+    The FCA specifically stated: the principal must oversee ARs <strong>to a standard comparable to its oversight of direct employees</strong>. This is a very high bar — "commercially reasonable" or "reasonable oversight" is not enough. The benchmark: "as if this person were your own full-time employee".
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Scenario: AR breaches suitability</div>
+    "PrincipalBank plc" discovers that its AR "AdviseNow Ltd" has been giving unsuitable investment advice to retail clients. What does the FCA expect PrincipalBank to do?<br><br>
+    <strong>Correct behaviour:</strong> address the problem proactively — do not wait for the FCA to investigate. Consider whether to terminate the AR relationship. On termination — ensure an orderly wind down: so that AR clients are not further harmed, their documents are transferred correctly, and a proper handover is arranged. All of this — at the principal's cost and under its direction.
+  </div>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 2</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Responsibility formula</div>
+    AR carries on regulated activity → principal has FULL responsibility<br>
+    AR = exempt (Section 39 FSMA) → COBS applies via principal<br>
+    AR sends a promotion → principal responsible for content<br>
+    AR breaches rules → FCA fines the principal<br>
+    Oversight standard = "as if direct employees"
+  </div>
+
+  <ul>
+    <li><strong>AR = exempt person</strong> under Section 39 FSMA + FSMA (Appointed Representatives) Regulations 2001.</li>
+    <li><strong>Principal</strong> must hold permissions matching AR's activities. Without the principal's permission — the AR cannot do anything.</li>
+    <li><strong>Governors and customer function staff</strong> inside the AR must be approved for controlled functions.</li>
+    <li><strong>COBS applies to the principal</strong> in respect of the AR's activities. AR business = principal's business for responsibility purposes.</li>
+    <li><strong>AR financial promotions:</strong> technically exempt promotions (no approval required), BUT the principal is responsible for the content of <strong>all</strong> types of its ARs' promotions.</li>
+    <li><strong>ARs CANNOT:</strong> deal as principal + manage investments. Dealing as agent — only pure protection / general insurance.</li>
+    <li><strong>2022 reforms:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>30 days</strong> advance notification to FCA for a new AR.</li>
+        <li><strong>60 days</strong> — one-off deadline for existing ARs information when the rules came in.</li>
+        <li>Principal must oversee to direct-employee standard.</li>
+        <li>Annual review + self-assessment document.</li>
+        <li>Complaints + revenue data to the FCA.</li>
+        <li>Clarity on termination + orderly wind down.</li>
+      </ul>
+    </li>
+    <li><strong>FCA's 4 outcomes:</strong> (1) principals understand responsibilities, (2) FCA can challenge firms, (3) harm problems addressed, (4) better information for retail consumers.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

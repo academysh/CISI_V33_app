@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3, Section 7 — Fraud and Economic Crime</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#9F1239;--primary-l:#FEE2E2;--primary-d:#7F1028;--primary-vd:#4C0519;--accent:#D97706;--accent-l:#FEF3C7;--accent-d:#92400E;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#FEF2F2;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(159,18,57,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(76,5,25,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#FEE2E2;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(159,18,57,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 3</div>
+  <div class="app-title">Chapter 3, Section 7 — Detailed Deep Dive</div>
+  <div class="app-sub">Fraud and Economic Crime · Syllabus 3.7 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 7 covers the <strong>Economic Crime and Corporate Transparency Act (ECCTA)</strong>, which <em>significantly expanded</em> the UK's anti-economic-crime framework. The key development: a new <strong>corporate offence of "failure to prevent fraud"</strong>, in force from <strong>1 September 2025</strong>. The structure mirrors Bribery Act s.7 — strict liability + a defence of reasonable procedures. It applies only to <strong>large organisations</strong> (2 of 3 criteria: turnover >£36m / balance sheet >£18m / >250 employees). <em>Base fraud offences</em> — the 3 limbs of Section 1 Fraud Act 2006 (false representation, failing to disclose, abuse of position) + others. Also — Companies House reforms, cryptoasset seizure, SLAPPs provisions. 1-2 exam questions.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s71">7.1 ECCTA Overview</a></li>
+    <li>→ <a href="#s72">7.2 Failure to Prevent Fraud — new corporate offence</a></li>
+    <li>→ <a href="#fraud-act">Fraud Act 2006 — 3 ways of fraud</a></li>
+    <li>→ <a href="#principles">6 Home Office Principles</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s71">
+  <div class="section-num">7.1</div>
+  <h2 class="section-title">ECCTA Overview</h2>
+
+  <p class="para">
+    The <strong>Economic Crime and Corporate Transparency Act (ECCTA)</strong> aims to <em>deliver reforms tackling economic crime + improve transparency</em> over corporate entities.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What ECCTA introduced</h3>
+
+  <ul class="bullet">
+    <li>A <strong>new regulatory objective</strong> in the <em>Legal Services Act 2007</em> — tackling economic crime</li>
+    <li><strong>Reforms to Companies House</strong> — preventing creation of + shutting down fraudulent companies</li>
+    <li>Reforms to <strong>prevent abuse of limited partnerships</strong></li>
+    <li><strong>Additional powers to seize + recover suspected criminal cryptoassets</strong></li>
+    <li><strong>New failure to prevent fraud offence</strong></li>
+    <li>Measures to address <strong>SLAPPs</strong> (Strategic Lawsuits Against Public Participation) — used to silence whistleblowers / journalists</li>
+  </ul>
+</div>
+
+<div class="section-card" id="s72">
+  <div class="section-num">7.2</div>
+  <h2 class="section-title">Failure to Prevent Fraud — new corporate offence</h2>
+
+  <div class="info-box">
+    <div class="ib-title">ECCTA failure to prevent fraud</div>
+    ECCTA introduced the <strong>corporate criminal offence of failure to prevent fraud</strong> — came into effect <strong>1 September 2025</strong>.<br><br>
+    Home Office guidance: <em>"An organisation may be criminally liable where an employee, agent, subsidiary, or other 'associated person' commits a fraud intending to benefit the organisation, and the organisation <strong>did not have reasonable fraud prevention procedures in place</strong>"</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Scope — only large organisations</h3>
+
+  <p class="para">The offence applies to:</p>
+
+  <ul class="bullet">
+    <li>All <strong>large incorporated bodies</strong>, subsidiaries, and partnerships</li>
+    <li><strong>Large not-for-profit organisations</strong> (incorporated charities)</li>
+    <li>Incorporated public bodies</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">"Large" — 2 of 3 criteria</div>
+    The organisation must meet <strong>at least 2 of 3 criteria</strong>:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Turnover > £36 million</strong></li>
+      <li><strong>Balance sheet total > £18 million</strong></li>
+      <li><strong>> 250 employees</strong></li>
+    </ul>
+    SMEs are <em>exempt</em> — unlike Bribery Act s.7, which applies to all.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Associated person</h3>
+
+  <p class="para">The base fraud offence must be committed by a <em>person associated with the relevant body</em>:</p>
+
+  <ul class="bullet">
+    <li><strong>Employee</strong></li>
+    <li><strong>Agent</strong></li>
+    <li><strong>Subsidiary</strong> of the relevant body</li>
+    <li><strong>Person providing services</strong> for / on behalf of the relevant body, while providing those services</li>
+  </ul>
+
+  <p class="para">
+    <em>Aiding, abetting, counselling, or procuring</em> the commission of the listed offences also qualifies.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Intent to benefit organisation</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Benefit requirement</div>
+    The benefit <em>may be financial or non-financial</em>. The organisation <strong>does not need to actually receive the benefit</strong> — the offence is complete <em>before any gain is received</em>. It is enough that the <strong>organisation was intended to be the beneficiary</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Defence</h3>
+
+  <p class="para">
+    The only defence is that the <strong>"organisation had reasonable procedures in place to prevent fraud"</strong>. Mirrors the Bribery Act s.7 structure.
+  </p>
+</div>
+
+<div class="section-card" id="fraud-act">
+  <div class="section-num">7.2.1</div>
+  <h2 class="section-title">Base Fraud Offences — Schedule 13 ECCTA</h2>
+
+  <p class="para">
+    The offence applies to the <strong>"base fraud" offences</strong> listed in <strong>Schedule 13 of ECCTA</strong>:
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Fraud Act 2006, Section 1 — 3 ways of fraud</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Fraud by false representation</span> — <em>dishonestly making a false representation</em> with intent to make gain / cause loss.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Fraud by failing to disclose information</span> — <em>dishonestly failing to disclose information</em> where there is a <strong>legal duty to disclose</strong>, with intent to make gain / cause loss.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Fraud by abuse of position</span> — <em>dishonestly abusing a position</em> in which the person is <strong>expected to safeguard the financial interests</strong> of another person.</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Other base fraud offences</h3>
+
+  <ul class="bullet">
+    <li>Participation in a <strong>fraudulent business</strong></li>
+    <li><strong>Obtaining services dishonestly</strong></li>
+    <li><strong>Cheating the public revenue</strong> (common law)</li>
+    <li><strong>False accounting</strong></li>
+    <li><strong>False statements by company directors</strong></li>
+    <li><strong>Fraudulent trading</strong> — carrying on business with intent to defraud creditors</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">ML — NOT a fraud offence</div>
+    <strong>Money laundering is NOT an offence of fraud</strong>. ML has its own regime under POCA (Sec 4). ECCTA failure to prevent fraud is separate.
+  </div>
+</div>
+
+<div class="section-card" id="principles">
+  <div class="section-num">7.3</div>
+  <h2 class="section-title">6 Home Office Fraud Prevention Principles</h2>
+
+  <p class="para">
+    The Home Office provided <strong>guidance</strong> — 6 fraud prevention principles that should inform an organisation's framework (very similar to the MoJ Bribery Act 6 principles):
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Top-level commitment</span> — senior management actively demonstrates zero tolerance of fraud</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Risk assessment</span> — identifying where the organisation is at risk of fraud</div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Proportionate risk-based prevention procedures</span></div></div>
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Due diligence</span> — understanding <em>who the organisation works with</em> — including employees, agents, third parties that could commit fraud on its behalf</div></div>
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Communication (including training)</span> — staff / partners aware of policies + training</div></div>
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Monitoring and review</span> — risks change; procedures must be kept up to date</div></div>
+
+  <div class="exam-box">
+    <div class="xb-title">ECCTA vs Bribery Act — parallel structure</div>
+    <strong>ECCTA failure to prevent fraud</strong> closely mirrors the <em>Bribery Act s.7 failure to prevent bribery</em>:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Both — strict corporate liability</li>
+      <li>Both — defence of "reasonable procedures"</li>
+      <li>Both — 6 guidance principles</li>
+    </ul>
+    <em>Difference:</em> the Bribery Act applies to ALL organisations; ECCTA only to LARGE.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 7</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">ECCTA Failure to Prevent Fraud</div>
+    <strong style="color:#FEF3C7">Effective:</strong> 1 September 2025<br>
+    <strong style="color:#FEF3C7">Applies to:</strong> Large organisations (2 of 3: £36m/£18m/250)<br>
+    <strong style="color:#FEF3C7">Defence:</strong> Reasonable procedures in place<br>
+    <strong style="color:#FEF3C7">Mirror:</strong> Bribery Act s.7 structure
+  </div>
+
+  <ul>
+    <li><strong>7.1 ECCTA Overview — reforms introduced:</strong>
+      <ul style="margin-top:.3rem">
+        <li>New regulatory objective in Legal Services Act 2007</li>
+        <li>Companies House reforms — preventing fraudulent company registration</li>
+        <li>Limited partnership abuse reforms</li>
+        <li>Cryptoasset seizure powers</li>
+        <li><strong>Failure to prevent fraud offence</strong></li>
+        <li>SLAPPs measures (Strategic Lawsuits Against Public Participation)</li>
+      </ul>
+    </li>
+    <li><strong>7.2 Failure to Prevent Fraud — effective 1 Sep 2025:</strong>
+      <ul style="margin-top:.3rem">
+        <li>An associated person (employee/agent/subsidiary) commits fraud <em>intending to benefit the organisation</em></li>
+        <li>The organisation is liable if it <em>did not have reasonable prevention procedures</em></li>
+        <li>Benefit = financial or non-financial; need not be actually received</li>
+      </ul>
+    </li>
+    <li><strong>Scope — only LARGE organisations</strong> (2 of 3):
+      <ul style="margin-top:.3rem">
+        <li>Turnover > £36 million</li>
+        <li>Balance sheet > £18 million</li>
+        <li>> 250 employees</li>
+      </ul>
+      SMEs are exempt — unlike the Bribery Act.
+    </li>
+    <li><strong>Associated persons:</strong> employee / agent / subsidiary / service provider. Aiding/abetting also qualifies.</li>
+    <li><strong>Base fraud offences (Schedule 13):</strong>
+      <ul style="margin-top:.3rem">
+        <li>Fraud Act 2006 Section 1 — 3 ways:
+          <ul style="margin-top:.2rem">
+            <li>(1) False representation</li>
+            <li>(2) Failing to disclose (with legal duty)</li>
+            <li>(3) Abuse of position</li>
+          </ul>
+        </li>
+        <li>Participation in a fraudulent business</li>
+        <li>Obtaining services dishonestly</li>
+        <li>Cheating the public revenue (common law)</li>
+        <li>False accounting</li>
+        <li>False statements by directors</li>
+        <li>Fraudulent trading</li>
+      </ul>
+      <strong>Money laundering — NOT a fraud offence</strong> (separate POCA regime).
+    </li>
+    <li><strong>Defence:</strong> reasonable procedures in place.</li>
+    <li><strong>6 Home Office principles:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Top-level commitment</li>
+        <li>(2) Risk assessment</li>
+        <li>(3) Proportionate risk-based procedures</li>
+        <li>(4) Due diligence</li>
+        <li>(5) Communication (including training)</li>
+        <li>(6) Monitoring and review</li>
+      </ul>
+    </li>
+    <li><strong>ECCTA vs Bribery Act:</strong> same structure (strict liability + reasonable procedures + 6 principles). Difference: Bribery Act = all sizes, ECCTA = large only.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

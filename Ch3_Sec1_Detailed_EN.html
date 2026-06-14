@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3, Section 1 — Market Abuse</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#9F1239;--primary-l:#FEE2E2;--primary-d:#7F1028;--primary-vd:#4C0519;--accent:#D97706;--accent-l:#FEF3C7;--accent-d:#92400E;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--rose:#BE123C;--rose-l:#FFE4E6;--rose-d:#881337;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--slate-d:#334155;--ink:#0F172A;--muted:#475569;--bg:#FEF2F2;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(159,18,57,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(76,5,25,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:#FEE2E2;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(159,18,57,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(159,18,57,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 3</div>
+  <div class="app-title">Chapter 3, Section 1 — Detailed Deep Dive</div>
+  <div class="app-sub">Market Abuse · Syllabus 3.1 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 1 of Chapter 3 is the <strong>foundation of all UK market integrity regulation</strong>. <em>Market abuse</em> is the deliberate distortion of how financial markets work: insider dealing, manipulation, false disclosure. The seriousness: it is a <strong>statutory offence under FSMA</strong>. The UK has a <strong>dual regime</strong>: civil (under UK MAR — administrative penalties by the FCA) + criminal (under CJA 1993 / FS Act 2012 — criminal prosecution). Key building blocks: <strong>UK MAR</strong> (onshored from the EU after Brexit), the <strong>MAR Sourcebook</strong> (FCA guidance), and <strong>STORs</strong> (Suspicious Transaction and Order Reports — firms must report to the FCA). Chapter 3 has around 19 exam questions; 3-4 of them come from Section 1.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s11">1.1 Statutory Offence — origin and scope</a></li>
+    <li>→ <a href="#mar">1.1.1 Implementation of MAR — 2016 → UK MAR</a></li>
+    <li>→ <a href="#brexit">Post-Brexit — 3 key amendments</a></li>
+    <li>→ <a href="#s12">1.2 FCA Market Conduct Handbook Guidance</a></li>
+    <li>→ <a href="#behaviours">Behaviours constituting market abuse</a></li>
+    <li>→ <a href="#fsact">FS Act 2012 — Sections 89-91 + 3 defences</a></li>
+    <li>→ <a href="#penalties">FS Act 2021 — new penalties</a></li>
+    <li>→ <a href="#s13">1.3 Prevention + Surveillance</a></li>
+    <li>→ <a href="#stor">1.3.2 STOR — Suspicious Transaction and Order Reports</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s11">
+  <div class="section-num">1.1</div>
+  <h2 class="section-title">The Statutory Offence — origin and scope</h2>
+
+  <p class="para">
+    <strong>Market abuse</strong> is a statutory offence covering <em>financial market manipulation and insider dealing</em>. It is a <strong>serious offence</strong> that damages <em>investor confidence</em> and <em>the integrity of financial markets</em>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Market abuse — origin</div>
+    The UK market abuse regime (an offence under the <strong>Financial Services and Markets Act (FSMA)</strong>) came into force in <strong>2001</strong>. This was the first comprehensive UK-wide market abuse prohibition.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Why market abuse is such a threat</h3>
+
+  <p class="para">Market abuse <em>undermines</em>:</p>
+
+  <ul class="bullet">
+    <li><strong>Investor confidence</strong> — if investors believe the market is manipulated, they exit</li>
+    <li><strong>Market integrity</strong> — prices stop reflecting <em>fundamental value</em></li>
+    <li><strong>Market efficiency</strong> — capital is misallocated; cost of capital rises</li>
+    <li><strong>Fairness</strong> — insiders profit at the expense of ordinary investors</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Why a statutory offence</div>
+    While market abuse was only a <em>civil wrong</em>, the preventive deterrent was insufficient. Making it a <strong>statutory offence</strong> means: (1) the FCA has formal enforcement powers; (2) criminal prosecutions are possible; (3) civil penalties rest on a legislative basis — not on private contract.
+  </div>
+</div>
+
+<div class="section-card" id="mar">
+  <div class="section-num">1.1.1</div>
+  <h2 class="section-title">Implementation of the Market Abuse Regulation (MAR)</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Timeline</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Date</th><th>Event</th></tr></thead>
+    <tbody>
+      <tr><td><span class="number-card">2001</span></td><td>UK market abuse regime <strong>came into force under FSMA</strong></td></tr>
+      <tr><td><span class="number-card">2016</span></td><td><strong>Market Abuse Regulation (MAR)</strong> came into effect — updating and enhancing the existing EU <em>Market Abuse Directive (MAD)</em></td></tr>
+      <tr><td><span class="number-card">2019</span></td><td><strong>Market Abuse (Amendment) (EU Exit) Regulations 2019</strong> — prepared for Brexit</td></tr>
+      <tr><td><span class="number-card">2020+</span></td><td>Post-Brexit <strong>UK MAR</strong> — onshored from the EU</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What MAR changed in 2016</h3>
+
+  <p class="para">MAR updated and enhanced the EU MAD, for example by:</p>
+
+  <ul class="bullet">
+    <li><strong>Extending scope</strong> — to include financial instruments traded on <em>platforms other than regulated markets</em> (bilaterally or <strong>OTC</strong>)</li>
+    <li><strong>Adapting rules</strong> for <em>new technology and specific behaviours</em></li>
+    <li>Clarifying that market abuse <strong>across spot commodity and related derivative markets</strong> is prohibited</li>
+    <li><strong>Reinforced cooperation</strong> between financial and commodity regulators</li>
+    <li>Ensuring regulators have the <strong>information needed to detect and sanction</strong> market abuse</li>
+    <li><strong>Tailored rules for SME issuers</strong> — so costs don't become a barrier to accessing financial markets</li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">The MAR Sourcebook after implementation</div>
+    Following MAR implementation, the FCA updated the Handbook to <strong>provide guidance</strong> on matters governed by MAR. It <em>does not take the form of binding rules</em> as it previously did. The Handbook <em>only provides guidance</em> where the FCA decided it was appropriate. The Handbook is <strong>not the sole source</strong> for provisions relating to market abuse.
+  </div>
+</div>
+
+<div class="section-card" id="brexit">
+  <div class="section-num">1.1.2</div>
+  <h2 class="section-title">Post-Brexit — UK MAR + 3 key amendments</h2>
+
+  <p class="para">
+    Following Brexit, the UK <strong>"onshored"</strong> (also referred to as <em>"retained"</em> or <em>"assimilated"</em> EU law) the EU MAR into the UK statute book. The provisions <em>remain largely unaltered</em>. However, MAR <strong>is now referred to as UK MAR</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 key amendments post-Brexit</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Market Abuse (Amendment) (EU Exit) Regulations 2019</div>
+    These regulations <em>ensure similar EU MAR requirements and protections</em> are in place after Brexit. <strong>3 key amendments</strong>:
+  </div>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">No obligation to share information with EU authorities</span> <em>without a guarantee of reciprocity</em>. Before Brexit — automatic data exchange with EU regulators. After — only where reciprocal.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">The FCA took over regulatory responsibilities</span> previously held by <em>ESMA</em> (European Securities and Markets Authority) and the <em>EC</em> (European Commission). The UK now has complete regulatory autonomy.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Supplementary legislation is subject to HM Treasury</span> — <em>not the European Commission</em>. HMT is now the policy authority for any additions.</div></div>
+
+  <div class="example-box">
+    <div class="eb-title">Practical effect of Brexit</div>
+    Firms trading <em>cross-border</em> between the UK and EU now have to comply with <strong>both</strong> — UK MAR (for UK operations) and EU MAR (for EU operations). This created a <em>dual compliance burden</em>. However, the substance of the rules is very similar — both derived from the same framework.
+  </div>
+</div>
+
+<div class="section-card" id="s12">
+  <div class="section-num">1.2</div>
+  <h2 class="section-title">FCA Market Conduct Handbook Guidance — Civil & Criminal Regime</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Dual regime structure</h3>
+
+  <div class="info-box">
+    <div class="ib-title">The UK — dual regime</div>
+    The UK has <strong>TWO parallel regimes</strong> for market abuse:<br>
+    <strong>CIVIL:</strong> UK MAR + MAR Sourcebook. FCA <em>administrative penalties</em>, public censure. Standard of proof — <em>balance of probabilities</em>.<br>
+    <strong>CRIMINAL:</strong> CJA 1993 (insider dealing) + FS Act 2012 Sections 89-91 (misleading statements). Criminal court prosecution. Standard of proof — <em>beyond reasonable doubt</em>. Sentences — prison.<br><br>
+    The FCA can choose — civil or criminal.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FSMA alongside insider dealing legislation</h3>
+
+  <p class="para">
+    The first <em>2 types of behaviour</em> potentially constituting market abuse — <strong>insider dealing</strong> and <strong>improper disclosure</strong> — are likely to give a <em>false or misleading impression</em> of supply/demand/value of the investments concerned.
+  </p>
+
+  <p class="para">They are <em>to an extent</em> already covered by UK legislation:</p>
+
+  <ul class="bullet">
+    <li><strong>Insider dealing</strong> — the <em>Criminal Justice Act 1993 (CJA)</em> — see Sec 2</li>
+    <li><strong>Misleading statements / practices</strong> — <em>Sections 89-92 of the FS Act 2012</em></li>
+  </ul>
+</div>
+
+<div class="section-card" id="behaviours">
+  <div class="section-num">1.2.1</div>
+  <h2 class="section-title">Behaviours constituting Market Abuse</h2>
+
+  <p class="para">
+    The MAR Sourcebook <strong>includes aspects of insider dealing</strong> + expands on the behaviours constituting market abuse + specifies <em>the civil actions available</em> to the FCA.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Typical market abuse hallmarks</h3>
+
+  <p class="para">
+    Market abuse behaviours are <strong>normally behaviours</strong> that are <em>likely to give a false or misleading impression</em> of:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Supply</strong> of investments</li>
+    <li><strong>Demand</strong> for investments</li>
+    <li><strong>Value</strong> of investments</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA civil actions</h3>
+
+  <p class="para">
+    The MAR Sourcebook specifies the civil actions the FCA can take in respect of firms — and <em>which may also be taken against senior managers and other individuals</em>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Financial penalties</strong></li>
+    <li><strong>Public censure</strong></li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">Public censure — why it is effective</div>
+    <strong>Public censure</strong> helps promote high standards of regulatory / market conduct — <em>both</em>:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Deterring firms/individuals</strong> from committing further breaches</li>
+      <li><strong>Warning others</strong></li>
+    </ul>
+    A financial firm's reputation depends on public trust. Censure can be far more damaging than a fine.
+  </div>
+</div>
+
+<div class="section-card" id="fsact">
+  <div class="section-num">1.2.2</div>
+  <h2 class="section-title">FS Act 2012 — Sections 89-91 + 3 Defences</h2>
+
+  <p class="para">
+    The <strong>Financial Services Act 2012</strong> introduced <strong>3 offences</strong> relating to the making / carrying on of misleading statements and practices — <em>replacing Section 3.97 of FSMA</em>:
+  </p>
+
+  <div class="p-item"><div class="p-num">89</div><div class="p-body"><span class="p-title">Making misleading statements</span> — Section 89. Deliberately making false statements to induce another person to enter into a financial transaction.</div></div>
+
+  <div class="p-item"><div class="p-num">90</div><div class="p-body"><span class="p-title">Creating false or misleading impressions</span> — Section 90. Causing impressions of the market/price of financial instruments that are false or misleading.</div></div>
+
+  <div class="p-item"><div class="p-num">91</div><div class="p-body"><span class="p-title">Making misleading statements relating to benchmarks</span> — Section 91. After the <em>LIBOR scandal</em> of 2012 — a specific offence around benchmark manipulation (LIBOR, EURIBOR, FX fixes).</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 potential defences</h3>
+
+  <p class="para">A person accused under Sections 89-91 has <strong>3 possible defences</strong>:</p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Reasonable belief</span> — the person <em>reasonably believed</em> that their act / conduct <strong>would not create an impression that was false or misleading</strong>.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Price stabilisation rules</span> — actions / statements / forecasts made <strong>in conformity with the FCA's price stabilisation rules</strong>. These rules allow market participants (investment banks) to <em>support the price of a new issue of securities</em> for clients — aim <em>preventing the market from being excessively volatile</em>. The rules require certain disclosures + restrict the support to a particular period.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Control of information rules</span> — actions / statements / forecasts made <strong>in conformity with the FCA's control of information rules</strong>. These rules relate to statements made on the basis of <em>limited information</em>. The remainder may be known to the firm but <strong>rests behind "information barriers"</strong> (Chinese walls) — <em>not known to the relevant individual</em>.</div></div>
+
+  <div class="example-box">
+    <div class="eb-title">Practical example — Chinese walls defence</div>
+    An M&A banker at a firm knows about an upcoming acquisition. An equity research analyst <em>at the same firm</em> publishes a bullish note on the target — <em>without knowing</em> about the M&A. If the analyst defends themselves — <strong>acted in conformity with the control of information rules</strong> (Chinese wall separated M&A and research) — that is a valid defence.
+  </div>
+</div>
+
+<div class="section-card" id="penalties">
+  <div class="section-num">1.2.3</div>
+  <h2 class="section-title">FS Act 2021 — new penalties</h2>
+
+  <p class="para">
+    The <strong>Financial Services Act 2021</strong> introduced <strong>new maximum sentences</strong> for insider dealing and financial services offences (misleading statements under the FS Act 2012).
+  </p>
+
+  <table class="comp-table">
+    <thead><tr><th>Conviction type</th><th>Offences up to 31 Oct 2021</th><th>Offences from 1 Nov 2021</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Summary conviction</strong></td>
+        <td colspan="2">Fine not exceeding the <em>statutory amount</em> or jail <em>≤12 months</em>, or both</td>
+      </tr>
+      <tr>
+        <td><strong>Conviction on indictment</strong></td>
+        <td>Jail <strong>≤7 years</strong> + fine, or both</td>
+        <td><strong>Jail ≤10 years</strong> + fine, or both</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="warn-box">
+    <div class="wb-title">Key date — 1 November 2021</div>
+    Offences committed <strong>up to 31 October 2021</strong> → max <strong>7 years</strong>.<br>
+    Offences committed <strong>from 1 November 2021</strong> → max <strong>10 years</strong>.<br>
+    This <em>3-year increase</em> represents a serious escalation of the UK's stance on financial crime.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>MAR 1 vs MAR 2</h3>
+
+  <p class="para">
+    Firms and individuals participating in financial markets are required to <strong>observe standards of conduct</strong>. The FCA's <strong>Market Conduct Sourcebook ("MAR")</strong> sets these standards:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>MAR 1</strong> — requirements relating to <em>market abuse</em></li>
+    <li><strong>MAR 2</strong> — <em>price stabilising rules</em></li>
+  </ul>
+
+  <p class="para">The FCA's MAR Sourcebook provides guidance on UK MAR in terms of:</p>
+
+  <ul class="bullet">
+    <li>What <strong>does and does not amount</strong> to market abuse</li>
+    <li><strong>Factors</strong> taken into account in determining whether market abuse has occurred</li>
+  </ul>
+</div>
+
+<div class="section-card" id="s13">
+  <div class="section-num">1.3</div>
+  <h2 class="section-title">Prevention + Surveillance — System Requirements</h2>
+
+  <p class="para">
+    Where firms have a reasonable suspicion that an order / transaction <em>in any financial instrument</em> (placed / executed <strong>on or outside a trading venue</strong>) <em>could constitute</em> insider dealing, market manipulation, <em>or attempts</em> — they are required to <strong>report the regulator without delay</strong> (the FCA in the UK).
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>System requirements</h3>
+
+  <p class="para">UK MAR requires firms to <strong>establish and maintain effective arrangements, systems and procedures</strong>:</p>
+
+  <ul class="bullet">
+    <li><strong>Appropriate and proportionate</strong> to the scale, size, nature, and complexity of business activity</li>
+    <li><strong>Regularly assessed</strong> — at least through an <em>annually conducted audit and internal review</em>, updated when necessary</li>
+    <li><strong>Clearly documented in writing</strong>, including changes / updates — documented information maintained for <strong>5 years</strong></li>
+    <li>Allow <strong>analysis</strong>, individually and comparatively, of <em>each and every transaction executed and order placed/modified/cancelled/rejected</em> in trading venue systems + transactions executed outside a trading venue</li>
+    <li>Produce <strong>alerts</strong> indicating activities requiring further analysis</li>
+    <li>Cover the <strong>full range of trading activities</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Human analysis + training</h3>
+
+  <p class="para">Firms should:</p>
+
+  <ul class="bullet">
+    <li>Put in place and maintain arrangements — ensuring an <strong>appropriate level of human analysis</strong> (not just automation) in monitoring</li>
+    <li>Provide the competent authority with <em>information</em> demonstrating the <strong>appropriateness/proportionality of systems</strong>, including the <em>level of automation</em></li>
+    <li>Provide <strong>effective and comprehensive training</strong> to staff involved in monitoring/detection. Training on a <em>regular basis</em>, appropriate to scale/size/nature of business</li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">Third-party vendors</div>
+    Many organisations use <strong>third-party vendor solutions</strong> — automated compliance tools that <em>monitor employee activities + alert teams</em> to potential violations. Examples: Nasdaq SMARTS, Behavox, Aquis Surveillance.
+  </div>
+</div>
+
+<div class="section-card" id="stor">
+  <div class="section-num">1.3.2</div>
+  <h2 class="section-title">STOR — Suspicious Transaction and Order Reporting</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Basic STOR principle</h3>
+
+  <div class="info-box">
+    <div class="ib-title">STOR — the backbone of the prevention regime</div>
+    Where a person has <em>reasonable suspicion</em> regarding an order or transaction <strong>in any financial instrument</strong>, whether placed / executed <em>on or outside a trading venue</em> (OTC / bilateral), that it <em>could constitute market manipulation or insider trading</em>, they <strong>must notify the FCA without delay</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Attempts are also included</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">STOR applies to attempts too</div>
+    The requirement <strong>extends to attempts</strong> to commit the offences — <em>where no execution took place</em> but there was <strong>intent to distort the market</strong> ("attempted market abuse"). An attempted insider trade — even if never executed — already triggers a STOR.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Timing — when to report</h3>
+
+  <p class="para">
+    Firms report <strong>directly to the FCA, in a timely manner</strong>, <em>once a full investigation has been undertaken</em> — to assess whether an event is considered suspicious and required to be reported.
+  </p>
+
+  <div class="exam-box">
+    <div class="xb-title">Important nuance</div>
+    Firms <strong>should not second-guess</strong> whether the FCA would consider an event suspicious. <em>They report what the firm considers suspicious</em>. It is the <strong>firm's duty</strong> — the FCA assesses afterwards.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>STOR report content</h3>
+
+  <p class="para">UK MAR outlines the content of a STOR report — includes:</p>
+
+  <ul class="bullet">
+    <li><strong>Identification of the person submitting the STOR</strong> — the capacity in which the person operates (own account / executing orders for third parties)</li>
+    <li><strong>Description of the order / transaction</strong>:
+      <ul style="margin-top:.2rem">
+        <li>Type of order, type of trading (particularly <em>block trades</em>), where the activity occurred</li>
+        <li>Price and volume</li>
+      </ul>
+    </li>
+    <li><strong>Reasons</strong> why the order/transaction is <em>suspected to constitute</em> insider dealing / market manipulation / attempted</li>
+    <li><strong>Means of identifying any person involved</strong> — the person who placed/executed + the person on whose behalf</li>
+    <li><strong>Any other information and supporting documents</strong> relevant for detecting/investigating/enforcing</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>STOR vs Market Observation</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Report</th><th>When used</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>STOR</strong></td>
+        <td>The firm is <em>directly involved</em> — has complete information about the transaction/order. A formal regulatory report.</td>
+      </tr>
+      <tr>
+        <td><strong>Market Observation</strong></td>
+        <td>The firm <em>observed suspicious activity</em> but is <strong>not involved</strong> — <em>does not have complete information</em> to meet the defined STOR requirements. An informal alert to the FCA.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Reports go directly to the FCA</h3>
+
+  <p class="para">
+    STORs are submitted <strong>directly to the FCA</strong> — the competent authority in the UK. <em>Not the NCA, not HMT, not ESMA</em>.
+  </p>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 1 (Chapter 3)</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Market Abuse — UK dual regime</div>
+    <strong style="color:#FEF3C7">CIVIL</strong> (UK MAR + MAR Sourcebook) → FCA administrative penalties + public censure<br>
+    <strong style="color:#FEF3C7">CRIMINAL</strong> (CJA 1993 + FS Act 2012 s.89-91) → prosecution + prison (max 10 years post-1 Nov 2021)<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong style="color:#FEF3C7">Prevention</strong>: Surveillance systems + STOR + Market observations
+  </div>
+
+  <ul>
+    <li><strong>1.1 Statutory Offence:</strong> Market abuse = <em>statutory offence</em> under FSMA. UK regime came into force <strong>2001</strong>. Covers financial market manipulation + insider dealing.</li>
+    <li><strong>1.1.1 MAR Implementation:</strong> <strong>2016</strong> — MAR came into effect, updating the EU MAD:
+      <ul style="margin-top:.3rem">
+        <li>Extended scope — OTC + bilateral trading</li>
+        <li>Adapted rules for new technology</li>
+        <li>Covered spot commodity + related derivatives</li>
+        <li>Reinforced cooperation between financial / commodity regulators</li>
+        <li>Tailored for SME issuers</li>
+      </ul>
+    </li>
+    <li><strong>FCA Handbook guidance</strong> — not binding rules, only guidance where appropriate. The MAR Sourcebook is not the sole source.</li>
+    <li><strong>Post-Brexit UK MAR:</strong> EU MAR <em>onshored</em> via the <strong>Market Abuse (Amendment) (EU Exit) Regulations 2019</strong>. <strong>3 key amendments</strong>:
+      <ul style="margin-top:.3rem">
+        <li>No obligation to share info with EU authorities without reciprocity</li>
+        <li>FCA takes on ESMA + EC responsibilities</li>
+        <li>Supplementary legislation — HM Treasury (not the EC)</li>
+      </ul>
+    </li>
+    <li><strong>1.2 Market abuse behaviours</strong> — normally likely to <em>give a false/misleading impression</em> of supply/demand/value of investments.</li>
+    <li><strong>FCA civil actions:</strong> financial penalties + public censure. Against firms + senior managers + individuals.</li>
+    <li><strong>FS Act 2012 — 3 offences:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Section 89</strong> — making misleading statements</li>
+        <li><strong>Section 90</strong> — creating false/misleading impressions</li>
+        <li><strong>Section 91</strong> — misleading statements relating to benchmarks (LIBOR post-scandal)</li>
+      </ul>
+    </li>
+    <li><strong>3 Defences under Sections 89-91:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Reasonable belief — would not create a false impression</li>
+        <li>(2) Price stabilisation rules FCA conformity</li>
+        <li>(3) Control of information rules FCA (Chinese walls)</li>
+      </ul>
+    </li>
+    <li><strong>FS Act 2021 — new maximum sentences:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Offences up to <strong>31 Oct 2021</strong> → max <strong>7 years</strong> on indictment</li>
+        <li>Offences from <strong>1 Nov 2021</strong> → max <strong>10 years</strong> on indictment</li>
+        <li>Summary: ≤12 months + statutory fine</li>
+      </ul>
+    </li>
+    <li><strong>MAR Sourcebook structure:</strong> MAR 1 = market abuse requirements; MAR 2 = price stabilising rules.</li>
+    <li><strong>1.3 Prevention requirements</strong> — firms must have systems:
+      <ul style="margin-top:.3rem">
+        <li>Proportionate to scale/size/nature</li>
+        <li>Annually reviewed + audited</li>
+        <li>Documented in writing — retained for <strong>5 years</strong></li>
+        <li>Analyse every transaction/order (executed/modified/cancelled/rejected)</li>
+        <li>Produce alerts</li>
+        <li>Cover the full range of trading</li>
+      </ul>
+    </li>
+    <li><strong>Human analysis + regular training</strong> of staff, proportionate to business.</li>
+    <li><strong>1.3.2 STOR — Suspicious Transaction and Order Reports:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Applies to orders/transactions <em>in any financial instrument</em> — trading venue OR OTC</li>
+        <li>Attempts also included (no execution, but intent)</li>
+        <li>Report <strong>directly to the FCA</strong> — timely, after full investigation</li>
+        <li>Firms don't second-guess the FCA — report what the firm considers suspicious</li>
+        <li>Content: submitter identity / order description / reasons / involved persons / supporting docs</li>
+      </ul>
+    </li>
+    <li><strong>STOR vs Market Observation:</strong> STOR = directly involved, complete info. Market Observation = observed but not involved, incomplete info.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

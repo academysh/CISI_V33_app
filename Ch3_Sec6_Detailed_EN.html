@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3, Section 6 — The Bribery Act 2010</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#9F1239;--primary-l:#FEE2E2;--primary-d:#7F1028;--primary-vd:#4C0519;--accent:#D97706;--accent-l:#FEF3C7;--accent-d:#92400E;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#FEF2F2;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(159,18,57,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(76,5,25,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#FEE2E2;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(159,18,57,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(159,18,57,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:52px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.78rem;min-width:46px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 3</div>
+  <div class="app-title">Chapter 3, Section 6 — Detailed Deep Dive</div>
+  <div class="app-sub">The Bribery Act 2010 · Syllabus 3.6 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    The <strong>Bribery Act 2010</strong> is one of the toughest anti-bribery laws in the world. It creates <strong>4 main offences</strong> (Sections 1, 2, 6, 7) plus interpretive Sections 3, 4, 5. <strong>Key features:</strong> (1) extraterritorial application — it applies to <em>any commercial organisation carrying on business in the UK</em>; (2) <strong>Section 7 — corporate strict liability offence</strong> with the only defence being <em>"adequate procedures"</em>; (3) facilitation payments are <strong>prohibited</strong> (unlike some US FCPA exceptions). Penalties: <strong>10 years prison</strong> for individuals, <strong>unlimited fine</strong> for corporates. The MoJ published <strong>6 principles</strong> of adequate procedures. 1-2 exam questions, often scenarios about facilitation payments, hospitality, or the 4 offences.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s61">6.1 Overview — 4 offences</a></li>
+    <li>→ <a href="#s62">6.2 Sections 1-7 detailed</a></li>
+    <li>→ <a href="#penalties">Penalties</a></li>
+    <li>→ <a href="#s63">6.3 MoJ 6 Principles + hospitality + facilitation</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s61">
+  <div class="section-num">6.1</div>
+  <h2 class="section-title">Overview — 4 offences</h2>
+
+  <p class="para">The <strong>Bribery Act 2010</strong> creates <strong>4 offences</strong>:</p>
+
+  <div class="p-item"><div class="p-num">1 (s.1)</div><div class="p-body"><span class="p-title">Offering a bribe</span> — <em>offering, promising or giving</em> a bribe to another person</div></div>
+  <div class="p-item"><div class="p-num">2 (s.2)</div><div class="p-body"><span class="p-title">Receiving a bribe</span> — <em>requesting, agreeing to receive, or accepting</em> a bribe from another person</div></div>
+  <div class="p-item"><div class="p-num">3 (s.6)</div><div class="p-body"><span class="p-title">Bribing a foreign public official</span></div></div>
+  <div class="p-item"><div class="p-num">4 (s.7)</div><div class="p-body"><span class="p-title">Corporate failure to prevent bribery</span> — <em>strict liability</em> offence for commercial organisations</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Territorial scope</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Extraterritoriality</div>
+    The Bribery Act <strong>applies to activities outside the UK</strong> if a firm <em>carries on business in the UK</em> — <strong>even if the activities have no direct link to the UK</strong>. A foreign company with a UK office can be caught for bribery in Asia or Africa.
+  </div>
+</div>
+
+<div class="section-card" id="s62">
+  <div class="section-num">6.2</div>
+  <h2 class="section-title">Sections 1-7 — Detailed</h2>
+
+  <div class="p-item"><div class="p-num">s.1</div><div class="p-body"><span class="p-title">Bribing another person</span> — a person <em>offers, gives or promises to give</em> a <strong>financial or other advantage</strong> to another individual <em>in exchange for <strong>improper performance</strong></em> of a relevant function/activity.</div></div>
+
+  <div class="p-item"><div class="p-num">s.2</div><div class="p-body"><span class="p-title">Being bribed</span> — defined as <em>requesting, accepting, or agreeing to accept</em> such an advantage <em>in exchange for improper performance</em> of such a function/activity.</div></div>
+
+  <div class="p-item"><div class="p-num">s.3</div><div class="p-body"><span class="p-title">Relevant function or activity — definition</span>:
+  <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+    <li><em>"Any function of a public nature;</em></li>
+    <li><em>any activity connected with a business, trade or profession;</em></li>
+    <li><em>any activity performed in the course of a person's employment;</em></li>
+    <li><em>any activity performed by or on behalf of a body of persons, whether corporate or unincorporated"</em></li>
+  </ul>
+  Applies to <strong>both private and public</strong> industry. Activities outside the UK — included even without a link to the country.</div></div>
+
+  <div class="p-item"><div class="p-num">s.4</div><div class="p-body"><span class="p-title">Improper performance</span> — activity is considered <em>improperly performed</em> when:
+  <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+    <li><strong>The expectation of good faith or impartiality is breached</strong></li>
+    <li><strong>The function is performed in a way not expected</strong> of a person in a <em>position of trust</em></li>
+  </ul></div></div>
+
+  <div class="p-item"><div class="p-num">s.5</div><div class="p-body"><span class="p-title">Standard of a reasonable person in the UK</span> — the standard <em>expected of a reasonable person in the UK</em>, including what might be <em>expected of a person in such a position</em>.
+  <br><br>
+  If the breach occurred in a <strong>jurisdiction outside the UK</strong> — <strong>local practices or customs should be disregarded</strong> <em>unless they form part of the <strong>written law</strong></em> of the jurisdiction. Written law = constitution / statute / judicial opinion set down in writing.</div></div>
+
+  <div class="p-item"><div class="p-num">s.6</div><div class="p-body"><span class="p-title">Bribery of foreign public officials</span> — a specific offence targeting corruption in international business deals.</div></div>
+
+  <div class="p-item"><div class="p-num">s.7</div><div class="p-body"><span class="p-title">Corporate failure to prevent bribery</span> — a commercial organisation <em>fails to prevent persons associated with it</em> from bribing. <strong>Strict liability</strong> — the company is guilty even if senior management did not know. Applies to <em>all commercial organisations carrying on business in the UK</em> — regardless of size.</div></div>
+
+  <div class="exam-box">
+    <div class="xb-title">Section 7 — the only defence</div>
+    The only defence to Section 7 is <strong>"the organisation had adequate procedures"</strong> in place to prevent bribery. This is the basis of MoJ guidance + the 6 principles (below).
+  </div>
+</div>
+
+<div class="section-card" id="penalties">
+  <div class="section-num">6.2.1</div>
+  <h2 class="section-title">Penalties</h2>
+
+  <table class="comp-table">
+    <thead><tr><th>Offence</th><th>Max penalty</th></tr></thead>
+    <tbody>
+      <tr><td>Sections 1, 2, 6 (individuals)</td><td><strong>10 years' imprisonment + unlimited fine</strong></td></tr>
+      <tr><td>Section 7 corporate offence</td><td><strong>Unlimited fine</strong> (no prison — it's corporate)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <div class="ib-title">Almost any size of bribe</div>
+    There is no minimum threshold. <em>Any financial or other advantage</em> — if offered with intent to bribe — is caught.
+  </div>
+</div>
+
+<div class="section-card" id="s63">
+  <div class="section-num">6.3</div>
+  <h2 class="section-title">MoJ 6 Principles + Hospitality + Facilitation Payments</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>MoJ 6 Principles of Adequate Procedures</h3>
+
+  <p class="para">
+    The Ministry of Justice published <strong>statutory guidance</strong> — <em>6 principles</em> defining "adequate procedures" for the s.7 defence:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Proportionate procedures</span> — anti-bribery procedures must be proportionate to the <em>bribery risks faced</em>, the nature/scale/complexity of activities.</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Top level commitment</span> — <em>senior management</em> actively <strong>demonstrates the organisation does not tolerate bribery</strong>. Personal demonstration + a clear message to staff/partners.</div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Risk assessment</span> — <em>periodic, informed, documented assessment</em> of the nature/extent of exposure to potential external + internal bribery risks.</div></div>
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Due diligence</span> — <em>knowing exactly who the firm is dealing with</em> — conducting checks <strong>before engaging third parties</strong>. Protects from associating with less trustworthy persons.</div></div>
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Communication (including training)</span> — communicating anti-bribery policies to <em>staff and others</em> — enhancing awareness + deterring bribery. Includes regular training.</div></div>
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Monitoring and review</span> — <em>bribery risks and the effectiveness of procedures may change over time</em>. Firms should keep their steps <strong>under review</strong>.</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Corporate Hospitality</h3>
+
+  <div class="info-box">
+    <div class="ib-title">When hospitality is NOT bribery</div>
+    Corporate hospitality <em>does not amount to a bribe</em> if it:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Has a <strong>legitimate business aim</strong></li>
+      <li>Is <strong>reasonable</strong></li>
+      <li>Is <strong>proportionate</strong></li>
+      <li>Is <strong>appropriate</strong> in the circumstances</li>
+    </ul>
+    There is no <em>fixed monetary threshold</em>. Context matters — a £100 dinner may be fine; £500 football tickets for a foreign official before a tender — already a problem.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Facilitation Payments</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Facilitation payments — an offence in the UK</div>
+    <em>Facilitation payments</em> — small payments to government officials to <em>expedite routine actions</em> (e.g. processing permits, customs clearance).<br><br>
+    Under the Bribery Act, this is an <strong>OFFENCE</strong>, <em>unless</em>:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Made under threat of violence / duress</strong></li>
+      <li><strong>Permitted by the written law</strong> of the foreign official's country</li>
+    </ul>
+    Unlike the US FCPA, which has an explicit carve-out for facilitation payments, the UK takes a <em>zero tolerance</em> approach. This is a <em>major compliance risk</em> for multinationals.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Scenario — facilitation payment</div>
+    A UK company's employee in Nigeria offers <em>$50 to a customs officer</em> to <em>speed up cargo release</em>. That is a <strong>facilitation payment</strong>. Under Nigerian written law — it is <em>NOT permitted</em>. The employee committed an offence + the company is potentially guilty under s.7 (unless it has adequate procedures).
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 6</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Bribery Act 2010 — 4 offences</div>
+    <strong style="color:#FEF3C7">s.1</strong> — Giving a bribe (active)<br>
+    <strong style="color:#FEF3C7">s.2</strong> — Receiving a bribe (passive)<br>
+    <strong style="color:#FEF3C7">s.6</strong> — Bribing a foreign public official<br>
+    <strong style="color:#FEF3C7">s.7</strong> — Corporate failure to prevent (strict liability)<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    Max: <strong style="color:#FEF3C7">10 years</strong> (individuals) / <strong style="color:#FEF3C7">unlimited fine</strong> (corporate)
+  </div>
+
+  <ul>
+    <li><strong>6.1 Overview — 4 offences:</strong> giving / receiving / foreign official / corporate failure.</li>
+    <li><strong>Territorial scope:</strong> applies to activities outside the UK if the firm carries on business in the UK — even without a direct link.</li>
+    <li><strong>6.2 Sections 1-7:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>s.1</strong> — offering/giving/promising a financial or other advantage for improper performance</li>
+        <li><strong>s.2</strong> — requesting/accepting a bribe</li>
+        <li><strong>s.3</strong> — "relevant function/activity" definition — public + private + employment + body of persons</li>
+        <li><strong>s.4</strong> — improper performance: breach of good faith/impartiality OR not as expected of a position of trust</li>
+        <li><strong>s.5</strong> — standard of a <em>reasonable person in the UK</em>. Local customs disregarded unless part of written law</li>
+        <li><strong>s.6</strong> — bribery of foreign public officials</li>
+        <li><strong>s.7</strong> — corporate strict liability. Defence = adequate procedures</li>
+      </ul>
+    </li>
+    <li><strong>Penalties:</strong> <strong>10 years</strong> + unlimited fine for individuals. <strong>Unlimited fine</strong> for the corporate s.7 offence.</li>
+    <li><strong>6.3 MoJ 6 Principles of adequate procedures:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Proportionate procedures</li>
+        <li>(2) Top level commitment</li>
+        <li>(3) Risk assessment</li>
+        <li>(4) Due diligence</li>
+        <li>(5) Communication (including training)</li>
+        <li>(6) Monitoring and review</li>
+      </ul>
+    </li>
+    <li><strong>Corporate hospitality</strong> — NOT a bribe if: legitimate business aim + reasonable + proportionate + appropriate. No fixed threshold.</li>
+    <li><strong>Facilitation payments</strong> — <strong>OFFENCE</strong> in the UK. Defences: (1) threat of violence / duress; (2) permitted by the <em>written law</em> of the country. The UK has zero tolerance — stricter than the US FCPA.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

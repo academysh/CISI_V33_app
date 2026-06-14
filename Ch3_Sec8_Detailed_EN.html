@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3, Section 8 — Disclosure and Transparency Rules</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#9F1239;--primary-l:#FEE2E2;--primary-d:#7F1028;--primary-vd:#4C0519;--accent:#D97706;--accent-l:#FEF3C7;--accent-d:#92400E;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#FEF2F2;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(159,18,57,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(76,5,25,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#FEE2E2;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(159,18,57,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(159,18,57,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 3</div>
+  <div class="app-title">Chapter 3, Section 8 — Detailed Deep Dive</div>
+  <div class="app-sub">Disclosure and Transparency Rules (DTR) · Syllabus 3.8 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    The <strong>Disclosure and Transparency Rules (DTR)</strong> are part of the FCA Handbook. They are designed to deliver <em>transparency over issuers</em> so that investors can make informed decisions. Key compliance requirements: (1) <strong>3% notifiable interest</strong> (UK retained; the EU starts at 5%); (2) <strong>PDMR transaction reporting</strong> — 3 business days + €5,000 threshold + 30 calendar-day closed period; (3) <strong>Section 793 Companies Act 2006</strong> letter for investigating beneficial ownership; (4) global context — US CTA 2021. 1-2 exam questions, often about the <em>3% threshold + whole percentage points</em>, exceptions, closed period.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s81">8.1 DTR Overview + Inside Information Control</a></li>
+    <li>→ <a href="#thresholds">UK DTR 3% Threshold + whole percentages</a></li>
+    <li>→ <a href="#pdmr">8.2 PDMR Rules — Closed Periods + Chairman Approval</a></li>
+    <li>→ <a href="#exemptions">Voting rights exemptions (6 categories)</a></li>
+    <li>→ <a href="#s793">Section 793 Companies Act 2006</a></li>
+    <li>→ <a href="#us-cta">US Corporate Transparency Act 2021</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s81">
+  <div class="section-num">8.1</div>
+  <h2 class="section-title">DTR Overview + Inside Information Control</h2>
+
+  <p class="para">
+    The <strong>Disclosure and Transparency Rules (DTR)</strong> are part of the <strong>FCA Handbook</strong>. They are implemented by the FCA in its role as the <em>UK's listing authority</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Purpose — transparency</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Aim of the DTR</div>
+    To enable existing + potential investors to <strong>assess a company in full knowledge</strong> — is there a new significant shareholding, who are the PDMRs, what inside information has been disclosed.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Post-Brexit context</h3>
+
+  <p class="para">
+    Following Brexit, the <strong>UK Transparency Directive</strong> established disclosure requirements on an <em>ongoing basis</em> for issuers that have securities <em>admitted to trading on a regulated market</em> situated / operated within the UK and/or EU. This includes <em>notification requirements for both issuers and investors</em> in relation to the acquisition / disposal of significant shareholdings.
+  </p>
+</div>
+
+<div class="section-card" id="thresholds">
+  <div class="section-num">8.1.1</div>
+  <h2 class="section-title">UK DTR 3% Threshold — notifiable interests</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>EU vs UK thresholds</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Regime</th><th>Starting threshold</th><th>Further thresholds</th></tr></thead>
+    <tbody>
+      <tr><td><strong>EU Transparency Directive</strong></td><td><span class="number-card">5%</span></td><td>10%, 15%, 20%, 25%, 30%, 50%, 75%</td></tr>
+      <tr><td><strong>UK DTR (retained)</strong></td><td><span class="number-card">3%</span></td><td><em>Every whole percentage point above 3%</em></td></tr>
+    </tbody>
+  </table>
+
+  <p class="para">
+    On implementation of the Directive, the UK decided to <em>retain its thresholds</em> at 3% + <strong>every percentage point above</strong>. So under UK regulation:
+  </p>
+
+  <ul class="bullet">
+    <li>An investor is <em>judged to have a notifiable interest</em> in a public company if they hold <strong>3% or more</strong> of its shares</li>
+    <li>Above 3%, the investor must notify the company if the holding <em>rises or falls through a whole percentage point</em></li>
+    <li>Notify if the stake <em>falls back below 3%</em></li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Whole percentage point — examples</div>
+    • <strong>3.7% → 4.1%</strong>: notifiable (crosses 4%)<br>
+    • <strong>3.7% → 3.9%</strong>: NOT notifiable (doesn't cross a whole point)<br>
+    • <strong>5.4% → 4.9%</strong>: notifiable (crosses 5%)<br>
+    • <strong>5.4% → 5.1%</strong>: NOT notifiable (doesn't cross a whole point)<br>
+    • <strong>Any holding below 3%</strong>: not notifiable under the standard rule
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Voting rights, not just shares</h3>
+
+  <p class="para">
+    An interest is also notifiable if the <em>3% interest is in the form of voting rights</em>, rather than simply holding shares. <strong>Voting rights attached to shares</strong> are now disclosable — rather than interests in shares. Voting rights may arise from <em>holdings of financial instruments</em> as well as shares.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Indirect holdings</h3>
+
+  <p class="para">
+    Indirect holdings <em>may also</em> trigger a notification requirement when a person <strong>may be able to control the exercise of voting rights</strong>. For example, <em>appointing a proxy</em> — if the holding reaches the threshold and the appointment includes the power to <em>vote at the proxy holder's discretion</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Connected parties</h3>
+
+  <p class="para">
+    Notifiable interest rules include <strong>not only directly held shares</strong>, but also:
+  </p>
+
+  <ul class="bullet">
+    <li>The investor's <strong>spouse</strong></li>
+    <li>The investor's <strong>children (< 18)</strong></li>
+    <li>Companies <strong>controlled by the investor</strong> — control is assumed if they hold <em>≥ 1/3 of voting rights</em></li>
+    <li><strong>Concert parties</strong> — an agreement between 2+ persons to <em>influence the company together</em> (e.g. voting together). If the combined holding <em>reaches 3%+</em>, it becomes notifiable <strong>as if a single holding</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Timing + process</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Notification timeline</div>
+    Shareholders are deemed to have knowledge of a voting rights change <strong>no later than 2 trading days</strong> following the transaction (or when it becomes unconditional).<br><br>
+    <strong>Notification to the company — in writing within 2 business days</strong>.<br><br>
+    If the company is listed — it must report to a <strong>primary information provider</strong> (the LSE's RNS) <em>by the end of the following business day</em>.<br><br>
+    <strong>Reporting is not made to the FCA</strong> — it goes to the company / RNS.
+  </div>
+</div>
+
+<div class="section-card" id="exemptions">
+  <div class="section-num">8.1.2</div>
+  <h2 class="section-title">Voting Rights — 6 Disregarded Categories</h2>
+
+  <p class="para">
+    Voting rights attached to shares are <strong>totally disregarded in 6 cases</strong>:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Clearing and settlement</span> — shares acquired for the <em>sole purpose of clearing/settlement</em> within the period between the transaction and the <strong>3rd trading day following execution</strong>.</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Custodian / bare nominee</span> — shares <em>held by a custodian or bare nominee</em>. Custodians are completely exempt, provided they cannot control voting.</div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Market maker (< 10%)</span> — shares held by a <em>declared market maker</em>, if <strong>less than 10%</strong>.</div></div>
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Trading book (≤ 5%)</span> — shares held <em>in the trading book</em> of an investment firm / credit institution, <strong>not more than 5%</strong>.</div></div>
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Collateral</span> — shares held as <em>collateral</em>.</div></div>
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Stabilisation</span> — shares acquired for <em>stabilisation purposes</em>, <strong>as long as the voting rights are not exercised</strong>.</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Fund managers / OEICs — non-beneficial rule</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Non-beneficial holders — different thresholds</div>
+    <strong>Fund managers</strong> + operators of regulated CIS (AUTs, OEICs) are deemed <em>non-beneficial holders</em> — <strong>exempt from the 3% rule</strong>. However, they are subject to disclosure:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>5% and 10%</strong> (but NOT in between)</li>
+      <li>Each percentage <strong>above 10%</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-card" id="pdmr">
+  <div class="section-num">8.2</div>
+  <h2 class="section-title">PDMR Rules — Closed Periods + Chairman Approval</h2>
+
+  <p class="para">
+    <strong>PDMRs</strong> were introduced in Section 3 (Market Manipulation). Here we add the DTR-related rules.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>PDMR notification thresholds</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Rule</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Notification threshold (aggregate per year)</strong></td><td><span class="number-card">€5,000</span> (MAR) / <span class="number-card">€10,000</span> (some sources)</td></tr>
+      <tr><td><strong>Notification deadline</strong></td><td><span class="number-card">3 business days</span> after the transaction</td></tr>
+      <tr><td><strong>Notify</strong></td><td>Issuer + FCA</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Closed Periods</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Closed period — 30 calendar days</div>
+    <strong>No trading</strong> in the issuer's instruments during the <strong>30 calendar days BEFORE</strong> the announcement of the <em>interim / annual financial report</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Chairman Approval — exceptional trading</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Exceptional circumstances trading</div>
+    A PDMR wishing to trade during the closed period (<em>exceptional circumstances</em>) must obtain <strong>prior WRITTEN approval</strong> from the <em>company's chairman</em> (or designated person). Oral consent is not sufficient. FCA approval is NOT required.<br><br>
+    Examples of <em>exceptional circumstances</em>:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Severe <strong>financial difficulty</strong> requiring immediate realisation of funds</li>
+      <li>Employee share schemes where there is <em>no change in beneficial ownership</em></li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>No short-term dealing</h3>
+
+  <p class="para">
+    PDMRs <em>should not engage in short-term dealing</em> in the issuer's instruments. The rule guards against <em>speculative trading</em> by directors.
+  </p>
+</div>
+
+<div class="section-card" id="s793">
+  <div class="section-num">8.3</div>
+  <h2 class="section-title">Section 793 Companies Act 2006</h2>
+
+  <div class="info-box">
+    <div class="ib-title">Section 793 Letter — investigation tool</div>
+    Under <strong>Section 793 of the Companies Act 2006</strong>, a UK public company <em>can send a written notice</em> to <strong>any person</strong> the company <em>knows or suspects to be a shareholder</em>, asking them to confirm that they are holding shares. The notice <strong>requests details</strong> of the shareholder's <em>total interest in the company</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Information requested</h3>
+
+  <p class="para">The notice can request:</p>
+
+  <ul class="bullet">
+    <li>Current shareholding details</li>
+    <li><strong>Past shareholdings</strong> held at any time <em>in the last 3 years</em></li>
+    <li>Where a past interest — the <strong>identity of the person to whom the shares were sold</strong> (if known)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Typical recipient — nominee company</h3>
+
+  <p class="para">
+    It is rare for a notice to be sent to an <em>individual shareholder</em>. Letters are <em>usually sent to <strong>nominee companies</strong></em> that appear on the register. A <em>nominee company</em> = the legal owner of shares <em>on behalf of</em> another <strong>beneficial owner</strong>.
+  </p>
+
+  <p class="para">
+    The letter is sent <em>to the company secretary of the nominee company</em> — requesting details of the <em>true beneficial owner</em> of the securities. <strong>Section 793 enables the registrar to identify</strong> when someone is using a nominee company to <em>hide their identity + accumulate a substantial holding</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Response timing + consequences</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Ignoring Section 793 — shares frozen</div>
+    The notice requires a <strong>written response</strong> within a <em>reasonable time</em>. If requests are <strong>persistently ignored</strong>, the company can <em>apply to court</em> to have the <strong>shares frozen</strong>. Consequences:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><em>Loss of voting rights</em> on those shares</li>
+      <li><em>Loss of entitlement to dividends</em></li>
+      <li><em>Unable to sell them</em></li>
+    </ul>
+    No FCA involvement, not criminal — a civil court order.
+  </div>
+
+  <p class="para">
+    The company is required to <em>keep a record</em> of Section 793 letters sent + information received, in a <strong>separate part of the register of shareholders</strong>.
+  </p>
+</div>
+
+<div class="section-card" id="us-cta">
+  <div class="section-num">8.4</div>
+  <h2 class="section-title">Global context — US Corporate Transparency Act 2021</h2>
+
+  <p class="para">
+    Similar disclosure requirements are being implemented globally. The US Congress enacted the <strong>Corporate Transparency Act (CTA) in 2021</strong>. The CTA requires <em>companies to report information about beneficial owners</em> — using a <strong>beneficial ownership registry</strong>, maintained by the US <em>Treasury Department's Financial Crimes Enforcement Network (<strong>FinCEN</strong>)</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Required information from beneficial owners</h3>
+
+  <ul class="bullet">
+    <li>Full legal name</li>
+    <li>Date of birth</li>
+    <li>Current residential / business street address</li>
+    <li>Non-expired US passport / US government ID / driver's licence / valid foreign passport number</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Reporting timeline</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Reporting — within 1 year of changes</div>
+    Reporting must be made <strong>within 1 year</strong> of beneficial status changes:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Ownership <em>exceeds or drops below 25%</em></li>
+      <li>Substantial change in <em>company ownership</em></li>
+      <li>Change in contact details of the beneficial owner</li>
+    </ul>
+  </div>
+
+  <p class="para">
+    Separately, the SEC published <em>disclosure rules for resource extraction issuers</em> — transparency of payments to governments.
+  </p>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 8</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Key DTR thresholds</div>
+    Notifiable: <strong style="color:#FEF3C7">3%</strong> (UK) / 5% (EU) → every <strong style="color:#FEF3C7">whole %</strong><br>
+    Deadline: <strong style="color:#FEF3C7">2 business days</strong> to company / <strong style="color:#FEF3C7">3 trading days</strong> for PDMR<br>
+    PDMR closed period: <strong style="color:#FEF3C7">30 calendar days</strong><br>
+    Exception: <strong style="color:#FEF3C7">written chairman approval</strong>
+  </div>
+
+  <ul>
+    <li><strong>8.1 DTR Overview:</strong> part of the FCA Handbook. Purpose — transparency for investors.</li>
+    <li><strong>EU vs UK thresholds:</strong>
+      <ul style="margin-top:.3rem">
+        <li>EU Transparency Directive: 5% / 10% / 15% / 20% / 25% / 30% / 50% / 75%</li>
+        <li>UK DTR: <strong>3%</strong> starting + each whole percentage point above</li>
+      </ul>
+    </li>
+    <li><strong>Whole percentage point rule:</strong>
+      <ul style="margin-top:.3rem">
+        <li>3.7% → 4.1% = notifiable (crosses 4%)</li>
+        <li>3.7% → 3.9% = NOT (stays between 3-4)</li>
+        <li>Below 3% = not notifiable under the standard rule</li>
+      </ul>
+    </li>
+    <li><strong>Interest is measured on voting rights,</strong> not only shares. Includes financial instruments.</li>
+    <li><strong>Indirect holdings</strong> — through a proxy with discretion = notifiable.</li>
+    <li><strong>Connected parties:</strong> spouse + children < 18 + controlled companies (≥ 1/3 voting) + concert parties (combined holding).</li>
+    <li><strong>Timing:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Deemed knowledge: <strong>2 trading days</strong> after the transaction</li>
+        <li>Report to the company: <strong>within 2 business days</strong></li>
+        <li>Company to RIS (if listed): <strong>by end of the following business day</strong></li>
+        <li><strong>NOT reported to the FCA</strong> — to the company/RIS</li>
+      </ul>
+    </li>
+    <li><strong>6 Disregarded voting rights categories:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Clearing/settlement (≤ 3 trading days)</li>
+        <li>(2) Custodian / bare nominee</li>
+        <li>(3) Market maker < 10%</li>
+        <li>(4) Trading book ≤ 5%</li>
+        <li>(5) Collateral</li>
+        <li>(6) Stabilisation (voting rights not exercised)</li>
+      </ul>
+    </li>
+    <li><strong>Fund managers / OEICs:</strong> non-beneficial — exempt from 3% rule. Disclose at 5%, 10%, + each % above 10%.</li>
+    <li><strong>8.2 PDMR rules:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Threshold: <strong>€5,000</strong> aggregate per year</li>
+        <li>Deadline: <strong>3 business days</strong></li>
+        <li>Notify: <strong>issuer + FCA</strong></li>
+        <li>Connected persons subject to the same rules</li>
+      </ul>
+    </li>
+    <li><strong>Closed periods:</strong> <strong>30 calendar days</strong> before an interim/annual financial report.</li>
+    <li><strong>Exception</strong> — <em>prior written chairman approval</em> (NOT FCA, NOT oral):
+      <ul style="margin-top:.3rem">
+        <li>Severe financial difficulty</li>
+        <li>Employee share schemes (no change in beneficial ownership)</li>
+      </ul>
+    </li>
+    <li><strong>No short-term dealing</strong> — PDMRs must not engage in speculative trading.</li>
+    <li><strong>8.3 Section 793 Companies Act 2006:</strong>
+      <ul style="margin-top:.3rem">
+        <li>A UK public company can send a written notice to any suspected shareholder</li>
+        <li>Request confirmation of interest + up to 3 years' past shareholdings</li>
+        <li>Usually sent to <strong>nominee companies</strong> — to identify the beneficial owner</li>
+        <li>If ignored — the court can <em>freeze the shares</em>: no voting / no dividends / cannot sell</li>
+      </ul>
+    </li>
+    <li><strong>8.4 US CTA 2021 — Corporate Transparency Act:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Registry maintained by <strong>FinCEN</strong> (US Treasury)</li>
+        <li>Requires: full name + DOB + address + ID number</li>
+        <li>Report within <strong>1 year</strong> of changes (25% threshold, substantial ownership change, contact changes)</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

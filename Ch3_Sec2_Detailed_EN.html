@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3, Section 2 — Insider Dealing</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#9F1239;--primary-l:#FEE2E2;--primary-d:#7F1028;--primary-vd:#4C0519;--accent:#D97706;--accent-l:#FEF3C7;--accent-d:#92400E;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--rose:#BE123C;--rose-l:#FFE4E6;--rose-d:#881337;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--slate-d:#334155;--ink:#0F172A;--muted:#475569;--bg:#FEF2F2;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(159,18,57,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(76,5,25,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:#FEE2E2;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(159,18,57,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(159,18,57,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 3</div>
+  <div class="app-title">Chapter 3, Section 2 — Detailed Deep Dive</div>
+  <div class="app-sub">Insider Dealing · Syllabus 3.2 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Insider dealing is the <strong>most-tested type of market abuse</strong>: using <em>inside information</em> to trade, encouraging others, or unlawfully disclosing. The UK has <strong>two parallel regimes</strong>: (1) a <em>criminal regime</em> under the CJA 1993 (Part V) — criminal prosecution and prison; (2) a <em>civil regime</em> under UK MAR — FCA administrative enforcement. Key distinction: <strong>general defences (for everyone) vs special defences (for market makers and certain scenarios only)</strong>. Also: <strong>insider lists</strong> — issuers must maintain lists of all persons with access to inside information. 2-3 exam questions here, often scenarios about defences.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s21">2.1 Inside Information + the Insider — UK MAR definition</a></li>
+    <li>→ <a href="#insider">Who is an "insider" — inside sources</a></li>
+    <li>→ <a href="#disclosure">2.1.1-2.1.2 Public Disclosure + Insider Lists</a></li>
+    <li>→ <a href="#unlawful">2.1.3 Unlawful Disclosure — permitted categories</a></li>
+    <li>→ <a href="#s22">2.2 CJA 1993 — criminal offence</a></li>
+    <li>→ <a href="#instruments">Instruments covered by CJA</a></li>
+    <li>→ <a href="#soundings">2.3 Market Soundings</a></li>
+    <li>→ <a href="#s24">2.4 Defences — General + Special</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s21">
+  <div class="section-num">2.1</div>
+  <h2 class="section-title">Inside Information + the Insider — UK MAR definition</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Inside Information definition</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Inside information — 4 key elements</div>
+    Information is <strong>inside information</strong> if it is:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Of a <strong>precise nature</strong></li>
+      <li><strong>Not been made public</strong></li>
+      <li>Relating <em>directly / indirectly</em> to <strong>one or more issuers / financial instruments</strong></li>
+      <li>If made public — <strong>likely to have significant effect on prices</strong> of those financial instruments / related derivatives</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>"Precise nature" — the test</h3>
+
+  <p class="para">Information is <strong>deemed precise</strong> if it indicates:</p>
+
+  <ul class="bullet">
+    <li>A <strong>set of circumstances</strong> that <em>exist or may reasonably be expected to come into existence</em></li>
+    <li>An <strong>event</strong> that has <em>occurred or may reasonably be expected to occur</em></li>
+  </ul>
+
+  <p class="para">
+    And it is <strong>specific enough</strong> to <em>enable a conclusion</em> about the possible effect on prices of financial instruments / related derivative instruments / spot commodity contracts / emission allowance products.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Precise vs imprecise — example</div>
+    <strong>Precise</strong>: "Company XYZ will announce an acquisition of Company ABC for £2bn next Tuesday" — specific event, specific time, specific price.<br>
+    <strong>Imprecise</strong>: "Company XYZ might do some M&A sometime" — too vague; no conclusion about price impact is possible.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>For persons executing client orders — extended definition</h3>
+
+  <p class="para">
+    For <em>persons charged with executing orders</em>, <strong>inside information also includes</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li>Information <em>conveyed by a client</em> and relating to the <strong>client's pending orders</strong> in financial instruments</li>
+    <li>Of a precise nature, relating directly/indirectly to financial instruments</li>
+    <li>If made public — <strong>likely to significantly affect the prices</strong> of those financial instruments / related spot commodities / related derivatives / auctioned emission allowance products</li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">Client order = inside information</div>
+    A broker knows: <em>a large hedge fund will buy a 5% stake in a small-cap company tomorrow</em>. That is <strong>inside information</strong> — even though it is about a pending order, not about the issuer. The broker <em>cannot</em> front-run the client order.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Insider Dealing — 4 specific behaviours under UK MAR</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Dealing</span> — a person <em>possesses inside information</em> and <strong>uses it</strong> by acquiring / disposing <em>on own account or third party's account</em>, directly or indirectly, of financial instruments to which the information relates.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Cancelling / amending orders</span> — using inside information <em>by cancelling / amending an order</em> placed <strong>BEFORE the person possessed the inside information</strong>. A rare scenario often overlooked, but also illegal.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Recommending / inducing another</span> — a person possesses inside information and <em>recommends, on the basis of that information</em>, that another person acquire / dispose / cancel / amend orders. This is <strong>itself insider dealing</strong>, even if no direct sharing takes place.</div></div>
+
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Recommending cancellation/amendment</span> — recommending or inducing the cancellation / amendment of an order concerning a financial instrument to which the information relates.</div></div>
+</div>
+
+<div class="section-card" id="insider">
+  <div class="section-num">2.1</div>
+  <h2 class="section-title">Who is an "Insider" — Inside Sources</h2>
+
+  <p class="para">An individual in possession of price-sensitive information <strong>is an insider</strong> if they:</p>
+
+  <ul class="bullet">
+    <li><strong>Know</strong> it is <em>inside information</em></li>
+    <li>The information was <em>knowingly acquired</em> from an <strong>inside source</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 categories of inside sources</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Direct inside source</span> — the person is <em>themselves an inside source</em>. For example: <strong>director, employee, shareholder</strong> of an issuer of securities. <em>And need not necessarily</em> be the company whose securities are the subject of the dealing. E.g., a bank employee learning something about a client.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Through employment/office/profession</span> — a person has access to information <em>by virtue of their employment, office, or profession</em>. Again, need not relate to the company. Examples: <strong>auditor, legal adviser, corporate finance adviser</strong> to the company.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Secondary (indirect)</span> — access <em>directly or indirectly</em> from a person who was either an inside source themselves or had access through employment. Example: a <strong>director's spouse</strong> sees confidential info at home about a takeover bid and then buys shares in the target company.</div></div>
+
+  <div class="warn-box">
+    <div class="wb-title">Important — <strong>knowingly</strong> acquired</div>
+    The person <em>must KNOW</em> the information is <strong>inside information</strong> + <em>knowingly acquired</em> from an inside source. Accidentally overhearing on a train — but not realising it was inside info — <em>may be a defence</em>. But if overheard AND they understood it was precise/non-public/price-sensitive AND used it — that is insider dealing.
+  </div>
+</div>
+
+<div class="section-card" id="disclosure">
+  <div class="section-num">2.1.1-2.1.2</div>
+  <h2 class="section-title">Public Disclosure + Insider Lists</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(1) Public Disclosure — issuer obligations</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Issuers must inform the public ASAP</div>
+    Issuers have obligations to <strong>inform the public as soon as possible</strong> of inside information <em>directly concerning the issuer</em>. The information must be made public in a manner enabling <strong>fast access + complete/correct/timely assessment</strong>.
+  </div>
+
+  <p class="para">
+    This ensures all investors can <em>base their investment decision-making</em> on information <strong>in the public domain</strong> — helping to <em>keep clean markets</em>.
+  </p>
+
+  <p class="para">
+    Issuers should use a <strong>Regulatory Information Service (RIS)</strong> for disseminating information.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(2) Insider Lists</h3>
+
+  <p class="para">
+    Issuers and persons <em>acting on their behalf</em> are required to <strong>maintain an insider list</strong> of all persons with <em>access to inside information</em>:
+  </p>
+
+  <ul class="bullet">
+    <li>Working <em>under a contract of employment</em></li>
+    <li>Or <em>otherwise performing tasks</em> through which they have access (advisers, <strong>accountants, credit rating agencies</strong>)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>When to update the list</h3>
+
+  <p class="para">The list <strong>must be promptly updated</strong> where there is a change:</p>
+
+  <ul class="bullet">
+    <li>The reason for <em>including a person already on the list</em> has changed</li>
+    <li>A <strong>new person</strong> has access to inside information and needs adding</li>
+    <li>A <strong>person ceases</strong> to have access to inside information</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Purpose of the insider list</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Why an insider list is needed</div>
+    The obligation on issuers + advisers is to maintain insider lists so that <strong>knowledge of price-sensitive information can be traced by the FCA</strong> if it undertakes an investigation into <em>adverse movement in a share price BEFORE a formal announcement</em>. If the share price moved strangely over 3 days before an announcement — the FCA can <em>trace who had access</em> during that window.
+  </div>
+
+  <p class="para">Firms are required to <strong>maintain separate insider lists</strong>:</p>
+
+  <ul class="bullet">
+    <li><strong>For each transaction</strong></li>
+    <li><strong>One for permanent insiders</strong> (directors, CEO, CFO — those who always have access to inside info)</li>
+  </ul>
+</div>
+
+<div class="section-card" id="unlawful">
+  <div class="section-num">2.1.3</div>
+  <h2 class="section-title">Unlawful Disclosure + Permitted Categories</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>The base rule</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Unlawful Disclosure (UK MAR)</div>
+    Under UK MAR, <strong>unlawful disclosure</strong> is the sharing of <em>inside information with another person</em>, unless the disclosure is part of the <strong>"normal exercise of employment, profession, or duties"</strong>.
+  </div>
+
+  <p class="para">It is an offence to <em>disclose non-public, price-sensitive, specific, likely-to-affect-price</em> information.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Penalties</h3>
+
+  <p class="para">A breach of these requirements can result in:</p>
+
+  <ul class="bullet">
+    <li><strong>Unlimited fines</strong></li>
+    <li><strong>Injunctions</strong></li>
+    <li>Also considered a <strong>criminal offence</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>5 categories of permitted disclosure</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Normal duties</span> — disclosure made in the <em>normal exercise of employment, profession, or duties</em>. E.g., CFO sharing with CEO and board during planning sessions.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Market soundings</span> — part of a <em>market sounding</em>, for example to <strong>raise capital</strong>. See Section 2.3.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Confidentiality</span> — disclosure is <em>reasonable</em> + accompanied by <strong>confidentiality requirements</strong> to facilitate a transaction, seek advice, or fulfil a legal obligation.</div></div>
+
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Professional advice</span> — shared with a <em>professional adviser</em>, such as a <strong>lawyer or auditor</strong>. Professional privilege applies.</div></div>
+
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Takeover bids</span> — made <em>to facilitate or seek commitment for a takeover bid</em> under the <strong>Takeover Code</strong>. Important for M&A — the bidder sometimes must share info with the target board / target shareholders.</div></div>
+
+  <div class="example-box">
+    <div class="eb-title">STOR reporting — permitted disclosure</div>
+    An employee <strong>reporting inside information to the FCA as part of a STOR</strong> is a <em>permitted disclosure</em>. Falls within the <strong>normal duties exemption</strong> — part of regulatory obligations.
+  </div>
+</div>
+
+<div class="section-card" id="s22">
+  <div class="section-num">2.2</div>
+  <h2 class="section-title">CJA 1993 — Criminal Regime</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Criminal offence definition</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Insider dealing — criminal definition</div>
+    <strong>Insider dealing</strong> is the <em>deliberate exploitation of information by dealing in financial instruments</em>, having obtained the information <em>by virtue of some privileged relationship or position</em>.
+  </div>
+
+  <p class="para">
+    The legislation is <strong>Part V of the CJA 1993 (Criminal Justice Act 1993)</strong>. The UK's current criminal law for insider dealing.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Recent update — 2023</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">CJA 1993 updated 15 June 2023</div>
+    The CJA 1993 was <em>updated and amended</em> by the <strong>Insider Dealing (Securities and Regulated Markets) Order 2023</strong>, which came into effect on <strong>15 June 2023</strong>. It updated the <em>list of Regulated Markets</em> for the purposes of Part V of the CJA 1993.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Section 52 — 3 ways of committing the offence</h3>
+
+  <p class="para">
+    <strong>Section 52 of the CJA</strong> outlines <strong>3 ways</strong> of committing the offence of insider trading:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Dealing in the security</span></div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Encouraging another to do so</span></div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Disclosing inside information to another</span></div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Section 56 — Inside Information definition (CJA)</h3>
+
+  <p class="para"><strong>Section 56 of the CJA</strong> — information:</p>
+
+  <ul class="bullet">
+    <li>(a) Relates to securities <em>traded / admitted to trade / request to admit to trading</em> on a <strong>UK, EEA, or Gibraltar Regulated Market, MTF or OTF</strong></li>
+    <li>(b) Relates to securities traded on <strong>Nasdaq, SIX Swiss Exchange, or NYSE</strong></li>
+    <li>(c) Relates to securities <em>not covered by (a) or (b)</em>, the price of which <strong>depends on / has an effect on the price</strong> of a security in (a)/(b)</li>
+    <li>(d) Is <strong>specific / precise</strong></li>
+    <li>(e) Has <strong>not been made public</strong></li>
+    <li>(f) Is <strong>price-sensitive</strong> — if made public, <em>likely to have a significant effect on the price of a security</em></li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">CJA vs UK MAR — scope</div>
+    <strong>CJA 1993</strong> — only specific <em>Regulated Markets / MTFs / OTFs</em> (UK, EEA, Gibraltar, Nasdaq, SIX Swiss, NYSE).<br>
+    <strong>UK MAR</strong> — <em>broader</em>: includes <strong>OTC + bilateral trades</strong>.<br>
+    If an OTC trade — only UK MAR civil regime, <em>not CJA criminal</em>.
+  </div>
+</div>
+
+<div class="section-card" id="instruments">
+  <div class="section-num">2.2.1</div>
+  <h2 class="section-title">Instruments covered by CJA 1993</h2>
+
+  <p class="para">
+    The CJA uses the term <strong>"security"</strong>, not "financial instrument". However, in <strong>2023</strong> this was updated — to be consistent with the <em>financial instrument definition in UK MiFID</em>. The CJA now covers:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Transferable securities</span> — shares, bonds</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Money-market instruments</span></div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Units in CIS</span></div></div>
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Options, futures, swaps, FRAs</span> — derivatives related to securities, currencies, interest rates, emission allowances, financial indices</div></div>
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Derivative contracts on commodities</span>, cash-settled</div></div>
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Commodity derivatives</span>, physically settled, traded on a UK Regulated Market / MTF / OTF</div></div>
+  <div class="p-item"><div class="p-num">7</div><div class="p-body"><span class="p-title">Other derivative commodity contracts</span></div></div>
+  <div class="p-item"><div class="p-num">8</div><div class="p-body"><span class="p-title">Credit risk derivative instruments</span></div></div>
+  <div class="p-item"><div class="p-num">9</div><div class="p-body"><span class="p-title">CFDs</span></div></div>
+  <div class="p-item"><div class="p-num">10</div><div class="p-body"><span class="p-title">Emission allowances</span></div></div>
+
+  <div class="warn-box">
+    <div class="wb-title">Example — debt securities vs spot FX</div>
+    Debt securities (bonds) are <strong>caught under insider dealing legislation</strong>.<br>
+    Other common alternatives (e.g. <em>spot FX, spot commodity purchases, physical gold</em>) are <strong>NOT MiFID financial instruments</strong> — <em>not in scope of CJA insider dealing</em>.
+  </div>
+</div>
+
+<div class="section-card" id="soundings">
+  <div class="section-num">2.3</div>
+  <h2 class="section-title">Market Soundings</h2>
+
+  <p class="para">
+    A <strong>market sounding</strong> is <em>communication with potential investors</em> to gauge interest in a transaction. It may include <strong>disclosure of non-public information</strong> that is sensitive and considered <em>inside information</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Obligations of the disclosing firm</h3>
+
+  <p class="para">The firm must comply with the following obligations:</p>
+
+  <ul class="bullet">
+    <li><strong>Obtain consent</strong> of the person receiving the market sounding to <em>receive inside information</em></li>
+    <li><strong>Inform the person</strong> that they are <em>prohibited from using the information</em> by:
+      <ul style="margin-top:.2rem">
+        <li>Acquiring / disposing of financial instruments</li>
+        <li>Cancelling / amending an order already placed</li>
+        <li>Personal account dealing</li>
+        <li>Encouraging another person to invest / divest in the underlying</li>
+      </ul>
+    </li>
+    <li><strong>Inform the person</strong> that by agreeing to receive the information, they are <em>obliged to keep it confidential</em></li>
+    <li><strong>Maintain a record</strong> of all information given to the person receiving the sounding</li>
+    <li><strong>Maintain a record</strong> of recipients who <em>did NOT consent</em> to receive inside information</li>
+    <li><strong>Advise recipients</strong> when the information <em>ceases</em> to be considered inside information</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Recipient obligations</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Market sounding recipients — their own assessment</div>
+    The provisions place an obligation on the <em>recipient of a market sounding</em> — they are required to <strong>assess for themselves</strong> whether the information provided is <em>"inside information"</em>. The recipient may have additional information that would mean the info is <strong>NOT inside information</strong> (already public).
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Market sounding example</div>
+    An investment bank is preparing a <em>secondary share placement</em> for Listed Company X. The bank <strong>contacts 15 institutional investors</strong> to gauge their interest at various price levels. That is a <em>market sounding</em>. The bank must: (1) obtain consent; (2) inform about restrictions; (3) require confidentiality; (4) record everything. The investors receiving the information are <em>prohibited from trading</em> in X shares or related derivatives.
+  </div>
+</div>
+
+<div class="section-card" id="s24">
+  <div class="section-num">2.4</div>
+  <h2 class="section-title">Defences — General + Special</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>General Defences (CJA 1993)</h3>
+
+  <p class="para">
+    <strong>General defences</strong> — available to <em>all defendants</em> accused of insider dealing / encouraging others:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">No profit expected</span> — the defendant <em>did not expect the dealing to result in profit</em> (or avoid a loss) due to the information.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Information widely disclosed</span> — the defendant <em>believed on reasonable grounds</em> that the information had been <strong>sufficiently widely disclosed</strong> so that <em>none of those taking part in the dealing would be prejudiced</em> by not being aware.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Would have acted anyway</span> — the defendant <em>would have acted in the same way</em> regardless of being in possession of the information. E.g., institutional portfolio rebalancing.</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Defences only for the disclosure offence</h3>
+
+  <p class="para">For the <strong>disclosing-only offence</strong>, defences:</p>
+
+  <ul class="bullet">
+    <li>The defendant <strong>did not expect any person to deal</strong></li>
+    <li>The defendant <em>may have expected a person to deal</em>, but <strong>did not expect the dealing to result in a profit</strong> (or avoid a loss) due to the information</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Important nuance — "no one would deal"</div>
+    The defence <em>"not expecting any person to deal"</em> is ONLY <strong>against the disclosure offence</strong> (s.53(1)(c) CJA). It is <em>not available</em> for the dealing offence (s.52(1)) or the encouraging-to-deal offence (s.52(2)(a)).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Special Defences — in particular circumstances</h3>
+
+  <p class="para">
+    <strong>Special defences</strong> — further defences in particular circumstances:
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(1) Market Makers</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Market maker special defence (s.53 CJA)</div>
+    If a market maker <em>can show they <strong>acted in good faith</strong></em> in the course of their business <em>as a market maker</em> — they are <strong>not guilty of insider dealing or encouraging another to deal</strong>. A market maker <em>can hold</em> unpublished price-sensitive information <strong>as an insider and continue making a market</strong>.
+  </div>
+
+  <p class="para">
+    Why this defence exists: market makers <em>must deal continuously</em> — even when they may receive information. The law requires continuous quoting — if every bit of new info interrupted trading, markets would stop.
+  </p>
+
+  <p class="para">
+    A further defence is <em>available to a market maker</em> if they can show they were <em>acting in connection with an acquisition / disposal</em> where the price was <strong>under negotiation</strong> and they acted <em>to facilitate the deal</em>. The defendant must show the information was <strong>market information arising directly out of the negotiations</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(2) Market Information</h3>
+
+  <p class="para"><strong>Market information</strong> includes, for example:</p>
+
+  <ul class="bullet">
+    <li>Information about a <em>sale of a block of securities under consideration</em></li>
+    <li>The <em>price at which the transaction is likely to be completed</em></li>
+  </ul>
+
+  <p class="para">
+    An insider is <strong>not guilty of dealing / encouraging others</strong> if they can prove:
+  </p>
+
+  <ul class="bullet">
+    <li>The information held <em>was market information</em></li>
+    <li>It was <em>reasonable for the defendant to act as they did</em> despite having the information as an insider</li>
+  </ul>
+
+  <p class="para">Whether the action was <em>reasonable</em> depends on:</p>
+
+  <ul class="bullet">
+    <li><strong>Content</strong> of the information</li>
+    <li><strong>Circumstances</strong> in which the defendant first had the information, and in what capacity</li>
+    <li><strong>Capacity</strong> in which the defendant <em>now acts</em></li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Textbook example — market information defence</div>
+    A client <em>discussed with a broker the purchase of a block of 10,000 shares in XYZ plc</em>. The client instructs the broker to buy. Clearly, the broker <em>has unpublished information</em> that the buy order exists <strong>before dealing</strong>.<br><br>
+    This is <strong>market information</strong> — a specific defence against a charge of insider dealing.<br><br>
+    The defence applies equally where it is market information relating to the <em>client's planned disposal</em> of securities.<br><br>
+    Consideration: <strong>size of the order</strong> + whether the size is <em>significant enough to move the underlying share price</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(3) Price Stabilisation</h3>
+
+  <p class="para">
+    A defence is <em>available</em> if the dealing / encouragement was done in conformity with the <strong>FCA's price stabilisation rules</strong> (MAR 2). See Sec 1.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(4) Legitimate Behaviour</h3>
+
+  <p class="para">
+    Additional specific categories of behaviour deemed <em>legitimate</em> — not constituting insider dealing. Covered in Section 3 (Market Manipulation).
+  </p>
+
+  <table class="comp-table">
+    <thead><tr><th>Defence</th><th>Type</th><th>Available to whom</th></tr></thead>
+    <tbody>
+      <tr><td>No profit expected</td><td>General</td><td>All defendants</td></tr>
+      <tr><td>Widely disclosed</td><td>General</td><td>All defendants</td></tr>
+      <tr><td>Would have acted anyway</td><td>General</td><td>All defendants</td></tr>
+      <tr><td>No one would deal (disclosure only)</td><td>General (limited)</td><td>Only against disclosure charge</td></tr>
+      <tr><td><strong>Acting in good faith as a market maker</strong></td><td><strong>Special</strong></td><td>Only market makers</td></tr>
+      <tr><td>Market information</td><td>Special</td><td>Anyone — but narrow scope</td></tr>
+      <tr><td>Price stabilisation</td><td>Special</td><td>Firms in price stabilisation activity</td></tr>
+      <tr><td>Legitimate behaviour</td><td>Special</td><td>Various specific categories</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 2</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Inside Information — 4 elements</div>
+    <strong style="color:#FEF3C7">(1)</strong> Precise nature +<br>
+    <strong style="color:#FEF3C7">(2)</strong> Not been made public +<br>
+    <strong style="color:#FEF3C7">(3)</strong> Relating to issuers / financial instruments +<br>
+    <strong style="color:#FEF3C7">(4)</strong> Likely to have significant effect on prices if made public<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong style="color:#FEF3C7">CJA 1993</strong> = criminal regime (Regulated Markets only) — <strong style="color:#FEF3C7">UK MAR</strong> = civil regime (broader, includes OTC)
+  </div>
+
+  <ul>
+    <li><strong>2.1 Inside Information (UK MAR):</strong> precise + non-public + relating to issuer/instruments + likely to have significant effect on price if made public.</li>
+    <li><strong>"Precise nature"</strong> — indicates circumstances existing/expected, OR event occurred/expected, specific enough to draw a conclusion about price effect.</li>
+    <li><strong>For executing orders</strong> — client's pending orders are also inside information (anti-front-running).</li>
+    <li><strong>4 insider dealing behaviours (UK MAR):</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Dealing — using info to acquire/dispose</li>
+        <li>(2) Cancelling/amending orders placed before having info</li>
+        <li>(3) Recommending/inducing others to engage</li>
+        <li>(4) Recommending cancellation/amendment of others' orders</li>
+      </ul>
+    </li>
+    <li><strong>Insider — 3 inside sources:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Direct (director, employee, shareholder of issuer)</li>
+        <li>(2) Through employment/office/profession (auditor, lawyer)</li>
+        <li>(3) Secondary (spouse seeing confidential docs)</li>
+      </ul>
+      The person must <strong>KNOW</strong> info = inside + <strong>knowingly</strong> acquired from an inside source.
+    </li>
+    <li><strong>2.1.1 Public disclosure:</strong> issuers must inform public ASAP via RIS — fast access + complete/correct/timely.</li>
+    <li><strong>2.1.2 Insider Lists:</strong> issuers maintain a list of everyone with access to inside info. <strong>Promptly updated</strong> on changes. Purpose — tracing knowledge for FCA investigations. Separate lists for each transaction + permanent insiders.</li>
+    <li><strong>2.1.3 Unlawful disclosure:</strong> sharing inside info, unless "normal exercise of employment/profession/duties". Penalties: unlimited fines + injunctions + criminal offence.</li>
+    <li><strong>5 Permitted Disclosure Categories:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Normal duties</li>
+        <li>(2) Market soundings</li>
+        <li>(3) Confidentiality-accompanied (facilitate transaction, seek advice, legal obligation)</li>
+        <li>(4) Professional advice (lawyer, auditor)</li>
+        <li>(5) Takeover bids under the Takeover Code</li>
+      </ul>
+    </li>
+    <li><strong>2.2 CJA 1993 Part V — criminal regime:</strong> updated 15 June 2023 (Insider Dealing Order 2023). <strong>Section 52 — 3 offences:</strong> dealing / encouraging / disclosing.</li>
+    <li><strong>Section 56 — inside information (CJA):</strong> securities on UK/EEA/Gibraltar Regulated Market, MTF, OTF + Nasdaq/SIX Swiss/NYSE + related derivatives + precise + non-public + price-sensitive.</li>
+    <li><strong>CJA vs UK MAR scope:</strong> CJA = specific Regulated Markets only. UK MAR = broader, includes OTC/bilateral.</li>
+    <li><strong>Instruments under CJA (2023 update — aligned with UK MiFID):</strong> transferable securities, money market instruments, CIS units, options/futures/swaps/FRAs, commodity derivatives (cash/physical), credit derivatives, CFDs, emission allowances.</li>
+    <li><strong>NOT in scope</strong> — spot FX, spot commodities, physical gold (not MiFID financial instruments).</li>
+    <li><strong>2.3 Market Soundings:</strong> communication with potential investors to gauge interest. Disclosing firm obligations: consent + inform restrictions + confidentiality + record keeping + cease-notification.</li>
+    <li><strong>2.4 Defences — 3 General:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) No profit expected</li>
+        <li>(2) Info widely disclosed</li>
+        <li>(3) Would have acted anyway</li>
+      </ul>
+      <strong>Disclosure-only:</strong> (a) no one would deal / (b) no profit from dealing.
+    </li>
+    <li><strong>4 Special Defences:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>(1) Market makers acting in good faith</strong> — ONLY available to market makers. Classic exam answer!</li>
+        <li>(2) Market information (block trade knowledge + reasonable action)</li>
+        <li>(3) Price stabilisation</li>
+        <li>(4) Legitimate behaviour</li>
+      </ul>
+    </li>
+    <li><strong>Exam trap:</strong> "acting in good faith" — SPECIAL (market makers only). "Would have dealt anyway" — GENERAL (available to all).</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

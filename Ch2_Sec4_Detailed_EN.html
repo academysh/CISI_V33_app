@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 4 — Client Agreements and Information Provision</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;
+  --teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;
+  --amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;
+  --coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;
+  --purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --green-l:#E1F5EE;--green:#085041;
+  --gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;
+  --bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09);
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 ";}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ ";}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 ";}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.tag-in{background:var(--green-l);color:var(--green);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-out{background:var(--coral-l);color:var(--coral);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-partial{background:var(--amber-l);color:var(--amber-d);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 4 — Detailed Deep Dive</div>
+  <div class="app-sub">Client Agreements and Information Provision · Syllabus 2.4 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<!-- INTRODUCTION -->
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 4 answers two practical questions: <strong>"What must be in the written agreement with the client"</strong> and <strong>"What information must the firm provide to the client before services begin"</strong>. This is a foundational part of COBS: it describes the basic hygiene of the firm↔client relationship — client agreement, firm information, disclosure of risks, costs, and compensation schemes. On the exam — expect 3-5 questions, with many details about timing, mediums, and exceptions.
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#intro">Overall philosophy of this section</a></li>
+    <li>→ <a href="#s41">4.1 Client Agreement — requirement to enter into an agreement</a></li>
+    <li>→ <a href="#s42">4.2 Information Requirements</a></li>
+    <li>→ <a href="#s421">4.2.1 Nature and risks of investments</a></li>
+    <li>→ <a href="#s422">4.2.2 Information about the firm</a></li>
+    <li>→ <a href="#s423">4.2.3 Managing Investments — additional requirements</a></li>
+    <li>→ <a href="#s424">4.2.4 Safeguarding — protection of client investments and money</a></li>
+    <li>→ <a href="#s43">4.3 Disclosure of Costs</a></li>
+    <li>→ <a href="#s431">4.3.1 Timing and Medium</a></li>
+    <li>→ <a href="#s432">4.3.2 Keeping the Client Up to Date</a></li>
+    <li>→ <a href="#s433">4.3.3 Existing Clients</a></li>
+    <li>→ <a href="#s434">4.3.4 Compensation Information — FSCS etc.</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<!-- BIG INTRODUCTION -->
+<div class="section-card" id="intro">
+  <div class="section-num">INTRODUCTION</div>
+  <h2 class="section-title">The philosophy: protecting the client through transparency</h2>
+
+  <p class="para">
+    Across all financial services regulation, there is a fundamental problem — <strong>information asymmetry</strong>. The firm knows everything about the product, risks, costs, and contract terms; the client knows very little. Without intervention, the client has no real chance of making an informed decision.
+  </p>
+
+  <p class="para">
+    Section 4 is a concrete tool to address this asymmetry. It forces the firm to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Fix rights and obligations in a written agreement</strong> (client agreement).</li>
+    <li><strong>Proactively disclose</strong> information about itself, products, risks, and costs.</li>
+    <li><strong>Keep the client updated</strong> about changes.</li>
+    <li><strong>Do all of this through a durable medium</strong> — so the client can return and check.</li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">The underlying principle: "in good time before"</div>
+    Almost every disclosure in this section must be made <strong>"in good time before"</strong> the client is bound by the agreement or before services begin. This is one of the most repeated principles — and a classic exam trap (answer options often include "after", "at the time", "within 14 days" — all wrong; the correct answer is "in good time before").
+  </div>
+
+  <p class="para">
+    <strong>"Durable medium"</strong> is another pervasive term. It is any medium that allows the client to <em>store</em> information personally addressed to them, <em>access it</em> for an adequate period, and <em>reproduce it unchanged</em>. Durable media include: paper, email, PDF, attachments to electronic communications, and (under conditions) websites. A plain SMS or a verbal conversation does not qualify.
+  </p>
+</div>
+
+<!-- 4.1 -->
+<div class="section-card" id="s41">
+  <div class="section-num">4.1</div>
+  <h2 class="section-title">Requirement to Provide a Client Agreement</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>When a client agreement is required</h3>
+
+  <p class="para">
+    The requirement to enter into a written client agreement applies in two cases:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Business type</th>
+        <th>Client category</th>
+        <th>Agreement needed?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Designated investment business</strong> (broadly)</td>
+        <td>Retail client</td>
+        <td><span class="tag-in">✓ Yes</span></td>
+      </tr>
+      <tr>
+        <td><strong>MiFID business and ancillary services</strong> (or equivalent third-country)</td>
+        <td>Retail OR Professional</td>
+        <td><span class="tag-in">✓ Yes</span></td>
+      </tr>
+      <tr>
+        <td>Designated investment business (non-MiFID)</td>
+        <td>Professional client</td>
+        <td><span class="tag-out">✗ No</span></td>
+      </tr>
+      <tr>
+        <td>Any business</td>
+        <td>ECP (Eligible Counterparty)</td>
+        <td><span class="tag-out">✗ No</span> (COBS 8A disapplied)</td>
+      </tr>
+      <tr>
+        <td>Insurance firms issuing life policies as principal</td>
+        <td>Any</td>
+        <td><span class="tag-out">✗ No</span> (special exclusion)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam mnemonic</div>
+    <strong>Retail:</strong> agreement is <em>always</em> required for designated investment business.<br>
+    <strong>Professional:</strong> agreement is required <em>only</em> for MiFID / ancillary / equivalent third-country.<br>
+    <strong>ECP:</strong> <em>never</em> required (COBS 8A disapplied).<br>
+    <strong>Exclusion:</strong> insurance firms issuing life policies as principal — outside the scope of this rule.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Form of the agreement</h3>
+
+  <p class="para">
+    The firm must enter into a <strong>written basic agreement</strong> with the client, setting out the <em>essential rights and obligations</em> of the firm and the client. The agreement must be on <strong>paper or another durable medium</strong>.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">What is covered by "essential rights and obligations"</div>
+    Typical content of such an agreement:<br>
+    • Description of services the firm will provide<br>
+    • Fees and firm remuneration<br>
+    • Reporting to the client<br>
+    • Limitations of liability (within permitted bounds)<br>
+    • Complaints procedure<br>
+    • Termination conditions<br>
+    • Jurisdiction and applicable law<br>
+    The FCA does not mandate a specific template — the firm decides how to structure it, as long as essential rights and obligations are covered.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>When the agreement and related information must be provided</h3>
+
+  <p class="para">
+    <strong>For a retail client:</strong> the firm must provide the client (in good time) <strong>before</strong> the client is bound by the agreement, <strong>OR</strong> before investment services commence (whichever is earlier):
+  </p>
+
+  <ul class="bullet">
+    <li><strong>The terms of any such agreement</strong></li>
+    <li><strong>Information about the firm and its services</strong> relating to that agreement or those services as required by COBS 6.1.4 and COBS 6.1ZA.2 — including authorised communications, conflicts of interest, and the firm's authorised status</li>
+  </ul>
+
+  <div class="schema">
+    <div class="schema-title">Timeline for a retail client</div>
+    ────────── TIME ──────────────►<br>
+    ▼<br>
+    <strong>BEFORE signing / before services</strong><br>
+    the firm must:<br>
+    ① deliver the agreement terms<br>
+    ② deliver firm information<br>
+    ▼<br>
+    Client reviews and analyses<br>
+    ▼<br>
+    Client signs / consents<br>
+    ▼<br>
+    Firm starts services<br><br>
+    Implicit: the client had reasonable time to review.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Exception: distance communications + voice telephone</h3>
+
+  <p class="para">
+    One important exception. If <strong>(a)</strong> the client <em>themselves requested</em> to use distance communications (e.g. concluding everything over the phone or through a web form), <strong>and</strong> <strong>(b)</strong> the firm complies with the <em>voice telephone communications</em> rules, the firm may provide the agreement and information <strong>immediately after</strong> the client is bound.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Practical example of the exception</div>
+    A client phones a broker and says: "I have an urgent trade, I want to buy 1,000 Tesla shares right now, I cannot wait for the paperwork to arrive." If the client themselves requested the phone transaction, and the firm complies with all voice-telephone-communications rules (call recording, disclosure of recording, party identification, etc.), then the full agreement and firm information can be sent after the transaction. But this is only <strong>at the client's initiative</strong> — not the firm's.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Changes to agreement terms</h3>
+
+  <p class="para">
+    The firm must notify the client of any <strong>material change</strong> to the terms of the client agreement:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>In good time BEFORE the change takes effect</strong> (not after!)</li>
+    <li>In a <strong>durable medium</strong></li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Common mistake</div>
+    Some people think material changes can be communicated "within a reasonable time after they take effect". Wrong: <strong>BEFORE</strong>. The logic is obvious — if the terms are changing, the client must have time to decide whether to continue the relationship or walk away.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Retention periods for client agreement records</h3>
+
+  <p class="para">
+    Client agreement records must be retained for the <strong>longer of the three periods</strong>:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Retention</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Baseline minimum</td>
+        <td><span class="number-card">5 years</span></td>
+      </tr>
+      <tr>
+        <td>If the client relationship runs longer than 5 years</td>
+        <td>Whole duration of the relationship</td>
+      </tr>
+      <tr>
+        <td><strong>Pension transfer, pension opt-out, FSAVC</strong> (freestanding additional voluntary contributions)</td>
+        <td><span class="number-card">INDEFINITELY</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="example-box">
+    <div class="eb-title">Example: client transferred pension 8 years ago</div>
+    A client transferred their pension through the firm 8 years ago. The firm has no active relationship with them now. Must it retain the records?<br><br>
+    <strong>Answer:</strong> Yes, indefinitely. Pension transfer is a special category where records must be retained indefinitely. The 5-year minimum is not applicable here.
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">Additional requirements</div>
+    When preparing client agreements, firms must also consider other COBS rules:
+    <ul class="bullet" style="margin-top:.3rem">
+      <li>Fair, clear and not misleading</li>
+      <li>Disclosure of information</li>
+      <li>Distance communications</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 4.2 -->
+<div class="section-card" id="s42">
+  <div class="section-num">4.2</div>
+  <h2 class="section-title">Information Requirements — nature and risks</h2>
+
+  <p class="para">
+    The client agreement is about the <em>relationship</em>. Section 4.2 is about the <em>product and service</em>. What exactly the client is buying, what risks are involved, what it costs.
+  </p>
+</div>
+
+<div class="section-card" id="s421">
+  <div class="section-num">4.2.1</div>
+  <h2 class="section-title">Information about the Nature and Risks of Investments</h2>
+
+  <p class="para">
+    COBS 2.2 and COBS 2.2A set out high-level disclosure requirements for firms carrying on MiFID business or equivalent third-country business.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What must be disclosed (4 categories)</h3>
+
+  <p class="para">
+    The firm must provide clients — <strong>retail AND professional</strong> (including potential retail and potential professional clients) — in a <strong>comprehensible form</strong> with the following information:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>The firm and its services</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Designated investments and proposed investment strategies</strong>, including guidance and warnings about associated risks</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Execution venues</strong> (trading venues)</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Costs and associated charges</strong></li>
+  </ol>
+
+  <p class="para">
+    <strong>Purpose:</strong> to enable the client to <em>reasonably understand</em> the nature and risks of the service and of the specific designated investments, and therefore to take investment decisions on an <em>informed basis</em>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">MiFID vs non-MiFID: who receives disclosures?</div>
+    <strong>For MiFID business:</strong> disclosures are needed for <strong>retail AND professional</strong> clients (including potential clients).<br>
+    <strong>For non-MiFID business:</strong> disclosures are needed only for <strong>retail</strong> clients. BUT for non-MiFID business <em>with a retail client</em> in relation to <strong>derivatives, warrants or stock lending</strong> — disclosure is also required (as under MiFID).
+  </div>
+
+  <p class="para">
+    These high-level rules are expanded in COBS 6.1 (firm information) and COBS 14.2 (product information).
+  </p>
+</div>
+
+<div class="section-card" id="s422">
+  <div class="section-num">4.2.2</div>
+  <h2 class="section-title">Information about the Firm</h2>
+
+  <p class="para">
+    The firm must provide <strong>retail, professional and ECP clients</strong> (including potential clients) with the following general information, where relevant:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Applicability</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Name and address of the firm</strong>, including contact details enabling effective communication</td>
+        <td>All clients</td>
+      </tr>
+      <tr>
+        <td><strong>Languages</strong> in which the client may communicate and receive documents</td>
+        <td>MiFID / equivalent third-country only</td>
+      </tr>
+      <tr>
+        <td><strong>Methods of communication</strong> between firm and client, including sending/receiving orders</td>
+        <td>All clients</td>
+      </tr>
+      <tr>
+        <td><strong>Statement that the firm is authorised</strong>, name and contact details of the competent authority (FCA)</td>
+        <td>All clients</td>
+      </tr>
+      <tr>
+        <td><strong>If the firm acts through an AR or tied agent</strong> — a statement of this fact</td>
+        <td>All clients</td>
+      </tr>
+      <tr>
+        <td><strong>Nature, frequency and timing of reports</strong> on the performance of the firm's service — per COBS 16 reporting rules</td>
+        <td>All clients</td>
+      </tr>
+      <tr>
+        <td><strong>Information about the firm's conflict of interest policy</strong>, summary of that policy, including how the firm ensures fair treatment + statement that further details are available on request</td>
+        <td>All clients</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="example-box">
+    <div class="eb-title">Example: failure to disclose AR status</div>
+    A retail client complains that the firm did not disclose it was acting through an appointed representative. This is a <strong>breach of the firm information disclosure requirement</strong>. The client has a formal right to know who they are dealing with: directly with the principal or through its AR (this affects the chain of responsibility, regulation, and complaint routes).
+  </div>
+</div>
+
+<div class="section-card" id="s423">
+  <div class="section-num">4.2.3</div>
+  <h2 class="section-title">Information Requirements Relating to Managing Investments</h2>
+
+  <p class="para">
+    If the firm <strong>manages investments</strong> for a client (discretionary or non-discretionary), additional requirements arise.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Method of evaluation and comparison</h3>
+
+  <p class="para">
+    The firm must establish an <strong>appropriate method of evaluation and comparison</strong> — for example, a <strong>meaningful benchmark</strong> — based on the investment objectives of the client and the types of investment in the portfolio. The aim: to enable the client to assess the firm's performance on an objective basis.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Practical benchmark example</div>
+    A firm manages a UK-equity portfolio for the client. A sensible benchmark would be the FTSE All-Share or FTSE 100. Saying "We returned +7% this year" is not enough — maybe the market rose +15% and that's a poor result. Saying "We returned +7% while the FTSE All-Share returned +5%" is correct — now the client has context.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Additional disclosures for retail + managed accounts</h3>
+
+  <p class="para">
+    For retail clients whose accounts are managed by the firm, additional disclosures are required. Among them:
+  </p>
+
+  <ul class="bullet">
+    <li>Details of any <strong>delegation of discretionary management</strong> of all or part of the portfolio to a third party</li>
+    <li>Valuation policy</li>
+    <li>Benchmark</li>
+    <li>Timing and nature of reporting</li>
+  </ul>
+</div>
+
+<div class="section-card" id="s424">
+  <div class="section-num">4.2.4</div>
+  <h2 class="section-title">Safeguarding Investments and Money</h2>
+
+  <p class="para">
+    When the firm <strong>holds client investments or money</strong>, this is the most sensitive situation: the client has handed their assets to a third party. The rules demand very clear disclosure of how this works.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>To whom it applies</h3>
+
+  <p class="para">
+    Safeguarding information must be provided to <strong>all client categories</strong> (retail, professional, ECP), including <strong>potential</strong> clients — where the UK MiFID custody / client money rules apply.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">This is unique!</div>
+    Note: this is one of the few areas where disclosure obligations <strong>extend even to ECPs</strong> — unlike most disclosure requirements, where ECPs are "disapplied". The logic: asset safety is too important to rely on the "assumed sophistication" of ECPs.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What must be disclosed (8 elements)</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Possible holding by a third party</strong> on the firm's behalf; <strong>firm's responsibility</strong> for acts/omissions of the third party; <strong>what happens</strong> if the third party becomes insolvent.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Lack of separate designation</strong>: if in the country of holding, assets cannot be separately designated from the custodian's own assets — explain <strong>what this means for the client and what the risks are</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Non-UK jurisdiction</strong>: if assets are subject to non-UK jurisdiction laws — disclose <strong>the fact</strong> and <strong>what it means for the client's rights</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Security interest, lien or right of set-off</strong>: if assets or money are subject to security interest, lien or set-off right — full disclosure of the <strong>fact and terms</strong> of such arrangement.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Securities lending</strong>: full and clear information about the firm's obligations and associated risks must be in a durable medium <strong>in good time before</strong> entering into securities lending.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Summary of protection measures</strong> the firm takes for the client's money / investments, including <strong>details of applicable investor compensation or deposit guarantee schemes</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">Nature and scope of the firm's powers in respect of the assets.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">Arrangements for returning assets to the client.</li>
+  </ol>
+
+  <div class="example-box">
+    <div class="eb-title">Right of set-off example</div>
+    The firm holds £50,000 of client money in a clients' money account. The client agreement contains a clause: if the client fails to pay fees owed to the firm, the firm may "set off" that debt against the client's money. This <strong>must be explicitly disclosed</strong>: the fact that such a right exists + the terms on which it applies. If this clause is buried in small print and was not explained to the client — that's a breach.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Non-UK jurisdiction example</div>
+    A client buys US-listed shares through a UK broker. The shares are held in the US via a sub-custodian, subject to US law. The firm must disclose: (a) the fact that the shares are under US law; (b) what this means — e.g. in the event of sub-custodian insolvency, the client's rights are determined by US insolvency law, which may differ from UK segregation rules.
+  </div>
+</div>
+
+<!-- 4.3 -->
+<div class="section-card" id="s43">
+  <div class="section-num">4.3</div>
+  <h2 class="section-title">Disclosure of Costs and Associated Charges</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>To whom mandatory cost disclosure applies</h3>
+
+  <p class="para">
+    Mandatory cost disclosure is required for <strong>retail clients</strong>. Professional clients and ECPs may <em>request</em> this information, but there is <strong>no regulatory obligation</strong> to provide it — it is a <em>commercial decision</em> for the firm.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What must be disclosed (content of cost disclosure)</h3>
+
+  <p class="para">
+    The firm must provide retail clients with information on <strong>all costs and charges</strong> applicable to investment services and financial instruments, including ancillary services. In particular:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Total price</strong> payable — including all related fees, costs, charges, expenses and taxes payable via the firm.</li>
+    <li>If the total price cannot be stated at the time of disclosure — the <strong>basis on which it will be calculated</strong>, so the client can verify and clarify later.</li>
+    <li><strong>Costs charged by the firm itself must be itemised separately</strong> in every case.</li>
+    <li>If a <strong>foreign currency</strong> is involved — specify the currency, conversion rate and related costs.</li>
+    <li>If other costs and taxes may apply (not charged/imposed by the firm):
+      <ul class="bullet" style="margin-top:.3rem">
+        <li>The fact that such costs/charges/taxes may be payable</li>
+        <li>How they will be paid / levied</li>
+        <li>Information about <strong>compensation schemes</strong></li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Key rule</div>
+    <strong>The firm's own costs must ALWAYS be itemised separately.</strong> Even if not all third-party costs can be precisely stated, the firm is obliged to break out <em>its own</em> charges. This detail is non-negotiable.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example of a cost disclosure structure</div>
+    A client is planning to buy fund units. A correct disclosure:<br>
+    <strong>Our (firm) charges:</strong><br>
+    • Initial charge: 3.0%<br>
+    • Annual management fee: 1.2%<br>
+    <strong>Third-party costs (approx):</strong><br>
+    • Custodian fee: ~0.15% p.a.<br>
+    • Transaction costs in the fund: ~0.35% p.a.<br>
+    <strong>Taxes:</strong><br>
+    • Stamp duty on UK shares in the fund: 0.5%<br>
+    • Returns taxed on the client's side (CGT/income tax)<br>
+    <strong>Compensation:</strong> The fund is covered by FSCS up to £85,000.
+  </div>
+</div>
+
+<!-- 4.3.1 -->
+<div class="section-card" id="s431">
+  <div class="section-num">4.3.1</div>
+  <h2 class="section-title">Timing and Medium of Disclosure</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>When to disclose</h3>
+
+  <p class="para">
+    <strong>Default:</strong> client information (including cost information) must be provided <strong>in good time before the provision of the firm's services</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Exception: distance communication</h3>
+
+  <p class="para">
+    The firm may provide the information <strong>immediately after</strong> the provision of services if:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>(a)</strong> at the client's request, the agreement was concluded using distance communication which prevented the firm providing the information beforehand, <strong>AND</strong></li>
+    <li><strong>(b)</strong> the firm complies with the voice telephone communications rules</li>
+  </ul>
+
+  <p class="para">
+    Both conditions must be met simultaneously.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>In what medium</h3>
+
+  <p class="para">
+    Disclosures must be made <strong>in a durable medium</strong> or, if the website conditions are satisfied, <strong>via the firm's website</strong>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Website conditions — what are these conditions</div>
+    For a website to count as a "durable medium", it must meet the COBS conditions: the client must have consented to the electronic channel, must have technical access, the material must be stable (the client can return to it later), and the website address must be clearly specified.
+  </div>
+</div>
+
+<!-- 4.3.2 -->
+<div class="section-card" id="s432">
+  <div class="section-num">4.3.2</div>
+  <h2 class="section-title">Keeping the Client Up to Date</h2>
+
+  <p class="para">
+    The firm must notify the client <strong>in good time</strong> about any <strong>material change</strong> to information previously provided which is relevant to a service being provided to that client.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Rule on notification medium</div>
+    The notification must be in the <strong>same durable medium</strong> as the original information. If the terms were originally on paper — the change must be on paper (or another durable medium). If originally via the app — the change must be via the app/email. This prevents situations where the client misses changes because they arrived via an unfamiliar channel.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example: annual management fee increase</div>
+    A client has a managed account; the agreement specifies AMC 1.0%. The firm decides to raise it to 1.25%. This is a material change → the client must be notified <strong>before the change takes effect</strong> (not after!) and <strong>in the same medium</strong> the terms were originally prescribed in.
+  </div>
+</div>
+
+<!-- 4.3.3 -->
+<div class="section-card" id="s433">
+  <div class="section-num">4.3.3</div>
+  <h2 class="section-title">Existing Clients — repeat transactions</h2>
+
+  <p class="para">
+    Logical question: if a client already received a cost disclosure when purchasing, say, Fund A, do they need the full disclosure again when purchasing the same Fund A a month later?
+  </p>
+
+  <p class="para">
+    <strong>Answer:</strong> The firm does <strong>not</strong> need to treat each transaction in the same financial instrument type as a new or different service. So the full disclosure does not need to be repeated.
+  </p>
+
+  <p class="para">
+    <strong>However:</strong> the firm must ensure the client has received <em>all relevant information in respect of the subsequent transaction</em> — e.g. details of product charges which may differ from those previously disclosed.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example</div>
+    The client received full cost disclosure in January and bought Fund A. In March they want to buy more of Fund A. No need to reissue the full disclosure. But if in February the firm raised its brokerage fee on this transaction from 0.5% to 0.75% — that's new information the client must be told about before the March trade.
+  </div>
+</div>
+
+<!-- 4.3.4 -->
+<div class="section-card" id="s434">
+  <div class="section-num">4.3.4</div>
+  <h2 class="section-title">Compensation Information</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>To whom it applies</h3>
+
+  <p class="para">
+    The obligation to disclose compensation scheme information applies specifically to firms <strong>carrying on MiFID business</strong> — in respect of clients who <em>use or intend to use</em> those services.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Minimum proactive disclosure</h3>
+
+  <p class="para">
+    The minimum that must be done <em>proactively, without client request</em>:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Information necessary to identify the compensation scheme</strong> (e.g. FSCS) or any alternative investor compensation scheme of which the firm is a member, or any alternative arrangement</li>
+    <li><strong>Amount and scope of cover</strong> offered by the scheme</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What must be disclosed on request</h3>
+
+  <p class="para">
+    If the client <em>requests it</em>, the firm must additionally provide information about:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Conditions</strong> governing compensation</li>
+    <li><strong>Formalities</strong> to be completed to obtain compensation</li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">FSCS — the main UK compensation scheme</div>
+    The <strong>Financial Services Compensation Scheme</strong> covers clients of failed financial firms. Key limits:
+    <ul class="bullet" style="margin-top:.3rem">
+      <li><strong>Deposits in banks/building societies:</strong> up to £85,000 per depositor per bank</li>
+      <li><strong>Investments:</strong> up to £85,000 per client per firm</li>
+      <li><strong>Compulsory insurance:</strong> 100% with no limit</li>
+      <li><strong>Non-compulsory insurance:</strong> 90% with no limit</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>In what medium</h3>
+
+  <p class="para">
+    Compensation scheme information must be provided in a <strong>durable medium</strong> or via a website where the website conditions are satisfied.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example: a full compensation disclosure</div>
+    "Your investments are covered by the Financial Services Compensation Scheme (FSCS). FSCS is the UK's compensation scheme of last resort for clients of authorised financial firms that are unable to meet their claims. FSCS covers investment business up to £85,000 per claimant per firm. For further information about the conditions and procedures for claiming from FSCS you can visit www.fscs.org.uk or request this from us."<br><br>
+    The minimum is given: scheme identity + scope. Detailed conditions and formalities — on request.
+  </div>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 4</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Key principles of this section</div>
+    • ALL disclosures: "in good time BEFORE" (not after!)<br>
+    • Form: "durable medium" (or website under conditions)<br>
+    • Material changes: notify BEFORE they take effect + same medium<br>
+    • Firm's own costs: ALWAYS itemised separately<br>
+    • Retail = maximum protection, ECP = minimum<br>
+    • Safeguarding disclosures = all categories (even ECP!)
+  </div>
+
+  <ul>
+    <li><strong>4.1 Client Agreement</strong> required for: (a) designated investment business with retail; (b) MiFID/ancillary with retail OR professional. Does not apply to ECPs and insurance firms issuing life policies as principal.</li>
+    <li>Form of the agreement — <strong>paper or other durable medium</strong>. Provision: in good time before the client is bound OR before services commence (whichever is earlier).</li>
+    <li>Exception: if the client themselves requested distance communication + the firm complies with voice-telephone rules → immediately after is acceptable.</li>
+    <li>Material changes: notify <strong>before</strong> they take effect, in a durable medium.</li>
+    <li><strong>Record retention:</strong> longer of (5 years, relationship duration, indefinitely for pension transfers/opt-outs/FSAVC).</li>
+    <li><strong>4.2.1 Nature & Risks (MiFID):</strong> 4 categories — firm/services + investments/strategies+risks + execution venues + costs. To whom: retail + professional (including potential). Non-MiFID: retail + mandatory for derivatives/warrants/stock lending.</li>
+    <li><strong>4.2.2 Firm Information:</strong> retail + professional + ECP (including potential). Elements: name/address, languages (MiFID), methods of comm, authorised status + competent authority, AR/tied-agent disclosure, reporting, conflicts policy.</li>
+    <li><strong>4.2.3 Managing Investments:</strong> meaningful benchmark + details of delegated discretionary management.</li>
+    <li><strong>4.2.4 Safeguarding:</strong> for retail + professional + ECP (including potential). 8 key elements, covering third parties, non-segregation, non-UK jurisdiction, security interest / lien / set-off, securities lending, compensation schemes.</li>
+    <li><strong>4.3 Costs:</strong> mandatory for retail only. Elements: total price + basis for calculation + firm's own costs itemised + currency + third-party costs/taxes + compensation info.</li>
+    <li><strong>4.3.1 Timing:</strong> in good time BEFORE services. Exception: distance comm at client's request + voice-telephone compliance → immediately after.</li>
+    <li><strong>4.3.1 Medium:</strong> durable medium or website (under conditions).</li>
+    <li><strong>4.3.2 Updates:</strong> material change → notify + same medium as the original.</li>
+    <li><strong>4.3.3 Existing clients:</strong> no need for a full disclosure per transaction in the same instrument type. BUT — check for new/changed info.</li>
+    <li><strong>4.3.4 Compensation:</strong> MiFID firms only. Proactive minimum: scheme identity + amount/scope. On request: conditions + formalities. Medium: durable or website.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

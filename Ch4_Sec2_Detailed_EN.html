@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 4, Section 2 — Customer Complaints · FOS · FSCS</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#065F46;--primary-l:#D1FAE5;--primary-d:#064E3B;--primary-vd:#022C22;--accent:#059669;--accent-l:#A7F3D0;--accent-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--sky:#0369A1;--sky-l:#E0F2FE;--sky-d:#075985;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#F0FDF4;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(6,95,70,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(2,44,34,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#D1FAE5;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(6,95,70,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--sky-l);border-left:4px solid var(--sky);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--sky-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(6,95,70,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#A7F3D0}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 4</div>
+  <div class="app-title">Chapter 4, Section 2 — Detailed Deep Dive</div>
+  <div class="app-sub">Customer Complaints · FOS · FSCS · Syllabus 4.2 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    The largest section of Chapter 4 — covering <strong>three interrelated topics</strong>: (1) <strong>Complaint handling</strong> — the DISP 1 Sourcebook, eligible complainants, procedures, timeframes (8 weeks, 15 business days for PSD); (2) the <strong>Financial Ombudsman Service (FOS)</strong> — a free, impartial dispute resolution body as an alternative to courts. Compulsory Jurisdiction + Voluntary Jurisdiction; (3) the <strong>Financial Services Compensation Scheme (FSCS)</strong> — an "insurance policy" paid for by all authorised firms, compensating eligible claimants when a firm defaults. Limits: <strong>£85,000</strong> for investments, <strong>£110,000</strong> for deposits (from 1 Dec 2025). Also super-complaints and mass-detriment references. 4-5 exam questions, often on FOS time limits, eligible complainants, and FSCS limits.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s21">2.1 Eligible Complainants — criteria</a></li>
+    <li>→ <a href="#s22">2.2 Complaint Handling Procedures — DISP 1</a></li>
+    <li>→ <a href="#timings">Timings — 3 business days / 8 weeks / PSD 15 days</a></li>
+    <li>→ <a href="#s23">2.3 FOS — role + jurisdictions + funding</a></li>
+    <li>→ <a href="#super">Super-complaints + mass-detriment</a></li>
+    <li>→ <a href="#s24">2.4 FSCS — purpose + eligibility + limits</a></li>
+    <li>→ <a href="#fscs-limits">FSCS compensation limits — table</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s21">
+  <div class="section-num">2.1</div>
+  <h2 class="section-title">Eligible Complainants — criteria</h2>
+
+  <p class="para">
+    Not all complainants have the right to subsequently take their grievance to the FOS. Access to the FOS depends on (1) the circumstances falling within the FOS <em>jurisdiction</em>, and (2) the <strong>eligibility</strong> of the complainant.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>6 categories of eligible complainants</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Consumers</span> — <em>any person using or contemplating</em> the services of an authorised firm / appointed representative.</div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Micro-enterprises</span> — any person engaged in economic activity, <em>fewer than 10 persons</em>, turnover / balance sheet <strong>≤ €2 million</strong> at the time the complaint is raised.</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Charities</span> — annual income <strong>< £6.5 million</strong> at the time the complaint is raised.</div></div>
+
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Trustees of trusts</span> — net asset value <strong>< £5 million</strong> at the time the complaint is raised.</div></div>
+
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Certain SMEs</span> — annual turnover <strong>< £6.5 million</strong> + balance sheet <strong>< £5 million</strong>, OR <em>fewer than 50 employees</em>.</div></div>
+
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Persons acting outside business/profession</span> — or <strong>borrowers under a "buy-to-let" credit agreement</strong> (even an ECP / professional client may be in scope).</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Business relationship requirement</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Also required — business relationship</div>
+    The complaint must <em>arise out of a business relationship with the firm</em>:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Customer</li>
+      <li>Beneficial interest in a pension scheme</li>
+      <li>Policyholder</li>
+      <li><strong>Personal guarantors</strong> of loans to a business they are involved in</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who is NOT generally eligible</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Typically excluded</div>
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Other authorised firms</strong> (unless the complaint is about an activity for which they do not have permission themselves)</li>
+      <li><strong>ECPs + professional clients</strong> (other than pension scheme trustees) — unless the activity is <em>outside their classification</em></li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-card" id="s22">
+  <div class="section-num">2.2</div>
+  <h2 class="section-title">Complaint Handling Procedures — DISP 1</h2>
+
+  <p class="para">
+    The FCA requires firms to have <em>appropriate written procedures</em> for handling <em>expressions of dissatisfaction</em>. Procedures must be followed <strong>regardless</strong> of:
+  </p>
+
+  <ul class="bullet">
+    <li>Oral or written complaint</li>
+    <li>Justified or not</li>
+    <li>As long as it relates to the <em>firm's provision / failure to provide</em> a financial service</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Procedures must capture</h3>
+
+  <ul class="bullet">
+    <li><strong>Receiving</strong> complaints</li>
+    <li><strong>Acknowledging receipt</strong> of complaints</li>
+    <li><strong>Responding</strong> to complaints</li>
+    <li><strong>Appropriately investigating</strong> complaints</li>
+    <li><strong>Notifying</strong> eligible complainants of their right to go to the FOS</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>DISP — Dispute Resolution: Complaints Sourcebook</h3>
+
+  <div class="info-box">
+    <div class="ib-title">DISP 1 — "Treating Complainants Fairly"</div>
+    Complaint Handling Rules are in the <strong>FCA's Dispute Resolution: Complaints Sourcebook (DISP 1)</strong>, entitled <em>"Treating Complainants Fairly"</em>. It contains rules + guidance on how respondents should deal <em>promptly and fairly</em> with complaints.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>DISP 1.2 — Consumer Awareness Rules</h3>
+
+  <p class="para">Firms must:</p>
+
+  <ul class="bullet">
+    <li><strong>Publish summary details</strong> of their internal complaints process + the right of eligible complainants to take unresolved complaints to the FOS</li>
+    <li><strong>Refer eligible complainants</strong> in writing to the availability of summary details <em>at, or immediately after, the point of sale</em></li>
+    <li>Provide such summary details <em>in writing on request</em> at any time + when <em>acknowledging a complaint</em></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>DISP 1.3 — Complaint Handling Rules</h3>
+
+  <p class="para">
+    Firms must have <strong>effective and transparent procedures</strong> for <em>reasonable + prompt handling</em> of all complaints, <strong>without charging the complainant</strong>. Complaints may be made <em>by any reasonable means</em> — oral or written.
+  </p>
+</div>
+
+<div class="section-card" id="timings">
+  <div class="section-num">2.2.1</div>
+  <h2 class="section-title">Timings — key deadlines</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 business days — informal resolution</h3>
+
+  <div class="info-box">
+    <div class="ib-title">"Next business days" rule</div>
+    Firms may <em>handle complaints less formally</em> — <strong>without sending an acknowledgement letter</strong> — if resolved <strong>within 3 business days</strong> of receipt. After 3 days, firms must send a <em>summary resolution communication</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>8 weeks — general rule</h3>
+
+  <p class="para">
+    Firms must send a <strong>final response</strong> within <em>8 weeks</em> of receipt of the complaint. The final response must include:
+  </p>
+
+  <ul class="bullet">
+    <li>The firm's decision</li>
+    <li>FOS referral information — <strong>within 6 months</strong> of the final response</li>
+    <li>The FOS leaflet</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>PSD / EMD — 15 business days</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Payment Services Directive complaints</div>
+    For <strong>PSD</strong> (Payment Services Directive) / <strong>EMD</strong> (Electronic Money Directive) complaints, there is a strict deadline: <strong>15 business days</strong>. In <em>exceptional circumstances</em>, extendable to <strong>35 business days</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Reporting</h3>
+
+  <p class="para">
+    Firms must submit <strong>complaints data to the FCA</strong> <em>twice yearly</em> (bi-annual 'new complaints' return) — detailing the number of complaints received.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Complaint "closed"</h3>
+
+  <div class="info-box">
+    <div class="ib-title">When a complaint is "closed"</div>
+    A complaint is <em>closed</em> when:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>The firm has <strong>sent a final response</strong>, OR</li>
+      <li>The complainant has <strong>indicated in writing</strong> that they accept an earlier response</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Complaint records</h3>
+
+  <p class="para">Must record:</p>
+
+  <ul class="bullet">
+    <li><strong>Name of the complainant</strong></li>
+    <li><strong>Substance</strong> of the complaint</li>
+    <li><strong>Measures taken</strong> to provide a resolution</li>
+  </ul>
+</div>
+
+<div class="section-card" id="s23">
+  <div class="section-num">2.3</div>
+  <h2 class="section-title">FOS — role + jurisdictions + funding</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Role of the FOS</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Financial Ombudsman Service (FOS)</div>
+    Under FSMA, the FCA has the <em>power to make rules</em> relating to the handling of complaints. An <strong>independent body</strong> — the <em>FOS</em> (operated by Financial Ombudsman Service Ltd) — administers the <em>dispute resolution scheme</em>.
+    <br><br>
+    Role: a <strong>free, impartial, efficient way</strong> for consumers to resolve complaints about financial products/services, acting as an <em>alternative to the courts</em>. The FOS aims for <strong>fair and reasonable outcomes</strong> for both consumers and businesses.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FOS key features</h3>
+
+  <ul class="bullet">
+    <li><strong>Free to complainants</strong> — removes the deterrent of legal costs</li>
+    <li><strong>Minimum formality</strong> + quick resolution</li>
+    <li>Does <em>not replace the court system</em> — a complainant can still take civil action <strong>if NOT accepting</strong> the final FOS decision</li>
+    <li>Accepting the FOS final decision = <strong>final and binding</strong> on both parties — <em>no civil action possible after</em></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>2 Jurisdictions</h3>
+
+  <div class="p-item"><div class="p-num">CJ</div><div class="p-body"><span class="p-title">Compulsory Jurisdiction</span> — automatically applies to <strong>all FCA-authorised firms</strong>, eligible complainants, regulated activities.</div></div>
+
+  <div class="p-item"><div class="p-num">VJ</div><div class="p-body"><span class="p-title">Voluntary Jurisdiction</span> — firms <em>opt in</em> via a contractual arrangement with the FOS (becoming a VJ participant). Allows non-FCA-authorised firms to use the service.</div></div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Funding</h3>
+
+  <div class="info-box">
+    <div class="ib-title">How the FOS is funded</div>
+    The service is <strong>free for complainants</strong>. Regulated firms pay:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>An <strong>annual "levy"</strong> — as part of overall regulatory fees</li>
+      <li><strong>"Case fees"</strong> — for each case <em>accepted and investigated</em> by the FOS</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Time limits</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Critical deadline — 6 months</div>
+    The complainant must refer the complaint to the FOS <strong>within 6 months</strong> of the firm's <em>final response</em>. Miss the deadline — <em>no access to the FOS</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FOS awards</h3>
+
+  <p class="para">
+    After adjudication, the FOS writes to the complainant asking for confirmation — accept or reject the decision. Accepting = <em>final + binding</em>.
+  </p>
+
+  <p class="para">
+    <strong>Maximum award limits</strong> are automatically adjusted on <strong>1 April each year</strong> using the <em>CPI for the preceding January</em>. The maximum <em>excludes</em> interest on the award + costs + interest on costs.
+  </p>
+</div>
+
+<div class="section-card" id="super">
+  <div class="section-num">2.3.4</div>
+  <h2 class="section-title">Super-complaints + Mass-detriment</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Super-complaints</h3>
+
+  <p class="para">
+    Certain <em>consumer organisations</em> are allowed to make <strong>super-complaints</strong>. The aim is to provide consumer bodies with a <em>way of raising competition and consumer issues</em> with the FCA.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Super-complaint process</div>
+    The super-complainant (designated by HM Treasury via primary legislation) writes to the FCA setting out why a <em>UK market has a feature</em> that is <strong>significantly harming consumer interests</strong>.<br><br>
+    The FCA must <strong>respond within 90 days</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Mass-detriment references</h3>
+
+  <p class="para">
+    Mass-detriment = <em>large-scale damage, harm or loss to consumers</em>. A reference can be made by the <strong>FOS or a regulated firm</strong> if:
+  </p>
+
+  <ul class="bullet">
+    <li>There are regular <em>failures by firm(s)</em> to comply + consumers have suffered / may suffer loss + remediable by legal proceedings</li>
+    <li>Firm(s) have <em>acted regularly</em> in a way that a complaint <em>would likely be upheld</em> by the FOS</li>
+  </ul>
+</div>
+
+<div class="section-card" id="s24">
+  <div class="section-num">2.4</div>
+  <h2 class="section-title">FSCS — purpose + eligibility</h2>
+
+  <div class="info-box">
+    <div class="ib-title">Financial Services Compensation Scheme (FSCS)</div>
+    The <strong>FSCS</strong> was established to <em>pay compensation to eligible claimants</em> in the event of the <strong>default of an authorised firm</strong>, where the firm's insurance cover is exhausted + the firm enters insolvency. Essentially an <em>"insurance policy"</em>, paid for by <em>all authorised firms</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 conditions for a claim</h3>
+
+  <p class="para">To receive compensation, the person making the claim <strong>must</strong>:</p>
+
+  <ul class="bullet">
+    <li>Be an <strong>eligible claimant</strong></li>
+    <li>Have a <strong>protected claim</strong></li>
+    <li>Against an authorised firm <strong>that is in default</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Eligible claimants</h3>
+
+  <p class="para">Most clients of a defaulting firm — <strong>EXCEPT</strong>:</p>
+
+  <ul class="bullet">
+    <li>Other <strong>authorised firms</strong></li>
+    <li><em>Overseas financial institutions</em></li>
+    <li>CISs, their trustees / operators</li>
+    <li>Some pension / retirement funds</li>
+    <li>Supranational institutions, governments, central administrative authorities</li>
+    <li>Provincial / regional / local / municipal authorities</li>
+    <li><strong>Directors + managers</strong> of the firm in default + their relatives</li>
+    <li>Companies in the <em>same group</em> as the firm in default</li>
+    <li>Persons holding <strong>≥ 5%</strong> of the defaulting firm's capital</li>
+    <li>Auditors of the firm in default</li>
+    <li>Any person who has <em>contributed to the firm's default</em></li>
+    <li><strong>Large companies / partnerships / mutual associations</strong></li>
+    <li>Persons whose claim arises from transactions where they have been <em>convicted of money laundering</em></li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Large companies — NOT eligible</div>
+    Important: <strong>large public limited companies (plc)</strong> are generally <em>excluded from the FSCS</em>. The FSCS primarily covers <em>private individuals + small businesses</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Protected claims</h3>
+
+  <ul class="bullet">
+    <li><strong>Protected deposits</strong> — money on deposit with a bank</li>
+    <li><strong>Protected contracts of insurance</strong></li>
+    <li><strong>Protected investment business</strong></li>
+    <li>Claims against the manager / trustee of an <em>authorised unit trust</em> or the ACD / depository of an ICVC</li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">Unregulated CIS — still covered!</div>
+    Operating an unregulated CIS is <em>designated investment business</em>. Claims against a UK-authorised unregulated scheme operator are <strong>eligible under the FSCS</strong>.
+  </div>
+</div>
+
+<div class="section-card" id="fscs-limits">
+  <div class="section-num">2.4.2</div>
+  <h2 class="section-title">FSCS Compensation Limits</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Deposits (from 1 Dec 2025)</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Category</th><th>Limit</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Deposits (per eligible person, per firm)</strong></td><td><span class="number-card">£110,000</span> (was £85,000 before 1 Dec 2025)</td></tr>
+      <tr><td><strong>Joint accounts</strong></td><td><span class="number-card">£220,000</span></td></tr>
+      <tr><td><strong>Temporary high balances</strong></td><td><span class="number-card">£1.4 million for 6 months</span> (was £1m before 1 Dec 2025)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <div class="ib-title">Temporary high balances — events</div>
+    Temporary high balance protection applies when a large sum arises from:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Property transactions</strong> (e.g. house sale)</li>
+      <li><strong>Marriage / civil partnership</strong></li>
+      <li><strong>Divorce</strong></li>
+      <li><strong>Redundancy</strong></li>
+      <li><strong>Personal injury compensation</strong></li>
+      <li>Inheritance</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Insurance (firm failed after 8 Oct 2020)</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Insurance type</th><th>Protection</th></tr></thead>
+    <tbody>
+      <tr><td>Compulsory insurance</td><td>100%</td></tr>
+      <tr><td>Long-term insurance</td><td>100%</td></tr>
+      <tr><td>Professional indemnity insurance</td><td>100%</td></tr>
+      <tr><td>Claims from death / incapacity (sickness, injury, infirmity)</td><td>100%</td></tr>
+      <tr><td>All other kinds of insurance</td><td>90%</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Insurance brokers / financial advisers (no time limit)</h3>
+
+  <ul class="bullet">
+    <li><strong>Compulsory general insurance:</strong> 100%</li>
+    <li><strong>All other general insurances:</strong> 90%</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Investments (firm failed after 1 Apr 2019)</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Investment limit — £85,000</div>
+    <strong>£85,000 per eligible person, per firm</strong>. This is the standard number to remember for the exam.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Pensions (firm failed after 1 Apr 2019)</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Scenario</th><th>Protection</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pension provider fails</strong></td><td><strong>100% — no upper limit</strong></td></tr>
+      <tr><td><strong>SIPP operator fails</strong></td><td>£85,000 per eligible person, per firm</td></tr>
+      <tr><td><strong>Bad pension advice</strong></td><td>£85,000 per eligible person, per firm</td></tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam trap — pension provider vs SIPP operator</div>
+    <strong>Pension provider fails</strong> = 100% no limit (full protection).<br>
+    <strong>SIPP operator fails</strong> = £85,000 only.<br>
+    These are <em>different outcomes</em> for different failures in the pension space.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 2</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#A7F3D0">Key numbers</div>
+    <strong style="color:#A7F3D0">Complaints:</strong> 3 biz days (informal) / 8 weeks (general) / 15 biz days (PSD)<br>
+    <strong style="color:#A7F3D0">FOS referral:</strong> 6 months of final response<br>
+    <strong style="color:#A7F3D0">Complaints reporting:</strong> twice yearly<br>
+    <strong style="color:#A7F3D0">FSCS deposits (Dec 2025):</strong> £110k / £220k joint / £1.4m temp 6mo<br>
+    <strong style="color:#A7F3D0">FSCS investments:</strong> £85k · <strong style="color:#A7F3D0">Pension provider:</strong> 100% no limit
+  </div>
+
+  <ul>
+    <li><strong>2.1 Eligible Complainants (6 categories):</strong>
+      <ul style="margin-top:.3rem">
+        <li>Consumers (private individuals)</li>
+        <li>Micro-enterprises (<10 ppl, ≤ €2m turnover/BS)</li>
+        <li>Charities (annual income < £6.5m)</li>
+        <li>Trustees of trusts (net asset value < £5m)</li>
+        <li>SMEs (turnover < £6.5m + BS < £5m OR <50 employees)</li>
+        <li>Persons outside business, buy-to-let borrowers</li>
+      </ul>
+      Business relationship requirement.
+    </li>
+    <li><strong>Generally NOT eligible:</strong> large plcs, other authorised firms, ECPs, professional clients.</li>
+    <li><strong>2.2 DISP 1 — "Treating Complainants Fairly":</strong>
+      <ul style="margin-top:.3rem">
+        <li>DISP 1.2 — Consumer Awareness Rules (publish summary + inform at point of sale)</li>
+        <li>DISP 1.3 — Complaint Handling (effective/transparent procedures, free, any reasonable means)</li>
+        <li>Apply regardless oral/written, justified/not</li>
+      </ul>
+    </li>
+    <li><strong>Timings:</strong>
+      <ul style="margin-top:.3rem">
+        <li>3 business days — informal resolution (no written acknowledgement)</li>
+        <li>8 weeks — final response (general rule)</li>
+        <li>PSD/EMD — 15 business days (extendable to 35 in exceptional circumstances)</li>
+        <li>Complaints data to FCA: twice yearly</li>
+      </ul>
+    </li>
+    <li><strong>Complaint closed:</strong> final response sent OR complainant written acceptance.</li>
+    <li><strong>Records:</strong> name + substance + measures taken for resolution.</li>
+    <li><strong>2.3 FOS:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Free, impartial, efficient — alternative to courts</li>
+        <li>Free to complainants; firms pay annual levy + case fees</li>
+        <li>2 jurisdictions: CJ (automatic for FCA-authorised) + VJ (opt in via contract)</li>
+        <li>6 months — complainant referral deadline</li>
+        <li>Final FOS decision — accept = binding, no civil action after</li>
+        <li>Max award limits auto-adjusted 1 April each year (CPI)</li>
+      </ul>
+    </li>
+    <li><strong>Super-complaints:</strong> consumer bodies (HMT-designated) raise competition/consumer issues — FCA must respond within 90 days.</li>
+    <li><strong>Mass-detriment references:</strong> the FOS or a firm can raise these if regular failures have caused consumer loss.</li>
+    <li><strong>2.4 FSCS:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Pays compensation when an authorised firm defaults</li>
+        <li>"Insurance policy" paid by all authorised firms</li>
+        <li>3 conditions: eligible claimant + protected claim + firm in default</li>
+        <li>Large companies NOT eligible (primarily private individuals + small businesses)</li>
+        <li>Unregulated CIS operator — still covered!</li>
+      </ul>
+    </li>
+    <li><strong>FSCS Limits (key numbers):</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Deposits (from 1 Dec 2025): £110,000</strong> per person/firm; £220,000 joint</li>
+        <li><strong>Temporary high balances: £1.4 million</strong> for 6 months (from 1 Dec 2025)</li>
+        <li>Insurance: 100% compulsory/long-term/PII/death-incapacity; 90% other</li>
+        <li><strong>Investments: £85,000</strong> per person/firm</li>
+        <li><strong>Pension provider fails: 100% no limit</strong></li>
+        <li>SIPP operator / bad pension advice: £85,000</li>
+      </ul>
+    </li>
+    <li><strong>Temp high balance events:</strong> property sale + marriage + divorce + redundancy + personal injury + inheritance.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

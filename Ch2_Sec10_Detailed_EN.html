@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 10 — Inducements and Payment for Research</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;--teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;--amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;--coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;--purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;--green-l:#E1F5EE;--green:#085041;--gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;--bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;--radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 10 — Detailed Deep Dive</div>
+  <div class="app-sub">Inducements and Payment for Research · Syllabus 2.14 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 10 is a continuation of the logic of the previous section (conflicts of interest). It governs <strong>inducements</strong> — any payments, commissions or non-monetary benefits the firm receives from or pays to third parties in connection with servicing a client. The general rule is: <strong>everything not expressly permitted is prohibited</strong>. Separately covered are the <strong>rules on payment for research</strong> — after MiFID II, firms must either pay for research from their own resources or through a dedicated Research Payment Account (RPA). On the exam — 4-6 questions, often scenarios about specific benefits.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s101">10.1 Inducements — the general rule</a></li>
+    <li>→ <a href="#mnmb">Minor non-monetary benefits — 4 criteria</a></li>
+    <li>→ <a href="#categories">3 categories of permitted payments</a></li>
+    <li>→ <a href="#nonmifid">Non-MiFID firms — separate regime</a></li>
+    <li>→ <a href="#s102">10.2 Inducements and Research — separate payment</a></li>
+    <li>→ <a href="#s103">10.3 Research Payment Account (RPA)</a></li>
+    <li>→ <a href="#s104">10.4 Payment Optionality — August 2024 changes</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s101">
+  <div class="section-num">10.1</div>
+  <h2 class="section-title">Inducements — the general rule and scope</h2>
+
+  <p class="para">
+    The inducements rules <strong>should be viewed as a "payment rule"</strong>: they <em>prohibit any payment unless expressly permitted</em>. This is a strict regime.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Scope of the rules</h3>
+
+  <p class="para">
+    The rules apply to firms carrying on designated investment business that is <strong>MiFID business, as well as non-MiFID business</strong>. But the rules apply <strong>only to professional clients and retail clients</strong> — investment firms undertaking <strong>ECP business are NOT subject</strong> to the detailed inducement provisions.
+  </p>
+
+  <div class="exam-box">
+    <div class="xb-title">Scope of inducements rules</div>
+    <strong>Applies to:</strong> professional + retail clients.<br>
+    <strong>Does NOT apply to:</strong> ECP business.<br>
+    This matches the general philosophy: ECPs are the sophisticated market participants themselves, able to defend their own interests.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Independent advice / Restricted advice / Portfolio management to retail</h3>
+
+  <p class="para">
+    The requirements <strong>also cover</strong> cases where a firm provides:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Independent advice</strong> to a retail client</li>
+    <li><strong>Restricted advice</strong> to a retail client</li>
+    <li><strong>Portfolio management services</strong> to a retail client</li>
+  </ul>
+
+  <p class="para">
+    Although <strong>minor non-monetary benefits are permitted to be received</strong> — even under these strict regimes.
+  </p>
+</div>
+
+<div class="section-card" id="mnmb">
+  <div class="section-num">10.1.1</div>
+  <h2 class="section-title">Minor Non-Monetary Benefits — 4 criteria + 4 examples</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>4 criteria for a minor non-monetary benefit</h3>
+
+  <p class="para">
+    A minor non-monetary benefit must meet <strong>ALL 4 criteria</strong>:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Clearly disclosed</strong> prior to the provision of the relevant service to the client</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Capable of enhancing the quality of service</strong> provided to the client</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">Of a scale and nature that it <strong>could NOT be judged to impair the firm's compliance</strong> with its duty to act honestly, fairly and professionally in the best interests of the client</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Reasonable, proportionate</strong> and of a scale unlikely to influence the firm's behaviour in any way detrimental to the client's interests</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>4 categories of permitted minor non-monetary benefits</h3>
+
+  <p class="para">
+    The benefit must consist of:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Information or documentation</strong> relating to a financial instrument or investment service, <strong>generic in nature or personalised</strong> to reflect the circumstances of an individual client.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Written material</strong> from a third party, commissioned and paid for by a <strong>corporate issuer or potential issuer to promote a new issuance</strong> by the company.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Participation in conferences, seminars and other training events</strong> on the benefits and features of a specific financial instrument or investment service.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Hospitality of reasonable de minimis value</strong>, such as <strong>food and drink during a business meeting or a conference, seminar or other relevant training events</strong>.</li>
+  </ol>
+
+  <div class="warn-box">
+    <div class="wb-title">Critical limitation — de minimis value</div>
+    Hospitality only qualifies if it is <strong>reasonable de minimis value</strong>. Food and drink during a business meeting — OK. <strong>Premier League football ticket, lavish dinner, trip to the Maldives — do NOT qualify</strong> as a minor non-monetary benefit. That is a direct inducement, prohibited unless it falls within one of the three categories.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Examples — what qualifies and what doesn't</div>
+    <strong>✓ QUALIFIES:</strong><br>
+    • A research report on a fund from an asset manager whose products the firm works with<br>
+    • Corporate issuer research on an IPO<br>
+    • Attendance at a fund house seminar with lunch<br>
+    • A sandwich and coffee at a training event<br>
+    <strong>✗ DOES NOT QUALIFY:</strong><br>
+    • A Rolling Stones concert ticket from a fund house<br>
+    • A weekend trip to a spa resort<br>
+    • An expensive bottle of wine as a gift<br>
+    • A dinner at a 3-Michelin-star restaurant without a business purpose
+  </div>
+</div>
+
+<div class="section-card" id="categories">
+  <div class="section-num">10.1.2</div>
+  <h2 class="section-title">3 categories of permitted payments (MiFID business)</h2>
+
+  <p class="para">
+    In relation to MiFID business, firms are <strong>prohibited</strong> from paying or accepting any fees, commissions or non-monetary benefits, <strong>other than</strong> three categories:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Fees, commissions or non-monetary benefits paid TO OR BY THE CLIENT</strong>, or someone on their behalf (e.g. management fees).</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Proper fees that are necessary</strong> for the provision of the service (e.g. <em>custody costs, legal fees, settlement fees</em>) and which <em>cannot, by their nature, give rise to conflicts</em>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Fees, commissions or non-monetary benefits paid TO OR BY A THIRD PARTY</strong> (or someone on their behalf) — only if <strong>3 conditions</strong> are met.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 conditions for third-party payments</h3>
+
+  <p class="para">
+    Third-party payments are permissible <strong>only if they</strong>:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Do NOT impair compliance</strong> with the firm's duty to act in the client's best interests</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Are <strong>designed to enhance quality</strong> of service to the client</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Are <strong>disclosed in accordance with set standards</strong> <em>prior to</em> provision of the service to the client</li>
+  </ol>
+
+  <div class="exam-box">
+    <div class="xb-title">Mnemonic for the 3 conditions</div>
+    <strong>N-E-D: Not impair + Enhance + Disclose</strong><br>
+    Third-party payments are permissible only if they <strong>do not impair</strong>, <strong>enhance</strong> quality, and are <strong>disclosed</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>How to satisfy the disclosure obligation</h3>
+
+  <p class="para">
+    Firms can satisfy disclosure obligations if they:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Disclose the essential arrangements</strong> for such payments/benefits <strong>in summary form</strong></li>
+    <li><strong>Undertake to the client</strong> that <strong>further details will be disclosed on request</strong></li>
+    <li>And, in fact, <strong>give such details on request</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Record-keeping</h3>
+
+  <p class="para">
+    Firms must also keep <strong>full records of such payments/benefits made to other firms</strong>, for all UK MiFID business.
+  </p>
+</div>
+
+<div class="section-card" id="nonmifid">
+  <div class="section-num">10.1.3</div>
+  <h2 class="section-title">Non-MiFID Firms — separate regime</h2>
+
+  <p class="para">
+    The inducements provisions <strong>have not been fully implemented for non-MiFID firms/business</strong>. In relation to third-party payments, these firms need only comply with:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>The "does not impair compliance" test only</strong></li>
+    <li>The other two tests (disclosure and enhancement) <strong>do NOT apply</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Retail non-MiFID for packaged products</h3>
+
+  <p class="para">
+    <strong>Retail non-MiFID business for the sale of packaged products is subject to the disclosure requirements</strong> of the inducement provisions. However, the extension of the provision <strong>does not expect firms to disclose details of reasonable non-monetary benefits</strong> for non-MiFID business.
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr><th>Firm type</th><th>Which tests apply</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>MiFID firm</strong></td>
+        <td>All 3 tests: not impair + enhance + disclose</td>
+      </tr>
+      <tr>
+        <td><strong>Non-MiFID firm</strong> (not retail packaged products)</td>
+        <td>Only the "not impair" test</td>
+      </tr>
+      <tr>
+        <td><strong>Non-MiFID retail for packaged products</strong></td>
+        <td>"Not impair" + disclosure requirements (but not for reasonable non-monetary benefits)</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="section-card" id="s102">
+  <div class="section-num">10.2</div>
+  <h2 class="section-title">Inducements and Research — a separate charge for research</h2>
+
+  <p class="para">
+    UK regulated firms producing research must <strong>apply a separately identifiable charge for research</strong> when providing it to an entity that is <strong>not permitted to receive research for free</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who may NOT receive research for free (in-scope firms)</h3>
+
+  <p class="para">
+    This is a regulated firm that either:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Provides portfolio management services</strong>, or</li>
+    <li>Provides <strong>independent or restricted advice</strong> to a retail client and/or <strong>professional client</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>2 permitted payment methods (for in-scope firms)</h3>
+
+  <p class="para">
+    In-scope firms <strong>may only receive (consume) research if they pay</strong> using one of two methods:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Directly from their own resources</strong> (the firm pays itself, without passing costs to clients).</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>From a Research Payment Account (RPA)</strong>, controlled by the firm and funded by a specific charge to clients.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Out-of-scope bodies</h3>
+
+  <p class="para">
+    The provisions <strong>do NOT apply</strong> to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Non-UK regulated bodies</strong> producing research</li>
+    <li>Firms located <strong>outside the UK</strong> consuming research</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA gold-plating — AIFs and CIS</h3>
+
+  <p class="para">
+    When implementing MiFID II into its Handbook, the FCA <strong>gold-plated</strong> (went beyond the Directive's requirements) some requirements. However, it did NOT apply the requirements to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>AIFs</strong></li>
+    <li><strong>CISs whose core investment policy does not involve investing in MiFID financial instruments</strong></li>
+  </ul>
+
+  <p class="para">
+    This means <strong>private equity business</strong> (investing in companies) and <strong>collective investment funds investing in commercial property</strong> are NOT caught by the prohibition on receiving research for free, since those investments are not designated MiFID financial instruments.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Macro-economic research — must be paid for</h3>
+
+  <p class="para">
+    FCA rules mean UK asset managers must <strong>continue to pay for macro-economic research</strong>, since it <em>does not meet the definition of "FICC" research</em>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Common confusion</div>
+    Many think that macro-economic research is "general info", generic, not requiring separate payment. That is NOT so. Under FCA rules, macro-economic research = not FICC research = <strong>must be paid for</strong>.
+  </div>
+</div>
+
+<div class="section-card" id="s103">
+  <div class="section-num">10.3</div>
+  <h2 class="section-title">Research Payment Account (RPA) — rules of use</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Funding the RPA</h3>
+
+  <p class="para">
+    The RPA must be <strong>funded ONLY by a specific research charge</strong> to clients, <em>agreed</em> with clients, developed by the firm as its research budget for the purpose of establishing the amount needed for third-party research in respect of the investment services provided to its clients.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Only for research</h3>
+
+  <p class="para">
+    The RPA must be <strong>only used to pay for research</strong>, and NOT goods and/or services that <strong>do not fall within the definition of research</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Non-exhaustive list of what is NOT research for RPA purposes</h3>
+
+  <ul class="bullet">
+    <li><strong>Post-trade analytics</strong></li>
+    <li><strong>Price feeds or historical price data</strong> that has not been <em>analysed or manipulated</em> in order to present the firm with meaningful conclusions</li>
+    <li><strong>Seminar fees</strong></li>
+    <li><strong>Corporate access service</strong></li>
+    <li><strong>Order and execution management services</strong></li>
+    <li><strong>Administration of an RPA</strong></li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">Key distinction: what is research and what isn't</div>
+    <strong>RESEARCH (can be paid via RPA):</strong> equity analysis, sector outlook, company fundamentals, investment strategy, currency movements with analysis.<br>
+    <strong>NOT RESEARCH (cannot be paid via RPA):</strong> seminar fees, corporate access, order/execution management, unanalysed price feeds, RPA administration.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Industry trend — paying from own resources</h3>
+
+  <p class="para">
+    There has been substantial <strong>debate over the use of RPA</strong> and fund managers charging clients for research. <strong>A number of fund managers took the decision to pay for research themselves</strong>, taking steps to reduce the amount of research they receive (and pay for), and to focus on relevant and appropriate research that will add value to investment decision-making.
+  </p>
+
+  <p class="para">
+    This also means that research received can be used to benefit <em>all clients</em> of the firm.
+  </p>
+</div>
+
+<div class="section-card" id="s104">
+  <div class="section-num">10.4</div>
+  <h2 class="section-title">Payment Optionality — August 2024 changes</h2>
+
+  <p class="para">
+    The FCA has introduced changes to the existing rules governing how payments for investment research are made.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Who gets flexibility</h3>
+
+  <p class="para">
+    In the UK, <strong>buy-side firms</strong> have been given greater flexibility in how they purchase investment research:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Asset managers</strong></li>
+    <li><strong>Pension schemes</strong></li>
+    <li><strong>Fund managers</strong> (managers of collective investment schemes)</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What is permitted from August 2024</h3>
+
+  <p class="para">
+    They are <strong>permitted to "bundle" payments</strong> for third-party research and execution services, <strong>provided they meet the relevant requirements</strong> around execution and research costs.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">What "bundle" means</div>
+    Previously (under MiFID II): research and execution <em>had to be paid for separately</em>. Brokers could not include research in execution commission — that was mandatory unbundling. From <strong>August 2024</strong>: UK buy-side firms can again include research payment in the commission at execution, if cost requirements are met. This is a return of flexibility that existed before MiFID II.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example before and after August 2024</div>
+    <strong>Before August 2024:</strong> an asset manager trades through broker X. Broker charges 5 bps execution commission. <em>Separately</em>, the asset manager receives research from broker X and pays £50K per year for research through the RPA.<br><br>
+    <strong>From August 2024:</strong> the asset manager may again <strong>bundle</strong> — the broker charges a 7 bps commission, which includes both execution and research. The key is meeting requirements on execution and research costs.
+  </div>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam number</div>
+    Remember: <strong>August 2024</strong> — UK buy-side firms can bundle research + execution payments. This is an important change, asked about on the exam.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 10</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Structure of the rules</div>
+    <strong style="color:#FEF3C7">Inducements general:</strong> prohibited, except 3 categories<br>
+    <strong style="color:#FEF3C7">Minor non-monetary benefits:</strong> 4 criteria + 4 categories<br>
+    <strong style="color:#FEF3C7">Third-party payments:</strong> 3 tests — not impair + enhance + disclose<br>
+    <strong style="color:#FEF3C7">Research:</strong> 2 methods — own resources or RPA<br>
+    <strong style="color:#FEF3C7">August 2024:</strong> bundling permitted for UK buy-side
+  </div>
+
+  <ul>
+    <li><strong>10.1 Inducements rules</strong> should be seen as a <em>"payment rule"</em> — prohibits any payment unless expressly permitted.</li>
+    <li><strong>Scope:</strong> MiFID + non-MiFID business. Applies to <strong>professional + retail clients. NOT to ECP business</strong>.</li>
+    <li><strong>Independent advice / Restricted advice / Portfolio management</strong> for retail: a particularly strict regime, but minor non-monetary benefits are permitted.</li>
+    <li><strong>Minor non-monetary benefits — 4 criteria:</strong> (1) disclosed prior; (2) capable of enhancing quality; (3) not impairing duty to act in best interests; (4) reasonable, proportionate, unlikely to influence detrimentally.</li>
+    <li><strong>4 categories of permitted minor benefits:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Generic or personalised info/documentation on an instrument/service</li>
+        <li>(2) Written material from a corporate issuer to promote a new issuance</li>
+        <li>(3) Conferences, seminars, training events</li>
+        <li>(4) Hospitality of reasonable de minimis value — food/drink at meetings/training</li>
+      </ul>
+    </li>
+    <li><strong>MiFID 3 categories of permitted payments:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Paid to/by client or someone on their behalf</li>
+        <li>(2) Proper fees necessary for the service (custody, legal, settlement)</li>
+        <li>(3) Third-party payments — if 3 conditions are met</li>
+      </ul>
+    </li>
+    <li><strong>3 conditions for third-party payments (NED):</strong> <strong>N</strong>ot impair duty + <strong>E</strong>nhance quality + <strong>D</strong>isclosed prior to service.</li>
+    <li><strong>Disclosure obligation:</strong> summary form + undertake to give details on request + actually give on request.</li>
+    <li><strong>Non-MiFID firms:</strong> only the "not impair" test. Retail non-MiFID packaged products: plus disclosure requirements (but not for reasonable non-monetary benefits).</li>
+    <li><strong>Records:</strong> full records of such payments/benefits for all UK MiFID business.</li>
+    <li><strong>10.2 Research payment — in-scope firms</strong> (portfolio management or independent/restricted advice for retail/professional): must pay via (1) own resources OR (2) RPA funded by specific client charge.</li>
+    <li><strong>Out-of-scope:</strong> non-UK producers, non-UK consumers.</li>
+    <li><strong>Gold-plating not applied to:</strong> AIFs + CISs where core policy does not involve MiFID instruments (private equity, commercial property funds).</li>
+    <li><strong>Macro-economic research:</strong> must be paid (not FICC research).</li>
+    <li><strong>10.3 RPA:</strong> funded by specific research charge, agreed with clients, research budget. Only for research.</li>
+    <li><strong>NOT research for RPA purposes:</strong> post-trade analytics, unanalysed price feeds, seminar fees, corporate access, order/execution management, RPA admin.</li>
+    <li><strong>10.4 From August 2024:</strong> UK buy-side firms (asset managers, pension schemes, fund managers) can <strong>bundle payments</strong> for third-party research and execution services (if cost requirements are met).</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

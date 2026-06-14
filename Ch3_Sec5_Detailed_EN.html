@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 3, Section 5 — Record-Keeping Requirements</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#9F1239;--primary-l:#FEE2E2;--primary-d:#7F1028;--primary-vd:#4C0519;--accent:#D97706;--accent-l:#FEF3C7;--accent-d:#92400E;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#FEF2F2;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(159,18,57,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(76,5,25,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#FEE2E2;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(159,18,57,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);margin-right:.35rem}
+.para{font-size:.93rem;margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(159,18,57,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 3</div>
+  <div class="app-title">Chapter 3, Section 5 — Detailed Deep Dive</div>
+  <div class="app-sub">Record-Keeping Requirements · Syllabus 3.5 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    <strong>Record-keeping</strong> — a tangential but important aspect of AML and financial crime prevention. Keeping records of <em>evidence of identity</em>, <em>transactions</em>, and <em>training</em> allows the FCA and authorities to <strong>reconstruct</strong> what happened during an investigation. The baseline rule: <strong>5 years retention</strong> for all AML records. MLR 2017, SYSC 9, and MiFID II all require 5-year retention. 1-2 exam questions — often about specific periods (5 vs 3 vs 7 years).
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#aml">5.1 AML Record-Keeping</a></li>
+    <li>→ <a href="#other">Other record-keeping requirements</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="aml">
+  <div class="section-num">5.1</div>
+  <h2 class="section-title">AML/CFT Record-Keeping Requirements</h2>
+
+  <p class="para">
+    Under <strong>MLR 2017</strong>, firms must <em>retain records</em> that demonstrate compliance with AML/CFT (Combating the Financing of Terrorism) obligations.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Specified periods — all 5 years</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Record</th><th>Retention</th><th>Start from</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Evidence of identity</strong></td><td><span class="number-card">5 years</span></td><td>End of relationship with the client</td></tr>
+      <tr><td><strong>Transactions</strong></td><td><span class="number-card">5 years</span></td><td>Date the transaction was completed</td></tr>
+      <tr><td><strong>Other records</strong></td><td><span class="number-card">5 years</span></td><td>Obtaining the information / creation of the record</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>AML training records</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Training records must include</div>
+    The records kept must include:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Dates</strong> when AML training was given</li>
+      <li><strong>Nature</strong> of the training</li>
+      <li><strong>Names of staff</strong> who received the training</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Reliance on third parties</h3>
+
+  <p class="para">
+    Where a firm <strong>relies on another party</strong> to carry out AML checks (e.g. a third-party KYC provider), the firm must <em>demonstrate</em> how it <strong>satisfies itself</strong> that the other party's records are being retained for <strong>5 years</strong>.
+  </p>
+
+  <p class="para">
+    Conversely, where a firm <strong>is relied upon by others</strong> for CDD checks, it must retain records for the <em>same 5-year period</em> applying to its own CDD.
+  </p>
+</div>
+
+<div class="section-card" id="other">
+  <div class="section-num">5.2</div>
+  <h2 class="section-title">Other record-keeping requirements</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Common 5-year period</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Record type</th><th>Retention</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td>MiFID firm transaction records, client orders</td><td><span class="number-card">5 years</span></td><td>MiFID II</td></tr>
+      <tr><td>STOR supporting documentation</td><td><span class="number-card">5 years</span></td><td>UK MAR</td></tr>
+      <tr><td>Suitability assessment + suitability report</td><td><span class="number-card">5 years (min)</span></td><td>COBS</td></tr>
+      <tr><td>MiFID complaints records</td><td><span class="number-card">5 years</span></td><td>DISP</td></tr>
+      <tr><td>Non-MiFID complaints records</td><td>3 years (min)</td><td>DISP</td></tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <div class="ib-title">FCA Handbook — SYSC 6 + SYSC 9</div>
+    The FCA's general record-keeping requirements are in <strong>SYSC 6 and SYSC 9</strong>. Firms must <em>take reasonable care</em> to make and retain <strong>adequate records</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Ongoing monitoring</h3>
+
+  <p class="para">
+    Part of CDD — <strong>ongoing monitoring</strong> of existing relationships:
+  </p>
+
+  <ul class="bullet">
+    <li>Validate that customer information <em>remains current</em></li>
+    <li>Detect <em>unusual transaction patterns</em> potentially indicating ML/TF</li>
+    <li>Update identification records + customer risk profile</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">Exam trap — 3 vs 5 years</div>
+    Be careful on the exam: <strong>non-MiFID complaints</strong> = 3 years; <strong>MiFID complaints</strong> = 5 years. <em>AML records — always 5 years</em>. Not 3. Not 7. Not 10.
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 5</div>
+
+  <div style="background:rgba(255,255,255,.1);border:1.5px dashed rgba(255,255,255,.4);color:#fff;padding:1rem;border-radius:10px;font-family:'SF Mono',Consolas,Monaco,monospace;font-size:.82rem;margin:.8rem 0 1.2rem">
+    <div style="font-family:system-ui,sans-serif;font-weight:700;color:#FEF3C7;font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em">Golden rule — 5 YEARS</div>
+    <strong style="color:#FEF3C7">AML evidence of identity</strong> = 5y (from end of relationship)<br>
+    <strong style="color:#FEF3C7">AML transactions</strong> = 5y (from date completed)<br>
+    <strong style="color:#FEF3C7">MiFID transactions</strong> = 5y<br>
+    <strong style="color:#FEF3C7">MiFID complaints</strong> = 5y<br>
+    <strong style="color:#FEF3C7">Suitability</strong> = 5y (min)
+  </div>
+
+  <ul>
+    <li><strong>Base MLR 2017 rule:</strong> 3 categories of records — all <strong>5 years</strong>:
+      <ul style="margin-top:.3rem">
+        <li>Evidence of identity — 5y from end of client relationship</li>
+        <li>Transactions — 5y from date transaction completed</li>
+        <li>Other — 5y from obtaining information / creation of record</li>
+      </ul>
+    </li>
+    <li><strong>AML training records</strong> must include: dates + nature of training + names of staff who received it.</li>
+    <li><strong>Third-party reliance:</strong> the firm must demonstrate how it satisfies itself that the other party's records are retained for <strong>5 years</strong>.</li>
+    <li><strong>Other 5-year records:</strong> MiFID transaction records, client orders, STOR supporting docs, suitability reports, MiFID complaints.</li>
+    <li><strong>Exception:</strong> <em>non-MiFID complaints = 3 years</em> (not 5).</li>
+    <li><strong>FCA source:</strong> SYSC 6 + SYSC 9 — general record-keeping requirements.</li>
+    <li><strong>Ongoing monitoring</strong> — part of CDD — validate customer info + detect unusual patterns.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

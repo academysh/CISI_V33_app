@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 2, Section 7 — Advising and Selling Standards</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#1E2761;--navy-l:#CADCFC;--navy-d:#12195F;
+  --teal:#028090;--teal-l:#D6F0F3;--teal-d:#015E6A;--teal-m:#1D9E75;
+  --amber:#B07D12;--amber-l:#FEF3C7;--amber-d:#7C5A0A;
+  --coral:#993C1D;--coral-l:#FAECE7;--coral-m:#D85A30;
+  --purple:#534AB7;--purple-l:#EEEDFE;--purple-d:#3C3489;
+  --green-l:#E1F5EE;--green:#085041;
+  --gray:#64748B;--gray-l:#F1F5F9;--gray-m:#CBD5E1;--gray-d:#334155;
+  --bg:#F0F4F8;--card:#fff;--text:#1e293b;--text2:#475569;--text3:#94a3b8;
+  --radius:12px;--shadow:0 2px 10px rgba(0,0,0,.09);
+}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--navy),var(--teal));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--navy-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--teal)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--navy);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--text2)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(0,0,0,.05)}
+.section-num{display:inline-block;background:var(--teal);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--teal-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--teal-l)}
+.sub-title .sub-num{color:var(--teal);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--text);margin-bottom:.85rem}
+.para strong{color:var(--navy-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--text)}
+.info-box{background:var(--teal-l);border-left:4px solid var(--teal);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--teal-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--purple-l);border-left:4px solid var(--purple);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--purple-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 ";}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ ";}
+.exam-box{background:var(--green-l);border-left:4px solid var(--teal-m);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--green);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 ";}
+.schema{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1.5px dashed var(--gray-m);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--text2);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--navy);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.comp-table th{background:var(--navy);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--gray-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--gray-l)}
+.tag-in{background:var(--green-l);color:var(--green);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-out{background:var(--coral-l);color:var(--coral);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.tag-partial{background:var(--amber-l);color:var(--amber-d);padding:.15rem .55rem;border-radius:12px;font-size:.76rem;font-weight:600;display:inline-block}
+.summary-card{background:linear-gradient(135deg,var(--navy),var(--teal));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--gray-m)}
+.toc-title{font-weight:700;color:var(--navy);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--teal-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--teal);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1rem 0}
+.cmp-card{padding:1rem;border-radius:10px;border:1.5px solid}
+.cmp-suit{border-color:var(--teal);background:var(--teal-l)}
+.cmp-app{border-color:var(--purple);background:var(--purple-l)}
+.cmp-title{font-weight:700;font-size:.95rem;margin-bottom:.4rem}
+.cmp-suit .cmp-title{color:var(--teal-d)}
+.cmp-app .cmp-title{color:var(--purple-d)}
+.cmp-list{font-size:.85rem;color:var(--text2);line-height:1.5}
+@media (max-width:600px){.compare-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="app-title">Chapter 2, Section 7 — Detailed Deep Dive</div>
+  <div class="app-sub">Advising and Selling Standards · Syllabus 2.10-2.11 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<!-- INTRODUCTION -->
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 7 is <strong>the most technical and most exam-heavy part of Chapter 2</strong>. It governs how a firm serves clients across two fundamentally different regimes: when advice is given (advised → <strong>suitability</strong>) and when no advice is given (non-advised → <strong>appropriateness</strong>). Plus additional topics: churning, suitability reports, insistent clients, and the execution-only exemption. Expect 5-8 exam questions, with lots of detail on thresholds, timing, and exceptions. This is one of the sections with the most numbers and specific wordings.
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#intro">The overall philosophy: advised vs non-advised</a></li>
+    <li>→ <a href="#s71">7.1 Application of Suitability Rules</a></li>
+    <li>→ <a href="#s72">7.2 Information Required for Suitability Assessment</a></li>
+    <li>→ <a href="#s73">7.3 Professional Clients — special treatment</a></li>
+    <li>→ <a href="#s74">7.4 Churning and Switching</a></li>
+    <li>→ <a href="#s75">7.5 The Suitability Report</a></li>
+    <li>→ <a href="#s76">7.6 Insistent Clients</a></li>
+    <li>→ <a href="#s77">7.7 Appropriateness (Non-Advised Sales)</a></li>
+    <li>→ <a href="#s78">7.8 Execution-Only Exemption and non-complex instruments</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<!-- BIG INTRODUCTION -->
+<div class="section-card" id="intro">
+  <div class="section-num">INTRODUCTION</div>
+  <h2 class="section-title">The two fundamental axes of this section: advised vs non-advised</h2>
+
+  <p class="para">
+    The whole of Section 7 revolves around one central question: <strong>how much responsibility does the firm bear for the client's investment decision</strong>? The answer depends on <em>what exactly</em> the firm is doing.
+  </p>
+
+  <div class="compare-grid">
+    <div class="cmp-card cmp-suit">
+      <div class="cmp-title">ADVISED → SUITABILITY</div>
+      <div class="cmp-list">
+        The firm <strong>gives a personal recommendation</strong> to the client or <strong>manages</strong> their portfolio.<br><br>
+        The firm must <strong>understand the client fully</strong>: their objectives, financial situation, knowledge, experience.<br><br>
+        The firm bears <strong>full responsibility</strong> for ensuring the recommendation is suitable for the client.<br><br>
+        <strong>3 information areas to collect</strong>
+      </div>
+    </div>
+    <div class="cmp-card cmp-app">
+      <div class="cmp-title">NON-ADVISED → APPROPRIATENESS</div>
+      <div class="cmp-list">
+        The firm <strong>does NOT give a recommendation</strong>; the client decides what to buy.<br><br>
+        The firm must <strong>satisfy itself</strong> that the client has <strong>sufficient knowledge and experience</strong> to understand the risks.<br><br>
+        The client bears <strong>responsibility for the decision</strong>; the firm is responsible for the appropriateness test.<br><br>
+        <strong>Only 1 information area to collect</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">Three regimes, three levels of protection</div>
+    <strong>1. Suitability</strong> — the strictest: for advised business. 3 information areas + full firm responsibility for suitability.<br>
+    <strong>2. Appropriateness</strong> — intermediate: for non-advised business in complex instruments. 1 area (knowledge & experience) + warnings.<br>
+    <strong>3. Execution-only</strong> — the lightest: NO assessments. Only for non-complex instruments if the 3 conditions are met.
+  </div>
+
+  <p class="para">
+    Each of these regimes is covered in detail below. Plus special cases: churning (excessive trading), insistent clients (who insist against a recommendation), and suitability reports (written documents for the client).
+  </p>
+</div>
+
+<!-- 7.1 APPLICATION OF SUITABILITY -->
+<div class="section-card" id="s71">
+  <div class="section-num">7.1</div>
+  <h2 class="section-title">Application of Suitability Rules — when suitability applies</h2>
+
+  <p class="para">
+    The COBS suitability rules apply in three cases — <strong>critical to know for the exam</strong>:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>The firm makes personal recommendations (investment advice)</strong> in relation to designated investments — including <strong>buy, hold or sell</strong> recommendations for a particular financial instrument.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>The firm manages investments</strong> on behalf of a retail client.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>The firm manages assets</strong> of an occupational pension scheme, stakeholder pension scheme or personal pension scheme — <strong>other than</strong> in relation to MiFID, equivalent third-country or optional exemption business.</li>
+  </ol>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — key nuances of suitability scope</div>
+    • <strong>MiFID suitability covers BUY + HOLD + SELL</strong> — not only buy recommendations! Advising "hold your position" also triggers suitability.<br>
+    • <strong>For non-MiFID business</strong> — suitability applies only to retail clients + managing pension scheme assets.<br>
+    • <strong>Execution-only</strong> and <strong>general information</strong> do NOT trigger suitability.<br>
+    • <strong>Personal recommendation</strong> = recommendation to a <em>specific person</em> about a <em>specific instrument</em>. General educational content is not a personal recommendation.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Portfolio management — when suitability assessment is needed</h3>
+
+  <p class="para">
+    If the firm manages the client's portfolio, it must conduct a suitability assessment:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>At the start</strong> of the mandate — required.</li>
+    <li><strong>Before recommending changes to the mandate</strong> that require client consent — required.</li>
+    <li>Keep <strong>client information up to date</strong> on an ongoing basis.</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Incentive schemes and FCA guidance</h3>
+
+  <p class="para">
+    When assessing suitability, firms must have policies and procedures ensuring they <strong>understand the nature, features (including costs and risks) of instruments</strong> selected for clients. The FCA expects firms to:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Consider whether their incentive schemes increase the risk of misselling</strong>, and if so — review governance/systems/controls.</li>
+    <li><strong>Take action</strong> to address inadequacies.</li>
+  </ul>
+
+  <p class="para">
+    The FCA has identified common areas where firms may need to do more to manage incentive risks effectively:
+  </p>
+
+  <ul class="bullet">
+    <li>Checking for <strong>spikes or trends</strong> in the sales patterns of individual advisers to identify areas of increased risk</li>
+    <li>More monitoring of <strong>poor sales practices</strong> in face-to-face sales conversations</li>
+    <li>Managing risks in <strong>discretionary incentive schemes and balanced scorecards</strong>, including the risk that discretion could be misused</li>
+    <li>Monitoring <strong>non-advised sales</strong> to ensure staff incentivised to sell do not give personal recommendations</li>
+    <li>Improving oversight of incentives used by <strong>appointed representatives</strong></li>
+    <li>Recognising that remuneration that is effectively 100% variable pay based on sales <strong>increases the risk of misselling</strong></li>
+  </ul>
+</div>
+
+<!-- 7.2 INFORMATION -->
+<div class="section-card" id="s72">
+  <div class="section-num">7.2</div>
+  <h2 class="section-title">Information Required for Suitability Assessment — 3 areas</h2>
+
+  <p class="para">
+    For MiFID investment business, if a firm provides investment advice or portfolio management services, MiFID II requires information across <strong>three areas</strong>:
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Area</th>
+        <th>What to gather specifically</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><strong>Knowledge and Experience</strong></td>
+        <td>
+          • Types of service, transaction and investment with which the client is familiar<br>
+          • Nature, volume, frequency and period of past involvement in such transactions<br>
+          • Level of education, profession, or relevant former profession
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>Financial Situation</strong></td>
+        <td>
+          Including <strong>ability to bear losses</strong>
+        </td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>Investment Objectives</strong></td>
+        <td>
+          And <strong>risk appetite / risk profile</strong>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Fact-finding — gathering information</h3>
+
+  <p class="para">
+    To conduct a suitability assessment, the firm must <strong>gather enough information from the client to understand the essential facts</strong> about them ("fact-finding"). It must have a <strong>reasonable basis</strong> to believe that (bearing in mind its nature) the service or transaction:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Meets their investment objectives</strong></li>
+    <li>Carries a <strong>level of investment risk</strong> the client <strong>can bear financially</strong></li>
+    <li>Carries <strong>risks the client has the experience and knowledge to understand</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What if the information is not obtained or is incomplete</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">CRITICAL rule</div>
+    Firms <strong>must NOT discourage</strong> clients from providing this information. If the firm does not obtain the information needed to assess suitability, it <strong>must not make a personal recommendation</strong> or <strong>take a decision to trade</strong> for the client.<br><br>
+    <em>All 3 areas are necessary. Missing any of them — cannot advise or trade.</em>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Relying on client-provided information</h3>
+
+  <p class="para">
+    The firm is <strong>entitled to rely</strong> on information provided by the client — <strong>unless it is manifestly out of date, inaccurate or incomplete</strong>. In other words, the firm is not obliged to verify every client statement, but where something is obviously implausible or out of date, clarification should be sought.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Practical example of information gathering</div>
+    Maria, 45, comes in for advice on investing a £100K inheritance. Fact-find must cover:<br>
+    <strong>Knowledge & Experience:</strong> Previously invested in ISAs (UCITS funds) for 10 years; MBA in finance; worked as an accountant at an insurance company for 15 years. → Sufficient knowledge for complex products.<br>
+    <strong>Financial Situation:</strong> Salary £70K, emergency fund £20K, mortgage £150K with 8 years left, no children. → Can bear moderate losses.<br>
+    <strong>Objectives + Risk Appetite:</strong> Goal — buy a house in 15 years; comfortable with medium risk; does not want to lose more than 20% of capital. → Balanced portfolio with a growth tilt.
+  </div>
+</div>
+
+<!-- 7.3 PROFESSIONAL -->
+<div class="section-card" id="s73">
+  <div class="section-num">7.3</div>
+  <h2 class="section-title">Assessing Suitability for Professional Clients</h2>
+
+  <p class="para">
+    For professional clients the rules are modified — the firm is entitled to make certain assumptions that reduce the assessment burden.
+  </p>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Client type</th>
+        <th>Assumption about knowledge & experience</th>
+        <th>Assumption about ability to bear losses</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Per se professional</strong></td>
+        <td><span class="tag-in">✓ Can assume</span></td>
+        <td><span class="tag-in">✓ Can assume</span></td>
+      </tr>
+      <tr>
+        <td><strong>Elective professional</strong></td>
+        <td><span class="tag-in">✓ Can assume</span></td>
+        <td><span class="tag-out">✗ CANNOT assume — must assess</span></td>
+      </tr>
+      <tr>
+        <td><strong>Retail</strong></td>
+        <td><span class="tag-out">✗ Cannot — must assess</span></td>
+        <td><span class="tag-out">✗ Cannot — must assess</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam key fact</div>
+    <strong>Per se professional</strong> — can assume BOTH (knowledge/experience AND financial loss-bearing capacity).<br>
+    <strong>Elective professional</strong> — can assume ONLY knowledge/experience. Ability to bear losses must be assessed.<br>
+    <strong>Retail</strong> — assess everything fully.<br>
+    The distinction between per se and elective professional is a favourite exam question.
+  </div>
+
+  <div class="info-box">
+    <div class="ib-title">Important: suitability does NOT disappear for professionals</div>
+    Professional clients are still <strong>under the suitability rules</strong> for MiFID business. The assumptions only <em>reduce the assessment burden</em> — they do not eliminate it. The firm must still consider whether the investment matches the client's objectives.
+  </div>
+</div>
+
+<!-- 7.4 CHURNING -->
+<div class="section-card" id="s74">
+  <div class="section-num">7.4</div>
+  <h2 class="section-title">Churning and Switching — excessive trading</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Definitions</h3>
+
+  <p class="para">
+    <strong>"Churning"</strong> is the activity of <strong>over-dealing or trading more frequently</strong> than is needed for the client, in order to <strong>generate additional fees or commissions</strong> for the firm. It is <em>one of the grossest breaches</em> of fiduciary duty.
+  </p>
+
+  <p class="para">
+    Churning is <strong>most relevant in the context of discretionary portfolio management</strong> — because in that setup, the firm makes trading decisions without needing to seek the client's approval for each trade.
+  </p>
+
+  <p class="para">
+    <strong>"Switching"</strong> is the activity of <strong>selling one investment and replacing it with another</strong>. Not wrong in itself — clients sometimes genuinely should switch. But frequent or unnecessary switching can become churning.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA guidance on switching and suitability</h3>
+
+  <p class="para">
+    FCA guidance on switching sits <strong>in the COBS suitability rules</strong>. The key principle:
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">The "collectively unsuitable" rule</div>
+    In the context of assessing suitability, <strong>a series of transactions that look suitable in isolation may not be suitable</strong> if the recommendations and/or trading decisions are <em>so frequent as to be detrimental</em> to the client.<br><br>
+    That is — each trade in isolation may be reasonable, yet <em>collectively</em> they harm the client (through excessive fees, taxes, transaction costs).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Considering the client's investment strategy</h3>
+
+  <p class="para">
+    Firms must <strong>bear in mind the client's investment strategy</strong> when determining how frequently to deal for them, including whether switching between packaged products is suitable.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example of churning in a discretionary account</div>
+    A discretionary portfolio manager makes <strong>35 trades in one month</strong> for a conservative retail client with a long-term income strategy. This is significantly above average (say, typically 3-5 trades per month for this profile).<br><br>
+    <strong>The problem:</strong><br>
+    • Excessive trading inconsistent with the client's investment strategy (conservative, long-term).<br>
+    • Each trade might be justifiable in isolation, but <em>collectively</em> they are detrimental — transaction costs, taxes, market timing risk.<br>
+    • The manager potentially <strong>generates unnecessary fees</strong> for the firm.<br>
+    → <strong>Classic churning concern</strong>. FCA investigation likely.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Example of a legitimate switch</div>
+    A client holds Fund A (emerging markets equity) with an AMC of 1.8%. Fund B hits the market — same strategy, AMC 0.8%, no performance difference. The firm switches the client from A to B.<br><br>
+    <strong>This is a legitimate switch</strong>: the client gets better value (lower fees), the investment strategy is unchanged. No pattern of frequent switches — one sensible move.
+  </div>
+</div>
+
+<!-- 7.5 SUITABILITY REPORT -->
+<div class="section-card" id="s75">
+  <div class="section-num">7.5</div>
+  <h2 class="section-title">The Suitability Report — the written document for the client</h2>
+
+  <p class="para">
+    A suitability report is a <strong>written document for the client explaining the recommendation</strong>. MiFID II <strong>extends</strong> the requirements: the suitability report is now required for retail clients for <em>any investment advice</em> (which now equates to a personal recommendation).
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>When a suitability report is required</h3>
+
+  <p class="para">
+    The firm must provide a suitability report if it makes a personal recommendation. This applies to any investment advice to acquire or sell any investment, including:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Equities</strong></li>
+    <li><strong>Derivatives</strong></li>
+    <li><strong>Structured products</strong></li>
+    <li><strong>Unregulated collective investments</strong></li>
+  </ul>
+
+  <p class="para">
+    The requirement also applies to products covered under the previous regime (MiFID) if the recommendation is to:
+  </p>
+
+  <ul class="bullet">
+    <li>Acquire a holding / sell all or part of a holding in:
+      <ul class="bullet" style="margin-top:.3rem">
+        <li>A <strong>regulated CIS</strong></li>
+        <li>An <strong>investment trust</strong>, where shares have been or are to be acquired through an investment trust savings scheme, or</li>
+        <li>An investment trust where shares are to be held in an ISA which has been promoted as the means for investing in one or more specific investment trusts</li>
+      </ul>
+    </li>
+    <li><strong>Buy, sell, surrender, convert or cancel rights</strong> under, or suspend contributions to, a <strong>personal pension scheme or stakeholder pension scheme</strong></li>
+    <li><strong>Elect to make income withdrawals or purchase a short-term annuity</strong></li>
+    <li><strong>Pension transfer or pension opt-out</strong></li>
+    <li><strong>Personal recommendation in connection with a life assurance policy</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>5 Exceptions from the suitability report requirement</h3>
+
+  <p class="para">
+    There are <strong>5 exceptions</strong> — a frequent exam topic:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem">The firm, acting as <strong>investment manager</strong> for a retail client, makes a personal recommendation in connection with a <strong>regulated CIS</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">The client is <strong>habitually resident outside the UK</strong> or <strong>not present in the UK</strong> at the time of acknowledging consent.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">The personal recommendation is made by a <strong>friendly society</strong> in connection with a <strong>small life policy</strong>, premium <strong>≤ £50 per year</strong> or (if payable weekly) <strong>≤ £1 per week</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">The personal recommendation is to <strong>increase a regular premium to an existing contract</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">The personal recommendation is to invest <strong>additional single premiums or single contributions to an existing packaged product</strong> to which a single premium / contribution has previously been paid.</li>
+  </ol>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam — the friendly society numbers</div>
+    <strong>£50/year or £1/week</strong> — thresholds for the friendly society small life policy exception. Typical distractor numbers: £100, £25 — all wrong.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Timing — when the suitability report must be provided</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Situation</th>
+        <th>Timing of the suitability report</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Life policy</strong></td>
+        <td><strong>Before</strong> the contract is concluded — <em>unless</em> information is provided orally OR cover is required immediately → report in durable medium <strong>immediately after</strong> contract conclusion</td>
+      </tr>
+      <tr>
+        <td><strong>Personal / stakeholder pension</strong> (if cancellation rules apply)</td>
+        <td>Within <span class="number-card">14 days</span> of concluding the contract</td>
+      </tr>
+      <tr>
+        <td><strong>Other cases</strong></td>
+        <td>Before the transaction is concluded — <em>unless</em> distance marketing communication + client consents → ASAP after the transaction is effected / executed</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 mandatory content elements of the suitability report</h3>
+
+  <p class="para">
+    The suitability report must, at least:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Specify the client's demands and needs</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Explain any possible disadvantages</strong> of the transaction for the client</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem"><strong>Explain why the firm concluded the recommended transaction is suitable</strong> for the client, having due regard to the information provided by the client</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Telephone-only life policy — a special case</h3>
+
+  <p class="para">
+    If the transaction is the <strong>sale of a life policy by telephone</strong>, and the <strong>only contact between firm and client before conclusion is by telephone</strong>, the suitability report must:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Comply with Distance Marketing Directive (DMD) rules</strong></li>
+    <li><strong>Be provided immediately after conclusion of the contract</strong></li>
+    <li><strong>Be in a durable medium</strong></li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Telephone life policy scenario</div>
+    A client phones the broker: "I urgently need a term life insurance policy, I'm leaving tomorrow for a high-risk business trip — give me the recommendation and set it up right now." The broker gives a recommendation verbally, the client signs up on the phone, the policy becomes effective immediately.<br><br>
+    <strong>What to do about the suitability report:</strong> DMD compliant + immediately after conclusion + durable medium. I.e. an email with the full suitability report within minutes of the call, covering demands/needs + disadvantages + why suitable.
+  </div>
+</div>
+
+<!-- 7.6 INSISTENT CLIENTS -->
+<div class="section-card" id="s76">
+  <div class="section-num">7.6</div>
+  <h2 class="section-title">Dealing with Insistent Clients — clients who insist against a recommendation</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Definition of an insistent client</h3>
+
+  <p class="para">
+    An insistent client is one where <strong>3 conditions</strong> are met:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem">The firm <strong>has given</strong> the client a <strong>personal recommendation</strong>.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">The client decides <strong>NOT to enter into the transaction</strong>, or enters into a transaction <strong>different</strong> from the one recommended in the personal recommendation.</li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">The client <strong>wishes the firm to facilitate</strong> the transaction (despite the disagreement).</li>
+  </ol>
+
+  <div class="schema">
+    <div class="schema-title">Insistent client process</div>
+    ① Firm gives personal recommendation<br>
+    ↓<br>
+    ② Client does NOT agree<br>
+    (does not act, or acts differently)<br>
+    ↓<br>
+    ③ Client ASKS the firm to carry out the trade anyway<br>
+    ↓<br>
+    = <strong>INSISTENT CLIENT</strong><br><br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    Firm's duty:<br>
+    Communicate 4 elements +<br>
+    Obtain acknowledgement<br>
+    ↓<br>
+    Firm <em>may</em> decide to facilitate<br>
+    (not an automatic refusal)
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>4 elements that must be communicated</h3>
+
+  <p class="para">
+    When the firm executes a transaction for an insistent client that is not in accordance with the personal recommendation, it must <strong>communicate to the client in a way that is fair, clear and not misleading</strong>, and having regard to the information needs of the insistent client so that the client can understand the information, the following <strong>4 elements</strong>:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>The firm has NOT recommended the transaction</strong>, and the transaction is <strong>not in accordance</strong> with the personal recommendation.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Reasons</strong> why the transaction is not in accordance with the recommendation.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Risks</strong> of the transaction proposed by the insistent client.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Reasons</strong> why the firm did not recommend this transaction.</li>
+  </ol>
+
+  <div class="exam-box">
+    <div class="xb-title">Exam critical point</div>
+    All <strong>4 elements</strong> must be communicated <em>before</em> the firm facilitates the transaction. This is <strong>not just a warning</strong>, it is a full explanation with reasons. Do not confuse with a simple appropriateness warning (which is a single warning, not 4 reasoning elements).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Acknowledgement from the client</h3>
+
+  <p class="para">
+    Additionally: the firm <strong>should obtain an acknowledgement from the insistent client</strong> that the transaction is not in accordance with the firm's personal recommendation and is being carried out <strong>at the client's request</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Must the firm facilitate?</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">Key nuance — NO automatic duty or prohibition</div>
+    After communicating the 4 elements + obtaining acknowledgement, the firm <strong>MAY decide to facilitate</strong> — it's a matter of judgement. There is no automatic prohibition on facilitating the transaction. Equally, there is no obligation to facilitate if the firm considers it harmful to the client.
+  </div>
+
+  <div class="example-box">
+    <div class="eb-title">Real-life insistent client example</div>
+    The firm recommends a 60-year-old client to hold his balanced retirement portfolio (70% equities, 30% bonds). The client speaks with a friend who made money in crypto and decides to sell everything and invest in a single crypto asset.<br><br>
+    <strong>Firm's obligations:</strong><br>
+    (1) Explain: "We did not recommend this transaction. It is not in accordance with our recommendation."<br>
+    (2) "Reasons: you are planning to retire in 5 years, you need liquidity and predictability, crypto is highly volatile."<br>
+    (3) "Risks: crypto can lose 80-90% over a few months, putting your retirement at risk."<br>
+    (4) "Why we did not recommend it: inconsistent with your age/objectives/risk profile."<br>
+    Then: obtain acknowledgement. Then: decide whether to facilitate or refuse. The firm is also entitled to <em>refuse</em> if it considers this harmful to the client — that too is a legitimate outcome.
+  </div>
+</div>
+
+<!-- 7.7 APPROPRIATENESS -->
+<div class="section-card" id="s77">
+  <div class="section-num">7.7</div>
+  <h2 class="section-title">Appropriateness (Non-Advised Sales) — the appropriateness test</h2>
+
+  <p class="para">
+    The rules on non-advised sales apply to a range of MiFID (and some non-MiFID) investment services that <strong>do not involve advice or discretionary portfolio management</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Scope — to whom appropriateness applies</h3>
+
+  <p class="para">
+    Specifically, the rules apply to firms:
+  </p>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem">Providing <strong>MiFID investment services, other than personal recommendations or managing investments</strong> (because those services are already covered by the suitability rules).</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Arranging deals or dealing in warrants and derivatives for retail clients</strong>, where the firm is, or should be, aware that the client's application or order is in response to a <strong>direct offer financial promotion</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">Which <strong>assess appropriateness on behalf of other UK MiFID firms</strong>.</li>
+  </ol>
+
+  <p class="para">
+    The purpose of the appropriateness test is to <strong>provide a degree of protection for non-advised transactions</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Information — only ONE area (unlike suitability)</h3>
+
+  <p class="para">
+    When the firm provides one of the above services, it must ask the client for information about <strong>knowledge and experience</strong> in the investment field specific to the type of product/service offered by the firm and/or requested by the client, so that the firm can <strong>assess whether the product/service is appropriate</strong>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Suitability vs Appropriateness comparison</div>
+    <strong>Suitability:</strong> 3 information areas (knowledge/experience + financial situation + objectives).<br>
+    <strong>Appropriateness:</strong> ONLY 1 area — knowledge and experience.<br><br>
+    The logic: for non-advised the client makes the decision; the firm only checks that they understand the risks. Financial situation and objectives are not relevant — the client knows their own position and makes their own choice.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Assumptions for professional clients</h3>
+
+  <p class="para">
+    For appropriateness, the firm <strong>may assume</strong> that a <strong>professional client has the necessary knowledge and experience</strong> for the services/products for which they are classified as professional. This applies to <strong>both per se and elective</strong> professional clients.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Inferring knowledge from experience</h3>
+
+  <p class="para">
+    Where it is <strong>reasonable</strong> to do so, the firm may <strong>infer knowledge from experience</strong> when assessing appropriateness. The firm may also satisfy itself that the client's knowledge alone is sufficient to understand the risks.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What to do if the product is NOT appropriate</h3>
+
+  <p class="para">
+    If the firm concludes that the product/service is <strong>NOT appropriate</strong> for the client, it <strong>MUST WARN the client</strong> of that fact. The warning <strong>may be in a standardised format</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What to do if the client refuses to provide information</h3>
+
+  <p class="para">
+    If the client declines to provide information, the firm must <strong>warn the client that it is unable to assess</strong> whether the product/service is appropriate. The warning may also be in a standardised format.
+  </p>
+
+  <p class="para">
+    If the client then asks to proceed — the <strong>firm may decide</strong> whether to do so (judgement call). There is no automatic prohibition.
+  </p>
+
+  <div class="schema">
+    <div class="schema-title">Appropriateness decision tree</div>
+    Client wants non-advised trade in a complex product<br>
+    ↓<br>
+    Firm asks about knowledge & experience<br>
+    ├─ Client answers ──→ Firm assesses<br>
+    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ Appropriate → proceed<br>
+    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ NOT appropriate → WARN<br>
+    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Client insists<br>
+    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+    │&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Firm may execute<br>
+    └─ Client refuses info ──→ WARN unable to assess<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Client asks to proceed<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↓<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Firm decides
+  </div>
+</div>
+
+<!-- 7.8 EXECUTION-ONLY -->
+<div class="section-card" id="s78">
+  <div class="section-num">7.8</div>
+  <h2 class="section-title">Execution-Only Exemption and non-complex instruments</h2>
+
+  <p class="para">
+    There is a <strong>third regime</strong>, separate from suitability and appropriateness — <strong>execution-only</strong>. In this regime, the firm <em>makes no assessment</em>: it simply executes the client's order. But this regime is only available under strict conditions.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 conditions for the execution-only exemption (ALL must be met)</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Service at the client's initiative</strong> (execution-only or reception/transmission of orders).</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">The client is <strong>clearly informed</strong> that the firm <strong>does NOT assess appropriateness</strong> and that they <strong>will not benefit from that protection</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem">The firm <strong>complies with conflicts of interest obligations</strong>.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>But that's not enough — a non-complex instrument is also required</h3>
+
+  <p class="para">
+    Execution-only is only available for <strong>non-complex instruments</strong>. For complex instruments (warrants, derivatives, structured products) appropriateness is required, even if the client is entirely on their own initiative.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>4 non-complex instrument criteria (ALL must be met)</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>NOT a derivative</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Sufficient liquidity</strong>.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Client liability does NOT exceed the cost of acquisition</strong> — the client cannot lose more than they paid.</li>
+    <li style="margin-bottom:.5rem;font-size:.92rem"><strong>Publicly available comprehensive information</strong>.</li>
+  </ol>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Examples of non-complex vs complex</h3>
+
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>Non-complex (execution-only OK)</th>
+        <th>Complex (appropriateness required)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          • Listed shares on a UK/EEA regulated market<br>
+          • Money market instruments<br>
+          • Bonds WITHOUT embedded derivatives<br>
+          • UCITS funds (explicitly listed in the rules)
+        </td>
+        <td>
+          • Warrants<br>
+          • Derivatives (futures, options, CFDs)<br>
+          • Structured products with embedded derivatives<br>
+          • Hedge funds not admitted to a regulated market
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-box">
+    <div class="xb-title">Key non-complex examples</div>
+    <strong>UCITS funds</strong> — always non-complex (explicitly listed).<br>
+    <strong>Listed shares</strong> on a regulated market — non-complex.<br>
+    <strong>Bonds</strong> without embedded derivatives — non-complex.<br>
+    <strong>A warrant</strong> — complex (it's a derivative).<br>
+    <strong>A structured product</strong> with an embedded derivative — complex.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Series of similar transactions</h3>
+
+  <p class="para">
+    Firms do <strong>not need to re-assess appropriateness</strong> each time for a <strong>series of similar transactions/services</strong>. However, they must reassess <strong>before beginning a new service</strong>.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example — series vs new service</div>
+    The client opened an execution-only account and made a trade in Apple shares — appropriateness was assessed once. They then do 50 more equity trades in similar non-complex instruments — <strong>no need to re-assess</strong> (series).<br><br>
+    But when the client suddenly wants to trade <strong>CFDs</strong> (complex derivatives) — that is a <strong>new type of service</strong>. Appropriateness must be re-assessed separately for that class of instrument.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>What to do if the client insists on a non-appropriate product</h3>
+
+  <p class="para">
+    If the firm has assessed that the product is <strong>NOT appropriate</strong>, and the client still <strong>wants to proceed</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li>The firm <strong>must warn</strong> clearly about this finding.</li>
+    <li>The client <strong>may decide</strong> to proceed at their own risk.</li>
+    <li>The firm <strong>may execute</strong> the transaction — <strong>but the warning must be given</strong>.</li>
+  </ul>
+
+  <p class="para">
+    The transaction is <strong>not automatically prohibited</strong>. The client is free to decide; the firm fulfils its duty through the warning.
+  </p>
+</div>
+
+<!-- FINAL SUMMARY -->
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 7</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Three client service regimes</div>
+    <strong style="color:#FEF3C7">SUITABILITY</strong> (advised):<br>
+    • 3 info areas — K&E + financial + objectives<br>
+    • Buy / hold / sell all trigger<br>
+    • If info missing — cannot advise / trade<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong style="color:#FEF3C7">APPROPRIATENESS</strong> (non-advised complex):<br>
+    • Only K&E<br>
+    • If not appropriate — WARN<br>
+    • If info refused — WARN can't assess<br>
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━<br>
+    <strong style="color:#FEF3C7">EXECUTION-ONLY</strong>:<br>
+    • 3 conditions + non-complex instrument (4 criteria)<br>
+    • No assessments<br>
+    • UCITS, listed shares, bonds without embedded derivatives
+  </div>
+
+  <ul>
+    <li><strong>7.1 Suitability applies to:</strong> (a) personal recommendations relating to designated investments (buy/hold/sell); (b) managing investments for retail clients; (c) managing pension scheme assets (occupational/stakeholder/personal) — other than MiFID/equivalent third-country/optional exemption business.</li>
+    <li><strong>7.2 Information for suitability — 3 areas:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Knowledge & Experience — familiar types + past involvement (nature/volume/frequency) + education/profession</li>
+        <li>(2) Financial Situation — incl. ability to bear losses</li>
+        <li>(3) Investment Objectives + risk appetite/profile</li>
+      </ul>
+    </li>
+    <li>The firm is <strong>entitled to rely</strong> on client-provided info — unless manifestly out of date/inaccurate/incomplete. Missing info → <strong>cannot advise / trade</strong>.</li>
+    <li><strong>7.3 Professional clients:</strong> per se + elective — assume knowledge/experience. Only per se — assume ability to bear losses. NOT for elective.</li>
+    <li><strong>7.4 Churning:</strong> over-dealing to generate fees. Most relevant in discretionary portfolio management. Individually suitable trades may be collectively unsuitable if too frequent / detrimental. Consider the client's investment strategy.</li>
+    <li><strong>7.5 Suitability Report required for:</strong> equities, derivatives, structured products, unregulated CIS, regulated CIS (in certain circumstances — ISA via savings scheme etc), pension transfers/opt-outs/short-term annuity/income withdrawals, life assurance policies.</li>
+    <li><strong>5 Exceptions:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Investment manager + regulated CIS personal rec</li>
+        <li>(2) Client habitually resident outside UK</li>
+        <li>(3) Friendly society small life policy (≤£50/year or ≤£1/week)</li>
+        <li>(4) Increase regular premium to existing contract</li>
+        <li>(5) Additional single premium to existing packaged product</li>
+      </ul>
+    </li>
+    <li><strong>Timing:</strong>
+      <ul style="margin-top:.3rem">
+        <li>Life policy — before contract (or immediately after in durable medium if info oral OR cover required immediately)</li>
+        <li>Personal/stakeholder pension with cancellation rules — <strong>14 days</strong> of conclusion</li>
+        <li>Other — before transaction (or ASAP after if distance marketing)</li>
+      </ul>
+    </li>
+    <li><strong>Contents:</strong> (1) demands and needs; (2) disadvantages; (3) why suitable.</li>
+    <li><strong>Telephone life policy:</strong> DMD compliant + immediately after conclusion + durable medium.</li>
+    <li><strong>7.6 Insistent clients = 3 conditions:</strong> firm gave personal rec + client does NOT follow + client wants firm to facilitate.</li>
+    <li><strong>4 elements to communicate:</strong> (1) not recommended; (2) reasons not in accordance; (3) risks of proposed transaction; (4) reasons why firm did not recommend. Plus obtain acknowledgement. After = firm MAY decide to facilitate (not automatic refusal).</li>
+    <li><strong>7.7 Appropriateness applies to:</strong> (a) MiFID investment services other than personal recommendations/managing investments; (b) warrants/derivatives for retail + direct offer financial promotion; (c) firms assessing on behalf of other UK MiFID firms.</li>
+    <li><strong>Info:</strong> only <strong>knowledge and experience</strong> (NOT financial/objectives). Professional assumed. May infer knowledge from experience where reasonable.</li>
+    <li><strong>NOT appropriate:</strong> must WARN (standardised OK). Info refused: WARN can't assess. Client insists → firm decides.</li>
+    <li><strong>7.8 Execution-only exemption — 3 conditions:</strong> (1) client's initiative; (2) clearly informed no appropriateness; (3) complies with conflicts of interest.</li>
+    <li><strong>Non-complex instrument — 4 criteria (ALL):</strong> (1) NOT a derivative; (2) sufficient liquidity; (3) client liability ≤ cost of acquisition; (4) publicly available comprehensive info.</li>
+    <li><strong>Non-complex examples:</strong> listed shares on UK/EEA regulated market, money market instruments, bonds without embedded derivatives, <strong>UCITS funds</strong>.</li>
+    <li><strong>Complex:</strong> warrants, derivatives, structured products with embedded derivatives, hedge funds.</li>
+    <li><strong>Series of similar transactions</strong> — no re-assessment; <strong>new service</strong> — reassess.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 1, Section 5 — UK Regulatory Infrastructure</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#4338CA;--primary-l:#E0E7FF;--primary-d:#3730A3;--primary-vd:#1E1B4B;--accent:#7C3AED;--accent-l:#EDE9FE;--accent-d:#5B21B6;--emerald:#10B981;--emerald-l:#D1FAE5;--emerald-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--rose:#BE123C;--rose-l:#FFE4E6;--rose-d:#881337;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--slate-d:#334155;--ink:#0F172A;--muted:#475569;--bg:#F5F3FF;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(67,56,202,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(30,27,75,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700;line-height:1.3}
+.app-sub{color:var(--primary-l);font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(67,56,202,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--emerald-l);border-left:4px solid var(--emerald);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--emerald-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(67,56,202,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#FEF3C7}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.number-card{display:inline-block;background:var(--amber-l);color:var(--amber-d);font-weight:700;padding:.1rem .55rem;border-radius:5px;font-size:.88rem;border:1.5px solid var(--amber)}
+.body-card{background:linear-gradient(135deg,#F5F3FF,#FAFAFF);border:1px solid var(--primary-l);border-radius:10px;padding:.9rem 1.1rem;margin:.8rem 0}
+.body-name{font-weight:700;color:var(--primary-vd);font-size:1rem;margin-bottom:.3rem}
+.body-tag{display:inline-block;background:var(--accent-l);color:var(--accent-d);font-size:.72rem;font-weight:600;padding:.15rem .55rem;border-radius:10px;margin-left:.4rem;letter-spacing:.04em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 1</div>
+  <div class="app-title">Chapter 1, Section 5 — Detailed Deep Dive</div>
+  <div class="app-sub">UK Regulatory Infrastructure · Syllabus 1.5 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    Section 5 is a <strong>map of all the players around the FCA and PRA</strong>. The UK regulatory environment is more than just the FCA and PRA. Around them are dozens of organisations that either <em>directly regulate</em> (CMA, HMRC, Pensions Regulator), <em>set policy framework</em> (HM Treasury, BoE, FPC), or <em>influence standards</em> (FATF, IOSCO, BIS, trade associations, professional bodies). This section is about <strong>who does what</strong>. On the exam 1-2 questions, but these often test confusion between similar entities: FPC vs PRA, MPC vs FPC, HMT vs BoE. The section also covers the <strong>Pensions Regulator</strong>, <strong>overseas influence</strong> post-Brexit, and <strong>oversight bodies</strong> (internal/external audit, trustees, compliance, industry/professional bodies, trade associations).
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents of this section</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s51">5.1 Competition and Markets Authority (CMA)</a></li>
+    <li>→ <a href="#s52">5.2 HM Revenue & Customs (HMRC)</a></li>
+    <li>→ <a href="#s53">5.3 Financial Policy Committee (FPC)</a></li>
+    <li>→ <a href="#s54">5.4 Bank of England (BoE) — MPC + financial stability</a></li>
+    <li>→ <a href="#s55">5.5 HM Treasury (HMT)</a></li>
+    <li>→ <a href="#s56">5.6 Pensions Regulator (TPR)</a></li>
+    <li>→ <a href="#s57">5.7 Overseas legislation impact + FATF, BIS, IOSCO</a></li>
+    <li>→ <a href="#s58">5.8 Oversight bodies — audit, trustees, compliance, associations</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s51">
+  <div class="section-num">5.1</div>
+  <h2 class="section-title">Competition and Markets Authority (CMA)</h2>
+
+  <p class="para">
+    The <strong>CMA promotes competition</strong> for the benefit of consumers, both <em>within and outside the UK</em>. Its aim is to make markets work well for consumers, business, and the economy.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">CMA — NOT a financial services body</div>
+    Although the CMA <em>covers financial services</em> and <em>works closely with the FCA</em>, the CMA <strong>is not a financial services body</strong>. It is a general-purpose competition regulator for the entire UK economy.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CMA's objective</h3>
+
+  <p class="para">
+    The CMA's objective is to ensure that <strong>consumers get a good deal</strong> when buying goods and services, and that businesses operate <em>within the law</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CMA's activities</h3>
+
+  <p class="para">The CMA undertakes this in a number of ways:</p>
+
+  <ul class="bullet">
+    <li><strong>Investigating mergers</strong> that could <em>restrict competition</em></li>
+    <li><strong>Conducting market studies and investigations</strong> in markets where there may be competition and consumer problems</li>
+    <li>Investigating where there may be <strong>breaches of UK prohibitions</strong> against <em>anti-competitive agreements</em> and <em>abuses of dominant positions</em></li>
+    <li><strong>Bringing criminal proceedings</strong> against individuals who commit the <em>cartel offence</em></li>
+    <li><strong>Enforcing consumer protection legislation</strong> — tackling practices/market conditions that make it difficult for consumers to exercise choice</li>
+    <li><strong>Cooperating with sector regulators</strong> — encouraging them to use competition powers, considering regulatory references and appeals</li>
+    <li><strong>Providing information and advice</strong> to individuals and businesses about rights/obligations under competition and consumer law</li>
+    <li>Providing advice, reporting, and monitoring in relation to <strong>government subsidies</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 CMA outcomes</h3>
+
+  <ol style="margin:.5rem 0 1rem 1.5rem">
+    <li style="margin-bottom:.4rem;font-size:.92rem">People can be <strong>confident they are getting great choices and fair deals</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">Competitive, fair-dealing <strong>businesses can innovate and thrive</strong></li>
+    <li style="margin-bottom:.4rem;font-size:.92rem">The <strong>UK economy can grow productively and sustainably</strong></li>
+  </ol>
+
+  <div class="example-box">
+    <div class="eb-title">Example — CMA vs FCA on retail banking</div>
+    The FCA assesses how banks sell products (conduct). The CMA assesses <em>whether there is competition</em> between banks — e.g. whether a client can easily switch between providers, whether there are barriers for newcomers. In 2017, after a retail banking market investigation, the CMA <strong>forced the big-9 banks to open APIs to fintechs</strong> — this became the <em>Open Banking initiative</em>. A prime example of <em>FCA + CMA working together</em>.
+  </div>
+</div>
+
+<div class="section-card" id="s52">
+  <div class="section-num">5.2</div>
+  <h2 class="section-title">HM Revenue & Customs (HMRC)</h2>
+
+  <p class="para">
+    <strong>HMRC</strong> is the UK's <strong>primary revenue-raising agency</strong>. It collects income tax, corporation tax, VAT, national insurance contributions, and customs duties.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">HMRC — NOT a financial regulator</div>
+    HMRC <em>does not regulate</em> financial services firms. HMRC's relevance to financial services is through <strong>information-sharing arrangements</strong> with the FCA and PRA.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>HMRC + FCA + PRA — information sharing</h3>
+
+  <p class="para">The FCA, PRA, and HMRC have <strong>agreed to share information and expertise</strong>. The agreement aims to enhance their:</p>
+
+  <ul class="bullet">
+    <li><em>Understanding of banks and their behavioural responses</em> to <strong>regulatory, tax, and other changes</strong></li>
+    <li>Helping to identify <em>significant issues</em> undermining their objectives</li>
+    <li>Enabling necessary action to <strong>address issues more quickly and on a more coordinated basis</strong></li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">What the agreement does NOT mean</div>
+    It <strong>does not mean</strong> that the FCA receives individual taxpayer records, or that HMRC regulates firms. It is about <em>mutual understanding + coordinated action</em> on systemic issues.
+  </div>
+</div>
+
+<div class="section-card" id="s53">
+  <div class="section-num">5.3</div>
+  <h2 class="section-title">Financial Policy Committee (FPC)</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FPC background</h3>
+
+  <p class="para">
+    A stable financial system is a <strong>key ingredient of a healthy and successful economy</strong>. Since <strong>2009</strong>, the Bank of England has had a <em>statutory objective</em> to <strong>"contribute to protecting and enhancing the stability of the financial systems of the UK"</strong>.
+  </p>
+
+  <p class="para">From <strong>April 2013</strong>, the BoE took on further responsibilities — the <em>creation of an independent FPC</em> at the BoE.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FPC role</h3>
+
+  <div class="info-box">
+    <div class="ib-title">FPC's mandate — macroprudential</div>
+    The FPC <strong>identifies, monitors, and takes action to remove or reduce systemic risks</strong> — with a view to protecting and enhancing the <em>resilience of the UK financial system</em>.
+  </div>
+
+  <p class="para">
+    The FPC focuses on <em>macroeconomic and financial issues</em> that may threaten the <em>long-term growth prospects</em> of the UK economy. This is <strong>"macroprudential"</strong> regulation — looking at the <em>system as a whole</em>, not individual firms.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Meetings and FSR</h3>
+
+  <p class="para">
+    The FPC <strong>meets at least 4 times a year</strong> and publishes a record of formal meetings. Also responsible for the <strong>BoE's biannual Financial Stability Report (FSR)</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li>Covers the Committee's <em>assessment of the outlook</em> for stability and resilience of the financial sector</li>
+    <li>Policy actions it advises to <em>reduce and mitigate risks</em> to economic stability</li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">FPC vs PRA — critical distinction</div>
+    <strong>FPC = macroprudential</strong> (system-wide risks — asset bubbles, excessive leverage, interconnected exposures).<br>
+    <strong>PRA = microprudential</strong> (individual firm soundness — does this bank have enough capital?).<br>
+    Both are part of the BoE family, but <em>at different levels</em>: the FPC looks at the forest, the PRA looks at individual trees.
+  </div>
+</div>
+
+<div class="section-card" id="s54">
+  <div class="section-num">5.4</div>
+  <h2 class="section-title">Bank of England (BoE) — central bank</h2>
+
+  <p class="para">The BoE performs all the functions of a <strong>central bank</strong>. Most important:</p>
+
+  <ul class="bullet">
+    <li><strong>Maintaining price stability</strong></li>
+    <li>Supporting the <strong>economic policies of the Government</strong> — promoting economic growth</li>
+  </ul>
+
+  <p class="para">Two main areas — <strong>Monetary Stability</strong> and <strong>Financial Stability</strong>.</p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(1) Monetary Stability — MPC</h3>
+
+  <p class="para">
+    <strong>Stable prices + confidence in the currency</strong> — the 2 main criteria for monetary stability. Stable prices are maintained by <em>making sure price increases meet the Government's inflation target</em>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Monetary Policy Committee (MPC)</div>
+    The BoE aims to meet the target by <strong>adjusting the bank interest base rate</strong>, agreed/decided by the Bank's <strong>Monetary Policy Committee (MPC)</strong>, which meets <strong>8 times a year</strong> (roughly every six weeks).
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(2) Financial Stability</h3>
+
+  <p class="para">
+    Maintaining financial stability — <strong>protecting against threats to the whole financial system</strong>. The BoE's <em>surveillance and market intelligence</em> functions detect these threats. Threats are dealt with through:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Financial and other operations</strong>, both at home and abroad</li>
+    <li>In <strong>exceptional circumstances</strong>, the BoE <em>may act as <strong>lender of last resort</strong></em> — extending credit to banks and other institutions when no other institutions will</li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">"Lender of last resort" — not routine</div>
+    This is <em>exceptional circumstances only</em> — providing emergency liquidity to prevent a <strong>wider system collapse</strong>. Not a routine facility, not available on request. The BoE uses its <em>own judgment</em>, based on assessment. Reserved for situations where a firm's failure could cause <em>systemic damage</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>BoE works with other institutions</h3>
+
+  <ul class="bullet">
+    <li><strong>HM Treasury</strong> — the Government department responsible for <em>financial and economic policy</em></li>
+    <li><strong>Other central banks and international organisations</strong> — aim of <em>improving the international financial system</em></li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">MPC vs FPC — a frequent confusion</div>
+    Both are committees within the BoE, but with <em>different mandates</em>:<br>
+    • <strong>MPC</strong> — sets interest rates (monetary stability), meets <strong>8 times/year</strong>.<br>
+    • <strong>FPC</strong> — identifies systemic risks (financial stability), publishes FSR biannually, meets <strong>at least 4 times/year</strong>.
+  </div>
+</div>
+
+<div class="section-card" id="s55">
+  <div class="section-num">5.5</div>
+  <h2 class="section-title">HM Treasury (HMT)</h2>
+
+  <p class="para">
+    <strong>HM Treasury (HMT)</strong>, sometimes referred to as <em>"the Treasury"</em>, is the department responsible for <strong>developing and executing the British Government's public finance and economic policy</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>HMT's role in financial services</h3>
+
+  <div class="info-box">
+    <div class="ib-title">HMT — overall responsibility for financial services</div>
+    HMT has <strong>overall responsibility for the financial services sector</strong> in the UK.
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>FCA reports directly to HMT</strong></li>
+      <li>The <strong>Chancellor of the Exchequer</strong> appoints the <em>FCA's CEO and Chair</em></li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Government vs regulator — important distinction</h3>
+
+  <p class="para">
+    HMT <em>develops policy</em> (e.g. decides whether Consumer Duty is needed, whether to reform pensions). The FCA <em>implements policy</em> through rules and supervision. HMT cannot dictate individual supervisory decisions of the FCA — the FCA is <strong>operationally independent</strong>.
+  </p>
+</div>
+
+<div class="section-card" id="s56">
+  <div class="section-num">5.6</div>
+  <h2 class="section-title">The Pensions Regulator (TPR) — Occupational Pensions</h2>
+
+  <p class="para">
+    The <strong>TPR</strong> <em>protects the UK's workplace pension</em> and ensures <strong>scheme members' rights are safeguarded</strong> through regulation that monitors:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Employers</strong></li>
+    <li><strong>Trustees</strong></li>
+    <li><strong>Pension specialists</strong></li>
+    <li><strong>Business advisers</strong></li>
+  </ul>
+
+  <div class="warn-box">
+    <div class="wb-title">TPR — work-based pensions only</div>
+    TPR regulates <strong>only work-based pensions</strong>. <em>Personal pensions</em> (SIPP, personal pension plan) are outside TPR's scope — they are regulated by the <strong>FCA</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>2 types by who pays</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Type</th><th>Who pays</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Contributory</strong></td><td>Part of the <em>employee's salary</em> is added to the <em>employer's contribution</em> — <strong>both pay</strong></td></tr>
+      <tr><td><strong>Non-contributory</strong></td><td><em>Only the employer</em> makes payments — <strong>employer only</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>2 types by benefit structure</h3>
+
+  <table class="comp-table">
+    <thead><tr><th>Type</th><th>Structure</th><th>Who bears risk</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Defined Contribution (DC)</strong></td>
+        <td>A set amount of payment is made to the scheme, <em>no guarantee of the final value</em> of the pot</td>
+        <td><strong>Member bears the risk</strong></td>
+      </tr>
+      <tr>
+        <td><strong>Defined Benefit (DB)</strong><br>(e.g. final salary)</td>
+        <td>Scheme members are guaranteed to receive <strong>x% of final salary</strong>. Details vary per scheme</td>
+        <td><strong>Employer bears the risk</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="info-box">
+    <div class="ib-title">DB vs DC — why it matters</div>
+    <strong>DB schemes are very expensive for employers</strong> — if the pension fund underperforms, the employer must <em>make up the shortfall</em>. This is why most UK private sector employers <em>closed DB schemes</em> to new members in the 2000s-2010s.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Pensions Act 2008 — automatic enrolment</h3>
+
+  <p class="para">
+    The <strong>main aim</strong> of the Pensions Act 2008 was to introduce <strong>"automatic enrolment"</strong> for workplace pensions, <em>requiring employers to automatically enrol eligible employees</em> into a pension scheme and <strong>contribute towards it</strong>.
+  </p>
+
+  <p class="para">The Act identifies <strong>eligible workers</strong> as:</p>
+
+  <ul class="bullet">
+    <li><strong>Over 22 and under State Pension age</strong></li>
+    <li>Earning <strong>over a certain threshold</strong></li>
+  </ul>
+
+  <p class="para">
+    The Pensions Act 2008 requires <strong>all UK employers</strong> to put certain staff into a workplace pension scheme and contribute towards it. <em>Any employer with at least 1 employee</em> has a <strong>legal duty to comply with automatic enrolment</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>TPR enforcement</h3>
+
+  <p class="para">TPR can take enforcement actions:</p>
+
+  <ul class="bullet">
+    <li><strong>Compliance notices</strong></li>
+    <li><strong>Penalty notices</strong></li>
+    <li><strong>Fines</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Late compliance — backdating</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">If the employer complies late</div>
+    The employer is <strong>expected to pay back missed contributions</strong> — <em>put staff in the position they would have been in had they complied on time</em>. This includes <strong>backdating contributions</strong> to the date when the staff member <em>first met the age and earnings criteria</em>.<br><br>
+    The employer <em>must pay all unpaid employer contributions</em>. The staff member <em>must pay theirs</em>, <strong>unless</strong> the employer chooses to pay their share too (as part of enforcement action — TPR may require).
+  </div>
+</div>
+
+<div class="section-card" id="s57">
+  <div class="section-num">5.7</div>
+  <h2 class="section-title">Overseas Legislation Impact + International Bodies</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Post-Brexit framework</h3>
+
+  <p class="para">
+    Following <strong>Brexit</strong>, the UK government introduced legislation that converted existing <strong>direct EU legislation (Regulations)</strong> into UK law, and <em>preserved existing UK laws</em> implementing EU obligations.
+  </p>
+
+  <p class="para">
+    The <strong>European Union (Withdrawal) Act 2018</strong> gave the government powers to amend current legislation — ensuring that it <em>functions when the UK is no longer an EU member state</em>. This allowed the <strong>same rules and laws to apply</strong> on the day after exit as on the day before — as far as possible.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Why overseas legislation impacts the UK</h3>
+
+  <p class="para">
+    Many firms operate globally, offering products and services <em>with similar but different local rules</em>, impacting how firms undertake operational activities.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Examples of extraterritorial reach</div>
+    <strong>Dodd-Frank (US)</strong> and <strong>EMIR (EU)</strong> have <em>extraterritorial requirements</em> — based on <strong>who the client is</strong> and <strong>where they are domiciled</strong>. For example: a branch of a UK bank has a UK EMIR reporting obligation <em>no matter where the derivative transaction was executed</em> and <em>no matter the domicile of the other client</em>.<br><br>
+    Another example — requirements based on <strong>where the issuer is listing shares or bonds</strong>: having to comply with local <em>listing, disclosure, and reporting obligations</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>International Intergovernmental Bodies</h3>
+
+  <p class="para">
+    The following intergovernmental (supernational) bodies <strong>do not make rules that directly apply in the UK</strong>, but their <em>recommendations shape the structure and future</em> of UK financial services regulation.
+  </p>
+
+  <div class="body-card">
+    <div class="body-name">FATF<span class="body-tag">AML / CTF</span></div>
+    <strong>Financial Action Task Force</strong> — global <em>anti-money laundering and terrorist financing body</em>. Sets international standards aimed at preventing illegal activities. A policy-making body.<br>
+    • Developed <strong>40 Recommendations</strong> — a coordinated global response to prevent organised crime, corruption, terrorism<br>
+    • Helps authorities go after the money of criminals (drugs, human trafficking)<br>
+    • Stops funding for <em>weapons of mass destruction</em><br>
+    • Over <strong>200 countries have committed to implementing the Recommendations</strong><br>
+    • Reviews ML and TF techniques — strengthens standards (e.g. regulation of <em>virtual assets / crypto</em>)<br>
+    • Monitors countries + holds them to account
+  </div>
+
+  <div class="body-card">
+    <div class="body-name">BIS<span class="body-tag">Central banks' bank</span></div>
+    <strong>Bank for International Settlements</strong> — the "bank for central banks". Fosters <em>international monetary and financial cooperation</em> + promotes financial stability.<br>
+    • Established <strong>1930</strong><br>
+    • Hub for central bankers + financial regulators — share knowledge, economic research, support global financial standards<br>
+    • <strong>Owned and governed by central banks</strong><br>
+    • <strong>Board of Directors</strong> — 18 members, including 6 <em>"ex-officio"</em> (Central Bank Governors of Belgium, France, Germany, Italy, UK, USA)<br>
+    • <strong>63 central banks</strong> are members<br>
+    • UK represented by the <strong>Governor of the BoE</strong>
+  </div>
+
+  <div class="body-card">
+    <div class="body-name">IOSCO<span class="body-tag">Securities standards</span></div>
+    <strong>International Organisation of Securities Commissions</strong> — the global body setting international standards for securities regulation.<br>
+    • Cooperative forum for <em>securities regulatory agencies from 130+ jurisdictions</em><br>
+    • Aim: <strong>protect investors, maintain fair/efficient/transparent markets, reduce systemic risk</strong><br>
+    • Develops <strong>IOSCO Principles</strong><br>
+    • <strong>IOSCO Board</strong> — 34 securities regulators<br>
+    • UK represented by the <strong>CEO of the FCA</strong>
+  </div>
+</div>
+
+<div class="section-card" id="s58">
+  <div class="section-num">5.8</div>
+  <h2 class="section-title">Oversight and Influencing Bodies</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(1) Internal Audit</h3>
+
+  <p class="para">
+    The <strong>internal audit function</strong> plays a crucial role in the <em>ongoing maintenance and assessment</em> of the firm's <strong>internal control, risk management, and governance systems</strong>. Both internal auditors and supervisors use <strong>risk-based approaches</strong> — to determine their respective work plans and actions.
+  </p>
+
+  <p class="para">Internal audit is expected to <strong>develop an independent and informed view of the risks</strong> faced by the firm — based on:</p>
+
+  <ul class="bullet">
+    <li>Access to <strong>all records and data</strong></li>
+    <li><strong>Enquiries</strong></li>
+    <li><strong>Professional competence</strong></li>
+  </ul>
+
+  <div class="info-box">
+    <div class="ib-title">Reporting line — critical for independence</div>
+    Internal audit must <strong>discuss views, findings, and conclusions directly with the audit committee and the board of directors</strong>. Helping the board <em>oversee senior management</em>.<br><br>
+    <strong>Does not</strong> report to the CEO or Compliance — that would compromise independence.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(2) External Audit</h3>
+
+  <p class="para">
+    A firm's <strong>external auditors</strong> play a crucial role in assessing the firm's risk and control infrastructure. The external auditor of a firm <strong>should</strong>:
+  </p>
+
+  <ul class="bullet">
+    <li>Have <strong>relevant industry knowledge and competence</strong> — to respond appropriately to the risks of material misstatement + meet <em>additional regulatory requirements</em></li>
+    <li>Be <strong>objective and independent in BOTH fact AND appearance</strong> with respect to the firm</li>
+    <li>Ensure reporting <strong>directly from auditor to supervisor</strong>, unless not permitted (then <em>indirectly through the firm</em>)</li>
+    <li>Exercise <strong>professional scepticism</strong> when planning and performing the audit</li>
+    <li>Comply with applicable <strong>standards of quality control</strong></li>
+    <li>Identify and assess <strong>risks of material misstatement</strong> in financial statements</li>
+    <li>Respond appropriately to significant risks of material misstatement in the bank's financial statements</li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(3) Trustees</h3>
+
+  <p class="para">
+    A <strong>trust</strong> is a type of legal arrangement that allows a <em>suitable third party (trustee)</em> to hold and manage an asset <em>on behalf of an organisation/beneficiary</em>. Various types:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Administrative trustees</strong></li>
+    <li><strong>Investment trustees</strong></li>
+    <li><strong>Pension scheme trustees</strong></li>
+    <li><strong>Charity trustees</strong></li>
+  </ul>
+
+  <p class="para">
+    Trustees can <strong>delegate management of investments</strong> to those with relevant professional experience (internal or external), and <em>pass oversight of portfolios</em> to a finance or investment committee. But trustees must be aware that they are <strong>ultimately responsible for any decisions</strong>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(4) Compliance Function</h3>
+
+  <p class="para">
+    The compliance function's responsibilities are to <strong>assist senior management</strong> in effectively managing the <em>compliance risks</em> faced by the firm.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">Post-Brexit — ESMA guidance treatment</div>
+    The FCA acknowledged it will <em>continue to comply with</em> and <em>expect firms to comply with</em> all <strong>Level 3 measures</strong> (Guidelines, Q&A, opinions), published and adopted by EU supervisory bodies (ESMA, EIOPA, EBA) when the UK was part of the EU. However, <strong>subsequent changes from ESMA</strong> will <em>not apply in the UK</em>. The FCA is gradually replacing them with its <strong>own guidance</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(5) Industry Bodies</h3>
+
+  <p class="para">
+    <strong>Industry bodies</strong> are similar to trade associations (have members, work for their members), but <em>not product specific</em> — <strong>more generalist</strong>.
+  </p>
+
+  <p class="para">
+    In financial services they <em>"champion"</em> and support the success of the UK-based financial and professional service regulatory architecture.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">Example — TheCityUK</div>
+    <strong>TheCityUK</strong> represents the broad spectrum of the financial + related professional services industry — sustaining London's reputation as a <em>global capital of finance</em>. Remit: <em>"promotion of the UK as a world leading international financial centre at home and overseas"</em>.
+  </div>
+
+  <p class="para">Members can be at:</p>
+
+  <ul class="bullet">
+    <li><strong>Individual level</strong> — senior individuals in regulated firms, acting in personal capacity</li>
+    <li><strong>Firm level</strong> — individuals acting <em>on behalf of the firm</em></li>
+  </ul>
+
+  <p class="para">
+    Members are subject to a <strong>code of conduct</strong>, <em>expected to be adhered to over and above</em> any code of conduct from employers.
+  </p>
+
+  <div class="example-box">
+    <div class="eb-title">FX Global Code</div>
+    An example — the <strong>FX Global Code</strong> — a set of principles applying to both <em>firms and individuals</em>, aimed at providing a common set of guidelines to promote <em>integrity and effective running of the wholesale FX market</em>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(6) Professional Bodies</h3>
+
+  <p class="para">
+    Membership of a professional body brings important benefits — <em>individuals concerned</em> + <em>public interest</em>.
+  </p>
+
+  <div class="warn-box">
+    <div class="wb-title">Banking and finance — NO statutory powers</div>
+    In UK banking and finance, <em>with the exception of accountancy and actuarial sectors</em>, <strong>no professional body has statutory regulatory powers</strong>, and membership is <strong>voluntary</strong>.
+  </div>
+
+  <p class="para">
+    Members are bound by <strong>codes of conduct</strong> — upheld vigorously. Expected to comply with these codes, which <strong>take precedence over the firm's internal code</strong> — this can create an <em>ethical dilemma</em>.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>CISI — a professional body</h3>
+
+  <p class="para">
+    Professional bodies are responsible for the <strong>development and management of professional examinations</strong> useful and relevant for individuals working in the financial industry (<em>CISI</em>, <em>Chartered Banker Institute</em>). Membership is <strong>at the individual level</strong>, where they are required to <em>attain a level of knowledge and skills</em>.
+  </p>
+
+  <p class="para">
+    The aim — <strong>raise levels of competence, knowledge, and understanding</strong> + promote <em>ethical behaviours</em>.
+  </p>
+
+  <div class="info-box">
+    <div class="ib-title">CISI website states</div>
+    The CISI's objective is to <em>"set standards of professional excellence and integrity for securities, investment, wealth and financial planning professionals, providing qualifications and promoting the highest level of competence"</em>.<br><br>
+    CISI expects members to comply with its <em>"code of conduct"</em> — <strong>over and above</strong> any code applied to individuals by their employer.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>(7) Trade Associations</h3>
+
+  <p class="para">
+    <strong>Trade associations</strong> provide <em>representative and other collective services</em> to firms, generally in a <em>specific sector</em> with common interests.
+  </p>
+
+  <p class="para">They work with members on:</p>
+
+  <ul class="bullet">
+    <li>Development of <strong>markets and rules</strong> — advocating <em>stable, competitive, sustainable markets</em></li>
+    <li>Undertake <strong>advocacy on behalf of members</strong> with:
+      <ul style="margin-top:.2rem">
+        <li><strong>Legislators</strong> (HM Treasury)</li>
+        <li><strong>Regulators</strong> (PRA/FCA)</li>
+      </ul>
+    </li>
+    <li>Assist the development of rules — ensure <em>proportionate</em> + guidance for firms</li>
+  </ul>
+
+  <div class="example-box">
+    <div class="eb-title">Industry bodies vs Trade associations</div>
+    <strong>Trade associations</strong> — product-specific / sector-specific (e.g. AIC for investment companies, BBA for banks — now UK Finance).<br>
+    <strong>Industry bodies</strong> — broader, more generalist, promoting the sector as a whole (TheCityUK).
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 5</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#FEF3C7">Key players around FCA/PRA</div>
+    <strong style="color:#FEF3C7">Statutory bodies:</strong> CMA / HMRC / FPC / BoE / HMT / TPR<br>
+    <strong style="color:#FEF3C7">International:</strong> FATF / BIS / IOSCO<br>
+    <strong style="color:#FEF3C7">Oversight:</strong> Internal audit / External audit / Trustees / Compliance<br>
+    <strong style="color:#FEF3C7">Influencing:</strong> Industry bodies / Professional bodies / Trade associations
+  </div>
+
+  <ul>
+    <li><strong>5.1 CMA:</strong> promotes competition for consumers. NOT a financial services body, though covers FS. Activities: investigate mergers, market studies, anti-competitive agreements, cartel prosecutions, consumer protection, cooperation with sector regulators. 3 outcomes: great choices/fair deals + businesses innovate/thrive + UK economy grows.</li>
+    <li><strong>5.2 HMRC:</strong> UK's primary revenue-raising agency (NOT a financial regulator). Information-sharing arrangement with FCA and PRA — for mutual understanding of banks + coordinated action. Does not access individual taxpayer records for the FCA.</li>
+    <li><strong>5.3 FPC:</strong> Part of BoE from April 2013. <strong>Macroprudential</strong> — identifies, monitors, takes action to remove systemic risks. Meets <strong>at least 4 times/year</strong>. Responsible for BoE's biannual <strong>Financial Stability Report (FSR)</strong>. BoE statutory objective for financial stability from 2009.</li>
+    <li><strong>FPC vs PRA:</strong> FPC = macro (system-wide), PRA = micro (individual firm). Both part of BoE.</li>
+    <li><strong>5.4 BoE:</strong> central bank. 2 areas:
+      <ul style="margin-top:.3rem">
+        <li><strong>Monetary Stability</strong> — <strong>MPC</strong> sets interest rates, meets <strong>8 times/year</strong> (~6 weeks)</li>
+        <li><strong>Financial Stability</strong> — surveillance + market intelligence. <strong>Lender of last resort</strong> in exceptional circumstances only</li>
+      </ul>
+    </li>
+    <li><strong>MPC vs FPC:</strong> both are committees of the BoE. MPC = rates. FPC = systemic risks + FSR.</li>
+    <li><strong>5.5 HMT:</strong> Government department <strong>developing and executing public finance + economic policy</strong>. Overall responsibility for financial services. <strong>FCA reports directly to HMT</strong>. <strong>Chancellor appoints FCA CEO and Chair</strong>.</li>
+    <li><strong>5.6 TPR (The Pensions Regulator):</strong>
+      <ul style="margin-top:.3rem">
+        <li>Protects <strong>work-based pensions only</strong> (personal pensions = FCA)</li>
+        <li>Monitors: employers, trustees, pension specialists, business advisers</li>
+        <li>2 types by contributor: <strong>Contributory</strong> (both pay) / <strong>Non-contributory</strong> (employer only)</li>
+        <li>2 types by benefit: <strong>DC</strong> (member bears risk) / <strong>DB</strong> (employer bears risk)</li>
+        <li><strong>Pensions Act 2008</strong> — automatic enrolment. Eligible: 22+ / under SPA / earning over threshold</li>
+        <li>Enforcement: compliance notices + penalty notices + fines</li>
+        <li>Late compliance → <strong>backdate contributions</strong> to date first met criteria</li>
+      </ul>
+    </li>
+    <li><strong>5.7 Overseas impact:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>European Union (Withdrawal) Act 2018</strong> — converted EU Regulations into UK law, preserved existing UK laws implementing EU obligations</li>
+        <li>Dodd-Frank + EMIR — extraterritorial: a branch of a UK bank has a UK EMIR obligation regardless of where/who</li>
+      </ul>
+    </li>
+    <li><strong>International bodies (do not make rules directly):</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>FATF</strong> — global AML/CTF standards. 40 Recommendations. 200+ countries.</li>
+        <li><strong>BIS</strong> (1930) — central banks' bank. 18-member Board (6 ex-officio). 63 central bank members. UK = BoE Governor.</li>
+        <li><strong>IOSCO</strong> — 130+ jurisdictions. IOSCO Principles. Board of 34. UK = FCA CEO.</li>
+      </ul>
+    </li>
+    <li><strong>5.8 Oversight bodies:</strong>
+      <ul style="margin-top:.3rem">
+        <li><strong>Internal audit:</strong> risk-based, reports to <em>audit committee + board</em> (not CEO), independent, access to all records</li>
+        <li><strong>External audit:</strong> independent <em>in fact AND appearance</em>, professional scepticism, reports <em>directly to supervisor</em> where permitted</li>
+        <li><strong>Trustees:</strong> hold/manage assets for beneficiaries. Can delegate investment management, but ultimate responsibility remains with the trustees</li>
+        <li><strong>Compliance:</strong> assists senior management in managing compliance risks. Post-Brexit: FCA retained Level 3 ESMA measures, but subsequent changes do not apply</li>
+        <li><strong>Industry bodies:</strong> generalist (TheCityUK). Code of conduct over/above the employer's</li>
+        <li><strong>Professional bodies:</strong> voluntary membership. <strong>No statutory powers</strong> in banking/finance (except accountancy/actuarial). <strong>CISI code takes precedence over the employer's code</strong>. Raise competence + ethical behaviours.</li>
+        <li><strong>Trade associations:</strong> sector-specific. Advocacy with HMT + FCA/PRA. Develop proportionate rules.</li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>

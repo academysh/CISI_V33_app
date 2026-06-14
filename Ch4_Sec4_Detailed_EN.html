@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chapter 4, Section 4 — Whistleblowing</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--primary:#065F46;--primary-l:#D1FAE5;--primary-d:#064E3B;--primary-vd:#022C22;--accent:#059669;--accent-l:#A7F3D0;--accent-d:#047857;--amber:#B45309;--amber-l:#FEF3C7;--amber-d:#78350F;--sky:#0369A1;--sky-l:#E0F2FE;--sky-d:#075985;--slate:#64748B;--slate-l:#F1F5F9;--slate-m:#CBD5E1;--ink:#0F172A;--muted:#475569;--bg:#F0FDF4;--card:#fff;--radius:12px;--shadow:0 2px 10px rgba(6,95,70,.08)}
+body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;line-height:1.6}
+.app-header{background:linear-gradient(135deg,var(--primary-vd),var(--accent));padding:1.5rem 1.5rem 1.2rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(2,44,34,.25)}
+.chap-badge{display:inline-block;background:rgba(255,255,255,.18);color:#fff;font-size:.7rem;font-weight:700;padding:.2rem .55rem;border-radius:4px;letter-spacing:.12em;margin-bottom:.35rem}
+.app-title{color:#fff;font-size:1.2rem;font-weight:700}
+.app-sub{color:#D1FAE5;font-size:.78rem;margin-top:.25rem}
+.screen{padding:1.6rem 1.2rem 4rem;max-width:900px;margin:0 auto}
+.intro-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.4rem 1.6rem;margin-bottom:1.4rem;border-left:4px solid var(--primary)}
+.intro-title{font-size:1.08rem;font-weight:700;color:var(--primary-d);margin-bottom:.5rem}
+.intro-text{font-size:.92rem;color:var(--muted)}
+.section-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.4rem;margin-bottom:1.4rem;border:1px solid rgba(6,95,70,.08)}
+.section-num{display:inline-block;background:var(--primary);color:#fff;font-size:.72rem;font-weight:700;padding:.22rem .65rem;border-radius:20px;margin-bottom:.55rem;letter-spacing:.04em}
+.section-title{font-size:1.22rem;font-weight:700;color:var(--primary-vd);margin-bottom:1rem;line-height:1.3}
+.sub-title{font-size:1.02rem;font-weight:700;color:var(--primary-d);margin:1.3rem 0 .6rem;padding-bottom:.3rem;border-bottom:2px solid var(--primary-l)}
+.sub-title .sub-num{color:var(--accent);font-weight:700;margin-right:.35rem}
+.para{font-size:.93rem;color:var(--ink);margin-bottom:.85rem}
+.para strong{color:var(--primary-d);font-weight:600}
+ul.bullet{margin:.5rem 0 1rem 1.2rem}
+ul.bullet li{margin-bottom:.4rem;font-size:.92rem;color:var(--ink)}
+.info-box{background:var(--primary-l);border-left:4px solid var(--primary);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.info-box .ib-title{font-weight:700;color:var(--primary-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box{background:var(--accent-l);border-left:4px solid var(--accent);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.example-box .eb-title{font-weight:700;color:var(--accent-d);margin-bottom:.35rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.example-box .eb-title::before{content:"💡 "}
+.warn-box{background:var(--amber-l);border-left:4px solid var(--amber);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.9rem}
+.warn-box .wb-title{font-weight:700;color:var(--amber-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.warn-box .wb-title::before{content:"⚠️ "}
+.exam-box{background:var(--sky-l);border-left:4px solid var(--sky);border-radius:8px;padding:.85rem 1.1rem;margin:.9rem 0;font-size:.88rem}
+.exam-box .xb-title{font-weight:700;color:var(--sky-d);margin-bottom:.3rem;font-size:.82rem;text-transform:uppercase;letter-spacing:.05em}
+.exam-box .xb-title::before{content:"🎯 "}
+.comp-table{width:100%;border-collapse:collapse;margin:1rem 0;font-size:.86rem;background:var(--card);border-radius:8px;overflow:hidden;box-shadow:0 1px 4px rgba(6,95,70,.08)}
+.comp-table th{background:var(--primary-vd);color:#fff;padding:.65rem .8rem;text-align:left;font-weight:600;font-size:.83rem}
+.comp-table td{padding:.6rem .8rem;border-top:1px solid var(--slate-m);vertical-align:top}
+.comp-table tr:nth-child(even) td{background:var(--slate-l)}
+.summary-card{background:linear-gradient(135deg,var(--primary-vd),var(--accent));color:#fff;border-radius:var(--radius);padding:1.5rem 1.6rem;margin-top:2rem;box-shadow:var(--shadow)}
+.summary-title{font-size:1.1rem;font-weight:700;margin-bottom:.8rem}
+.summary-card ul{margin:.4rem 0 0 1.2rem}
+.summary-card li{margin-bottom:.5rem;font-size:.9rem}
+.summary-card strong{color:#A7F3D0}
+.toc{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:1.1rem 1.3rem;margin-bottom:1.4rem;border:1px solid var(--slate-m)}
+.toc-title{font-weight:700;color:var(--primary-vd);font-size:.88rem;margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.05em}
+.toc-list{list-style:none;padding:0}
+.toc-list li{padding:.25rem 0;font-size:.88rem}
+.toc-list a{color:var(--primary-d);text-decoration:none;font-weight:500}
+.toc-list a:hover{color:var(--accent);text-decoration:underline}
+.p-item{display:grid;grid-template-columns:42px 1fr;gap:.55rem;align-items:start;margin-bottom:.42rem;padding:.45rem .6rem;border-radius:6px;background:var(--slate-l)}
+.p-num{display:flex;align-items:center;justify-content:center;background:var(--primary);color:#fff;font-weight:700;border-radius:6px;padding:.18rem .4rem;font-size:.82rem;min-width:32px;height:28px}
+.p-body{font-size:.88rem;line-height:1.5}
+.p-title{font-weight:700;color:var(--primary-vd);margin-right:.3rem}
+.schema{background:linear-gradient(135deg,#FAFAFC,#F1F5F9);border:1.5px dashed var(--primary-l);border-radius:10px;padding:1.1rem 1rem;margin:1rem 0;text-align:center;font-family:"SF Mono",Consolas,Monaco,monospace;font-size:.82rem;line-height:1.7;color:var(--muted);overflow-x:auto}
+.schema-title{font-family:system-ui,sans-serif;font-weight:700;color:var(--primary-vd);font-size:.85rem;margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+</style>
+</head>
+<body>
+
+<div class="app-header">
+  <div class="chap-badge">CHAPTER 4</div>
+  <div class="app-title">Chapter 4, Section 4 — Detailed Deep Dive</div>
+  <div class="app-sub">Whistleblowing · PIDA 1998 · SYSC 18 · Syllabus 4.4 · CISI V33</div>
+</div>
+
+<div class="screen">
+
+<div class="intro-card">
+  <div class="intro-title">What is this section about?</div>
+  <div class="intro-text">
+    The final section of the book — covering <strong>whistleblowing</strong> (reporting wrongdoing to the authorities). Two main sources of rules: (1) the <strong>Public Interest Disclosure Act 1998 (PIDA)</strong> — protects workers who make protected disclosures from <em>detriment or dismissal</em>; (2) <strong>FCA / PRA rules</strong> — in <em>SYSC 18</em>, setting out the requirements for firms. Key concepts: <strong>protected disclosure</strong>, <strong>qualifying wrongdoing</strong>, <strong>reasonable belief</strong>, <strong>prescribed regulator</strong> (the FCA is such a regulator), and the <strong>whistleblowers' champion</strong> (mandatory for banks + Solvency II insurers). 1-2 exam questions, often about qualifying wrongdoing, reasonable belief, disclosure routes, and the role of the champion.
+  </div>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Contents</div>
+  <ul class="toc-list">
+    <li>→ <a href="#s41">4.1 PIDA 1998 — overview + qualifying wrongdoing</a></li>
+    <li>→ <a href="#s42">4.2 Protected Disclosure — reasonable belief + 3 routes</a></li>
+    <li>→ <a href="#remedy">Remedy — Employment Tribunal</a></li>
+    <li>→ <a href="#fca-rules">4.3 FCA/PRA Rules — SYSC 18 (7 requirements)</a></li>
+    <li>→ <a href="#champion">Whistleblowers' Champion</a></li>
+    <li>→ <a href="#summary">Final summary</a></li>
+  </ul>
+</div>
+
+<div class="section-card" id="s41">
+  <div class="section-num">4.1</div>
+  <h2 class="section-title">PIDA 1998 — overview + qualifying wrongdoing</h2>
+
+  <div class="info-box">
+    <div class="ib-title">Public Interest Disclosure Act 1998 (PIDA)</div>
+    <strong>PIDA 1998</strong> protects <em>individuals</em> from <strong>retaliation</strong> when they <em>inform regulatory authorities</em> of concerns that come to their attention <em>in the workplace</em>. Generally referred to as <strong>"whistleblowing"</strong>. Protects workers who make <em>"protected disclosures"</em> from <strong>detriment or dismissal</strong>.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Qualifying wrongdoing — 6 categories</h3>
+
+  <p class="para">
+    For a disclosure to be protected under PIDA, it must relate to <strong>qualifying wrongdoing</strong>:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Criminal offence</span> — committed / being committed / likely</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Health and safety danger</span></div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Environmental damage</span></div></div>
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Miscarriage of justice</span></div></div>
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Breach of legal obligation</span></div></div>
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Concealment</span> — any of the above being deliberately concealed</div></div>
+
+  <div class="warn-box">
+    <div class="wb-title">NOT qualifying wrongdoing</div>
+    <strong>Management performance decisions</strong> (e.g. a denied promotion, negative performance review) are <em>NOT qualifying</em>. PIDA is about <em>legal / regulatory / ethical</em> wrongdoing — not internal employment grievances.
+  </div>
+</div>
+
+<div class="section-card" id="s42">
+  <div class="section-num">4.2</div>
+  <h2 class="section-title">Protected Disclosure — reasonable belief + 3 routes</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Reasonable belief — not certainty</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Standard — reasonable belief</div>
+    The worker <strong>need not be correct</strong> about the wrongdoing. The standard is <em>"reasonable belief"</em> that the <strong>information tends to show wrongdoing</strong>. If it later turns out there was no wrongdoing, the worker is <em>still protected</em> as long as the belief was reasonable.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>3 disclosure routes</h3>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Internally</span> — to the employer (usually the <em>preferred</em> first route)</div></div>
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Prescribed regulator</span> — e.g. <strong>the FCA</strong>, PRA, ICO. The worker can <em>go directly</em> to the regulator <strong>without prior internal reporting</strong> and still receive PIDA protection</div></div>
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Wider public disclosure</span> — e.g. <em>press / MPs</em> — only in <strong>specific circumstances</strong> (higher threshold) — reasonable belief + no other route suitable + a pattern of concealment</div></div>
+
+  <div class="info-box">
+    <div class="ib-title">FCA — prescribed regulator</div>
+    The <strong>FCA is a prescribed regulator</strong> under PIDA. Workers in financial services can <em>make a protected disclosure directly to the FCA</em> <strong>without first reporting internally</strong> and receive PIDA protection. The FCA operates its own <em>confidential whistleblowing service</em>.
+  </div>
+</div>
+
+<div class="section-card" id="remedy">
+  <div class="section-num">4.2.1</div>
+  <h2 class="section-title">Remedy — Employment Tribunal</h2>
+
+  <div class="warn-box">
+    <div class="wb-title">Remedy if the worker suffers detriment / dismissal</div>
+    A worker who suffers <em>detriment or dismissal</em> for making a protected disclosure can:
+    <ul style="margin-top:.35rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Bring a claim before an Employment Tribunal</strong></li>
+      <li><strong>No cap on compensation</strong> for dismissal claims (unlike standard unfair dismissal, which has a cap)</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>False / malicious disclosures</h3>
+
+  <div class="info-box">
+    <div class="ib-title">PIDA does not protect false / malicious disclosures</div>
+    <strong>Nothing prevents firms</strong> from taking action against workers who make <em>false and/or malicious</em> disclosures. PIDA protection is only for <em>genuine protected disclosures</em> based on reasonable belief, <strong>not deliberate false allegations</strong>.
+  </div>
+</div>
+
+<div class="section-card" id="fca-rules">
+  <div class="section-num">4.3</div>
+  <h2 class="section-title">FCA / PRA Rules — SYSC 18 (7 requirements)</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Background — PCBS 2013</h3>
+
+  <p class="para">
+    In <strong>2013</strong>, the <em>Parliamentary Commission on Banking Standards (PCBS)</em> recommended that banks:
+  </p>
+
+  <ul class="bullet">
+    <li><strong>Put in place additional mechanisms</strong> for employees to <em>raise concerns internally</em></li>
+    <li><strong>Appoint a senior person</strong> to take responsibility for the <em>effectiveness of those arrangements</em></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>FCA / PRA whistleblowing rules (SYSC 18)</h3>
+
+  <p class="para">
+    The FCA and PRA whistleblowing rules <em>require firms to establish, implement and maintain</em> <strong>appropriate + effective arrangements</strong> for the disclosure of reportable concerns. <strong>7 requirements</strong>:
+  </p>
+
+  <div class="p-item"><div class="p-num">1</div><div class="p-body"><span class="p-title">Effective handling</span> — of disclosures of reportable concerns, including:
+  <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+    <li><em>Confidentiality</em> requested / anonymity</li>
+    <li>Range of communication methods</li>
+  </ul></div></div>
+
+  <div class="p-item"><div class="p-num">2</div><div class="p-body"><span class="p-title">Escalation</span> — effective assessment + <em>escalation to the FCA / PRA</em> where appropriate</div></div>
+
+  <div class="p-item"><div class="p-num">3</div><div class="p-body"><span class="p-title">Anti-victimisation measures</span> — reasonable measures to ensure that <em>no individual under the firm's control</em> engages in <strong>victimisation</strong> of the whistleblower</div></div>
+
+  <div class="p-item"><div class="p-num">4</div><div class="p-body"><span class="p-title">Feedback</span> — provide the whistleblower with <em>feedback on the reportable concern</em> where feasible + appropriate</div></div>
+
+  <div class="p-item"><div class="p-num">5</div><div class="p-body"><span class="p-title">Records + procedures</span>:
+  <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+    <li>Appropriate <strong>records of reportable concerns</strong> + the firm's treatment (incl. outcome)</li>
+    <li>Up-to-date <strong>written procedures</strong> readily available to UK-based employees</li>
+  </ul></div></div>
+
+  <div class="p-item"><div class="p-num">6</div><div class="p-body"><span class="p-title">Reports</span>:
+  <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+    <li><strong>Annual report to the governing body / board</strong> on the operation + effectiveness of systems / controls. <em>Maintain confidentiality</em> of individual whistleblowers</li>
+    <li><strong>Prompt reports to the FCA / PRA</strong> for each case the firm <em>contested but lost</em> at an Employment Tribunal, where the claimant <strong>successfully based the claim</strong> on:
+      <ul style="margin-top:.2rem">
+        <li>Detriment suffered as a result of a protected disclosure (s.47B Employment Rights Act 1996)</li>
+        <li>Unfair dismissal (s.103A ERA 1996)</li>
+      </ul>
+    </li>
+  </ul></div></div>
+
+  <div class="p-item"><div class="p-num">7</div><div class="p-body"><span class="p-title">Training</span>:
+  <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+    <li><strong>UK-based employees</strong></li>
+    <li>Managers of UK-based employees (<em>wherever the manager is based</em>)</li>
+    <li>Employees <em>operating the firm's internal arrangements</em></li>
+  </ul></div></div>
+</div>
+
+<div class="section-card" id="champion">
+  <div class="section-num">4.3.1</div>
+  <h2 class="section-title">Whistleblowers' Champion</h2>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Which firms must appoint</h3>
+
+  <div class="info-box">
+    <div class="ib-title">Mandatory appointment under SM&CR</div>
+    Certain firms are <em>required</em> to appoint a <strong>whistleblowers' champion</strong>:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li><strong>Banks</strong> with deposit-taking permission</li>
+      <li><strong>Insurance companies subject to Solvency II</strong></li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Seniority</h3>
+
+  <p class="para">
+    The FCA expects most firms to <em>appoint a <strong>non-executive director (NED)</strong></em> as champion. If there is no NED, a senior manager is acceptable. For insurers — a director / senior manager is expected.
+  </p>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Responsibilities of the champion</h3>
+
+  <p class="para">The champion is <em>responsible for</em>:</p>
+
+  <ul class="bullet">
+    <li><strong>Integrity</strong> of the firm's whistleblowing policies</li>
+    <li><strong>Independence</strong> of processes</li>
+    <li><strong>Effectiveness</strong> of arrangements</li>
+    <li>Overseeing the handling of disclosures</li>
+    <li>Reporting to the board</li>
+    <li><strong>Protecting whistleblowers from victimisation</strong></li>
+  </ul>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Access + authority</h3>
+
+  <div class="info-box">
+    <div class="ib-title">The champion must have</div>
+    <strong>Sufficient authority + independence</strong>:
+    <ul style="margin-top:.3rem;margin-bottom:.2rem;margin-left:1.1rem">
+      <li>Access to <strong>independent legal advice</strong></li>
+      <li><strong>Training</strong></li>
+      <li><strong>Information</strong> required to perform the function</li>
+    </ul>
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>No operational role required</h3>
+
+  <div class="warn-box">
+    <div class="wb-title">No operational role required</div>
+    The champion <em>does not need</em> a <strong>day-to-day operational role</strong>. They can be <em>based anywhere</em>, as long as they can <em>effectively perform the function</em>. Often it is a NED with only an oversight role.
+  </div>
+
+  <h3 class="sub-title"><span class="sub-num">▸</span>Board reporting + tribunal losses</h3>
+
+  <ul class="bullet">
+    <li><strong>Annual board report</strong> on the operation + effectiveness of whistleblowing systems. <em>Confidentiality of whistleblowers is maintained</em></li>
+    <li><strong>Prompt FCA notification</strong> — the firm lost an Employment Tribunal where the claimant <em>successfully based the claim on whistleblowing detriment / dismissal</em></li>
+  </ul>
+
+  <div class="exam-box">
+    <div class="xb-title">SM&CR whistleblowing summary</div>
+    • <strong>Who must appoint a champion:</strong> deposit-taking banks + Solvency II insurers<br>
+    • <strong>Seniority:</strong> NED (or senior manager if no NED)<br>
+    • <strong>No day-to-day ops role needed</strong><br>
+    • <strong>Annual board report</strong> on effectiveness<br>
+    • <strong>Prompt FCA report</strong> on lost tribunals
+  </div>
+</div>
+
+<div class="summary-card" id="summary">
+  <div class="summary-title">📋 Final summary of Section 4</div>
+
+  <div class="schema" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4);color:#fff;text-align:left;margin:.8rem 0 1.2rem">
+    <div class="schema-title" style="color:#A7F3D0">Whistleblowing — two layers</div>
+    <strong style="color:#A7F3D0">PIDA 1998:</strong> protects workers from detriment/dismissal<br>
+    <strong style="color:#A7F3D0">FCA/PRA SYSC 18:</strong> 7 requirements for firms<br>
+    <strong style="color:#A7F3D0">Whistleblowers' champion:</strong> banks + Solvency II insurers<br>
+    <strong style="color:#A7F3D0">Standard:</strong> reasonable belief (not certainty)
+  </div>
+
+  <ul>
+    <li><strong>PIDA 1998:</strong> protects workers making protected disclosures from detriment/dismissal.</li>
+    <li><strong>6 qualifying wrongdoing categories:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Criminal offence</li>
+        <li>(2) Health & safety danger</li>
+        <li>(3) Environmental damage</li>
+        <li>(4) Miscarriage of justice</li>
+        <li>(5) Breach of legal obligation</li>
+        <li>(6) Concealment of any of the above</li>
+      </ul>
+      <strong>NOT qualifying:</strong> management performance decisions.
+    </li>
+    <li><strong>Standard — reasonable belief</strong> (the worker need not be correct).</li>
+    <li><strong>3 disclosure routes:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Internally to the employer</li>
+        <li>(2) Prescribed regulator (<strong>the FCA is prescribed</strong>, can go directly)</li>
+        <li>(3) Wider public — specific circumstances only</li>
+      </ul>
+    </li>
+    <li><strong>Remedy:</strong> Employment Tribunal claim — <strong>no cap on compensation</strong> for dismissal.</li>
+    <li><strong>PIDA does not protect false/malicious</strong> disclosures — the firm may take action.</li>
+    <li><strong>The FCA operates its own confidential whistleblowing service.</strong></li>
+    <li><strong>PCBS 2013</strong> recommended banks appoint a senior person for whistleblowing effectiveness.</li>
+    <li><strong>FCA/PRA SYSC 18 — 7 requirements for firms' arrangements:</strong>
+      <ul style="margin-top:.3rem">
+        <li>(1) Effective handling (incl. confidentiality)</li>
+        <li>(2) Escalation to FCA/PRA</li>
+        <li>(3) Anti-victimisation measures</li>
+        <li>(4) Feedback to the whistleblower</li>
+        <li>(5) Records + written procedures</li>
+        <li>(6) Reports (annual to the board + prompt to the FCA/PRA for lost tribunals)</li>
+        <li>(7) Training (UK employees + managers + those operating arrangements)</li>
+      </ul>
+    </li>
+    <li><strong>Whistleblowers' champion (under SM&CR):</strong>
+      <ul style="margin-top:.3rem">
+        <li>Mandatory for <strong>banks (deposit-taking) + insurers (Solvency II)</strong></li>
+        <li>Typically a <strong>NED</strong> (or senior manager)</li>
+        <li>Responsible for integrity + independence + effectiveness</li>
+        <li>Protects whistleblowers from victimisation</li>
+        <li>Must have sufficient authority + independent legal advice + training + information</li>
+        <li>Does <em>NOT need a day-to-day operational role</em></li>
+        <li>Can be based anywhere, as long as they can effectively perform the function</li>
+      </ul>
+    </li>
+    <li><strong>Annual board report</strong> on operation + effectiveness (maintaining whistleblower confidentiality).</li>
+    <li><strong>Prompt FCA/PRA report</strong> on each lost Employment Tribunal case where the claimant based the claim on whistleblowing detriment / s.103A ERA 1996 dismissal.</li>
+    <li><strong>Reportable concerns</strong> — escalated to the FCA / PRA where appropriate.</li>
+  </ul>
+</div>
+
+</div>
+</body>
+</html>
